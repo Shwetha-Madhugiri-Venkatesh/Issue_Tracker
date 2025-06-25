@@ -1,0 +1,54 @@
+<div id="login-container">
+    <div id="inner-login-div">
+        <div id="welcome-div">
+            <h1 style="font-weight: bold;">ORG Issue Tracker</h1>
+            <span>Enter your credentials to access your account</span>
+        </div>
+        <div id="form-div">
+            <form #form="ngForm" (ngSubmit)="form_submit(form)">
+                <label style="font-weight: bold;">Email</label>
+                <input 
+                    pInputText 
+                    placeholder="m@example.com" 
+                    type="email" 
+                    name="email"
+                    [(ngModel)]="email_add"
+                    [required]="true"
+                    />
+                <br />
+                <label style="font-weight: bold;">Password</label>
+                <p-password 
+                    class="p-passwords" 
+                    name="Password" 
+                    [toggleMask]="true" 
+                    [feedback]='forgot?true:false'
+                    [(ngModel)]="password"
+                    [required]="true"
+                    >
+                </p-password>
+                <br />
+                <ng-container *ngIf="forgot">
+                    <label style="font-weight: bold;">Confirm Password</label>
+                    <p-password 
+                        class="p-passwords" 
+                        name="confirmPassword" 
+                        [toggleMask]="true" 
+                        [feedback]="false"
+                        [(ngModel)]="confirmPassword">
+                    </p-password>
+                      <p *ngIf="!(confirmPassword==password)&&confirmPassword" >Please enter the same password</p>
+                </ng-container>
+                
+                <br />
+                <p-button 
+                    [label]='forgot?"Reset Password":"Login"'
+                    type="submit"
+                ></p-button>
+                <br />
+                <div id="forgot">
+                    <button id="forgot-btn" type="button" (click)="forgot_password()">{{forgot?"Back to login":"Forgot Password?"}}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
