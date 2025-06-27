@@ -1,4 +1,5 @@
 <div id="login-container">
+     <p-toast/>
     <div id="inner-login-div">
         <div id="welcome-div">
             <h1 style="font-weight: bold;">ORG Issue Tracker</h1>
@@ -6,13 +7,12 @@
         </div>
         <div id="form-div">
             <form #form="ngForm" (ngSubmit)="form_submit(form)">
-                <label style="font-weight: bold;">Email</label>
+                <label style="font-weight: bold;">User ID</label>
                 <input 
-                    pInputText 
-                    placeholder="m@example.com" 
-                    type="email" 
-                    name="email"
-                    [(ngModel)]="email_add"
+                    pInputText  
+                    type="text" 
+                    name="userId"
+                    [(ngModel)]="user_Id"
                     [required]="true"
                     />
                 <br />

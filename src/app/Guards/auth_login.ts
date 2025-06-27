@@ -15,7 +15,6 @@ export class AuthLogin implements CanActivate{
        if(this.authorize.isLogged){
         return true;
        }else{
-        alert("User credentials are wrong!");
         this.route.navigate(['/login']);
         return false;
        }

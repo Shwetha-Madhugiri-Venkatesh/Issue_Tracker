@@ -1,0 +1,96 @@
+#header-container{
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    background-color: white;
+}
+
+#logo-container{
+    padding: 20px 20px 0px 20px;
+    width: 50%;
+}
+
+#logo{
+    position: absolute;
+    width: 20px;
+    height: 25px;
+    top: 2%;
+    left: 5%;
+}
+
+#logo-title{
+    position: relative;
+    font-weight: bold;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-style: italic;
+    font-size: 20px;
+}
+
+#theme{
+    background-color: rgb(244, 244, 244);
+    border-radius: 50%;
+    padding: 10px 15px;
+}
+
+#header-footer{
+    width: 50%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding: 10px;
+}
+
+#header-components{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+#photo{
+    width: 40px;
+    height: 40px;
+}
+
+#last{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+::ng-deep .p-overlay-badge .p-badge{
+    top:-6px;
+    right: -8px;
+}
+
+::ng-deep .p-button.p-button-icon-only{
+    width: 10px;
+    height: 10px;
+}
+
+.p-tabMenu{
+    all:unset;
+}
+
+#navigation-btn{
+    width: 100px;
+    border: none;
+    background-color: white;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+#navigation-btn:focus{
+    color: skyblue;
+    border-bottom: 2px solid skyblue;
+}
+
+#navigation-container{
+    display: flex;
+    flex-direction: row;
+    padding: 0px 10px;
+    background-color: white;
+}
+
+#btn-container{
+    width: 100px;
+}
