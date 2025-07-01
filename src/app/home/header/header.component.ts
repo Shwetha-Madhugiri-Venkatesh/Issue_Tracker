@@ -9,10 +9,11 @@ import { Router } from '@angular/router';
 export class HeaderComponent {
   constructor(public router:Router){}
   items = [
-            { label: 'Dashboard', icon: 'fa-solid fa-table-columns', route: 'dashboard' },
-           { label: 'Issues', icon: 'fa-solid fa-bug', route: 'issues' },
-            { label: 'Users', icon: 'fa-solid fa-user', route: 'users' },
+            { label: 'Dashboard', icon: 'dashboard_1828765.png', route: 'dashboard' },
+           { label: 'Issues', icon: 'bug_8786300.png', route: 'issues' },
+            { label: 'Users', icon: 'profile_7310896.png', route: 'users' },
         ];
+
 
   navigate_to(route){
     this.router.navigateByUrl("/home/"+route);

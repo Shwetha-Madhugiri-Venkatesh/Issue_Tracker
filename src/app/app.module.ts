@@ -3,25 +3,32 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
+import { IssuesComponent } from './home/issues/issues.component';
+import { UsersComponent } from './home/users/users.component';
+import { GraphComponent } from './home/dashboard/graph/graph.component';
+import { HeaderComponent } from './home/header/header.component';
+import { HomeComponent } from './home/home.component';
+import { DashboardComponent } from './home/dashboard/dashboard.component';
 
 import { FormsModule } from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { CheckboxModule } from 'primeng/checkbox';
 import { ButtonModule } from 'primeng/button';
-import { DashboardComponent } from './home/dashboard/dashboard.component';
 import { RoutingModule } from './rounting.module';
 import { RouterModule } from '@angular/router';
 import { ToastModule } from 'primeng/toast';
-import { HeaderComponent } from './home/header/header.component';
-import { HomeComponent } from './home/home.component';
 import { BadgeModule } from 'primeng/badge';
 import { TabMenuModule } from 'primeng/tabmenu';
-import { IssuesComponent } from './home/issues/issues.component';
-import { UsersComponent } from './home/users/users.component';
-
+import { ChartModule } from 'primeng/chart';
+import { TableComponent } from './home/users/table/table.component';
+import { TableModule } from 'primeng/table';
+import { CommonModule } from '@angular/common';
+import { DropdownModule } from 'primeng/dropdown';
+import { MultiSelectModule } from 'primeng/multiselect';
 
 @NgModule({
   declarations: [
@@ -31,7 +38,9 @@ import { UsersComponent } from './home/users/users.component';
     HeaderComponent,
     HomeComponent,
     IssuesComponent,
-    UsersComponent
+    UsersComponent,
+    GraphComponent,
+    TableComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,7 +54,13 @@ import { UsersComponent } from './home/users/users.component';
     RouterModule,
     ToastModule,
     BadgeModule,
-    TabMenuModule
+    TabMenuModule,
+    HttpClientModule,
+   ChartModule,
+   TableModule,
+   CommonModule,
+   DropdownModule,
+   MultiSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

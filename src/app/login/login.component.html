@@ -7,36 +7,44 @@
         </div>
         <div id="form-div">
             <form #form="ngForm" (ngSubmit)="form_submit(form)">
+                <!-- <input name="dummy" ngmoz/> -->
                 <label style="font-weight: bold;">User ID</label>
-                <input 
+                <input
+                    #userIdRef="ngModel"
                     pInputText  
                     type="text" 
                     name="userId"
                     [(ngModel)]="user_Id"
-                    [required]="true"
+                    required
                     />
+                <p *ngIf="userIdRef.invalid && userIdRef.touched">*required</p>
                 <br />
                 <label style="font-weight: bold;">Password</label>
                 <p-password 
+                    #pass="ngModel"
                     class="p-passwords" 
                     name="Password" 
                     [toggleMask]="true" 
                     [feedback]='forgot?true:false'
                     [(ngModel)]="password"
-                    [required]="true"
+                    required
                     >
                 </p-password>
+                <p *ngIf="pass.invalid && pass.touched">*required</p>
                 <br />
                 <ng-container *ngIf="forgot">
                     <label style="font-weight: bold;">Confirm Password</label>
                     <p-password 
+                        #confirm="ngModel"
                         class="p-passwords" 
                         name="confirmPassword" 
                         [toggleMask]="true" 
                         [feedback]="false"
-                        [(ngModel)]="confirmPassword">
+                        [(ngModel)]="confirmPassword"
+                        required>
                     </p-password>
                       <p *ngIf="!(confirmPassword==password)&&confirmPassword" >Please enter the same password</p>
+                      <p *ngIf="confirm.invalid && confirm.touched">*required</p>
                 </ng-container>
                 
                 <br />

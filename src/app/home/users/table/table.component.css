@@ -1,0 +1,81 @@
+tr:hover{
+    background-color: rgb(208, 237, 249);
+}
+
+::ng-deep .p-paginator {
+    justify-content: flex-end!important;
+}
+
+::ng-deep .p-paginator .p-paginator-first{
+    border-radius: 0;
+   height: 30px;
+    background: white;
+   
+   box-shadow: none;
+   margin: 0;
+}
+
+::ng-deep .p-paginator .p-paginator-last{
+    border-radius: 0;
+   height: 30px;
+    background:white;
+
+   box-shadow: none;
+   margin: 0;
+}
+
+::ng-deep .p-paginator .p-paginator-prev{
+     border-radius: 0;
+    height: 30px;
+     background: white;
+    
+    box-shadow: none;
+    margin: 0;
+}
+
+::ng-deep .p-paginator .p-paginator-next{
+     border-radius: 0;
+    height: 30px;
+     background: white;
+    
+    box-shadow: none;
+    margin: 0;
+}
+
+::ng-deep .p-paginator .p-paginator-pages .p-paginator-page{
+     width: 5px;
+    height: 30px;
+    border-radius: 0px;
+    background: white;
+    color: #1D4ED8;
+    box-shadow: none;
+    margin: 0;
+}
+
+::ng-deep .p-paginator{
+    padding: 10px 0px;
+}
+
+::ng-deep .p-paginator .p-paginator-pages .p-paginator-page:hover{
+    background-color: rgb(229, 245, 249);
+}
+::ng-deep .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+    background: rgb(215, 237, 246);
+    border:none;
+    color: #1D4ED8;
+}
+
+::ng-deep .p-datatable-header{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.header-last{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+.heading{
+    width: 50%;
+}

@@ -1,7 +1,10 @@
 <div id="header-container">
     <div id="logo-container">
-        <img id="logo" src="../../../assets/images/logo.jfif"/>
-        <h1 id="logo-title">Issue Tracker</h1>
+        <!-- <img id="logo" src="../../../assets/images/logo.jfif"/> -->
+         <div style="width: 30px; height: 30px;background-color: skyblue;border-radius: 10px;display: flex;align-items: center;justify-content: center;">
+        <i class="fa-solid fa-bug fa-rotate-by" style="color: #ffffff; --fa-rotate-angle: 30deg;"></i>
+        </div>
+        <p id="logo-title">Issue Tracker</p>
     </div>
     <div id="header-footer">
         <div id="header-components">
@@ -19,8 +22,8 @@
                 <h4>Rachel Green</h4>
                 <span>Admin</span>
                 </div>
-                <div>
-                   <i class="fa-solid fa-gear"></i>
+                <div style="display: flex;align-items: center;justify-content: center;">
+                   <i style="cursor:pointer;" class="fa-solid fa-gear"></i>
                 </div>
             </div>
         </div>
@@ -28,9 +31,10 @@
 </div>
 
 <div id="navigation-container">
-    <div id="btn-container" *ngFor="let item of items">
-        <i [ngClass]="item.icon"></i>
-        <!-- <button id="navigation-btn" (click)="navigate_to(item.route)">{{item.label}}</button> -->
-        <button id="navigation-btn" (click)="navigate_to(item.route)" >{{item.label}}</button>
+    <div id="navigation-content">
+        <div class="btn-container" *ngFor="let item of items" >
+            <img style="width: 20px;height: 20px;" [src]="'../../../assets/images/'+item.icon"/>
+            <button class="navigation-btn" (click)="navigate_to(item.route)" >{{item.label}}</button>
+        </div>
     </div>
 </div>
