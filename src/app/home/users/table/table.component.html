@@ -1,33 +1,34 @@
-<p-table [columns]="cols" [value]="products" [tableStyle]="{ 'min-width': '50rem' }" styleClass="p-datatable-sm" 
-[paginator]="true"
-    [rows]="5">
-      <ng-template pTemplate="caption">
+<div id="user-content">
+    <div id="header">
         <div class="heading">
             <h2 style="width: 100px;">Users</h2>
         </div>
         <div class="header-last">
+            <div id="header-last-inner">
             <div>
-            <p-dropdown 
-                [options]="numbers" 
-                [(ngModel)]="selectedNum" 
-                optionLabel="name" 
-                [placeholder]="'show '+selectedNum" />
+                <p-dropdown id="top" [options]="numbers" [(ngModel)]="selectedNum" optionLabel="name"
+                    [placeholder]="'show '+selectedNum" />
             </div>
             <div>
-            <p-multiSelect 
-    [options]="columns" 
-    [(ngModel)]="selectedCol" 
-    optionLabel="name" 
-    [placeholder]="selectedCol+' are selected'" />
+                <p-multiSelect [options]="columns" [(ngModel)]="selectedCol" optionLabel="name"
+                    [placeholder]="selectedCol+' columns are selected'" />
+            </div>
+            <div>
+                <button id="filter" (click)="filter_display()"><i class="fa-solid fa-filter"></i> Filter</button>
+            </div>
+            <div>
+                <button id="add-btn" (click)="dialog_display()">Add</button>
+            </div>
             </div>
         </div>
-        <div>
-            <button>Filter</button>
-        </div>
-    </ng-template>
+    </div>
+    <div id="content">
+    <div id="p-table-div">
+    <p-table [columns]="cols" [value]="products" [tableStyle]="{ 'min-width': '50rem' }" styleClass="p-datatable-sm"
+    [paginator]="true" [rows]="5">
     <ng-template pTemplate="header" let-columns>
         <tr>
-            <th *ngFor="let col of columns" [pSortableColumnDisabled]="false" [pSortableColumn]="col.field" >
+            <th *ngFor="let col of columns" [pSortableColumnDisabled]="false" [pSortableColumn]="col.field">
                 {{ col.header }} <i class="fa-solid fa-sort"></i>
             </th>
         </tr>
@@ -39,3 +40,38 @@
         </tr>
     </ng-template>
 </p-table>
+</div>
+<ng-template [ngIf]="filter_flag">
+    <div id="filter-div">
+        <div id="filter-header">
+            <h4>Filter</h4>
+        </div>
+        <div id="filter-form">
+            <form id="form" #form="ngForm">
+                <input pInputText placeholder="User Name" name="user_name" ngModel/>
+                <p-dropdown
+                    id="bottom" 
+                    [options]="user_types" 
+                    name="userType"
+                    [(ngModel)]="user_type" 
+                    optionLabel="name" 
+                    placeholder="User Type" />
+                <input pInputText placeholder="Email ID" name="email" ngModel />
+                <input pInputText placeholder="Created Source" name="created_source" ngModel/>
+                <input pInputText placeholder="Created Source Type" name="created_source_type" ngModel/>
+                <input pInputText placeholder="Created Date Time" name="created_datetime" ngModel/>
+                <input pInputText placeholder="Last Modified Source" name="last_modified_source" ngModel/>
+                <input pInputText placeholder="Last Modified Source Type" name="last_modified_source_type" ngModel/>
+                <input pInputText placeholder="Last Modified Date Time" name="last_modified_source_datetime" ngModel/>
+            </form>
+            <div id="filter-footer">
+                <div id="btn-div">
+                    <button id="reset-btn" type="button">Reset</button>
+                    <button id="submit-btn" type="submit" (click)="filter_form_submit(form)">Apply</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+</div>
+</div>

@@ -1,7 +1,29 @@
+#user-content{
+    height: 100%;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+#p-table-div{
+    width: 100%;
+}
 tr:hover{
     background-color: rgb(208, 237, 249);
 }
 
+#content{
+    padding-top: 5px;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+#header{
+    display: flex;
+    flex-direction: row;
+}
 ::ng-deep .p-paginator {
     justify-content: flex-end!important;
 }
@@ -10,7 +32,6 @@ tr:hover{
     border-radius: 0;
    height: 30px;
     background: white;
-   
    box-shadow: none;
    margin: 0;
 }
@@ -19,7 +40,6 @@ tr:hover{
     border-radius: 0;
    height: 30px;
     background:white;
-
    box-shadow: none;
    margin: 0;
 }
@@ -47,22 +67,59 @@ tr:hover{
     height: 30px;
     border-radius: 0px;
     background: white;
-    color: #1D4ED8;
     box-shadow: none;
     margin: 0;
 }
+
 
 ::ng-deep .p-paginator{
     padding: 10px 0px;
 }
 
+::ng-deep #top{
+    display: flex;
+    height: 30px;
+    width: 90px;
+}
+
+::ng-deep #top .p-dropdown-label.p-placeholder{
+    padding: 0 0 2px 8px;
+    font-size: 15px;
+    color: rgb(45, 57, 57);
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 15px;
+}
+
+::ng-deep .p-multiselect{
+    height: 30px;
+    width: 200px;
+}
+
+::ng-deep .p-multiselect .p-multiselect-label.p-placeholder{
+    padding: 0 0 0 4px;
+    display: flex;
+    color: rgb(45, 57, 57);
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    font-size: 15px;
+}
+
+::ng-deep .p-multiselect .p-multiselect-trigger{
+    width: 30px;
+}
+::ng-deep .p-dropdown .p-dropdown-trigger{
+    width: 30px;
+}
 ::ng-deep .p-paginator .p-paginator-pages .p-paginator-page:hover{
     background-color: rgb(229, 245, 249);
 }
 ::ng-deep .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
     background: rgb(215, 237, 246);
+    color: black;
     border:none;
-    color: #1D4ED8;
 }
 
 ::ng-deep .p-datatable-header{
@@ -72,10 +129,128 @@ tr:hover{
 }
 
 .header-last{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+#header-last-inner{
     display: flex;
     flex-direction: row;
-    gap: 20px;
+    gap: 10px;
+    align-items: center;
+    justify-content: flex-end;
 }
 .heading{
     width: 50%;
+} 
+
+#filter{
+    width: 80px;
+    height: 30px;
+    background-color: white;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px;
+}
+td{
+    font-size: 15px;
+}
+#add-btn{
+    height: 30px;
+    background-color:rgb(45, 57, 57);
+    color: white;
+    border: 1px solid rgb(45, 57, 57);
+    padding: 2.5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#filter-div{
+    width: 35%;
+    height: 100%;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid lightgray;
+}
+
+#filter-header{
+    width: 100%;
+    background-color: rgba(211, 211, 211,0.3);
+    padding: 8px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom: 1px solid lightgrey;
+}
+::ng-deep .p-datatable.p-datatable-sm .p-datatable-thead > tr > th{
+    padding: 0 10px;
+}
+::ng-deep .p-datatable .p-datatable-thead > tr > th{
+    background-color: rgba(211, 211, 211,0.3);
+    font-size: 16px;
+}
+#filter-form{
+    width: 100%;
+    padding: 20px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: lightgray;
+    border-radius: 5px;
+}
+input{
+    width: 100%;
+    border-color: #cbd3d9;
+    padding: 4px;
+    font-size: 14px;
+}
+
+::ng-deep .p-inputtext{
+    color: rgb(45, 57, 57);
+}
+#form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+::ng-deep #bottom .p-dropdown-label.p-placeholder{
+    padding: 4px;
+    font-size: 14px;
+}
+#filter-footer{
+    display: flex;
+    justify-content: flex-end;
+}
+#btn-div{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+#reset-btn{
+    background-color: white;
+    border: 1px solid gray;
+    height: 25px;
+    padding: 0px 10px;
+    border-radius: 5px;
+     cursor: pointer;
+}
+
+#submit-btn{
+    background-color:rgb(45, 57, 57);
+    color: white;
+    border: 1px solid rgb(45, 57, 57);
+    height: 25px;
+    padding: 0px 10px;
+    border-radius: 5px;
+     cursor: pointer;
+}
+
+::ng-deep .p-dropdown{
+    width: 100%;
+    padding: 0;
 }

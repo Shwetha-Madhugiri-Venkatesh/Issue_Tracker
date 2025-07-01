@@ -1,0 +1,28 @@
+#dialog-inner{
+    display: flex;
+    flex-direction: column;
+}
+
+#top-dialog-div{
+    display: flex;
+    flex-direction: column;
+}
+
+#top-dialog-header{
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(232, 230, 230);
+}
+
+#top-header{
+    width: 50%;
+}
+
+#heading{
+    font-size: 25px;
+}
+#icon-div{
+    width: 50%;
+    display: flex;
+    justify-content: flex-end;
+}

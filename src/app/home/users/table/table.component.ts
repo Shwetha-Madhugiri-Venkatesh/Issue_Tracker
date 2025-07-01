@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Observable, Subject } from 'rxjs';
+import { User } from 'src/app/Models/User';
+import { DialogComponent } from '../dialog/dialog.component';
 
 @Component({
   selector: 'app-table',
@@ -9,7 +13,13 @@ export class TableComponent {
 
     products;
     cols;
+    filter_flag:boolean=true;
 
+    @Output()
+    display_dialog:EventEmitter<boolean> = new EventEmitter<boolean>;
+   
+    user_types=[{name:"User"},{name:"Admin"}];
+    user_type:string;
     selectedNum:number=5;
      numbers = [
     { name: '5', value: 5 },
@@ -29,7 +39,7 @@ export class TableComponent {
     {name:'Last Modified Date Time', value:'last_modified_datetime'},
     {name:'Status', value:'status'},
   ]
-    ngOnInit() {
+  ngOnInit() {
         this.products=[{user_name:"Shwetha",email:"shwetha@gmail.com",created_source:"lokesh",created_source_type:"mentor",created_datetime:"today",
           last_modified_source:"lokesh",last_modified_source_type:"lead",last_modified_datetime:"today",icons:'<div class="icons"><i class="fa-solid fa-pen-to-square"></i> <i class="fa-solid fa-trash"></i></div>',
           status:'<button class="disabled-btn">Disabled</button>'
@@ -61,5 +71,17 @@ export class TableComponent {
             { field: 'icons', header: 'Actions' },
             { field: 'status', header: 'Status' },
         ];
+    }
+
+    filter_form_submit(form:NgForm){
+      console.log(form);
+    }
+
+    filter_display(){
+      this.filter_flag=!this.filter_flag;
+    }
+    dialog_display(){
+      console.log("btn");
+      this.display_dialog.emit(true);
     }
 }

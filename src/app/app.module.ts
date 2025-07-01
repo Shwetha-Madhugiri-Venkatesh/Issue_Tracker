@@ -29,6 +29,8 @@ import { TableModule } from 'primeng/table';
 import { CommonModule } from '@angular/common';
 import { DropdownModule } from 'primeng/dropdown';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { DialogModule } from 'primeng/dialog';
+import { DialogComponent } from './home/users/dialog/dialog.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
     UsersComponent,
     GraphComponent,
     TableComponent,
+    DialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,6 +64,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
    CommonModule,
    DropdownModule,
    MultiSelectModule,
+   DialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
