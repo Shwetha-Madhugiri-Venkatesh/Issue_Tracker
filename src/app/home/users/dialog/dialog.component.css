@@ -1,28 +1,126 @@
 #dialog-inner{
+    width: 100%;
     display: flex;
     flex-direction: column;
+    gap: 10px;
 }
 
-#top-dialog-div{
+.top-dialog-div{
     display: flex;
     flex-direction: column;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    border-bottom: 1px solid lightgray;
 }
 
-#top-dialog-header{
+.top-dialog-header{
+    border-bottom: 1px solid lightgray;
     display: flex;
     flex-direction: row;
-    background-color: rgb(232, 230, 230);
+    background-color: rgba(211, 211, 211,0.3);
+    padding: 3px 10px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
 
-#top-header{
+.top-header{
     width: 50%;
 }
 
-#heading{
-    font-size: 25px;
+.heading{
+    font-size: 15px;
+    font-weight: bold;
 }
 #icon-div{
     width: 50%;
     display: flex;
     justify-content: flex-end;
+    padding-right: 10px;
+}
+
+#icon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.input-div{
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+
+::ng-deep .p-dialog {
+    width: 80%!important;
+}
+
+.top-dialog-form{
+    margin: 10px;
+    width: 100%;
+}
+
+.form{
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto auto;
+    row-gap: 10px;
+}
+
+.label{
+    width: 200px;
+}
+
+label,input{
+    font-size: 15px;
+}
+
+::ng-deep .p-dialog .p-dialog-content{
+    padding: 10px 15px;
+}
+
+::ng-deep .p-dialog .p-dialog-header{
+    padding: 3px 15px;
+}
+
+.radios{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.input{
+    width: 200px;
+}
+
+input .ng-dirty{
+    border: none;
+}
+
+#submit{
+    background-color:rgb(45, 57, 57);
+    color: white;
+    border: 1px solid rgb(45, 57, 57);
+    height: 25px;
+    padding: 0px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#dialog-footer{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+input{
+    border: 1px solid lightgray;
+    border-radius: 5px;
+}
+.input-value{
+    border: none;
+    background-color: white !important;
+}
+
+input:-internal-autofill-selected {
+    background-color: white;
 }

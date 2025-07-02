@@ -1,4 +1,4 @@
 <div id="table-container">
     <app-table (display_dialog)="dialog($event)"></app-table>
-    <app-dialog [(visible)]="dialog_flag" ></app-dialog>
+    <app-dialog [(visible)]="dialog_flag" [prefill]="prefill_id"></app-dialog>
 </div>

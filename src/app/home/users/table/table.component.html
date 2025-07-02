@@ -6,8 +6,13 @@
         <div class="header-last">
             <div id="header-last-inner">
             <div>
-                <p-dropdown id="top" [options]="numbers" [(ngModel)]="selectedNum" optionLabel="name"
-                    [placeholder]="'show '+selectedNum" />
+                <p-dropdown 
+                id="top" 
+                [options]="numbers" 
+                [(ngModel)]="selectedNum" 
+                optionLabel="name"
+                [placeholder]="'show '+selectedNum" 
+                />
             </div>
             <div>
                 <p-multiSelect [options]="columns" [(ngModel)]="selectedCol" optionLabel="name"
@@ -31,11 +36,18 @@
             <th *ngFor="let col of columns" [pSortableColumnDisabled]="false" [pSortableColumn]="col.field">
                 {{ col.header }} <i class="fa-solid fa-sort"></i>
             </th>
+            <th>Actions</th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-rowData let-columns="columns">
         <tr>
             <td *ngFor="let col of columns" [innerHTML]="rowData[col.field] ">
+            </td>
+            <td>
+                <div class="icons">
+                    <i class="fa-solid fa-pen-to-square" (click)="open_form(rowData['user_id'])"></i>
+                    <i class="fa-solid fa-trash"></i>
+                </div>
             </td>
         </tr>
     </ng-template>

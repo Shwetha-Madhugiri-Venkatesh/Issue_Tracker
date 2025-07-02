@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { User } from "../Models/User";
 
 @Injectable({
     providedIn:'root',
@@ -13,5 +14,13 @@ export class HTTPService{
 
     fetch_login(){
         return this.http.get("http://localhost:3001/login");
+    }
+
+    create_new_user(user_details:User){
+        return this.http.post("http://localhost:3001/users",user_details);
+    }
+
+    fetch_users(){
+        return this.http.get("http://localhost:3001/users");
     }
 }

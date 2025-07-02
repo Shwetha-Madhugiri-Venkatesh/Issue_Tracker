@@ -3,6 +3,8 @@ import { NgForm } from '@angular/forms';
 import { Observable, Subject } from 'rxjs';
 import { User } from 'src/app/Models/User';
 import { DialogComponent } from '../dialog/dialog.component';
+import { HTTPService } from 'src/app/Services/http_service';
+import { AuthorizeUser } from 'src/app/Services/authorize_user';
 
 @Component({
   selector: 'app-table',
@@ -11,20 +13,22 @@ import { DialogComponent } from '../dialog/dialog.component';
 })
 export class TableComponent {
 
-    products;
-    cols;
-    filter_flag:boolean=true;
+    constructor(private http_service:HTTPService,private authorize:AuthorizeUser){}
+    products:User[];
+    cols:{field:string,header:string}[];
+    filter_flag:boolean=false;
 
     @Output()
-    display_dialog:EventEmitter<boolean> = new EventEmitter<boolean>;
+    display_dialog:EventEmitter<[boolean,string?]> = new EventEmitter<[boolean,string?]>;
    
     user_types=[{name:"User"},{name:"Admin"}];
     user_type:string;
     selectedNum:number=5;
+
      numbers = [
-    { name: '5', value: 5 },
-    { name: '10', value: 10 },
-    { name: '20', value: 20 },
+    { name: 'show 5', value: 5 },
+    { name: 'show 10', value: 10 },
+    { name: 'show 20', value: 20 },
   ];
 
   selectedCol:number=9;
@@ -40,36 +44,22 @@ export class TableComponent {
     {name:'Status', value:'status'},
   ]
   ngOnInit() {
-        this.products=[{user_name:"Shwetha",email:"shwetha@gmail.com",created_source:"lokesh",created_source_type:"mentor",created_datetime:"today",
-          last_modified_source:"lokesh",last_modified_source_type:"lead",last_modified_datetime:"today",icons:'<div class="icons"><i class="fa-solid fa-pen-to-square"></i> <i class="fa-solid fa-trash"></i></div>',
-          status:'<button class="disabled-btn">Disabled</button>'
-        }, {user_name:"Anith",email:"shwetha@gmail.com",created_source:"lokesh",created_source_type:"mentor",created_datetime:"today",
-          last_modified_source:"lokesh",last_modified_source_type:"lead",last_modified_datetime:"today",icons:'<div class="icons"><i class="fa-solid fa-pen-to-square"></i> <i class="fa-solid fa-trash"></i></div>',
-          status:'<button class="disabled-btn">Disabled</button>'
-        },{user_name:"Shwetha",email:"shwetha@gmail.com",created_source:"lokesh",created_source_type:"mentor",created_datetime:"today",
-          last_modified_source:"lokesh",last_modified_source_type:"lead",last_modified_datetime:"today",icons:'<div class="icons"><i class="fa-solid fa-pen-to-square"></i> <i class="fa-solid fa-trash"></i></div>',
-          status:'<button class="disabled-btn">Disabled</button>'
-        },{user_name:"Shwetha123",email:"shwetha@gmail.com",created_source:"lokesh",created_source_type:"mentor",created_datetime:"today",
-          last_modified_source:"lokesh",last_modified_source_type:"lead",last_modified_datetime:"today",icons:'<div class="icons"><i class="fa-solid fa-pen-to-square"></i> <i class="fa-solid fa-trash"></i></div>',
-          status:'<button class="disabled-btn">Disabled</button>'
-        },{user_name:"Swathi",email:"shwetha@gmail.com",created_source:"lokesh",created_source_type:"mentor",created_datetime:"today",
-          last_modified_source:"lokesh",last_modified_source_type:"lead",last_modified_datetime:"today",icons:'<div class="icons"><i class="fa-solid fa-pen-to-square"></i> <i class="fa-solid fa-trash"></i></div>',
-          status:'<button class="disabled-btn">Disabled</button>'
-        },{user_name:"Hari",email:"shwetha@gmail.com",created_source:"lokesh",created_source_type:"mentor",created_datetime:"today",
-          last_modified_source:"lokesh",last_modified_source_type:"lead",last_modified_datetime:"today",icons:'<div class="icons"><i class="fa-solid fa-pen-to-square"></i> <i class="fa-solid fa-trash"></i></div>',
-          status:'<button class="disabled-btn">Disabled</button>'
-        }];
+        this.http_service.fetch_users().subscribe((res:User[])=>{
+          this.products=res;
+        });
+
+        this.authorize.emit_users.subscribe((res)=>{
+          this.products=res;
+        })
         this.cols = [
-            { field: 'user_name', header: 'User Name' },
-            { field: 'email', header: 'Email ID' },
+            { field: 'uname', header: 'User Name' },
+            { field: 'email_id', header: 'Email ID' },
             { field: 'created_source', header: 'Created Source' },
             { field: 'created_source_type', header: 'Created Source Type' },
             { field: 'created_datetime', header: 'Created Date Time' },
             { field: 'last_modified_source', header: 'Last Modified Source' },
             { field: 'last_modified_source_type', header: 'Last Modified Source Type' },
             { field: 'last_modified_datetime', header: 'Last modified Date Time' },
-            { field: 'icons', header: 'Actions' },
-            { field: 'status', header: 'Status' },
         ];
     }
 
@@ -82,6 +72,11 @@ export class TableComponent {
     }
     dialog_display(){
       console.log("btn");
-      this.display_dialog.emit(true);
+      this.display_dialog.emit([true]);
+    }
+
+    open_form(uid){
+      console.log(uid);
+      this.display_dialog.emit([true,uid]);
     }
 }

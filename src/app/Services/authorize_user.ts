@@ -1,5 +1,6 @@
-import { inject, Injectable } from "@angular/core";
+import { EventEmitter, inject, Injectable } from "@angular/core";
 import { Router } from "@angular/router";
+import { User } from "../Models/User";
 
 @Injectable({
     providedIn:'root',
@@ -26,5 +27,11 @@ export class AuthorizeUser{
         }
         //console.log(userId,Password);
         return this.authentication;
+    }
+
+    emit_users:EventEmitter<User[]> = new EventEmitter<User[]>
+
+    raise_emit_users(users:User[]){
+        this.emit_users.emit(users);
     }
 }

@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
+  selected:string = '';
   constructor(public router:Router){}
   items = [
             { label: 'Dashboard', icon: 'dashboard_1828765.png', route: 'dashboard' },
@@ -15,7 +16,8 @@ export class HeaderComponent {
         ];
 
 
-  navigate_to(route){
+  navigate_to(route,label){
     this.router.navigateByUrl("/home/"+route);
+    this.selected=label;
   }
 }

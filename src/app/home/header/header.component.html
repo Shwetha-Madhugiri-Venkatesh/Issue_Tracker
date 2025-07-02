@@ -32,9 +32,9 @@
 
 <div id="navigation-container">
     <div id="navigation-content">
-        <div class="btn-container" *ngFor="let item of items" >
+        <div class="btn-container" *ngFor="let item of items" [ngClass]="{'btn-container-focus':selected===item.label}" >
             <img style="width: 20px;height: 20px;" [src]="'../../../assets/images/'+item.icon"/>
-            <button class="navigation-btn" (click)="navigate_to(item.route)" >{{item.label}}</button>
+            <button class="navigation-btn" [ngClass]="{'navigation-btn-focus':selected===item.label}" (click)="navigate_to(item.route,item.label)">{{item.label}}</button>
         </div>
     </div>
 </div>

@@ -79,11 +79,14 @@ tr:hover{
 ::ng-deep #top{
     display: flex;
     height: 30px;
-    width: 90px;
+    width: 110px;
 }
 
+::ng-deep #top .p-inputtext{
+    padding: 5px 10px!important;
+}
 ::ng-deep #top .p-dropdown-label.p-placeholder{
-    padding: 0 0 2px 8px;
+    
     font-size: 15px;
     color: rgb(45, 57, 57);
     display: flex;
@@ -210,6 +213,7 @@ input{
 
 ::ng-deep .p-inputtext{
     color: rgb(45, 57, 57);
+    font-size: 15px;
 }
 #form{
     display: flex;
@@ -253,4 +257,25 @@ input{
 ::ng-deep .p-dropdown{
     width: 100%;
     padding: 0;
+}
+
+::ng-deep .p-dropdown{
+    box-shadow: none!important;
+    border-color: lightgray!important;
+}
+
+::ng-deep .p-multiselect{
+    box-shadow: none!important;
+    border-color: lightgray!important;
+}
+
+::ng-deep .p-dropdown-panel .p-dropdown-items .p-dropdown-item{
+    padding: 5px 10px;
+    font-size: 15px;
+}
+
+.icons{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
 }

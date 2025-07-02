@@ -6,12 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent {
-  dialog_flag=false;
-
-  dialog(val:boolean){
-    console.log(val);
-    this.dialog_flag=val;
+  dialog_flag:boolean=false;
+  prefill_id:string='';
+  dialog(data:[boolean,string?]){
+    console.log(data);
+    this.dialog_flag=data[0];
+    this.prefill_id=data[1];
   }
-
  
 }
