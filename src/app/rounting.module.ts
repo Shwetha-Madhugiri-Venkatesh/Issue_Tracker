@@ -8,10 +8,11 @@ import { IssuesComponent } from "./home/issues/issues.component";
 import { UsersComponent } from "./home/users/users.component";
 
 const routes:Routes = [
-    {path:"",component:LoginComponent, canActivate:[login_canActivate]},
+    {path:"",component:LoginComponent},
     // {path:"",component:LoginComponent},
     // {path:"",component:HomeComponent},
     {path:"home", component:HomeComponent,children:[
+        {path:'', component:DashboardComponent},
         {path:'dashboard', component:DashboardComponent},
         {path:'issues', component:IssuesComponent},
         {path:'users', component:UsersComponent},

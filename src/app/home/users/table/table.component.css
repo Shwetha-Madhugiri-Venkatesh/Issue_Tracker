@@ -207,8 +207,11 @@ td{
 input{
     width: 100%;
     border-color: #cbd3d9;
+    border: 1px solid lightgray;
+    border-radius: 5px;
     padding: 4px;
     font-size: 14px;
+    color:  rgb(45, 57, 57);
 }
 
 ::ng-deep .p-inputtext{
@@ -278,4 +281,57 @@ input{
     display: flex;
     flex-direction: row;
     gap: 10px;
+}
+
+::ng-deep .p-multiselect-panel .p-multiselect-header{
+    padding: 5px 10px;
+}
+
+::ng-deep .p-multiselect-panel .p-multiselect-header .p-multiselect-filter-container .p-inputtext{
+    padding: 3px;
+}
+
+::ng-deep .p-inputtext:enabled:focus {
+    box-shadow: none;
+    border-color: lightgray;
+}
+
+::ng-deep .p-checkbox .p-checkbox-box {
+    border-radius: 5px;
+    border: 1px solid lightgray;
+}
+
+::ng-deep .p-multiselect-panel .p-multiselect-items .p-multiselect-item {
+    padding: 5px 10px;
+    border-bottom: 1px solid lightgray;
+    font-size: 15px;
+}
+
+::ng-deep .p-multiselect-panel .p-multiselect-items{
+    padding: 0;
+}
+
+::ng-deep .p-multiselect .p-multiselect-label{
+    padding: 0;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    margin: 1px 0px 0px 6px;
+}
+
+#multiselect-btn{
+    background-color:rgb(45, 57, 57);
+    color: white;
+    border: 1px solid rgb(45, 57, 57);
+    height: 25px;
+    padding: 0px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#multi-btn-con{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 5px 10px;
 }

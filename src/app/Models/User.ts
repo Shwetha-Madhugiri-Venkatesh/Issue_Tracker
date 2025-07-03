@@ -6,7 +6,7 @@ export class User{
         public lname:string, 
         public created_source:string,
         public created_source_type:string,
-        public create_dateime:string,
+        public created_datetime:string,
         public company_code:string,
         public type:string,
         public user_id:string,

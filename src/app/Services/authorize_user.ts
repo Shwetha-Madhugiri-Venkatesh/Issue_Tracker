@@ -23,15 +23,9 @@ export class AuthorizeUser{
             // }
             console.log("true");
             this.authentication=true;
-             this.route.navigate(['/home',login_details]);
+            this.route.navigate(['/home',login_details]);
         }
         //console.log(userId,Password);
         return this.authentication;
-    }
-
-    emit_users:EventEmitter<User[]> = new EventEmitter<User[]>
-
-    raise_emit_users(users:User[]){
-        this.emit_users.emit(users);
     }
 }

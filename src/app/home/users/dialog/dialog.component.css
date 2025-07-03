@@ -91,10 +91,6 @@ label,input{
     width: 200px;
 }
 
-input .ng-dirty{
-    border: none;
-}
-
 #submit{
     background-color:rgb(45, 57, 57);
     color: white;

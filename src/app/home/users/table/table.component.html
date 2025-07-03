@@ -12,11 +12,22 @@
                 [(ngModel)]="selectedNum" 
                 optionLabel="name"
                 [placeholder]="'show '+selectedNum" 
+                (onChange)="dynamic_rows($event)"
                 />
             </div>
             <div>
-                <p-multiSelect [options]="columns" [(ngModel)]="selectedCol" optionLabel="name"
-                    [placeholder]="selectedCol+' columns are selected'" />
+                <p-multiSelect 
+                [options]="columns" 
+                [(ngModel)]="selectedCol" 
+                optionLabel="name"
+                [placeholder]="selectedCol+' columns are selected'"
+                (onChange)="get_selected_columns($event)">
+                <ng-template pTemplate="footer">
+                    <div id="multi-btn-con">
+                        <button id="multiselect-btn" (click)="dynamic_columns()">apply</button>
+                    </div>
+                </ng-template>
+            </p-multiSelect>
             </div>
             <div>
                 <button id="filter" (click)="filter_display()"><i class="fa-solid fa-filter"></i> Filter</button>
@@ -45,7 +56,7 @@
             </td>
             <td>
                 <div class="icons">
-                    <i class="fa-solid fa-pen-to-square" (click)="open_form(rowData['user_id'])"></i>
+                    <i class="fa-solid fa-pen-to-square" (click)="open_form(rowData['id'])"></i>
                     <i class="fa-solid fa-trash"></i>
                 </div>
             </td>
@@ -60,21 +71,21 @@
         </div>
         <div id="filter-form">
             <form id="form" #form="ngForm">
-                <input pInputText placeholder="User Name" name="user_name" ngModel/>
+                <input pInputText placeholder="User Name" name="uname" ngModel/>
                 <p-dropdown
                     id="bottom" 
                     [options]="user_types" 
-                    name="userType"
+                    name="type"
                     [(ngModel)]="user_type" 
                     optionLabel="name" 
                     placeholder="User Type" />
-                <input pInputText placeholder="Email ID" name="email" ngModel />
+                <input pInputText placeholder="Email ID" name="emai_id+" ngModel />
                 <input pInputText placeholder="Created Source" name="created_source" ngModel/>
                 <input pInputText placeholder="Created Source Type" name="created_source_type" ngModel/>
-                <input pInputText placeholder="Created Date Time" name="created_datetime" ngModel/>
+                <input type="datetime-local" placeholder="Created Date Time" name="created_datetime" ngModel/>
                 <input pInputText placeholder="Last Modified Source" name="last_modified_source" ngModel/>
                 <input pInputText placeholder="Last Modified Source Type" name="last_modified_source_type" ngModel/>
-                <input pInputText placeholder="Last Modified Date Time" name="last_modified_source_datetime" ngModel/>
+                <input type="datetime-local" placeholder="Last Modified Date Time" name="last_modified_source_datetime" ngModel/>
             </form>
             <div id="filter-footer">
                 <div id="btn-div">

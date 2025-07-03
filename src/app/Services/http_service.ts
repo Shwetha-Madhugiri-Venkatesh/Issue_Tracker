@@ -23,4 +23,8 @@ export class HTTPService{
     fetch_users(){
         return this.http.get("http://localhost:3001/users");
     }
+
+    fetch_user(id:string){
+        return this.http.get(`http://localhost:3001/users/${id}`);
+    }
 }

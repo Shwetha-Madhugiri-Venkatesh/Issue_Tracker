@@ -1,17 +1,18 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild } from '@angular/core';
 import { TableComponent } from '../table/table.component';
 import { NgForm } from '@angular/forms';
 import { User } from 'src/app/Models/User';
 import { HTTPService } from 'src/app/Services/http_service';
 import { Subject } from 'rxjs';
 import { AuthorizeUser } from 'src/app/Services/authorize_user';
+import { TwoWayDataBinding } from 'src/app/Services/two_way_dataBinding';
 
 @Component({
   selector: 'app-dialog',
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.css']
 })
-export class DialogComponent implements OnInit{
+export class DialogComponent implements OnChanges{
 
   @Input()
   visible:boolean=false;
@@ -21,13 +22,18 @@ export class DialogComponent implements OnInit{
 
   @Output() visibleChange = new EventEmitter<boolean>();
   user_subject = new Subject();
-  constructor(private http_service:HTTPService, private authorize:AuthorizeUser){};
+  constructor(private http_service:HTTPService,private two_way:TwoWayDataBinding){};
   user:User;
-
-  ngOnInit(){
+  prefill_user:User;
+  ngOnChanges(){
     if(this.prefill){
       console.log(this.prefill);
     }
+
+    this.http_service.fetch_user(this.prefill).subscribe((res:User)=>{
+      console.log(res);
+      this.prefill_user=res;
+    })
   }
 
   form_submit(topForm:NgForm,bottomForm:NgForm){
@@ -41,9 +47,12 @@ export class DialogComponent implements OnInit{
     })
   }
 
+  onHide(){
+    this.visibleChange.emit(false);
+  }
   get_users(){
      this.http_service.fetch_users().subscribe((res:User[])=>{
-      this.authorize.raise_emit_users(res);
+      this.two_way.raise_emit_users(res);
     })
   }
 
