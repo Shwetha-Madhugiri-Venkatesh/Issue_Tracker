@@ -10,7 +10,7 @@ import { TwoWayDataBinding } from 'src/app/Services/two_way_dataBinding';
 export class HeaderComponent {
   selected:string = 'Dashboard';
    items = [
-            { label: 'Dashboard', icon: 'dashboard_1828765.png', route: 'dashboard' },
+            { label: 'Dashboard', icon: 'dashboard_1828765.png', route: "/home" },
            { label: 'Issues', icon: 'bug_8786300.png', route: 'issues' },
             { label: 'Users', icon: 'profile_7310896.png', route: 'users' },
         ];

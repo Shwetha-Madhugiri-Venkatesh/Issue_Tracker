@@ -22,5 +22,6 @@ export class User{
         public postal_code:string,
         public locale:string,
         public time_zone:string,
+        public password:string,
     ) {}
 }

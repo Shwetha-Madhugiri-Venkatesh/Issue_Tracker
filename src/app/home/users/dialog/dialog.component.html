@@ -15,92 +15,97 @@
                     <form class="form" #topForm="ngForm">
                         <div class="input-div">
                         <label class="label">User Name *</label>
-                        <input type="text" [value]="prefill? prefill_user.uname:''" name="uname" ngModel [ngClass]="topForm?.controls['uname']?.value?'input-value':'input'"/>
+                        <input type="text"  name="uname" [(ngModel)]="user_uname" [ngClass]="topForm?.controls['uname']?.value?'input-value':'input'" (change)="create_user_password($event)"/>
                         </div>
 
                         <div class="input-div">
                         <label class="label">First Name *</label>
-                        <input [ngClass]="topForm?.controls['fname']?.value?'input-value':'input'" [value]="prefill? prefill_user.fname:''" type="text" name="fname" ngModel/>
+                        <input [ngClass]="topForm?.controls['fname']?.value?'input-value':'input'" type="text" name="fname" [(ngModel)]="user_fname"/>
                         </div>
 
                         <div class="input-div">
                         <label class="label">Middle Name *</label>
-                        <input [ngClass]="topForm?.controls['mname']?.value?'input-value':'input'" [value]="prefill? prefill_user.mname:''" type="text" name="mname" ngModel/>
+                        <input [ngClass]="topForm?.controls['mname']?.value?'input-value':'input'" type="text" name="mname" [(ngModel)]="user_mname"/>
                         </div>
 
                         <div class="input-div">
                         <label class="label">Last Name *</label>
-                        <input [ngClass]="topForm?.controls['lname']?.value?'input-value':'input'" type="text" name="lname" [value]="prefill? prefill_user.lname:''" ngModel/>
+                        <input [ngClass]="topForm?.controls['lname']?.value?'input-value':'input'" type="text" name="lname" [(ngModel)]="user_lname"/>
                         </div>
 
                         <div class="input-div">
                         <label class="label">Created Source</label>
-                        <input [ngClass]="topForm?.controls['created_source']?.value?'input-value':'input'" [value]="prefill? prefill_user.created_source:''" type="text" name="created_source" ngModel/>
+                        <input [ngClass]="topForm?.controls['created_source']?.value?'input-value':'input'" type="text" name="created_source" [(ngModel)]="user_created_source"/>
                         </div>
 
                         <div class="input-div">
                         <label class="label">Created Source Type</label>
                         <div class="radios">
-                            <input type="radio" id="html" name="fav_language" value="User" name="created_source_type" [(ngModel)]="prefill_user.created_source_type">
+                            <input type="radio" id="html" name="fav_language" value="User" name="created_source_type" [(ngModel)]="user_created_source_type">
                             <label for="html">User</label><br>
-                            <input type="radio" id="css" name="fav_language" value="Admin" name="created_source_type" [(ngModel)]="prefill_user.created_source_type">
+                            <input type="radio" id="css" name="fav_language" value="Admin" name="created_source_type" [(ngModel)]="user_created_source_type">
                             <label for="css">Admin</label><br>
                         </div>
                         </div>
 
                         <div class="input-div">
                         <label class="label">Created Date time</label>
-                        <input [ngClass]="topForm?.controls['created_datetime']?.value?'input-value':'input'" [value]="prefill? prefill_user.created_datetime:''" type="datetime-local" name="created_datetime" ngModel/>
+                        <input [ngClass]="topForm?.controls['created_datetime']?.value?'input-value':'input'"  type="datetime-local" name="created_datetime" [(ngModel)]="user_created_datetime"/>
                         </div>
 
                         <div class="input-div">
                         <label class="label">Company Code</label>
-                        <input [ngClass]="topForm?.controls['company_code']?.value?'input-value':'input'" [value]="prefill? prefill_user.company_code:''" type="text" name="company_code" ngModel/>
+                        <input [ngClass]="topForm?.controls['company_code']?.value?'input-value':'input'" type="text" name="company_code" [(ngModel)]="user_company_code"/>
                         </div>
 
                         <div class="input-div">
                         <label class="label">Type</label>
                         <div class="radios">
-                            <input type="radio" id="html" name="fav_language" value="User" name="type" [(ngModel)]="prefill_user.type">
+                            <input type="radio" id="html" name="fav_language" value="User" name="type" [(ngModel)]="user_type">
                             <label for="html">User</label><br>
-                            <input type="radio" id="css" name="fav_language" value="Admin" name="type" [(ngModel)]="prefill_user.type">
+                            <input type="radio" id="css" name="fav_language" value="Admin" name="type" [(ngModel)]="user_type">
                             <label for="css">Admin</label><br>
                         </div>
                         </div>
 
                         <div class="input-div">
                         <label class="label">User ID</label>
-                        <input [ngClass]="topForm?.controls['user_id']?.value?'input-value':'input'" [value]="prefill? prefill_user.user_id:''" type="text" name="user_id" ngModel/>
+                        <input [ngClass]="topForm?.controls['user_id']?.value?'input-value':'input'" type="text" name="user_id" [(ngModel)]="user_user_id"/>
                         </div>
 
                         <div class="input-div">
                         <label class="label">Email ID</label>
-                        <input [ngClass]="topForm?.controls['email_id']?.value?'input-value':'input'" [value]="prefill? prefill_user.email_id:''" type="email" name="email_id" ngModel/>
+                        <input [ngClass]="topForm?.controls['email_id']?.value?'input-value':'input'" type="email" name="email_id" [(ngModel)]="user_email_id"/>
                         </div>
 
                         <div class="input-div">
                         <label class="label">Phone Number</label>
-                        <input [ngClass]="topForm?.controls['phone']?.value?'input-value':'input'" [value]="prefill? prefill_user.phone:''" type="text" name="phone" ngModel/>
+                        <input [ngClass]="topForm?.controls['phone']?.value?'input-value':'input'" type="text" name="phone" [(ngModel)]="user_phone"/>
                         </div>
 
                         <div class="input-div">
                         <label class="label">Last Modified Source</label>
-                        <input [ngClass]="topForm?.controls['last_modified_source']?.value?'input-value':'input'" [value]="prefill? prefill_user.last_modified_source:''" type="text" name="last_modified_source" ngModel/>
+                        <input [ngClass]="topForm?.controls['last_modified_source']?.value?'input-value':'input'" type="text" name="last_modified_source" [(ngModel)]="user_last_modified_source"/>
                         </div>
 
                         <div class="input-div">
                         <label class="label">Last Modified Source Type</label>
                         <div class="radios">
-                            <input type="radio" id="html" name="fav_language" value="User" name="last_modified_source_type" [(ngModel)]="prefill_user.last_modified_source_type">
+                            <input type="radio" id="html" name="fav_language" value="User" name="last_modified_source_type" [(ngModel)]="user_last_modified_source_type">
                             <label for="html">User</label><br>
-                            <input type="radio" id="css" name="fav_language"  value="Admin" name="last_modified_source_type" [(ngModel)]="prefill_user.last_modified_source_type">
+                            <input type="radio" id="css" name="fav_language"  value="Admin" name="last_modified_source_type" [(ngModel)]="user_last_modified_source_type">
                             <label for="css">Admin</label><br>
                         </div>
                         </div>
 
                         <div class="input-div">
                         <label class="label">Last Modified Date Time</label>
-                        <input [ngClass]="topForm?.controls['last_modified_datetime']?.value?'input-value':'input'" [value]="prefill? prefill_user.last_modified_datetime:''" type="datetime-local" name="last_modified_datetime" ngModel/>
+                        <input [ngClass]="topForm?.controls['last_modified_datetime']?.value?'input-value':'input'" type="datetime-local" name="last_modified_datetime" [(ngModel)]="user_last_modified_datetime"/>
+                        </div>
+
+                        <div class="input-div">
+                        <label class="label">Password</label>
+                        <input [ngClass]="topForm?.controls['password']?.value?'input-value':'input'" type="text" name="password" [(ngModel)]="user_password"/>
                         </div>
                     </form>
                 </div>
@@ -115,37 +120,37 @@
                     <form class="form"  id="bottom-form" #bottomForm="ngForm">
                         <div class="input-div">
                         <label class="label">Address</label>
-                        <input [ngClass]="bottomForm?.controls['address']?.touched?'input':'input-value'" [value]="prefill? prefill_user.address:''" type="text" name="address" ngModel/>
+                        <input [ngClass]="bottomForm?.controls['address']?.touched?'input':'input-value'" type="text" name="address" [(ngModel)]="user_address"/>
                         </div>
 
                         <div class="input-div">
                         <label class="label">Country</label>
-                        <input [ngClass]="bottomForm?.controls['country']?.value?'input-value':'input'" [value]="prefill? prefill_user.country:''" type="text" name="country" ngModel/>
+                        <input [ngClass]="bottomForm?.controls['country']?.value?'input-value':'input'" type="text" name="country" [(ngModel)]="user_country"/>
                         </div>
 
                         <div class="input-div">
                         <label class="label">State</label>
-                        <input [ngClass]="bottomForm?.controls['state']?.value?'input-value':'input'" [value]="prefill? prefill_user.state:''" type="text" name="state" ngModel/>
+                        <input [ngClass]="bottomForm?.controls['state']?.value?'input-value':'input'" type="text" name="state" [(ngModel)]="user_state"/>
                         </div>
 
                         <div class="input-div">
                         <label class="label">City</label>
-                        <input [ngClass]="bottomForm?.controls['city']?.value?'input-value':'input'" [value]="prefill? prefill_user.city:''" type="text" name="city" ngModel/>
+                        <input [ngClass]="bottomForm?.controls['city']?.value?'input-value':'input'" type="text" name="city" [(ngModel)]="user_city"/>
                         </div>
 
                         <div class="input-div">
                         <label class="label">Postal Code</label>
-                        <input [ngClass]="bottomForm?.controls['postal_code']?.value?'input-value':'input'" [value]="prefill? prefill_user.postal_code:''"  type="text" name="postal_code" ngModel/>
+                        <input [ngClass]="bottomForm?.controls['postal_code']?.value?'input-value':'input'"  type="text" name="postal_code" [(ngModel)]="user_postal_code"/>
                         </div>
 
                         <div class="input-div">
                         <label class="label">Locale</label>
-                        <input [ngClass]="bottomForm?.controls['locale']?.value?'input-value':'input'" [value]="prefill? prefill_user.locale:''" type="text" name="locale" ngModel/>
+                        <input [ngClass]="bottomForm?.controls['locale']?.value?'input-value':'input'" type="text" name="locale" [(ngModel)]="user_locale"/>
                         </div>
 
                         <div class="input-div">
                         <label class="label">Time zone</label>
-                        <input [ngClass]="bottomForm?.controls['time_zone']?.value?'input-value':'input'" [value]="prefill? prefill_user.time_zone:''" type="text" name="time_zone" ngModel/>
+                        <input [ngClass]="bottomForm?.controls['time_zone']?.value?'input-value':'input'" type="text" name="time_zone" [(ngModel)]="user_time_zone"/>
                         </div>
                     </form>
                 </div>

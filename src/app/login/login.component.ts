@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, inject, OnDestroy, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MessageService, PrimeNGConfig } from 'primeng/api';
 import { AuthorizeUser } from '../Services/authorize_user';
@@ -14,16 +14,17 @@ export class LoginComponent implements OnInit{
 
   constructor(private primeNg:PrimeNGConfig,
               private message_service:MessageService,
-              private http_service:HTTPService,
+              private authorize:AuthorizeUser,
             ){}
 
   forgot:boolean=false;
   password:string='';
   confirmPassword:string='';
   user_Id:string='';
-  log:boolean=true;
+  log:boolean;
+  err:string='Credentials are wrong!';
+  sub;
   login_content:[{userId:string,Password:string,isLogged:boolean}];
-  authorize:AuthorizeUser=inject(AuthorizeUser);
 
   ngOnInit(){
     this.primeNg.ripple=true;
@@ -41,9 +42,17 @@ export class LoginComponent implements OnInit{
     if(!form.valid){
       return;
     }
-    this.log = this.authorize.login(form.value);
-    if(!this.log){
-      this.message_service.add({severity:'error', summary:'Error', detail:'User credentials are wrong'});
+    this.authorize.login(form.value);
+    this.sub = this.authorize.authentication.subscribe((res:boolean)=>{
+      this.log = res[0];
+      this.err=res[1];
+      if(!this.log){
+        this.message_service.add({severity:'error', summary:'Error', detail:this.err});
+      }
+      this.sub.unsubscribe();
+    });
+    if(this.forgot){
+      console.log(form.value);
     }
   }
 }

@@ -18,7 +18,7 @@ export class TableComponent {
     products:User[];
     users_from_http:User[];
     cols:{field:string,header:string}[];
-    columns:{name:string,value:string}[];
+    columns:{name:string,value:string}[]=[];
     filter_flag:boolean=false;
     columns_selected:[];
 
@@ -35,14 +35,11 @@ export class TableComponent {
     { name: 'show 20', value: 20 },
   ];
 
-  selectedCol:number=9;
-  ngOnInit() {
-        this.http_service.fetch_users().subscribe((res:User[])=>{
-          this.users_from_http=res;
-          this.products=this.users_from_http;
-        });
+  selectedCol:[];
 
-        this.two_way.emit_users.subscribe((res)=>{
+  ngOnInit() {
+       this.get_all_users();
+        this.two_way.emit_users.subscribe(res=>{
           this.products=res;
         })
         this.cols = [
@@ -55,38 +52,30 @@ export class TableComponent {
             { field: 'last_modified_source_type', header: 'Last Modified Source Type' },
             { field: 'last_modified_datetime', header: 'Last modified Date Time' },
         ];
-
-        this.columns=[
-    {name:'User Name', value:'uname'},
-    {name:'Email ID', value:'email_id'},
-    {name:'Created Source', value:'created_source'},
-    {name:'Created Source Type', value:'created_source_type'},
-    {name:'Created Date Time', value:'created_datetime'},
-    {name:'Last Modified Source', value:'last_modified_source'},
-    {name:'Last Modified Source Type', value:'last_modified_source_type'},
-    {name:'Last Modified Date Time', value:'last_modified_datetime'},
-  ]
     }
 
     filter_form_submit(form:NgForm){
-      console.log(form.value);
-       let form_data:User={} as User;
-        for(let key in form.value){
-          if(form.value[key]!=""||undefined){
-            form_data[key]=form.value[key];
+      let form_data = {...form.value,type:(form.value.type==undefined)?undefined:form.value.type['name']};
+      this.products= this.users_from_http.filter(item=>{
+        let match:boolean = false;
+        for(let key in form_data){
+          console.log(form[key]);
+          if(form_data[key]!=undefined && form_data[key]!=""){
+          if(item[key]==form_data[key]){
+            match=true;
+          } else{
+            match=false;
+            break;
+          }
           }
         }
-      this.products = this.users_from_http.filter((item) =>{
-        return item.uname==form_data.uname || item.email_id==form_data.email_id||
-               item.type==form_data.type['name']||
-               item.created_source==form_data.created_source||
-               item.created_source_type==form_data.created_source_type||
-               item.created_datetime==form_data.created_datetime||
-               item.last_modified_source==form_data.last_modified_source||
-               item.last_modified_source_type==form_data.last_modified_source_type||
-               item.last_modified_datetime==form_data.last_modified_datetime;
+        if(match){
+          return item;
+        }
+        else{
+          return null;
+        }
       })
-      console.log(this.products);
     }
 
     filter_display(){
@@ -103,16 +92,31 @@ export class TableComponent {
 
     dynamic_rows(event){
       console.log(event.value);
-      this.products =this.users_from_http.slice(0,event.value.value);
+      if(this.users_from_http.length>event.value){
+        this.products =this.users_from_http.slice(0,event.value.value);
+      }else{
+        this.products=this.users_from_http;
+      }
     }
 
-    get_selected_columns(event){
-      this.columns_selected=event.value;
+    get_selected_columns(){
+      this.columns_selected=this.selectedCol;
     }
 
     dynamic_columns(){
-      console.log(this.columns_selected);
-      this.columns=this.columns_selected;
-      console.log(this.columns);
+      this.cols=this.columns_selected;
+    }
+
+    get_all_users(){
+      this.http_service.fetch_users().subscribe((res:User[])=>{
+          this.users_from_http=res;
+          this.products=this.users_from_http;
+        });
+    }
+    delete_the_user(id:string){
+     this.http_service.delete_user(id).subscribe(res=>{
+      console.log(res);
+      this.get_all_users();
+     })
     }
 }

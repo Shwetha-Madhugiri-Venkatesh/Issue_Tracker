@@ -17,17 +17,18 @@
             </div>
             <div>
                 <p-multiSelect 
-                [options]="columns" 
+                [options]="cols" 
                 [(ngModel)]="selectedCol" 
-                optionLabel="name"
+                optionLabel="header"
                 [placeholder]="selectedCol+' columns are selected'"
-                (onChange)="get_selected_columns($event)">
+                (onChange)="get_selected_columns()">
                 <ng-template pTemplate="footer">
                     <div id="multi-btn-con">
                         <button id="multiselect-btn" (click)="dynamic_columns()">apply</button>
                     </div>
                 </ng-template>
             </p-multiSelect>
+
             </div>
             <div>
                 <button id="filter" (click)="filter_display()"><i class="fa-solid fa-filter"></i> Filter</button>
@@ -57,7 +58,7 @@
             <td>
                 <div class="icons">
                     <i class="fa-solid fa-pen-to-square" (click)="open_form(rowData['id'])"></i>
-                    <i class="fa-solid fa-trash"></i>
+                    <i class="fa-solid fa-trash" (click)="delete_the_user(rowData['id'])"></i>
                 </div>
             </td>
         </tr>
@@ -79,7 +80,7 @@
                     [(ngModel)]="user_type" 
                     optionLabel="name" 
                     placeholder="User Type" />
-                <input pInputText placeholder="Email ID" name="emai_id+" ngModel />
+                <input pInputText placeholder="Email ID" name="email_id" ngModel />
                 <input pInputText placeholder="Created Source" name="created_source" ngModel/>
                 <input pInputText placeholder="Created Source Type" name="created_source_type" ngModel/>
                 <input type="datetime-local" placeholder="Created Date Time" name="created_datetime" ngModel/>

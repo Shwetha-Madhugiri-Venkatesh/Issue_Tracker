@@ -27,4 +27,12 @@ export class HTTPService{
     fetch_user(id:string){
         return this.http.get(`http://localhost:3001/users/${id}`);
     }
+
+    update_user(id:string,updated_user:User){
+        return this.http.put(`http://localhost:3001/users/${id}`,updated_user);
+    }
+
+    delete_user(id:string){
+        return this.http.delete(`http://localhost:3001/users/${id}`);
+    }
 }
