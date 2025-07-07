@@ -1,0 +1,98 @@
+<div id="kabban-content">
+    <div id="kabban-header">
+        <div id="header-content">
+            <div id="left">
+                <h2>Issues</h2>
+            </div>
+            <div id="right">
+                <button (click)="add_bug()">Add</button>
+                <div><i class="fa-solid fa-filter"></i></div>
+            </div>
+        </div>
+    </div>
+    <div id="issues">
+        <div id="issues-container">
+            <div *ngFor="let s of statuses" class="issues-inner">
+                <div class="issues-header">
+                    <div class="left">
+                        <span [ngStyle]="{color:s.status=='Open'?'blue':
+                                                s.status=='Assigned'?'orange':
+                                                s.status=='In Progress'?'#c6c61a':
+                                                s.status=='Completed'?'green':'black'
+                        }">{{s.status}}</span>
+                    </div>
+                    <div class="right">
+                        <span>{{s.tickets.length}}</span>
+                        <button><i class="fa-solid fa-rotate-right fa-rotate-270"></i></button>
+                    </div>
+                </div>
+                <div id="tickets-div">
+                    <div id="tickets">
+                        <app-ticket *ngFor="let item of s.tickets" [ticket]="item" [priority]="priorities"></app-ticket>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card flex justify-center">
+    <p-dialog header="Bug Record Form" [modal]="true" [(visible)]="visible" [style]="{ width: '50rem'}">
+        <div id="form-div">
+            <form #bugForm="ngForm" (ngSubmit)="bug_form_submit(bugForm)">
+                <div class="row">
+                    <div class="div">
+                        <label>Reporter Name</label>
+                        <input pInputText type="text" name="reporter_name" [(ngModel)]="user_details.uname" readonly />
+                    </div>
+                    <div class="div">
+                        <label>Reporter Id</label>
+                        <input pInputText name="reportedId" [(ngModel)]="user_details.user_id" readonly />
+                    </div>
+                </div>
+                <div class="row_">
+                    <label>Type</label>
+                    <div id="type-div">
+                        <div id="type-bug"
+                            [ngStyle]="bug?{'background-color': 'blue','color': 'white'}:{'background-color': '#eff7fa','color': 'blue'}"
+                            (click)="ticket_type_bug()">Bug</div>
+                        <div id="type-feature"
+                            [ngStyle]="feature?{'background-color': 'blue','color': 'white'}:{'background-color': '#eff7fa','color': 'blue'}"
+                            (click)="ticket_type_feature()">Feature</div>
+                    </div>
+                </div>
+                <div class="row_">
+                    <label>Subject</label>
+                    <input pInputText name="subject" ngModel />
+                </div>
+                <div class="row_">
+                    <label>Priority</label>
+                    <p-dropdown [options]="priorities" [(ngModel)]="selectedPriority" optionLabel="priority"
+                        placeholder="Select a City" name="priority" />
+                </div>
+                <div class="row_">
+                    <label>Attachments</label>
+                    <input type="file" name="input_file" ngModel />
+                </div>
+                <div class="row">
+                    <div class="div">
+                        <label>Category</label>
+                        <p-dropdown [options]="categories" [(ngModel)]="selectedCategory" optionLabel="categoryDesc"
+                            placeholder="Select a City" name="category" (onChange)="category_entered($event)" />
+                    </div>
+                    <div class="div">
+                        <label>Subcategory</label>
+                        <p-dropdown [options]="dynamic_subcategory" [(ngModel)]="selectedSubCategory"
+                            optionLabel="subCategoryDesc" placeholder="Select a City" name="subcategory" />
+                    </div>
+                </div>
+                <div>
+                    <label>Description</label>
+                    <textarea name="description" ngModel></textarea>
+                </div>
+                <div>
+                    <button id="submit" type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </p-dialog>
+</div>

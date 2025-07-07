@@ -1,4 +1,3 @@
-<p>dialog works!</p>
 <div class="card flex justify-center">
     <p-dialog header="User Details" [modal]="true" [(visible)]="visible" (onHide)="onHide()" [style]="{ width: '25rem' }">
         <div id="dialog-inner">
@@ -35,22 +34,22 @@
 
                         <div class="input-div">
                         <label class="label">Created Source</label>
-                        <input [ngClass]="topForm?.controls['created_source']?.value?'input-value':'input'" type="text" name="created_source" [(ngModel)]="user_created_source"/>
+                        <input class="input-value" type="text" name="created_source" [(ngModel)]="user_details.uname" readonly/>
                         </div>
 
                         <div class="input-div">
                         <label class="label">Created Source Type</label>
                         <div class="radios">
-                            <input type="radio" id="html" name="fav_language" value="User" name="created_source_type" [(ngModel)]="user_created_source_type">
+                            <input type="radio" id="html" name="fav_language" value="User" name="created_source_type" [(ngModel)]="user_details.type" readonly>
                             <label for="html">User</label><br>
-                            <input type="radio" id="css" name="fav_language" value="Admin" name="created_source_type" [(ngModel)]="user_created_source_type">
+                            <input type="radio" id="css" name="fav_language" value="Admin" name="created_source_type" [(ngModel)]="user_details.type" readonly>
                             <label for="css">Admin</label><br>
                         </div>
                         </div>
 
                         <div class="input-div">
                         <label class="label">Created Date time</label>
-                        <input [ngClass]="topForm?.controls['created_datetime']?.value?'input-value':'input'"  type="datetime-local" name="created_datetime" [(ngModel)]="user_created_datetime"/>
+                        <input class="input-value"  type="text" name="created_datetime" [(ngModel)]="today"/>
                         </div>
 
                         <div class="input-div">
@@ -85,22 +84,22 @@
 
                         <div class="input-div">
                         <label class="label">Last Modified Source</label>
-                        <input [ngClass]="topForm?.controls['last_modified_source']?.value?'input-value':'input'" type="text" name="last_modified_source" [(ngModel)]="user_last_modified_source"/>
+                        <input class="input-value" type="text" name="last_modified_source" [(ngModel)]="last_modified.uname" readonly/>
                         </div>
 
                         <div class="input-div">
                         <label class="label">Last Modified Source Type</label>
                         <div class="radios">
-                            <input type="radio" id="html" name="fav_language" value="User" name="last_modified_source_type" [(ngModel)]="user_last_modified_source_type">
+                            <input type="radio" id="html" name="fav_language" value="User" name="last_modified_source_type" [(ngModel)]="last_modified.type"  readonly>
                             <label for="html">User</label><br>
-                            <input type="radio" id="css" name="fav_language"  value="Admin" name="last_modified_source_type" [(ngModel)]="user_last_modified_source_type">
+                            <input type="radio" id="css" name="fav_language"  value="Admin" name="last_modified_source_type" [(ngModel)]="last_modified.type"  readonly>
                             <label for="css">Admin</label><br>
                         </div>
                         </div>
 
                         <div class="input-div">
                         <label class="label">Last Modified Date Time</label>
-                        <input [ngClass]="topForm?.controls['last_modified_datetime']?.value?'input-value':'input'" type="datetime-local" name="last_modified_datetime" [(ngModel)]="user_last_modified_datetime"/>
+                        <input class="input-value" type="text" name="last_modified_datetime" [(ngModel)]="today"  readonly/>
                         </div>
 
                         <div class="input-div">

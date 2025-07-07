@@ -17,11 +17,11 @@
             </div>
             <div>
                 <p-multiSelect 
-                [options]="cols" 
+                [options]="columns" 
                 [(ngModel)]="selectedCol" 
                 optionLabel="header"
-                [placeholder]="selectedCol+' columns are selected'"
-                (onChange)="get_selected_columns()">
+                [placeholder]="len+' columns are selected'"
+                (onChange)="get_selected_columns($event)" #multi>
                 <ng-template pTemplate="footer">
                     <div id="multi-btn-con">
                         <button id="multiselect-btn" (click)="dynamic_columns()">apply</button>
@@ -34,7 +34,7 @@
                 <button id="filter" (click)="filter_display()"><i class="fa-solid fa-filter"></i> Filter</button>
             </div>
             <div>
-                <button id="add-btn" (click)="dialog_display()">Add</button>
+                <button id="add-btn" [ngStyle]="user_details.type!='Admin'?{'visibility':'hidden'}:{'visibility':'visible'}" (click)="dialog_display()">Add</button>
             </div>
             </div>
         </div>
@@ -42,7 +42,7 @@
     <div id="content">
     <div id="p-table-div">
     <p-table [columns]="cols" [value]="products" [tableStyle]="{ 'min-width': '50rem' }" styleClass="p-datatable-sm"
-    [paginator]="true" [rows]="5">
+    [paginator]="this.products.length<=5?false:true" [rows]="5">
     <ng-template pTemplate="header" let-columns>
         <tr>
             <th *ngFor="let col of columns" [pSortableColumnDisabled]="false" [pSortableColumn]="col.field">
@@ -52,7 +52,7 @@
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-rowData let-columns="columns">
-        <tr>
+        <tr (click)="open_form(rowData['id'])">
             <td *ngFor="let col of columns" [innerHTML]="rowData[col.field] ">
             </td>
             <td>

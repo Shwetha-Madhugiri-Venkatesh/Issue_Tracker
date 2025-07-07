@@ -6,6 +6,8 @@ import { AuthLogin, login_canActivate } from "src/app/Guards/auth_login";
 import { HomeComponent } from "./home/home.component";
 import { IssuesComponent } from "./home/issues/issues.component";
 import { UsersComponent } from "./home/users/users.component";
+import { KabbanComponent } from "./home/issues/kabban/kabban.component";
+import { ListComponent } from "./home/issues/list/list.component";
 
 const routes:Routes = [
     {path:"",component:LoginComponent},
@@ -13,7 +15,10 @@ const routes:Routes = [
     // {path:"",component:HomeComponent},
     {path:"home", component:HomeComponent,children:[
         {path:'', component:DashboardComponent},
-        {path:'issues', component:IssuesComponent},
+        {path:'issues', component:IssuesComponent, children:[
+            {path:'', component:KabbanComponent},
+            {path:'list', component:ListComponent},
+        ]},
         {path:'users', component:UsersComponent},
     ]}
 ]

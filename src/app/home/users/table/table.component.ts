@@ -6,6 +6,7 @@ import { DialogComponent } from '../dialog/dialog.component';
 import { HTTPService } from 'src/app/Services/http_service';
 import { AuthorizeUser } from 'src/app/Services/authorize_user';
 import { TwoWayDataBinding } from 'src/app/Services/two_way_dataBinding';
+import { MultiSelect } from 'primeng/multiselect';
 
 @Component({
   selector: 'app-table',
@@ -13,21 +14,24 @@ import { TwoWayDataBinding } from 'src/app/Services/two_way_dataBinding';
   styleUrls: ['./table.component.css'],
 })
 export class TableComponent {
+  login_user: any;
+  user_details: User;
 
     constructor(private http_service:HTTPService,private authorize:AuthorizeUser, private two_way:TwoWayDataBinding){}
-    products:User[];
+    products:User[]=[];
     users_from_http:User[];
     cols:{field:string,header:string}[];
-    columns:{name:string,value:string}[]=[];
+    columns:{field:string,header:string}[]=[];
     filter_flag:boolean=false;
-    columns_selected:[];
-
+    columns_selected:{field:string,header:string}[];
     @Output()
     display_dialog:EventEmitter<[boolean,string?]> = new EventEmitter<[boolean,string?]>;
    
+    @ViewChild('multi') multi:MultiSelect;
     user_types=[{name:"User"},{name:"Admin"}];
     user_type:string;
     selectedNum:number=5;
+    len:number=8;
 
      numbers = [
     { name: 'show 5', value: 5 },
@@ -35,9 +39,13 @@ export class TableComponent {
     { name: 'show 20', value: 20 },
   ];
 
-  selectedCol:[];
-
+  selectedCol:{field:string,header:string}[]=[];
   ngOnInit() {
+      this.login_user=JSON.parse(sessionStorage.getItem("login"))||{};
+    this.http_service.fetch_users().subscribe((res:User[])=>{
+      this.user_details=res.find(item=>item.user_id==this.login_user['userId']);
+      console.log(this.user_details);
+    })
        this.get_all_users();
         this.two_way.emit_users.subscribe(res=>{
           this.products=res;
@@ -52,8 +60,8 @@ export class TableComponent {
             { field: 'last_modified_source_type', header: 'Last Modified Source Type' },
             { field: 'last_modified_datetime', header: 'Last modified Date Time' },
         ];
+        this.columns=this.cols;
     }
-
     filter_form_submit(form:NgForm){
       let form_data = {...form.value,type:(form.value.type==undefined)?undefined:form.value.type['name']};
       this.products= this.users_from_http.filter(item=>{
@@ -99,11 +107,13 @@ export class TableComponent {
       }
     }
 
-    get_selected_columns(){
-      this.columns_selected=this.selectedCol;
+    get_selected_columns(val){
+      this.columns_selected=val.value;
+      this.len=val.value.length;
     }
 
     dynamic_columns(){
+      this.multi.hide();
       this.cols=this.columns_selected;
     }
 

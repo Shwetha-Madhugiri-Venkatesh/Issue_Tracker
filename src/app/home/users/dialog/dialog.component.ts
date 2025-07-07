@@ -12,7 +12,7 @@ import { TwoWayDataBinding } from 'src/app/Services/two_way_dataBinding';
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.css']
 })
-export class DialogComponent implements OnChanges{
+export class DialogComponent implements OnChanges,OnInit{
 
   @Input()
   visible:boolean=false;
@@ -22,6 +22,7 @@ export class DialogComponent implements OnChanges{
 
   @Output() visibleChange = new EventEmitter<boolean>();
   user_subject = new Subject();
+  today=new Date().toLocaleString();
 
   user_uname: string;
   user_fname: string;
@@ -50,6 +51,25 @@ export class DialogComponent implements OnChanges{
   constructor(private http_service:HTTPService,private two_way:TwoWayDataBinding){};
   user:User;
   prefill_user:User;
+  login_user:{};
+  user_details={uname:'',type:''};
+  last_modified;
+  ngOnInit(){
+    this.login_user=JSON.parse(sessionStorage.getItem("login"))||{};
+    this.http_service.fetch_users().subscribe((res:User[])=>{
+      this.user_details=res.find(item=>item.user_id==this.login_user['userId']);
+      console.log(this.user_details);
+      this.last_modified=structuredClone(this.user_details);
+    })
+
+    if(this.prefill){
+      this.user_details.uname=this.prefill_user.created_source;
+      this.user_details.type=this.prefill_user.created_source_type;
+    }else{
+      this.user_details.uname=this.last_modified.uname;
+      this.user_details.type=this.last_modified.type;
+    }
+  }
   ngOnChanges(){
     if(this.prefill){
       this.http_service.fetch_user(this.prefill).subscribe((res:User)=>{
@@ -59,8 +79,8 @@ export class DialogComponent implements OnChanges{
         this.user_fname=res.fname;
         this.user_mname=res.mname;
         this.user_lname=res.lname;
-        this.user_created_source=res.created_source;
-        this.user_created_source_type=res.created_source_type;
+        this.user_details.uname=res.created_source;
+        this.user_details.type=res.created_source_type;
         this.user_created_datetime=res.created_datetime;
         this.user_company_code=res.company_code;
         this.user_user_id=res.user_id;
@@ -77,6 +97,7 @@ export class DialogComponent implements OnChanges{
         this.user_locale=res.locale;
         this.user_time_zone=res.time_zone;
         this.user_last_modified_source_type=res.last_modified_source_type;
+        this.user_password=res.password;
       })
     }else{
       this.reset_fields();

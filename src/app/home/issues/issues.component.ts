@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { TwoWayDataBinding } from 'src/app/Services/two_way_dataBinding';
 
 @Component({
@@ -7,9 +8,26 @@ import { TwoWayDataBinding } from 'src/app/Services/two_way_dataBinding';
   styleUrls: ['./issues.component.css']
 })
 export class IssuesComponent {
-  constructor(private two_way:TwoWayDataBinding){}
+  constructor(private two_way:TwoWayDataBinding,private router:Router){}
+  kabban:boolean=false;
+  list:boolean=false;
+  route:string='';
 
   ngOnInit(){
     this.two_way.current_route_emit('Issues')
+  }
+
+  kabban_clicked(){
+    this.kabban=true;
+    this.list=false;
+    this.route='/issues';
+    this.router.navigateByUrl("/home/issues/"+this.route);
+  }
+
+  list_clicked(){
+    this.list=true;
+    this.kabban=false;
+    this.route='list';
+    this.router.navigateByUrl("/home/issues/"+this.route);
   }
 }

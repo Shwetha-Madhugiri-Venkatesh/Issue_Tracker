@@ -1,0 +1,22 @@
+<div class="ticket-container">
+    <div class="ticket-inner">
+        <div class="top">
+            <div class="first">
+                <div class="ticket-type">{{ticket.type}}</div>
+                <div class="priority">{{priority_name}}</div>
+            </div>
+            <div class="second">
+                <p class="ticket-id">Ticket Id:{{ticket.ticketId}}</p>
+                <p class="subject">Subject:{{ticket.subject}}</p>
+            </div>
+        </div>
+        <div class="bottom">
+            <div class="left">
+                <div class="profile">{{ticket.reporter_name.at(0)}}</div>
+            </div>
+            <div class="right">
+                <i class="fa-regular fa-comments"></i>
+            </div>
+        </div>
+    </div>
+</div>

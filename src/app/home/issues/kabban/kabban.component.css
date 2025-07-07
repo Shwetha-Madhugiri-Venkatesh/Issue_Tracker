@@ -1,0 +1,184 @@
+#kabban-header{
+    padding: 5px;
+    
+}
+
+#form-div{
+    overflow-y: hidden;
+}
+#header-content{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+#left{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    justify-content: flex-start;
+}
+
+#right{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    padding-right: 10px;
+}
+
+button{
+    height: 30px;
+    background-color:rgb(45, 57, 57);
+    color: white;
+    border: 1px solid rgb(45, 57, 57);
+    padding: 2.5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.row{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: hidden;
+}
+
+.div{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+#type-div{
+    display: flex;
+    flex-direction: row;
+}
+
+#type-bug{
+    padding: 5px 10px;
+    text-align: center;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    cursor: pointer;
+}
+#type-feature{
+    padding: 5px 10px;
+    text-align: center;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    cursor: pointer;
+}
+
+.row_{
+    display: flex;
+    flex-direction: column;
+    gap:3px;
+}
+
+::ng-deep .p-dropdown{
+    width: 100% !important;
+}
+
+::ng-deep .p-inputtext{
+    padding: 5px;
+}
+textarea{
+    width: 100%;
+    height: 50px;
+}
+
+::ng-deep .p-dialog .p-dialog-header{
+    padding: 5px 10px;
+}
+
+label,input{
+    font-size: 15px;
+    padding: 5px;
+}
+
+::ng-deep .p-dialog .p-dialog-content{
+    padding: 0px 15px 10px 15px;
+}
+
+#submit{
+    height: 30px;
+    width: 100%;
+    background-color:skyblue;
+    border: none;
+    color: white;
+    padding: 2.5px 10px;
+    border-radius: 5px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+#issues-container{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    padding: 0px 10px 10px 10px;
+}
+
+.issues-inner{
+    width: 25%;
+    height: 480px;
+    display: flex;
+    flex-direction: column;
+    background-color:rgb(231, 238, 240);
+    border-radius: 10px;
+    overflow: scroll;
+    scrollbar-width: none;
+}
+
+.issues-header{
+    display: flex;
+    flex-direction: row;
+    position: sticky;
+    top: 0;
+    background-color: white;  /* Required to avoid content bleed-through */
+    z-index: 10;               /* Ensure it stays above other content */
+    padding: 3px;
+    border-bottom: 1px solid #ddd;
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#issues{
+    width: 100%;
+}
+
+.left{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.right{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+#tickets{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#tickets-div{
+    padding: 10px;
+}

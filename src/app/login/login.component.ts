@@ -39,11 +39,18 @@ export class LoginComponent implements OnInit{
 
   form_submit(form:NgForm){
     console.log(form);
-    if(!form.valid){
+    if(this.forgot){
+      console.log(form.value);
+      this.authorize.reset_password(form.value);
+      this.authorize.authentication.subscribe((res:string)=>{
+        this.message_service.add({severity:'success', summary:'Success', detail:res});
+      })
+    }else{
+      if(!form.valid){
       return;
     }
     this.authorize.login(form.value);
-    this.sub = this.authorize.authentication.subscribe((res:boolean)=>{
+    this.sub = this.authorize.authentication.subscribe((res)=>{
       this.log = res[0];
       this.err=res[1];
       if(!this.log){
@@ -51,8 +58,6 @@ export class LoginComponent implements OnInit{
       }
       this.sub.unsubscribe();
     });
-    if(this.forgot){
-      console.log(form.value);
     }
   }
 }

@@ -31,6 +31,11 @@ import { DropdownModule } from 'primeng/dropdown';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { DialogModule } from 'primeng/dialog';
 import { DialogComponent } from './home/users/dialog/dialog.component';
+import { KabbanComponent } from './home/issues/kabban/kabban.component';
+import { ListComponent } from './home/issues/list/list.component';
+import { TicketComponent } from './home/issues/kabban/ticket/ticket.component';
+import { FileUploadModule } from 'primeng/fileupload';
+import { ProgressBarModule } from 'primeng/progressbar';
 
 @NgModule({
   declarations: [
@@ -44,6 +49,9 @@ import { DialogComponent } from './home/users/dialog/dialog.component';
     GraphComponent,
     TableComponent,
     DialogComponent,
+    KabbanComponent,
+    ListComponent,
+    TicketComponent,
   ],
   imports: [
     BrowserModule,
@@ -65,6 +73,8 @@ import { DialogComponent } from './home/users/dialog/dialog.component';
    DropdownModule,
    MultiSelectModule,
    DialogModule,
+   FileUploadModule,
+   ProgressBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
