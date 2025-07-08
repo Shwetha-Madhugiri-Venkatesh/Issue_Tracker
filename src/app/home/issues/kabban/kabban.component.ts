@@ -6,6 +6,7 @@ import { Comment } from 'src/app/Models/comment';
 import { Ticket } from 'src/app/Models/ticket';
 import { User } from 'src/app/Models/User';
 import { HTTPService } from 'src/app/Services/http_service';
+import { TwoWayDataBinding } from 'src/app/Services/two_way_dataBinding';
 
 
 @Component({
@@ -57,42 +58,13 @@ export class KabbanComponent implements OnInit {
   edit_comment_visible:boolean=false;
   updated_comment:string='';
   comment_to_be_edited;
-  priorities:{priorityId:string, priority:string}[]=[
-    {priorityId:'L', priority:'Low'},
-    {priorityId:'H', priority:'High'},
-    {priorityId:'M', priority:'Medium'},
-    {priorityId:'C', priority:'Critical'},
-  ]
+  
+  constructor(private http_service:HTTPService,private two_way_data:TwoWayDataBinding){}
 
-  statuses:{statusId:string, status:string,tickets:Ticket[]}[]=[
-    {statusId:'O', status:'Open', tickets:[]},
-    {statusId:'A', status:'Assigned', tickets:[]},
-    {statusId:'P', status:'In Progress', tickets:[]},
-    {statusId:'C', status:'Completed', tickets:[]},
-  ]
-
-  categories:{categoryId:string, categoryDesc:string}[]=[
-    {categoryId:'HW', categoryDesc:"Hardware"},
-    {categoryId:'SW', categoryDesc:"Software"},
-    {categoryId:'AM', categoryDesc:'Access Management'},
-  ]
-
-  subcategories:{subCategoryId:string, categoryId:string , subCategoryDesc:string}[]=[
-    {subCategoryId:'AL', categoryId:'HW',subCategoryDesc:'Allocate Laptop'},
-    {subCategoryId:'AH', categoryId:'HW',subCategoryDesc:'Allocate Hardware'},
-    {subCategoryId:'HR', categoryId:'HW',subCategoryDesc:'Hardware Replacement'},
-    {subCategoryId:'SI', categoryId:'SW',subCategoryDesc:'Software Installation'},
-    {subCategoryId:'AV', categoryId:'SW',subCategoryDesc:'Antivirus'},
-    {subCategoryId:'EP', categoryId:'SW',subCategoryDesc:'Email password Update'},
-    {subCategoryId:'LS', categoryId:'SW',subCategoryDesc:'Laptop slowness issue'},
-    {subCategoryId:'SIs', categoryId:'SW',subCategoryDesc:'Sofware issue'},
-    {subCategoryId:'SA', categoryId:'AM',subCategoryDesc:'Sofware Access'},
-    {subCategoryId:'WA', categoryId:'AM',subCategoryDesc:'Wifi Access'},
-    {subCategoryId:'DA', categoryId:'AM',subCategoryDesc:'Database Access'},
-    {subCategoryId:'VA', categoryId:'AM',subCategoryDesc:'VPN Access'},
-  ]
-
-  constructor(private http_service:HTTPService){}
+  priorities:{priorityId:string, priority:string}[]=this.two_way_data.priorities;
+  statuses:{statusId:string, status:string,tickets:Ticket[]}[]=this.two_way_data.statuses;
+  categories:{categoryId:string, categoryDesc:string}[]=this.two_way_data.categories;
+  subcategories:{subCategoryId:string, categoryId:string , subCategoryDesc:string}[]=this.two_way_data.subcategories;
   
   ngOnInit(){
     this.login_user=JSON.parse(sessionStorage.getItem("login"))||{};
@@ -180,8 +152,12 @@ export class KabbanComponent implements OnInit {
     ticket['status']=this.statuses.find(item=>item.statusId==ticket.statusId);
     this.comment_ticket=ticket;
     console.log(this.comment_ticket);
+    this.fetch_update_comments();
+  }
+
+  fetch_update_comments(){
     this.http_service.fetch_comments().subscribe((res:Comment[])=>{
-      let comments =res.filter(item=>item.ticketId==ticket.ticketId);
+      let comments =res.filter(item=>item.ticketId==this.comment_ticket.ticketId);
       comments.forEach(item => {
         let user = this.users_list.find(i=>i.user_id==item.userId);
         item['uname']=user.uname;
@@ -197,7 +173,6 @@ export class KabbanComponent implements OnInit {
       this.user_specific=Object.keys(this.tickets_comments)
     })
   }
-
   get_comment_submit(commentForm:NgForm,comment_ticket_details){
     console.log(commentForm.value);
     this.http_service.fetch_comments().subscribe((res:Comment[])=>{
@@ -244,12 +219,18 @@ export class KabbanComponent implements OnInit {
     console.log(rest);
     this.http_service.update_comment(rest.id,rest).subscribe((res)=>{
       console.log(res);
+      this.fetch_update_comments();
     })
   }
 
   delete_comment(val){
     this.http_service.delete_comment(val.id).subscribe((res)=>{
       console.log(res);
+      this.fetch_update_comments();
     })
+  }
+
+  open_filter_form(){
+    
   }
 }
