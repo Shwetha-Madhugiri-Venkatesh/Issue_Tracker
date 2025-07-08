@@ -36,6 +36,7 @@ import { ListComponent } from './home/issues/list/list.component';
 import { TicketComponent } from './home/issues/kabban/ticket/ticket.component';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ProgressBarModule } from 'primeng/progressbar';
+import { EditorModule } from 'primeng/editor';
 
 @NgModule({
   declarations: [
@@ -75,6 +76,7 @@ import { ProgressBarModule } from 'primeng/progressbar';
    DialogModule,
    FileUploadModule,
    ProgressBarModule,
+   EditorModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -28,7 +28,7 @@
                 </div>
                 <div id="tickets-div">
                     <div id="tickets">
-                        <app-ticket *ngFor="let item of s.tickets" [ticket]="item" [priority]="priorities"></app-ticket>
+                        <app-ticket *ngFor="let item of s.tickets" [ticket]="item" [priority]="priorities" (commentForm)="get_comment_ticket($event)"></app-ticket>
                     </div>
                 </div>
             </div>
@@ -62,7 +62,7 @@
                 </div>
                 <div class="row_">
                     <label>Subject</label>
-                    <input pInputText name="subject" ngModel />
+                    <input pInputText name="subject" [(ngModel)]="subject" />
                 </div>
                 <div class="row_">
                     <label>Priority</label>
@@ -71,7 +71,7 @@
                 </div>
                 <div class="row_">
                     <label>Attachments</label>
-                    <input type="file" name="input_file" ngModel />
+                    <input type="file" name="input_file" [(ngModel)]="files" />
                 </div>
                 <div class="row">
                     <div class="div">
@@ -87,12 +87,147 @@
                 </div>
                 <div>
                     <label>Description</label>
-                    <textarea name="description" ngModel></textarea>
+                    <textarea name="description" [(ngModel)]="description"></textarea>
                 </div>
                 <div>
                     <button id="submit" type="submit">Submit</button>
                 </div>
             </form>
+        </div>
+    </p-dialog>
+</div>
+
+<div class="card flex justify-center">
+    <p-dialog header="Ticket Details" [modal]="true" [(visible)]="visible_comment" [style]="{ width: '70rem'}">
+        <div id="comment-dialog-container">
+            <div id="comment-form">
+                <form #commentForm="ngForm" (ngSubmit)="get_comment_submit(commentForm,comment_ticket)">
+                <div id="comment-top">
+                    <div id="comment-ticket-id">
+                        <span class="label">Ticket ID:</span>
+                        <span>{{comment_ticket.ticketId}}</span>
+                    </div>
+                    <div id="comment-subject">
+                        <span class="label">Subject:</span>
+                        <span>{{comment_ticket.subject}}</span>
+                    </div>
+                    <div id="comment-description">
+                        <span class="label">Description:</span>
+                        <span>{{comment_ticket.description}}</span>
+                    </div>
+                    <div id="comment-middle">
+                        <div id="comment-middle-top">
+                            <div id="comment-left">
+                                <div id="comment-left-div">
+                                    <div class="comment-input">
+                                    <span class="label">Reporter Id:</span>
+                                    <span>{{comment_ticket.reportedId}}</span>
+                                    </div>
+                                    <div class="comment-input">
+                                    <span class="label">Created:</span>
+                                    <span>{{comment_ticket.createDateTime}}</span>
+                                    </div>
+                                    <div class="comment-input">
+                                    <span class="label">Modified:</span>
+                                    <input style="border: none; color: rgb(45, 57, 57);" type="text" name="lastModifiedDateTime" [(ngModel)]="today"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="comment-right">
+                                <div id="comment-right-div">
+                                    <div>
+                                        {{comment_ticket.input_file}}
+                                    </div>
+                                    <button>Download</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="form-last">
+                            <div class="update-input">
+                                <label class="label">Assignee:</label>
+                                <p-dropdown [options]="users_list" [(ngModel)]="comment_ticket['assignee']" optionLabel="uname"
+                                    name="assignee"
+                                    appendTo="body"
+                                    placeholder="Assignee..." 
+                                    [readonly]="user_details.type!='Admin'"
+                                    />
+                            </div>
+                            <div class="update-input">
+                                <label class="label">Priority:</label>
+                                <p-dropdown [options]="priorities" [(ngModel)]="comment_ticket['priority']" optionLabel="priority"
+                                    name="priority"
+                                    appendTo="body"
+                                    placeholder="Update Priority"
+                                    [readonly]="user_details.type!='Admin'" 
+                                    />
+                            </div>
+                            <div class="update-input">
+                                <label class="label">Status:</label>
+                                <p-dropdown [options]="statuses" [(ngModel)]="comment_ticket['status']" optionLabel="status"
+                                    name="status"
+                                    appendTo="body"
+                                    placeholder="Update Status"
+                                    [readonly]="user_details.type!='Admin'" 
+                                    />
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="comment-bottom">
+                    <p class="label">Comment:</p>
+                    <div>
+                        <p-editor [(ngModel)]="comment" [style]="{ height: '320px' }" name="comment"/>
+                    </div>
+                    <div>
+                        <button type="submit">Send</button>
+                    </div>
+                </div>
+                </form>
+            </div>
+            <div id="comment-activity">
+                <div id="activity-header">
+                    <p>Activity</p>
+                </div>
+                <div id="comments">
+                    <div id="comment-container">
+                        <!-- ngFor -->
+                        <div *ngFor="let com of user_specific" class="comment-div">
+                            <div class="comment-header">
+                                <div class="comment-header-left">
+                                    <p>{{tickets_comments[com][0].uname}}</p>
+                                </div>
+                                <div class="comment-header-right">
+                                    <p>{{comment_ticket.lastModifiedDateTime}}</p>
+                                </div>
+                            </div>
+                            <div class="comment-footer">
+                                <div *ngFor="let commen of tickets_comments[com]" class="comment-footer-div">
+                                    <div class="comment-footer-div-left">
+                                        <p [innerHTML]="commen.message"></p>
+                                    </div>
+                                    <div class="comment-footer-div-right">
+                                        <div class="comment-footer-div-right-inner">
+                                            <i class="fa-solid fa-pen" (click)="edit_comment(commen,tickets_comments[com][0].userId)"></i>
+                                            <i class="fa-solid fa-trash" (click)="delete_comment(commen)"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </p-dialog>
+</div>
+<div class="card flex justify-content-center">
+    <p-dialog header="Edit Comment" [modal]="true" [(visible)]="edit_comment_visible" [style]="{ width: '25rem' }">
+        <div>
+            <p-editor [(ngModel)]="updated_comment" [style]="{ height: '320px' }"/>
+        </div>
+        <div>
+            <button (click)="update_comment()">Save</button>
         </div>
     </p-dialog>
 </div>

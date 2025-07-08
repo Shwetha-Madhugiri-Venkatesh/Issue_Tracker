@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { Ticket } from 'src/app/Models/ticket';
 import { KabbanComponent } from '../kabban.component';
 
@@ -10,11 +10,20 @@ import { KabbanComponent } from '../kabban.component';
 export class TicketComponent {
   @Input()
   ticket:Ticket;
+
   @Input()
   priority
+
   priority_name:string='';
   
   ngOnInit(){
     this.priority_name=this.priority.find(item=>item.priorityId==this.ticket.priorityId).priority;
+  }
+
+  @Output()
+  commentForm:EventEmitter<Ticket> = new EventEmitter<Ticket>;
+
+  open_comment_form(ticket:Ticket){
+    this.commentForm.emit(ticket);
   }
 }

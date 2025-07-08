@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { User } from "../Models/User";
 import { Ticket } from "../Models/ticket";
+import { Comment } from "../Models/comment";
 
 @Injectable({
     providedIn:'root',
@@ -41,7 +42,26 @@ export class HTTPService{
         return this.http.post("http://localhost:3001/tickets",ticket_details);
     }
 
+    update_ticket(id:string,updated_ticket_details:Ticket){
+        return this.http.put(`http://localhost:3001/tickets/${id}`,updated_ticket_details);
+    }
+
     fetch_tickets(){
         return this.http.get("http://localhost:3001/tickets");
+    }
+
+    post_comment(comment_details:Comment){
+        return this.http.post("http://localhost:3001/comments",comment_details);
+    }
+
+    update_comment(id:string,updated_comment:Comment){
+        return this.http.put(`http://localhost:3001/comments/${id}`,updated_comment)
+    }
+
+    delete_comment(id:string){
+        return this.http.delete(`http://localhost:3001/comments/${id}`);
+    }
+    fetch_comments(){
+        return this.http.get("http://localhost:3001/comments");
     }
 }

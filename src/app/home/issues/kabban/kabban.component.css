@@ -19,7 +19,6 @@
     padding-left: 10px;
     justify-content: flex-start;
 }
-
 #right{
     width: 50%;
     display: flex;
@@ -165,6 +164,15 @@ label,input{
     justify-content: flex-start;
 }
 
+.comment-input{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.label{
+    font-weight: bold;
+}
 .right{
     width: 50%;
     display: flex;
@@ -181,4 +189,200 @@ label,input{
 
 #tickets-div{
     padding: 10px;
+}
+
+#comment-dialog-container{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+#comment-form{
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 70%;
+    padding: 10px;
+}
+
+#comment-top{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#comment-ticket-id{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-bottom: 20px;
+}
+
+#comment-subject{
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    border-bottom: 1px solid lightgray;
+    padding-bottom: 10px;
+}
+
+#comment-description{
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    border-bottom: 1px solid lightgray;
+    padding-bottom: 10px;
+}
+
+#comment-middle{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-bottom: 10px;
+}
+
+.update-input{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+#comment-middle-top{
+    display: 100%;
+    display: flex;
+    flex-direction: row;
+}
+#comment-left{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+#comment-left-div{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#comment-right-div{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#comment-right{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+#comment-bottom{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#comment-activity{
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    border:1px solid lightgray;
+    border-radius: 10px;
+}
+
+#activity-header{
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(219, 235, 241);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    /* position: sticky;
+    z-index: 10; */
+}
+
+#comment-container{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#form-last{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    padding: 5px;
+}
+
+.comment-div{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+}
+
+.comment-header{
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid lightgray;
+    padding: 5px;
+}
+
+.comment-header-left{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.comment-header-right{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+/* .comment-footer{
+    padding: 5px;
+} */
+
+::ng-deep .ql-toolbar.ql-snow + .ql-container.ql-snow {
+    height: 100px !important;
+} 
+
+.comment-footer-div{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid lightgray;
+    padding: 5px;
+}
+
+.comment-footer-div-left{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 5px;
+}
+
+.comment-footer-div-right{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 5px;
+}
+
+.comment-footer-div-right-inner{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
 }

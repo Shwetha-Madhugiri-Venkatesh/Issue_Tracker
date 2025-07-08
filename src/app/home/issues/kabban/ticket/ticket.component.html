@@ -15,7 +15,7 @@
                 <div class="profile">{{ticket.reporter_name.at(0)}}</div>
             </div>
             <div class="right">
-                <i class="fa-regular fa-comments"></i>
+                <i style="cursor: pointer;" class="fa-regular fa-comments" (click)="open_comment_form(ticket)"></i>
             </div>
         </div>
     </div>
