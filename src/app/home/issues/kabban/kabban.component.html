@@ -109,11 +109,11 @@
                     </div>
                     <div id="comment-subject">
                         <span class="label">Subject:</span>
-                        <span>{{comment_ticket.subject}}</span>
+                        <input [ngClass]="commentForm?.controls['subject']?.value?'input-value':'input'" name="subject" [(ngModel)]="comment_ticket.subject"/>
                     </div>
                     <div id="comment-description">
                         <span class="label">Description:</span>
-                        <span>{{comment_ticket.description}}</span>
+                        <input [ngClass]="commentForm?.controls['description']?.value?'input-value':'input'" name="description" [(ngModel)]="comment_ticket.description"/>
                     </div>
                     <div id="comment-middle">
                         <div id="comment-middle-top">

@@ -192,8 +192,9 @@ export class KabbanComponent implements OnInit {
       comment_ticket_details.assigneeId=commentForm.value.assignee.user_id;
       comment_ticket_details.statusId=commentForm.value.status.statusId;
       console.log(comment_ticket_details);
+      let {assignee, priority, status,...rest}=comment_ticket_details
 
-      this.http_service.update_ticket(comment_ticket_details.id,comment_ticket_details).subscribe((res)=>{
+      this.http_service.update_ticket(comment_ticket_details.id,rest).subscribe((res)=>{
         console.log(res);
         this.fetch_tickets_update();
       })

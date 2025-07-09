@@ -24,7 +24,7 @@ export class TwoWayDataBinding{
         {categoryId:'HW', categoryDesc:"Hardware"},
         {categoryId:'SW', categoryDesc:"Software"},
         {categoryId:'AM', categoryDesc:'Access Management'},
-      ]
+      ];
     
       subcategories:{subCategoryId:string, categoryId:string , subCategoryDesc:string}[]=[
         {subCategoryId:'AL', categoryId:'HW',subCategoryDesc:'Allocate Laptop'},

@@ -5,97 +5,86 @@
         </div>
         <div class="header-last">
             <div id="header-last-inner">
-            <div>
-                <p-dropdown 
-                id="top" 
-                [options]="numbers" 
-                [(ngModel)]="selectedNum" 
-                optionLabel="name"
-                [placeholder]="'show '+selectedNum" 
-                (onChange)="dynamic_rows($event)"
-                />
-            </div>
-            <div>
-                <p-multiSelect 
-                [options]="columns" 
-                [(ngModel)]="selectedCol" 
-                optionLabel="header"
-                [placeholder]="len+' columns are selected'"
-                (onChange)="get_selected_columns($event)" #multi>
-                <ng-template pTemplate="footer">
-                    <div id="multi-btn-con">
-                        <button id="multiselect-btn" (click)="dynamic_columns()">apply</button>
-                    </div>
-                </ng-template>
-            </p-multiSelect>
+                <div>
+                    <p-dropdown id="top" [options]="numbers" [(ngModel)]="selectedNum" optionLabel="name"
+                        [placeholder]="'show '+selectedNum" (onChange)="dynamic_rows($event)" />
+                </div>
+                <div>
+                    <p-multiSelect [options]="columns" [(ngModel)]="selectedCol" optionLabel="header"
+                        [placeholder]="len+' columns are selected'" (onChange)="get_selected_columns($event)" #multi>
+                        <ng-template pTemplate="footer">
+                            <div id="multi-btn-con">
+                                <button id="multiselect-btn" (click)="dynamic_columns()">apply</button>
+                            </div>
+                        </ng-template>
+                    </p-multiSelect>
 
-            </div>
-            <div>
-                <button id="filter" (click)="filter_display()"><i class="fa-solid fa-filter"></i> Filter</button>
-            </div>
-            <div>
-                <button id="add-btn" [ngStyle]="user_details.type!='Admin'?{'visibility':'hidden'}:{'visibility':'visible'}" (click)="dialog_display()">Add</button>
-            </div>
+                </div>
+                <div>
+                    <button id="filter" (click)="filter_display()"><i class="fa-solid fa-filter"></i> Filter</button>
+                </div>
+                <div>
+                    <button id="add-btn"
+                        [ngStyle]="user_details.type!='Admin'?{'visibility':'hidden'}:{'visibility':'visible'}"
+                        (click)="dialog_display()">Add</button>
+                </div>
             </div>
         </div>
     </div>
     <div id="content">
-    <div id="p-table-div">
-    <p-table [columns]="cols" [value]="products" [tableStyle]="{ 'min-width': '50rem' }" styleClass="p-datatable-sm"
-    [paginator]="this.products.length<=5?false:true" [rows]="5">
-    <ng-template pTemplate="header" let-columns>
-        <tr>
-            <th *ngFor="let col of columns" [pSortableColumnDisabled]="false" [pSortableColumn]="col.field">
-                {{ col.header }} <i class="fa-solid fa-sort"></i>
-            </th>
-            <th>Actions</th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-rowData let-columns="columns">
-        <tr (click)="open_form(rowData['id'])">
-            <td *ngFor="let col of columns" [innerHTML]="rowData[col.field] ">
-            </td>
-            <td>
-                <div class="icons">
-                    <i class="fa-solid fa-pen-to-square" (click)="open_form(rowData['id'])"></i>
-                    <i class="fa-solid fa-trash" (click)="delete_the_user(rowData['id'])"></i>
-                </div>
-            </td>
-        </tr>
-    </ng-template>
-</p-table>
-</div>
-<ng-template [ngIf]="filter_flag">
-    <div id="filter-div">
-        <div id="filter-header">
-            <h4>Filter</h4>
+        <div id="p-table-div">
+            <p-table [columns]="cols" [value]="products" [tableStyle]="{ 'min-width': '50rem' }"
+                styleClass="p-datatable-sm" [paginator]="this.products.length<=5?false:true" [rows]="5">
+                <ng-template pTemplate="header" let-columns>
+                    <tr>
+                        <th *ngFor="let col of columns" [pSortableColumnDisabled]="false" [pSortableColumn]="col.field">
+                            {{ col.header }} <i class="fa-solid fa-sort"></i>
+                        </th>
+                        <th>Actions</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-rowData let-columns="columns">
+                    <tr (click)="open_form(rowData['id'])">
+                        <td *ngFor="let col of columns" [innerHTML]="rowData[col.field] ">
+                        </td>
+                        <td>
+                            <div class="icons">
+                                <i class="fa-solid fa-pen-to-square" (click)="open_form(rowData['id'])"></i>
+                                <i class="fa-solid fa-trash" (click)="delete_the_user(rowData['id'])"></i>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
         </div>
-        <div id="filter-form">
-            <form id="form" #form="ngForm">
-                <input pInputText placeholder="User Name" name="uname" ngModel/>
-                <p-dropdown
-                    id="bottom" 
-                    [options]="user_types" 
-                    name="type"
-                    [(ngModel)]="user_type" 
-                    optionLabel="name" 
-                    placeholder="User Type" />
-                <input pInputText placeholder="Email ID" name="email_id" ngModel />
-                <input pInputText placeholder="Created Source" name="created_source" ngModel/>
-                <input pInputText placeholder="Created Source Type" name="created_source_type" ngModel/>
-                <input type="datetime-local" placeholder="Created Date Time" name="created_datetime" ngModel/>
-                <input pInputText placeholder="Last Modified Source" name="last_modified_source" ngModel/>
-                <input pInputText placeholder="Last Modified Source Type" name="last_modified_source_type" ngModel/>
-                <input type="datetime-local" placeholder="Last Modified Date Time" name="last_modified_source_datetime" ngModel/>
-            </form>
-            <div id="filter-footer">
-                <div id="btn-div">
-                    <button id="reset-btn" type="button">Reset</button>
-                    <button id="submit-btn" type="submit" (click)="filter_form_submit(form)">Apply</button>
+        <ng-template [ngIf]="filter_flag">
+            <div id="filter-div">
+                <div id="filter-header">
+                    <h4>Filter</h4>
+                </div>
+                <div id="filter-form">
+                    <form id="form" #form="ngForm">
+                        <input pInputText placeholder="User Name" name="uname" ngModel />
+                        <p-dropdown id="bottom" [options]="user_types" name="type" [(ngModel)]="user_type"
+                            optionLabel="name" placeholder="User Type" />
+                        <input pInputText placeholder="Email ID" name="email_id" ngModel />
+                        <input pInputText placeholder="Created Source" name="created_source" ngModel />
+                        <input pInputText placeholder="Created Source Type" name="created_source_type" ngModel />
+                        <input type="datetime-local" placeholder="Created Date Time" name="created_datetime" ngModel />
+                        <input pInputText placeholder="Last Modified Source" name="last_modified_source" ngModel />
+                        <input pInputText placeholder="Last Modified Source Type" name="last_modified_source_type"
+                            ngModel />
+                        <input type="datetime-local" placeholder="Last Modified Date Time"
+                            name="last_modified_source_datetime" ngModel />
+                    </form>
+                    <div id="filter-footer">
+                        <div id="btn-div">
+                            <button id="reset-btn" type="button">Reset</button>
+                            <button id="submit-btn" type="submit" (click)="filter_form_submit(form)">Apply</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </ng-template>
     </div>
-</ng-template>
-</div>
 </div>

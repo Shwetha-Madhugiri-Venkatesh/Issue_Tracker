@@ -37,6 +37,9 @@ import { TicketComponent } from './home/issues/kabban/ticket/ticket.component';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { EditorModule } from 'primeng/editor';
+import { SidebarModule } from 'primeng/sidebar';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+
 
 @NgModule({
   declarations: [
@@ -77,6 +80,8 @@ import { EditorModule } from 'primeng/editor';
    FileUploadModule,
    ProgressBarModule,
    EditorModule,
+   SidebarModule,
+   AutoCompleteModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -70,42 +70,7 @@
       "createDateTime": "7/7/2025, 6:09:12 pm",
       "lastModifiedDateTime": "8/7/2025, 7:09:18 pm",
       "input_file": "C:\\fakepath\\profile_7310896.png",
-      "last_modified_datetime": "8/7/2025, 5:22:11 pm",
-      "assignee": {
-        "id": "dfd3",
-        "uname": "Madhu",
-        "fname": "Anitha",
-        "mname": "madhu",
-        "lname": "V",
-        "created_source": "Shwetha",
-        "created_source_type": "Admin",
-        "created_datetime": "7/7/2025, 11:53:17 am",
-        "company_code": "UCBOS",
-        "type": "User",
-        "user_id": "Madhu_User123",
-        "email_id": "mvshwetha8@gmail.com",
-        "phone": "07538764786",
-        "last_modified_source": "Shwetha",
-        "last_modified_source_type": "Admin",
-        "last_modified_datetime": "7/7/2025, 11:53:17 am",
-        "password": "hello",
-        "address": "Bangalore",
-        "country": "India",
-        "state": "Karnataka",
-        "city": "London",
-        "postal_code": "6758769",
-        "locale": "Hoodi",
-        "time_zone": "US"
-      },
-      "priority": {
-        "priorityId": "H",
-        "priority": "High"
-      },
-      "status": {
-        "statusId": "P",
-        "status": "In Progress",
-        "tickets": []
-      }
+      "last_modified_datetime": "8/7/2025, 5:22:11 pm"
     },
     {
       "id": "562d",
@@ -122,42 +87,7 @@
       "priorityId": "H",
       "createDateTime": "7/7/2025, 6:09:12 pm",
       "lastModifiedDateTime": "8/7/2025, 7:09:18 pm",
-      "input_file": "C:\\fakepath\\profile_7310896.png",
-      "assignee": {
-        "id": "dfd3",
-        "uname": "Madhu",
-        "fname": "Anitha",
-        "mname": "madhu",
-        "lname": "V",
-        "created_source": "Shwetha",
-        "created_source_type": "Admin",
-        "created_datetime": "7/7/2025, 11:53:17 am",
-        "company_code": "UCBOS",
-        "type": "User",
-        "user_id": "Madhu_User123",
-        "email_id": "mvshwetha8@gmail.com",
-        "phone": "07538764786",
-        "last_modified_source": "Shwetha",
-        "last_modified_source_type": "Admin",
-        "last_modified_datetime": "7/7/2025, 11:53:17 am",
-        "password": "hello",
-        "address": "Bangalore",
-        "country": "India",
-        "state": "Karnataka",
-        "city": "London",
-        "postal_code": "6758769",
-        "locale": "Hoodi",
-        "time_zone": "US"
-      },
-      "priority": {
-        "priorityId": "H",
-        "priority": "High"
-      },
-      "status": {
-        "statusId": "C",
-        "status": "Completed",
-        "tickets": []
-      }
+      "input_file": "C:\\fakepath\\profile_7310896.png"
     },
     {
       "id": "bab3",
@@ -174,95 +104,7 @@
       "priorityId": "L",
       "createDateTime": "7/7/2025, 6:09:12 pm",
       "lastModifiedDateTime": "8/7/2025, 11:28:32 pm",
-      "input_file": "C:\\fakepath\\profile_7310896.png",
-      "assignee": {
-        "id": "2411",
-        "uname": "Anitha",
-        "fname": "Anitha",
-        "mname": "madhu",
-        "lname": "V",
-        "created_source": "Shwetha",
-        "created_source_type": "Admin",
-        "created_datetime": "7/7/2025, 11:53:17 am",
-        "company_code": "UCBOS",
-        "type": "Admin",
-        "user_id": "Anitha_User123",
-        "email_id": "mvshwetha8@gmail.com",
-        "phone": "07538764786",
-        "last_modified_source": "Shwetha",
-        "last_modified_source_type": "Admin",
-        "last_modified_datetime": "7/7/2025, 11:53:17 am",
-        "password": "hi",
-        "address": "ITOrizon",
-        "country": "India",
-        "state": "Karnataka",
-        "city": "Bangalore",
-        "postal_code": "560048",
-        "locale": "Hoodi",
-        "time_zone": "kn "
-      },
-      "priority": {
-        "priorityId": "L",
-        "priority": "Low"
-      },
-      "status": {
-        "statusId": "A",
-        "status": "Assigned",
-        "tickets": [
-          {
-            "id": "775e",
-            "reporter_name": "Anitha",
-            "reportedId": "Anitha_User123",
-            "type": "bug",
-            "ticketId": "AM#WA#1",
-            "categoryId": "AM",
-            "subCategoryId": "WA",
-            "assigneeId": "Madhu_User123",
-            "statusId": "A",
-            "subject": "dfgnm",
-            "description": "mnbvc",
-            "priorityId": "M",
-            "createDateTime": "8/7/2025, 12:32:03 am",
-            "lastModifiedDateTime": "8/7/2025, 11:27:33 pm",
-            "input_file": "C:\\fakepath\\ORG issue tracker 1.docx",
-            "assignee": {
-              "id": "dfd3",
-              "uname": "Madhu",
-              "fname": "Anitha",
-              "mname": "madhu",
-              "lname": "V",
-              "created_source": "Shwetha",
-              "created_source_type": "Admin",
-              "created_datetime": "7/7/2025, 11:53:17 am",
-              "company_code": "UCBOS",
-              "type": "User",
-              "user_id": "Madhu_User123",
-              "email_id": "mvshwetha8@gmail.com",
-              "phone": "07538764786",
-              "last_modified_source": "Shwetha",
-              "last_modified_source_type": "Admin",
-              "last_modified_datetime": "7/7/2025, 11:53:17 am",
-              "password": "hello",
-              "address": "Bangalore",
-              "country": "India",
-              "state": "Karnataka",
-              "city": "London",
-              "postal_code": "6758769",
-              "locale": "Hoodi",
-              "time_zone": "US"
-            },
-            "priority": {
-              "priorityId": "M",
-              "priority": "Medium"
-            },
-            "status": {
-              "statusId": "A",
-              "status": "Assigned",
-              "tickets": []
-            }
-          }
-        ]
-      }
+      "input_file": "C:\\fakepath\\profile_7310896.png"
     },
     {
       "id": "775e",
@@ -279,42 +121,7 @@
       "priorityId": "M",
       "createDateTime": "8/7/2025, 12:32:03 am",
       "lastModifiedDateTime": "8/7/2025, 11:27:33 pm",
-      "input_file": "C:\\fakepath\\ORG issue tracker 1.docx",
-      "assignee": {
-        "id": "dfd3",
-        "uname": "Madhu",
-        "fname": "Anitha",
-        "mname": "madhu",
-        "lname": "V",
-        "created_source": "Shwetha",
-        "created_source_type": "Admin",
-        "created_datetime": "7/7/2025, 11:53:17 am",
-        "company_code": "UCBOS",
-        "type": "User",
-        "user_id": "Madhu_User123",
-        "email_id": "mvshwetha8@gmail.com",
-        "phone": "07538764786",
-        "last_modified_source": "Shwetha",
-        "last_modified_source_type": "Admin",
-        "last_modified_datetime": "7/7/2025, 11:53:17 am",
-        "password": "hello",
-        "address": "Bangalore",
-        "country": "India",
-        "state": "Karnataka",
-        "city": "London",
-        "postal_code": "6758769",
-        "locale": "Hoodi",
-        "time_zone": "US"
-      },
-      "priority": {
-        "priorityId": "M",
-        "priority": "Medium"
-      },
-      "status": {
-        "statusId": "A",
-        "status": "Assigned",
-        "tickets": []
-      }
+      "input_file": "C:\\fakepath\\ORG issue tracker 1.docx"
     },
     {
       "id": "ba31",
@@ -324,13 +131,13 @@
       "ticketId": "HW#AL#3",
       "categoryId": "HW",
       "subCategoryId": "AL",
-      "assigneeId": "",
-      "statusId": "O",
+      "assigneeId": "Anitha_User123",
+      "statusId": "P",
       "subject": "dfgnm",
       "description": "kjhgfc",
       "priorityId": "L",
       "createDateTime": "8/7/2025, 10:50:31 am",
-      "lastModifiedDateTime": "8/7/2025, 10:50:31 am",
+      "lastModifiedDateTime": "9/7/2025, 11:41:23 pm",
       "input_file": "C:\\fakepath\\profile_7310896.png"
     },
     {
@@ -473,6 +280,34 @@
       "ticketId": "HW#AH#1",
       "userId": "Anitha_User123",
       "message": "<p>asdfvb</p>"
+    },
+    {
+      "id": "b09a",
+      "commentId": "com16",
+      "ticketId": "HW#AL#3",
+      "userId": "Anitha_User123",
+      "message": "<p>first</p>"
+    },
+    {
+      "id": "55fc",
+      "commentId": "com17",
+      "ticketId": "HW#AL#3",
+      "userId": "Anitha_User123",
+      "message": "<p>second</p>"
+    },
+    {
+      "id": "b89a",
+      "commentId": "com18",
+      "ticketId": "HW#AL#3",
+      "userId": "Anitha_User123",
+      "message": "<p>second</p>"
+    },
+    {
+      "id": "0f4c",
+      "commentId": "com19",
+      "ticketId": "HW#AL#3",
+      "userId": "Anitha_User123",
+      "message": "<p>second</p>"
     }
   ]
 }

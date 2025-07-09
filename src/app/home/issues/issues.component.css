@@ -1,8 +1,16 @@
 #issues-content{
+    position: relative;
     height: 100%;
     background-color: white;
     margin-top: 5px;
+    z-index: 1;
 }
+
+#content{
+    position: absolute;
+    z-index: 2;
+}
+
 #header-div{
     display: flex;
     flex-direction: row;

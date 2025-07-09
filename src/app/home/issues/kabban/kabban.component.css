@@ -386,3 +386,12 @@ label,input{
     flex-direction: row;
     gap: 10px;
 }
+
+input{
+    border: 1px solid lightgray;
+    border-radius: 5px;
+}
+.input-value{
+    border: none;
+    background-color: white !important;
+}

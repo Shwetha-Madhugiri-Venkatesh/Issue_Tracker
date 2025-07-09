@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Ticket } from 'src/app/Models/ticket';
 import { TwoWayDataBinding } from 'src/app/Services/two_way_dataBinding';
 
 @Component({
@@ -9,9 +10,11 @@ import { TwoWayDataBinding } from 'src/app/Services/two_way_dataBinding';
 })
 export class IssuesComponent {
   constructor(private two_way:TwoWayDataBinding,private router:Router){}
+  
   kabban:boolean=false;
   list:boolean=false;
   route:string='';
+
 
   ngOnInit(){
     this.two_way.current_route_emit('Issues')
