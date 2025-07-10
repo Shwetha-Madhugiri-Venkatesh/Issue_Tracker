@@ -59,14 +59,41 @@ export class KabbanComponent implements OnInit {
   updated_comment:string='';
   comment_to_be_edited;
   
+
+  filter:boolean=false;
+  filterPriority;
+  filterAssigneeId;
+  users=[];
+  fiterCategory;
+  filterSubcategory;
+  filterReporterId;
+  filterStatus;
+  filterType;
+  filterAssignee;
+  filterSubject;
+  filterDescription;
+  filterOpenedDate;
+  filterDaysOld;
+  filterReporter;
+  filtered_tickets;
+  filterTicketId;
+  filter_output=[];
+  tickets;
+  http_tickets: Ticket[];
+  
   constructor(private http_service:HTTPService,private two_way_data:TwoWayDataBinding){}
 
   priorities:{priorityId:string, priority:string}[]=this.two_way_data.priorities;
   statuses:{statusId:string, status:string,tickets:Ticket[]}[]=this.two_way_data.statuses;
   categories:{categoryId:string, categoryDesc:string}[]=this.two_way_data.categories;
   subcategories:{subCategoryId:string, categoryId:string , subCategoryDesc:string}[]=this.two_way_data.subcategories;
-  
+  types:{type:string,value:string}[]=[
+    {type:"Bug", value:"bug"},
+    {type:"Feature",value:"feature"},
+  ]
+
   ngOnInit(){
+    this.two_way_data.current_issues_subcomponent("");
     this.login_user=JSON.parse(sessionStorage.getItem("login"))||{};
     this.http_service.fetch_users().subscribe((res:User[])=>{
     this.user_details=res.find(item=>item.user_id==this.login_user['userId']);
@@ -78,7 +105,16 @@ export class KabbanComponent implements OnInit {
     this.http_service.fetch_users().subscribe((res:User[])=>{
       this.users_list=res;
     })
+
+    this.fetch_all_tickets();
       
+  }
+  fetch_all_tickets(){
+    this.http_service.fetch_tickets().subscribe((res:Ticket[])=>{
+        this.all_tickets=res;
+        this.http_tickets=res;
+        this.fetch_tickets_update();
+    })
   }
 
   category_entered(val){
@@ -95,15 +131,14 @@ export class KabbanComponent implements OnInit {
   }
 
   fetch_tickets_update(){
-    this.http_service.fetch_tickets().subscribe((res:Ticket[])=>{
-        this.all_tickets=res;
-        for(let s of this.statuses){
-            s.tickets=res.filter(item=>item.statusId==s.statusId);
-        }
-    })
+    for(let s of this.statuses){
+            s.tickets=this.all_tickets.filter(item=>item.statusId==s.statusId);
+    }
   }
   bug_form_submit(bugForm:NgForm){
-    this.reset_form_fields();
+    console.log("bug form sumbit",bugForm.value);
+    bugForm.value['input_file']=this.filePayload;
+    console.log("bug form sumbit",bugForm.value);
     this.http_service.fetch_tickets().subscribe((res:Ticket[])=>{
         let len = res.filter(item=>item.categoryId==bugForm.value.category.categoryId && item.subCategoryId==bugForm.value.subcategory.subCategoryId);
         console.log(len.length);
@@ -126,7 +161,7 @@ export class KabbanComponent implements OnInit {
         console.log(form_data);
         this.http_service.post_ticket(form_data).subscribe((res)=>{
             console.log(res);
-            this.fetch_tickets_update();
+            this.fetch_all_tickets();
         })
         this.visible=false;
     })
@@ -189,7 +224,7 @@ export class KabbanComponent implements OnInit {
       })
       comment_ticket_details.priorityId=commentForm.value.priority.priorityId;
       comment_ticket_details.lastModifiedDateTime=commentForm.value.lastModifiedDateTime;
-      comment_ticket_details.assigneeId=commentForm.value.assignee.user_id;
+      comment_ticket_details.assigneeId=commentForm.value.assignee?.user_id;
       comment_ticket_details.statusId=commentForm.value.status.statusId;
       console.log(comment_ticket_details);
       let {assignee, priority, status,...rest}=comment_ticket_details
@@ -231,7 +266,142 @@ export class KabbanComponent implements OnInit {
     })
   }
 
-  open_filter_form(){
-    
+  toggleFilter() {
+    this.reset_fields();
+    this.filter = !this.filter;
   }
+
+  reset_fields(){
+    this.filterPriority='';
+    this.filterAssigneeId='';    
+    this.fiterCategory='';
+    this.filterSubcategory='';
+    this.filterReporterId='';
+    this.filterStatus='';
+    this.filterType='';
+    this.filterAssignee='';
+    this.filterSubject='';
+    this.filterDescription='';
+    this.filterOpenedDate='';
+    this.filterDaysOld='';
+    this.filterReporter='';
+    this.filterTicketId='';
+  }
+
+  issues_filter_form_submited(issuesFilterForm:NgForm){
+    console.log(issuesFilterForm.value);
+    let {filter_assignee,filter_reporter,filter_days_old,...rest}=issuesFilterForm.value;
+    let form_data ={
+      ticketId:rest.ticketId?.ticketId,
+      categoryId:rest.category?.categoryId,
+      subCategoryId:rest.subcategory?.subCategoryId,
+      type:rest.type?.value,
+      assigneeId:rest.assigneeId?.user_id,
+      reportedId:rest.reportedId?.user_id,
+      statusId:rest.status?.statusId,
+      priorityId:rest.priority?.priorityId,
+      subject:rest.subject?.trim(),
+      description:rest.description.trim(),
+      createDateTime:rest.createDateTime,
+    }
+    if(filter_days_old){
+      let today = new Date();
+      today.setDate(today.getDate()-filter_days_old);
+      form_data.createDateTime=today.toLocaleDateString();
+    }
+    console.log(form_data);
+    let keys= Object.keys(form_data);
+
+    this.filter_output = this.http_tickets.filter(item=>{
+      let match:boolean=false;
+      for(let key of keys){
+        if(form_data[key]!=undefined && form_data[key]!=""){
+          if(item[key]==form_data[key]){
+            match=true;
+          }else if(key=='createDateTime'){
+            if(item.createDateTime.includes(form_data.createDateTime)){
+              match=true;
+            }
+          }else{
+            match=false;
+            break;
+          }
+        }
+      }
+      if(match){
+        return item;
+      }else{
+        return null;
+      }
+    })
+    this.all_tickets=this.filter_output;
+    console.log(this.all_tickets);
+    this.fetch_tickets_update();
+  }
+
+  search_tickets(val){
+    this.tickets=[];
+    let search = val.query.toLowerCase();
+    this.http_tickets.forEach((item)=>{
+      if(item.ticketId.toLowerCase().startsWith(search)){
+        this.tickets.push(item);
+      }
+    })
+  }
+
+  assignee_id_change(){
+    this.filterAssignee =this.users_list.find(item=>item.user_id==this.filterAssigneeId.user_id)?.uname;
+  }
+
+  reporter_id_change(){
+    this.filterReporter =this.users_list.find(item=>item.user_id==this.filterReporterId.user_id)?.uname;
+  }
+
+  reset_all(){
+    this.reset_fields();
+    this.filter_output=[];
+    this.all_tickets=this.http_tickets;
+    this.fetch_tickets_update();
+    this.filter=false;
+  }
+
+   search(val){
+    this.users=[];
+    console.log(val.query);
+    let search = val.query.toLowerCase();
+    this.users_list.forEach((item)=>{
+      if(item.user_id.toLowerCase().startsWith(search)){
+        this.users.push(item);
+      }
+    })
+    console.log(this.users);
+  }
+
+  files_: File[] = [];
+  filePayload;
+onFilesSelected(event: Event) {
+  const input = event.target as HTMLInputElement;
+  if (input.files && input.files.length > 0) {
+    const file = input.files[0];
+    const reader = new FileReader();
+    reader.onload = () => {
+      const base64 = reader.result as string;
+
+      this.filePayload = {
+        filename: file.name,
+        filetype: file.type,
+        data: base64
+      };
+    };
+    reader.readAsDataURL(file);
+  }
+}
+
+downloadFile(base64Data: string, filename: string) {
+  const link = document.createElement('a');
+  link.href = base64Data;
+  link.download = filename;
+  link.click();
+}
+
 }

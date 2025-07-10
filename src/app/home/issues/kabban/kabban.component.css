@@ -395,3 +395,115 @@ input{
     border: none;
     background-color: white !important;
 }
+
+#filter-form-container{
+    width: 100%;
+}
+
+.filter-input-div{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+#filter-overlay {
+  width: 35%;
+  background-color: white;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+}
+
+#filter-form-inner {
+width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+#filter-header{
+   width: 100%;
+   padding: 8px; 
+   border-bottom: 1px solid lightgray;
+   background-color: rgba(211, 211, 211, 0.3);
+}
+
+#filter-heading{
+    font-size: 15px;
+    color:rgb(45, 57, 57);
+    font-weight: bold;
+}
+
+#filter-form-container{
+    width: 100%;
+}
+
+.filter-input-div{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.label{
+    width: 35%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.input{
+    width: 65%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+label{
+    font-size: 15px;
+    font-weight:normal;
+}
+input{
+    width: 187px;
+    object-fit: cover;
+    padding: 3px;
+    border-radius: 10px;
+    border: 1px solid lightgray;
+}
+
+form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+::ng-deep .p-dropdown{
+    width:187px !important;
+}
+
+::ng-deep .p-autoComplete{
+    width: 187% !important;
+}
+
+::ng-deep .p-inputtext {
+    padding: 4px;
+}
+
+#form-top{
+    height: 380px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    padding: 10px;
+}
+
+#form-footer{
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 5px;
+}

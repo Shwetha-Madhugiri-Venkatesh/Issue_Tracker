@@ -1,0 +1,86 @@
+#graph-component{
+    height: 100%;
+    width: 100%;
+    padding: 10px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0.2px rgba(0, 0, 0, 0.2);
+}
+
+#graph-content-inner{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#graph-header{
+    width: 100%;
+    height: 8%;
+    display: flex;
+    flex-direction: row;
+}
+
+#graph-header-left{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+#graph-header-right{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+#graph-header-right-inner{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+::ng-deep .p-dropdown{
+    width: 100px!important;
+}
+
+::ng-deep .p-dropdown .p-dropdown-label{
+    padding: 2px;
+}
+
+::ng-deep .p-dropdown .p-dropdown-trigger{
+    width: 35%;
+}
+
+#calender-div{
+    height: 27px;
+    width: 27px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+}
+
+#refresh-div{
+    height: 27px;
+    width: 27px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+}
+
+#graph-container{
+    width: 100%;
+    height: 92%;
+}
+
+#graph-container-inner{
+    height: 100%;
+    width: 100%;
+}

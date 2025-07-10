@@ -18,6 +18,15 @@ export class IssuesComponent {
 
   ngOnInit(){
     this.two_way.current_route_emit('Issues')
+    this.two_way.emit_issues_subcomponent.subscribe((res)=>{
+      if(res==""){
+        this.kabban=true;
+        this.list=false;
+      }else if(res=="list"){
+        this.list=true;
+        this.kabban=false;
+      }
+    })
   }
 
   kabban_clicked(){

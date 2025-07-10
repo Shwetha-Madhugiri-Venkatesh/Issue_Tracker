@@ -52,4 +52,10 @@ export class TwoWayDataBinding{
     current_route_emit(label:string){
         this.emit_current_route.emit(label);
     }
+
+    emit_issues_subcomponent:EventEmitter<string>=new EventEmitter<string>;
+
+    current_issues_subcomponent(label:string){
+      this.emit_issues_subcomponent.emit(label);
+    }
 }

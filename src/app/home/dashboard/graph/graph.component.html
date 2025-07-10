@@ -1,4 +1,25 @@
-<p>graph works!</p>
-<div class="card">
-    <p-chart type="bar" [data]="basicData" [options]="basicOptions" />
+<div id="graph-component">
+    <div id="graph-content-inner">
+        <div id="graph-header">
+            <div id="graph-header-left">
+                <h4 id="graph-heading">Number of Issues</h4>
+            </div>
+            <div id="graph-header-right">
+                <div id="graph-header-right-inner">
+                    <p-dropdown [options]="scales" [(ngModel)]="selectedScale" optionLabel="scale" />
+                    <div id="calender-div">
+                        <i class="fa-regular fa-calendar"></i>
+                    </div>
+                    <div id="refresh-div">
+                        <i class="fa-solid fa-rotate-right fa-rotate-270"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="graph-container">
+            <div id="graph-container-inner">
+                <p-chart type="line" [data]="data" [options]="options" class="h-[30rem]" />
+            </div>
+        </div>
+    </div>
 </div>

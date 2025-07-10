@@ -5,24 +5,28 @@
                 <h2>Issues</h2>
             </div>
             <div id="search">
-                <i class="fa-solid fa-magnifying-glass"></i>
+                <div id="search-div" [ngStyle]="searchBtn?{'border':'1px solid gray'}:{'border': 'none'}">
+                    <input id="search-input" type="text" [(ngModel)]="search_text" (change)="search_input($event)"/>
+                    <button id="search-btn" (click)="search_clicked()"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
                 <i class="fa-solid fa-filter" (click)="toggleFilter()"></i>
             </div>
         </div>
         <div id="table-container">
             <div id="table-inner">
-                <p-table [columns]="cols" [value]="products" [tableStyle]="{ 'min-width': '50rem' }">
+                <p-table [columns]="cols" [value]="products" [tableStyle]="{ 'min-width': '50rem' }"
+                [paginator]="this.products.length<=5?false:true" [rows]="5">
                     <ng-template pTemplate="header" let-columns>
                         <tr>
-                            <th *ngFor="let col of columns">
-                                {{ col.header }}
+                            <th *ngFor="let col of columns" [pSortableColumnDisabled]="false" [pSortableColumn]="col.field">
+                                {{ col.header }} <i class="fa-solid fa-sort"></i>
                             </th>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-rowData let-columns="columns">
                         <tr>
                             <td *ngFor="let col of columns">
-                                {{ rowData[col.field] }}
+                                <div [ngStyle]="{color:getColor(rowData[col.field]), 'background-color':getBackGroundColor(rowData[col.field])}">{{ rowData[col.field] }}</div>
                             </td>
                         </tr>
                     </ng-template>

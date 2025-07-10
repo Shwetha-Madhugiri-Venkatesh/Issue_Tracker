@@ -17,7 +17,7 @@ export class TicketComponent {
   priority_name:string='';
   
   ngOnInit(){
-    this.priority_name=this.priority.find(item=>item.priorityId==this.ticket.priorityId).priority;
+    this.priority_name=this.priority.find(item=>item.priorityId==this.ticket.priorityId)?.priority;
   }
 
   @Output()

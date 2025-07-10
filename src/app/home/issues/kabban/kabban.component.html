@@ -6,7 +6,7 @@
             </div>
             <div id="right">
                 <button (click)="add_bug()">Add</button>
-                <div><i class="fa-solid fa-filter" (click)="open_filter_form()"></i></div>
+                <div><i class="fa-solid fa-filter" (click)="toggleFilter()"></i></div>
             </div>
         </div>
     </div>
@@ -29,6 +29,150 @@
                 <div id="tickets-div">
                     <div id="tickets">
                         <app-ticket *ngFor="let item of s.tickets" [ticket]="item" [priority]="priorities" (commentForm)="get_comment_ticket($event)"></app-ticket>
+                    </div>
+                </div>
+            </div>
+            <div id="filter-overlay" *ngIf="filter">
+                <div id="filter-form-inner">
+                    <div id="filter-header">
+                        <span id="filter-heading">Filter</span>
+                    </div>
+                    <div id="filter-form-container">
+                        <form #issuesFilterForm="ngForm" (ngSubmit)="issues_filter_form_submited(issuesFilterForm)">
+                            <div id="form-top">
+                                <div class="filter-input-div">
+                                    <div class="label">
+                                        <label>Ticket Id:</label>
+                                    </div>
+                                    <div class="input">
+                                        <p-autoComplete name="ticketId" [(ngModel)]="filterTicketId"
+                                            field="ticketId"
+                                            [dropdown]="true" [suggestions]="tickets" (completeMethod)="search_tickets($event)" (onSelect)="assignee_id_change()" />
+                                    </div>
+                                </div>
+                                <div class="filter-input-div">
+                                    <div class="label">
+                                        <label>Type:</label>
+                                    </div>
+                                    <div class="input">
+                                        <p-dropdown [options]="types" [(ngModel)]="filterType"
+                                            optionLabel="type" name="type" appendTo="body"
+                                            placeholder="Select Type" />
+                                    </div>
+                                </div>
+                                <div class="filter-input-div">
+                                    <div class="label">
+                                        <label>Priority:</label>
+                                    </div>
+                                    <div class="input">
+                                        <p-dropdown [options]="priorities" [(ngModel)]="filterPriority"
+                                            optionLabel="priority" name="priority" appendTo="body"
+                                            placeholder="Select Priority" />
+                                    </div>
+                                </div>
+                                <div class="filter-input-div">
+                                    <div class="label">
+                                        <label>Assigned Id:</label>
+                                    </div>
+                                    <div class="input">
+                                        <p-autoComplete name="assigneeId" [(ngModel)]="filterAssigneeId"
+                                            field="user_id"
+                                            [dropdown]="true" [suggestions]="users" (completeMethod)="search($event)" (onSelect)="assignee_id_change()" />
+                                    </div>
+                                </div>
+                                <div class="filter-input-div">
+                                    <div class="label">
+                                        <label>Assignee</label>
+                                    </div>
+                                    <div class="input">
+                                        <input pInputText name="filter_assignee" [(ngModel)]="filterAssignee" readonly/>
+                                    </div>
+                                </div>
+                                <div class="filter-input-div">
+                                    <div class="label">
+                                        <label>Subject:</label>
+                                    </div>
+                                    <div class="input">
+                                        <input pInputText name="subject" [(ngModel)]="filterSubject" />
+                                    </div>
+                                </div>
+                                <div class="filter-input-div">
+                                    <div class="label">
+                                        <label>Category</label>
+                                    </div>
+                                    <div class="input">
+                                        <p-dropdown [options]="categories" [(ngModel)]="fiterCategory"
+                                            optionLabel="categoryDesc" placeholder="Select category"
+                                            name="category" (onChange)="category_entered($event)" />
+                                    </div>
+                                </div>
+                                <div class="filter-input-div">
+                                    <div class="label">
+                                        <label>Subcategory</label>
+                                    </div>
+                                    <div class="input">
+                                        <p-dropdown [options]="dynamic_subcategory" [(ngModel)]="filterSubcategory"
+                                            optionLabel="subCategoryDesc" placeholder="Select a Subcategory"
+                                            name="subcategory" />
+                                    </div>
+                                </div>
+                                <div class="filter-input-div">
+                                    <div class="label">
+                                        <label>Description:</label>
+                                    </div>
+                                    <div class="input">
+                                        <input pInputText name="description" [(ngModel)]="filterDescription" />
+                                    </div>
+                                </div>
+                                <div class="filter-input-div">
+                                    <div class="label">
+                                        <label>Opened date</label>
+                                    </div>
+                                    <div class="input">
+                                        <input type="date" name="createDateTime" [(ngModel)]="filterOpenedDate" />
+                                    </div>
+                                </div>
+                                <div class="filter-input-div">
+                                    <div class="label">
+                                        <label>Days Old</label>
+                                    </div>
+                                    <div class="input">
+                                        <input type="number" name="filter_days_old" [(ngModel)]="filterDaysOld" />
+                                    </div>
+                                </div>
+                                <div class="filter-input-div">
+                                    <div class="label">
+                                        <label>Reporter Id</label>
+                                    </div>
+                                    <div class="input">
+                                        <p-autoComplete name="reporterId" [(ngModel)]="filterReporterId"
+                                            field="user_id"
+                                            [dropdown]="true" [suggestions]="users" (completeMethod)="search($event)" (onSelect)="reporter_id_change()" />
+                                    </div>
+                                </div>
+                                <div class="filter-input-div">
+                                    <div class="label">
+                                        <label>Reporter Name</label>
+                                    </div>
+                                    <div class="input">
+                                        <input pInputText name="filter_reporter" [(ngModel)]="filterReporter" readonly />
+                                    </div>
+                                </div>
+                                <div class="filter-input-div">
+                                    <div class="label">
+                                        <label>Status</label>
+                                    </div>
+                                    <div class="input">
+                                        <p-dropdown [options]="statuses" [(ngModel)]="filterStatus" optionLabel="status"
+                                            name="status" appendTo="body" placeholder="Select Status" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="form-footer">
+                                <button id="apply-btn" type="submit">Apply</button>
+                                <button id="apply-btn" type="button" (click)="reset_all()">Reset</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -71,7 +215,7 @@
                 </div>
                 <div class="row_">
                     <label>Attachments</label>
-                    <input type="file" name="input_file" [(ngModel)]="files" />
+                    <input type="file" accept="image/*,video/*,audio/*" multiple (change)="onFilesSelected($event)"/>
                 </div>
                 <div class="row">
                     <div class="div">
@@ -134,13 +278,26 @@
                                 </div>
                             </div>
                             <div id="comment-right">
-                                <div id="comment-right-div">
-                                    <div>
-                                        {{comment_ticket.input_file}}
-                                    </div>
-                                    <button>Download</button>
-                                </div>
-                            </div>
+  <div id="comment-right-div">
+    <div>
+      <!-- Optional preview -->
+      <img *ngIf="comment_ticket?.input_file" 
+           [src]="comment_ticket?.input_file?.data" 
+           alt="attachment"
+           width="100" />
+
+      <!-- Or just show file type -->
+      {{ comment_ticket.input_file ? 'File attached' : 'No file' }}
+    </div>
+    
+    <button 
+      (click)="downloadFile(comment_ticket?.input_file?.data, 'attachment')"
+      [disabled]="!comment_ticket.input_file">
+      Download
+    </button>
+  </div>
+</div>
+
                         </div>
                         <div id="form-last">
                             <div class="update-input">

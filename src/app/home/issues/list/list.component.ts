@@ -11,7 +11,7 @@ import { TwoWayDataBinding } from 'src/app/Services/two_way_dataBinding';
   styleUrls: ['./list.component.css']
 })
 export class ListComponent {
-  products:Ticket[];
+  products:Ticket[]=[];
   cols;
   dynamic_subcategory: { subCategoryId: string; categoryId: string; subCategoryDesc: string; }[];
 
@@ -36,6 +36,11 @@ export class ListComponent {
   filterTicketId;
   tickets;
 
+  searchBtn:boolean=false;
+  search_text:string='';
+  filter_output=[];
+  search_output=[];
+
   constructor(private http_service:HTTPService,private two_way_data:TwoWayDataBinding){}
 
   priorities:{priorityId:string, priority:string}[]=this.two_way_data.priorities;
@@ -48,19 +53,20 @@ export class ListComponent {
   ]
 
     ngOnInit() {
+
+      this.two_way_data.current_issues_subcomponent("list");
       console.log("ngoninit",this.subcategories);
         this.http_service.fetch_tickets().subscribe((res:Ticket[])=>{
           this.http_tickets=res;
           res.forEach(item=>{
-            item['priority']=this.priorities.find(i=>i.priorityId==item.priorityId).priority;
-            item['category']=this.categories.find(i=>i.categoryId==item.categoryId).categoryDesc;
-            item['subcategory']=this.subcategories.find(i=>i.subCategoryId==item.subCategoryId).subCategoryDesc;
+            item['priority']=this.priorities.find(i=>i.priorityId==item.priorityId)?.priority;
+            item['category']=this.categories.find(i=>i.categoryId==item.categoryId)?.categoryDesc;
+            item['subcategory']=this.subcategories.find(i=>i.subCategoryId==item.subCategoryId)?.subCategoryDesc;
             this.http_service.fetch_users().subscribe((res_users:User[])=>{
               item['assignee']=(res_users.find(i=>i.user_id==item.assigneeId)?.uname)?(res_users.find(i=>i.user_id==item.assigneeId)?.uname):"---";
               console.log(res);
               this.products=res;
               console.log(this.products);
-              console.log("ngoninit",this.subcategories);
             })
           })
         })
@@ -123,7 +129,9 @@ export class ListComponent {
     }
     console.log(form_data);
     let keys= Object.keys(form_data);
-    this.products = this.http_tickets.filter(item=>{
+
+    let filter_input=this.search_output.length!=0?this.search_output:this.http_tickets;
+    this.filter_output = filter_input.filter(item=>{
       let match:boolean=false;
       for(let key of keys){
         if(form_data[key]!=undefined && form_data[key]!=""){
@@ -145,6 +153,7 @@ export class ListComponent {
         return null;
       }
     })
+    this.products=this.filter_output;
     console.log(this.products);
   }
 
@@ -185,7 +194,76 @@ export class ListComponent {
 
   reset_all(){
     this.reset_fields();
-    this.products=this.http_tickets;
+    this.filter_output=[];
+    if(this.search_output.length!=0){
+      this.products=this.search_output;
+    }else{
+      this.products=this.http_tickets;
+    }
     this.filter=false;
+  }
+
+  search_clicked(){
+    this.searchBtn=!this.searchBtn;
+  }
+
+  search_input(val){
+    let inp =this.search_text;
+    if(inp!=''){
+    let search_input_array=this.filter_output.length!=0?this.filter_output:this.http_tickets;
+    this.search_output = search_input_array.filter(item=>{
+      item['category']=this.categories.find(j=>j.categoryId==item.categoryId).categoryDesc;
+      item['subcategory'] = this.subcategories.find(j=>j.subCategoryId==item.subCategoryId).subCategoryDesc;
+      item['priority']=this.priorities.find(j=>j.priorityId==item.priorityId).priority;
+      item['status']=this.statuses.find(j=>j.statusId==item.statusId).status;
+      let keys = Object.keys(item);
+      let match=false;
+      for(let key of keys){
+        if(item[key].toString().toLowerCase().includes(inp.toLowerCase())){
+          match=true;
+          break;
+        }
+      }
+      if(match){
+        return item;
+      }else{
+        return null;
+      }
+    })
+    console.log(this.search_output);
+    this.products=this.search_output;
+   }
+   else{
+    this.search_output=[];
+    if(this.filter_output.length!=0){
+      this.products=this.filter_output;
+    }else{
+      this.products=this.http_tickets;
+    }
+   }
+  }
+
+  getColor(val){
+    switch(val){
+      case 'bug': return 'orange';
+      case 'feature': return 'blue';
+      case 'Low': return 'yellowgreen';
+      case 'High': return 'magenta';
+      case 'Medium': return '#bbbb0d';
+      case 'Critical': return 'red';
+      default: return 'black';
+    }
+  }
+
+  getBackGroundColor(val){
+    switch(val){
+      case 'bug': return '#fdf0d8';
+      case 'feature': return '#def5fd';
+      case 'Low': return '#ecfbec';
+      case 'High': return '#fbe3e7';
+      case 'Medium': return '#f2f2ec';
+      case 'Critical': return '#faecec';
+      default: return 'none';
+    }
   }
 }
