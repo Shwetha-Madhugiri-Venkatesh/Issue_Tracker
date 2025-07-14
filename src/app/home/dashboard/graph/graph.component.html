@@ -6,9 +6,23 @@
             </div>
             <div id="graph-header-right">
                 <div id="graph-header-right-inner">
-                    <p-dropdown [options]="scales" [(ngModel)]="selectedScale" optionLabel="scale" />
-                    <div id="calender-div">
-                        <i class="fa-regular fa-calendar"></i>
+                    <!-- <p-dropdown [options]="scales" [(ngModel)]="selectedScale" optionLabel="scale"
+                        (onChange)="scale_selected()" />
+                    <div id="calender" [ngStyle]="show_cal?{border:'1px solid lightgray'}:{border:'none'}">
+                        <div id="calender-div" [ngStyle]="show_cal?{border:'none'}:{border:'1px solid lightgray'}">
+                            <i class="fa-regular fa-calendar" (click)="show_calender()"></i>
+                        </div>
+                        <div *ngIf="show_cal">
+                            <p-calendar *ngIf="day" placeholder="Day..." [(ngModel)]="selectedDate" dateFormat="yy-mm-dd" (onSelect)="day_selected()"></p-calendar>
+                            <p-calendar *ngIf="month" placeholder="Month..." [(ngModel)]="selectedMonth" view="month" dateFormat="mm/yy"
+                                [showIcon]="false" (onSelect)="month_selected()">
+                            </p-calendar>
+                            <p-dropdown *ngIf="week" [options]="weeks" [(ngModel)]="selectedWeek" optionLabel="name" (onChange)="week_selected()"/>
+                        </div>
+                    </div> -->
+                    <div id="calender">
+                        <p-calendar placeholder="Start Date" [showIcon]="true" [(ngModel)]="start_date" dateFormat="yy-mm-dd" (onSelect)="start_date_selected()"></p-calendar>
+                        <p-calendar placeholder="End Date" [showIcon]="true" [(ngModel)]="end_date" dateFormat="yy-mm-dd" (onSelect)="end_date_selected()"></p-calendar>
                     </div>
                     <div id="refresh-div">
                         <i class="fa-solid fa-rotate-right fa-rotate-270"></i>
@@ -18,7 +32,7 @@
         </div>
         <div id="graph-container">
             <div id="graph-container-inner">
-                <p-chart type="line" [data]="data" [options]="options" class="h-[30rem]" />
+                <p-chart type="bar" [data]="data" class="h-[30rem]" [options]="graph_options"/>
             </div>
         </div>
     </div>

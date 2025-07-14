@@ -115,13 +115,11 @@
 ::ng-deep .p-dropdown .p-dropdown-trigger{
     width: 30px;
 }
-::ng-deep .p-paginator .p-paginator-pages .p-paginator-page:hover{
-    background-color: rgb(229, 245, 249);
-}
+
 ::ng-deep .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
-    background: rgb(215, 237, 246);
-    color: black;
-    border:none;
+    background-color:#3482a2;
+    color: white;
+   border-color: lightgray;
 }
 
 ::ng-deep .p-datatable-header{
@@ -168,6 +166,9 @@ td{
     padding: 2.5px 10px;
     border-radius: 5px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 #filter-div{
     width: 35%;
@@ -255,13 +256,13 @@ input{
     gap: 10px;
 }
 
-#reset-btn{
+#filter-footer #btn-div #reset-btn{
     background-color: white;
     border: 1px solid gray;
     height: 25px;
     padding: 0px 10px;
     border-radius: 5px;
-     cursor: pointer;
+    cursor: pointer;
 }
 
 #submit-btn{
@@ -274,11 +275,13 @@ input{
     cursor: pointer;
 }
 
-::ng-deep .p-dropdown{
+::ng-deep #filter-form .p-dropdown{
     width: 100%;
     padding: 0;
 }
-
+::ng-deep #filter-form .p-dropdown .p-dropdown-label{
+    padding: 4px;
+}
 ::ng-deep .p-dropdown{
     box-shadow: none!important;
     border-color: lightgray!important;
@@ -333,7 +336,7 @@ input{
     font-size: 15px;
     display: flex;
     align-items: center;
-    margin: 1px 0px 0px 6px;
+    margin: 5px 0px 0px 6px;
 }
 
 #multiselect-btn{
@@ -351,4 +354,60 @@ input{
     align-items: center;
     justify-content: flex-end;
     padding: 5px 10px;
+}
+
+::ng-deep .p-paginator .p-paginator-first{
+    border-top:2px solid lightgray;
+    border-bottom:2px solid lightgray;
+    border-left:2px solid lightgray;
+     min-width: 30px !important;
+     border-top-left-radius: 5px;
+     border-bottom-left-radius: 5px;
+
+}
+
+::ng-deep .p-paginator .p-paginator-first:hover{
+    background-color: rgb(229, 245, 249);
+   border-color: lightgray !important;
+}
+
+::ng-deep .p-paginator .p-paginator-prev{
+    border-top:2px solid lightgray;
+    border-bottom:2px solid lightgray;
+     min-width: 30px !important;
+}
+
+::ng-deep .p-paginator .p-paginator-prev:hover{
+    background-color: rgb(229, 245, 249);
+   border-color: lightgray !important;
+}
+
+::ng-deep .p-paginator .p-paginator-pages .p-paginator-page{
+    border-top:2px solid lightgray;
+    border-bottom:2px solid lightgray;
+     min-width: 30px !important;
+}
+
+::ng-deep .p-paginator .p-paginator-next{
+    border-top:2px solid lightgray;
+    border-bottom:2px solid lightgray; 
+     min-width: 30px !important;
+
+}
+::ng-deep .p-paginator .p-paginator-next:hover{
+    background-color: rgb(229, 245, 249);
+   border-color: lightgray !important;
+}
+
+::ng-deep .p-paginator .p-paginator-last{
+     border-top:2px solid lightgray;
+    border-bottom:2px solid lightgray;
+    border-right:2px solid lightgray;
+     min-width: 30px !important;
+      border-top-right-radius: 5px;
+     border-bottom-right-radius: 5px;
+}
+::ng-deep .p-paginator .p-paginator-last:hover{
+    background-color: rgb(229, 245, 249);
+   border-color: lightgray !important;
 }

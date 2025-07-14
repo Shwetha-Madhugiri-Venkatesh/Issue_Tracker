@@ -7,5 +7,6 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-
+  ngOnInit(){
+  }
 }

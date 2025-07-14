@@ -53,7 +53,6 @@ export class ListComponent {
   ]
 
     ngOnInit() {
-
       this.two_way_data.current_issues_subcomponent("list");
       console.log("ngoninit",this.subcategories);
         this.http_service.fetch_tickets().subscribe((res:Ticket[])=>{

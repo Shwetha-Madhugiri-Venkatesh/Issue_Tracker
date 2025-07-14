@@ -39,7 +39,13 @@ import { ProgressBarModule } from 'primeng/progressbar';
 import { EditorModule } from 'primeng/editor';
 import { SidebarModule } from 'primeng/sidebar';
 import { AutoCompleteModule } from 'primeng/autocomplete';
-
+import { CalendarModule } from 'primeng/calendar';
+import { PriorityComponent } from './home/dashboard/priority/priority.component';
+import { StatusComponent } from './home/dashboard/status/status.component';
+import { CategoryComponent } from './home/dashboard/category/category.component';
+import { TypeComponent } from './home/dashboard/type/type.component';
+import { BrowserComponent } from './home/dashboard/browser/browser.component';
+import { OperatingSystemComponent } from './home/dashboard/operating-system/operating-system.component';
 
 
 @NgModule({
@@ -57,6 +63,12 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
     KabbanComponent,
     ListComponent,
     TicketComponent,
+    PriorityComponent,
+    StatusComponent,
+    CategoryComponent,
+    TypeComponent,
+    BrowserComponent,
+    OperatingSystemComponent,
   ],
   imports: [
     BrowserModule,
@@ -83,6 +95,7 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
    EditorModule,
    SidebarModule,
    AutoCompleteModule,
+   CalendarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

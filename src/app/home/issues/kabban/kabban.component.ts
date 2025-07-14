@@ -50,7 +50,9 @@ export class KabbanComponent implements OnInit {
     priorityId: '',
     createDateTime: '',
     lastModifiedDateTime: '',
-    input_file: undefined
+    input_file: undefined,
+    browser:'',
+    operatingSystem:'',
   };
   tickets_comments={};
   user_specific;
@@ -80,6 +82,9 @@ export class KabbanComponent implements OnInit {
   filter_output=[];
   tickets;
   http_tickets: Ticket[];
+
+  selectedbrowser;
+  selectedOS;
   
   constructor(private http_service:HTTPService,private two_way_data:TwoWayDataBinding){}
 
@@ -87,6 +92,8 @@ export class KabbanComponent implements OnInit {
   statuses:{statusId:string, status:string,tickets:Ticket[]}[]=this.two_way_data.statuses;
   categories:{categoryId:string, categoryDesc:string}[]=this.two_way_data.categories;
   subcategories:{subCategoryId:string, categoryId:string , subCategoryDesc:string}[]=this.two_way_data.subcategories;
+  browsers:{browser_name:string, browser_id:string}[]=this.two_way_data.browsers;
+  operatingSystems:{os_name:string,os_id:string}[]=this.two_way_data.operatingSystems;
   types:{type:string,value:string}[]=[
     {type:"Bug", value:"bug"},
     {type:"Feature",value:"feature"},
@@ -157,6 +164,8 @@ export class KabbanComponent implements OnInit {
             createDateTime:this.today,
             lastModifiedDateTime:this.today,
             input_file:bugForm.value.input_file,
+            browser:bugForm.value.browser.browser_id,
+            operatingSystem:bugForm.value.operatingSystem.os_id,
         }
         console.log(form_data);
         this.http_service.post_ticket(form_data).subscribe((res)=>{
@@ -191,11 +200,12 @@ export class KabbanComponent implements OnInit {
   }
 
   fetch_update_comments(){
+    this.tickets_comments={};
     this.http_service.fetch_comments().subscribe((res:Comment[])=>{
       let comments =res.filter(item=>item.ticketId==this.comment_ticket.ticketId);
       comments.forEach(item => {
         let user = this.users_list.find(i=>i.user_id==item.userId);
-        item['uname']=user.uname;
+        item['uname']=user?.uname;
       });
       comments.forEach(item=>{
         let res = comments.filter(fil_item=>{

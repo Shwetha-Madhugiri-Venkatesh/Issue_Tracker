@@ -41,6 +41,27 @@ export class TwoWayDataBinding{
         {subCategoryId:'VA', categoryId:'AM',subCategoryDesc:'VPN Access'},
       ]
     
+      browsers:{browser_name:string, browser_id:string}[]=[
+        {browser_name:"Google Chrome", browser_id:"GC"},
+        {browser_name:"Internet Explorer, Safari", browser_id:"IES"},
+        {browser_name:"Netscape", browser_id:"NS"},
+        {browser_name:"Firefax, Google Chrome", browser_id:"FGC"},
+        {browser_name:"Firefax, Opera", browser_id:"FO"},
+        {browser_name:"Opera", browser_id:"O"},
+        {browser_name:"null", browser_id:"N"}
+      ];
+
+      operatingSystems:{os_name:string,os_id:string}[]=[
+        {os_name:"Linux",os_id:"L"},
+        {os_name:"Mac Os X",os_id:"MOsX"},
+        {os_name:"Windows XP",os_id:"WXP"},
+        {os_name:"Mac OS X",os_id:"MOSX"},
+        {os_name:"Windows 2000, Mac Os X",os_id:"W2000MOX"},
+        {os_name:"Windows 7",os_id:"W7"},
+        {os_name:"Windows Vista",os_id:"WV"},
+        {os_name:"Windows XP, Mac Os X",os_id:"WXPMOX"},
+        {os_name:"null",os_id:"N"},
+      ]
     emit_users:EventEmitter<User[]> = new EventEmitter<User[]>
 
     raise_emit_users(users:User[]){

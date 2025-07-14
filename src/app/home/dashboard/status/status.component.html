@@ -1,0 +1,21 @@
+<div id="status-component">
+    <div id="status-content-inner">
+        <div id="status-header">
+            <div id="status-header-left">
+                <h4 id="status-heading">Statuses</h4>
+            </div>
+            <div id="status-header-right">
+                <div id="status-header-right-inner">
+                    <div id="refresh-div">
+                        <i class="fa-solid fa-rotate-right fa-rotate-270"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="status-container">
+            <div id="status-container-inner">
+                <p-chart type="bar" [data]="data" class="h-[30rem]" [options]="status_options"/>
+            </div>
+        </div>
+    </div>
+</div>

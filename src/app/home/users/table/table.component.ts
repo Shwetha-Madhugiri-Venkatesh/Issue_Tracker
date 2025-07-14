@@ -7,17 +7,28 @@ import { HTTPService } from 'src/app/Services/http_service';
 import { AuthorizeUser } from 'src/app/Services/authorize_user';
 import { TwoWayDataBinding } from 'src/app/Services/two_way_dataBinding';
 import { MultiSelect } from 'primeng/multiselect';
+import { MessageService, PrimeNGConfig } from 'primeng/api';
 
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.css'],
+  providers:[MessageService]
 })
 export class TableComponent {
   login_user: any;
   user_details: User;
 
-    constructor(private http_service:HTTPService,private authorize:AuthorizeUser, private two_way:TwoWayDataBinding){}
+filter_user_name: any='';
+filter_user_email_id: any='';
+filter_user_created_source: any='';
+filter_user_created_source_type: any='';
+filter_user_datetime: any='';
+filter_user_last_modified_source: any='';
+filter_user_last_modified_source_type: any='';
+filter_user_last_modified_datetime: any='';
+
+    constructor(private http_service:HTTPService,private primeNg:PrimeNGConfig,private message_service:MessageService,private authorize:AuthorizeUser, private two_way:TwoWayDataBinding){}
     products:User[]=[];
     users_from_http:User[];
     cols:{field:string,header:string}[];
@@ -30,7 +41,7 @@ export class TableComponent {
     @ViewChild('multi') multi:MultiSelect;
     user_types=[{name:"User"},{name:"Admin"}];
     user_type:string;
-    selectedNum:number=5;
+    selectedNum:number=0;
     len:number=8;
 
      numbers = [
@@ -43,6 +54,7 @@ export class TableComponent {
   ngOnInit() {
       this.login_user=JSON.parse(sessionStorage.getItem("login"))||{};
     this.http_service.fetch_users().subscribe((res:User[])=>{
+      this.selectedNum=res.length;
       this.user_details=res.find(item=>item.user_id==this.login_user['userId']);
       console.log(this.user_details);
     })
@@ -61,15 +73,23 @@ export class TableComponent {
             { field: 'last_modified_datetime', header: 'Last modified Date Time' },
         ];
         this.columns=this.cols;
+        this.selectedCol=this.columns;
     }
     filter_form_submit(form:NgForm){
+      console.log(form.value);
       let form_data = {...form.value,type:(form.value.type==undefined)?undefined:form.value.type['name']};
       this.products= this.users_from_http.filter(item=>{
         let match:boolean = false;
         for(let key in form_data){
           console.log(form[key]);
           if(form_data[key]!=undefined && form_data[key]!=""){
-          if(item[key]==form_data[key]){
+          if(key=='last_modified_datetime' || key=='created_datetime'){
+            let form_date = new Date(form_data[key]).toLocaleDateString();
+            if(item[key].startsWith(form_date)){
+              match=true;
+            }
+          }else
+          if(item[key].toLowerCase()==form_data[key].toLowerCase()){
             match=true;
           } else{
             match=false;
@@ -95,12 +115,34 @@ export class TableComponent {
     }
 
     open_form(id:string){
+      if(this.user_details?.type=='Admin'){
       this.display_dialog.emit([true,id]);
+      }else{
+        // this.message_service.add({severity:'warn', summary:'Warn', detail:"Access Denied"});
+        return;
+      }
+    }
+
+    reset_fields(){
+      this.filter_user_name='';
+      this.filter_user_email_id='';
+      this.filter_user_datetime='';
+      this.filter_user_last_modified_datetime='';
+      this.filter_user_last_modified_source='';
+      this.filter_user_last_modified_source_type='';
+      this.filter_user_created_source='';
+      this.filter_user_created_source_type='';
+      this.user_type='';
+    }
+
+    reset_form(){
+      this.products = this.users_from_http;
+      this.reset_fields();
     }
 
     dynamic_rows(event){
       console.log(event.value);
-      if(this.users_from_http.length>event.value){
+      if(this.users_from_http.length>event.value.value){
         this.products =this.users_from_http.slice(0,event.value.value);
       }else{
         this.products=this.users_from_http;
@@ -108,6 +150,7 @@ export class TableComponent {
     }
 
     get_selected_columns(val){
+      console.log(this.selectedCol);
       this.columns_selected=val.value;
       this.len=val.value.length;
     }
@@ -124,9 +167,14 @@ export class TableComponent {
         });
     }
     delete_the_user(id:string){
+    if(this.user_details.type=='Admin'){
      this.http_service.delete_user(id).subscribe(res=>{
       console.log(res);
       this.get_all_users();
      })
+    }else{
+      this.message_service.add({severity:'warn', summary:'Warn', detail:"Access Denied"});
+      return;
+    }
     }
 }

@@ -14,22 +14,30 @@
                     <form class="form" #topForm="ngForm">
                         <div class="input-div">
                         <label class="label">User Name *</label>
-                        <input type="text"  name="uname" [(ngModel)]="user_uname" [ngClass]="topForm?.controls['uname']?.value?'input-value':'input'" (change)="create_user_password($event)"/>
-                        </div>
+                        <input type="text"  name="uname" [(ngModel)]="user_uname" [ngStyle]="{border: topForm?.controls['uname']?.value && editable && prefill?'1px solid lightgray':
+                        topForm?.controls['uname']?.value && !editable && prefill?'none': 
+                        topForm?.controls['uname']?.value && !prefill?'none':'1px solid lightgray'}" (change)="create_user_password($event)" [readOnly]="!editable && prefill"/>
+                        </div >
 
                         <div class="input-div">
                         <label class="label">First Name *</label>
-                        <input [ngClass]="topForm?.controls['fname']?.value?'input-value':'input'" type="text" name="fname" [(ngModel)]="user_fname"/>
+                        <input [ngStyle]="{border: topForm?.controls['fname']?.value && editable && prefill?'1px solid lightgray':
+                        topForm?.controls['fname']?.value && !editable && prefill?'none': 
+                        topForm?.controls['fname']?.value && !prefill?'none':'1px solid lightgray'}" type="text" name="fname" [(ngModel)]="user_fname" [readOnly]="!editable  && prefill"/>
                         </div>
 
                         <div class="input-div">
                         <label class="label">Middle Name *</label>
-                        <input [ngClass]="topForm?.controls['mname']?.value?'input-value':'input'" type="text" name="mname" [(ngModel)]="user_mname"/>
+                        <input [ngStyle]="{border: topForm?.controls['mname']?.value && editable && prefill?'1px solid lightgray':
+                        topForm?.controls['mname']?.value && !editable && prefill?'none': 
+                        topForm?.controls['mname']?.value && !prefill?'none':'1px solid lightgray'}" type="text" name="mname" [(ngModel)]="user_mname" [readOnly]="!editable  && prefill"/>
                         </div>
 
                         <div class="input-div">
                         <label class="label">Last Name *</label>
-                        <input [ngClass]="topForm?.controls['lname']?.value?'input-value':'input'" type="text" name="lname" [(ngModel)]="user_lname"/>
+                        <input [ngStyle]="{border: topForm?.controls['lname']?.value && editable && prefill?'1px solid lightgray':
+                        topForm?.controls['lname']?.value && !editable && prefill?'none': 
+                        topForm?.controls['lname']?.value && !prefill?'none':'1px solid lightgray'}" type="text" name="lname" [(ngModel)]="user_lname" [readOnly]="!editable  && prefill"/>
                         </div>
 
                         <div class="input-div">
@@ -39,47 +47,47 @@
 
                         <div class="input-div">
                         <label class="label">Created Source Type</label>
-                        <div class="radios">
-                            <input type="radio" id="html" name="fav_language" value="User" name="created_source_type" [(ngModel)]="user_details.type" readonly>
-                            <label for="html">User</label><br>
-                            <input type="radio" id="css" name="fav_language" value="Admin" name="created_source_type" [(ngModel)]="user_details.type" readonly>
-                            <label for="css">Admin</label><br>
-                        </div>
+                        <input class="input-value" name="created_source_type" [(ngModel)]="user_details.type" readonly/>
                         </div>
 
                         <div class="input-div">
                         <label class="label">Created Date time</label>
-                        <input class="input-value"  type="text" name="created_datetime" [(ngModel)]="today"/>
+                        <input class="input-value"  type="text" name="created_datetime" [(ngModel)]="today" readonly/>
                         </div>
 
                         <div class="input-div">
                         <label class="label">Company Code</label>
-                        <input [ngClass]="topForm?.controls['company_code']?.value?'input-value':'input'" type="text" name="company_code" [(ngModel)]="user_company_code"/>
+                        <input [ngStyle]="{border: topForm?.controls['company_code']?.value && editable && prefill?'1px solid lightgray':
+                        topForm?.controls['company_code']?.value && !editable && prefill?'none': 
+                        topForm?.controls['company_code']?.value && !prefill?'none':'1px solid lightgray'}" type="text" name="company_code" [(ngModel)]="user_company_code" [readOnly]="!editable  && prefill"/>
                         </div>
 
                         <div class="input-div">
                         <label class="label">Type</label>
-                        <div class="radios">
-                            <input type="radio" id="html" name="fav_language" value="User" name="type" [(ngModel)]="user_type">
-                            <label for="html">User</label><br>
-                            <input type="radio" id="css" name="fav_language" value="Admin" name="type" [(ngModel)]="user_type">
-                            <label for="css">Admin</label><br>
+                        <input *ngIf="!editable && prefill" class="input-value" name="type" [(ngModel)]="user_type" readonly/>
+                        <div *ngIf="editable || !prefill" class="radios">
+                            <label for="html"><input type="radio" id="html" value="User" name="type" [(ngModel)]="user_type" [readOnly]="!editable  && prefill">  User</label><br>
+                            <label for="css"><input type="radio" id="css" value="Admin" name="type" [(ngModel)]="user_type" [readOnly]="!editable  && prefill">  Admin</label><br>
                         </div>
                         </div>
 
                         <div class="input-div">
                         <label class="label">User ID</label>
-                        <input [ngClass]="topForm?.controls['user_id']?.value?'input-value':'input'" type="text" name="user_id" [(ngModel)]="user_user_id"/>
+                        <input class="input-value" type="text" name="user_id" [(ngModel)]="user_user_id" readonly/>
                         </div>
 
                         <div class="input-div">
                         <label class="label">Email ID</label>
-                        <input [ngClass]="topForm?.controls['email_id']?.value?'input-value':'input'" type="email" name="email_id" [(ngModel)]="user_email_id"/>
+                        <input [ngStyle]="{border: topForm?.controls['email_id']?.value && editable && prefill?'1px solid lightgray':
+                        topForm?.controls['email_id']?.value && !editable && prefill?'none': 
+                        topForm?.controls['email_id']?.value && !prefill?'none':'1px solid lightgray'}" class="input" type="email" name="email_id" [(ngModel)]="user_email_id" [readOnly]="!editable  && prefill"/>
                         </div>
 
                         <div class="input-div">
                         <label class="label">Phone Number</label>
-                        <input [ngClass]="topForm?.controls['phone']?.value?'input-value':'input'" type="text" name="phone" [(ngModel)]="user_phone"/>
+                        <input [ngStyle]="{border: topForm?.controls['phone']?.value && editable && prefill?'1px solid lightgray':
+                        topForm?.controls['phone']?.value && !editable && prefill?'none': 
+                        topForm?.controls['phone']?.value && !prefill?'none':'1px solid lightgray'}" type="text" name="phone" [(ngModel)]="user_phone" [readOnly]="!editable  && prefill"/>
                         </div>
 
                         <div class="input-div">
@@ -89,12 +97,7 @@
 
                         <div class="input-div">
                         <label class="label">Last Modified Source Type</label>
-                        <div class="radios">
-                            <input type="radio" id="html" name="fav_language" value="User" name="last_modified_source_type" [(ngModel)]="last_modified.type"  readonly>
-                            <label for="html">User</label><br>
-                            <input type="radio" id="css" name="fav_language"  value="Admin" name="last_modified_source_type" [(ngModel)]="last_modified.type"  readonly>
-                            <label for="css">Admin</label><br>
-                        </div>
+                        <input class="input-value" name="last_modified_source_type" [(ngModel)]="last_modified.type" readonly/>
                         </div>
 
                         <div class="input-div">
@@ -104,7 +107,7 @@
 
                         <div class="input-div">
                         <label class="label">Password</label>
-                        <input [ngClass]="topForm?.controls['password']?.value?'input-value':'input'" type="text" name="password" [(ngModel)]="user_password"/>
+                        <input class="input-value" type="text" name="password" [(ngModel)]="user_password" readonly/>
                         </div>
                     </form>
                 </div>
@@ -119,44 +122,60 @@
                     <form class="form"  id="bottom-form" #bottomForm="ngForm">
                         <div class="input-div">
                         <label class="label">Address</label>
-                        <input [ngClass]="bottomForm?.controls['address']?.touched?'input':'input-value'" type="text" name="address" [(ngModel)]="user_address"/>
+                        <input [ngStyle]="{border: bottomForm?.controls['address']?.value && editable && prefill?'1px solid lightgray':
+                        bottomForm?.controls['address']?.value && !editable && prefill?'none': 
+                        bottomForm?.controls['address']?.value && !prefill?'none':'1px solid lightgray'}" type="text" name="address" [(ngModel)]="user_address"/>
                         </div>
 
                         <div class="input-div">
                         <label class="label">Country</label>
-                        <input [ngClass]="bottomForm?.controls['country']?.value?'input-value':'input'" type="text" name="country" [(ngModel)]="user_country"/>
+                        <input [ngStyle]="{border: bottomForm?.controls['country']?.value && editable && prefill?'1px solid lightgray':
+                        bottomForm?.controls['country']?.value && !editable && prefill?'none': 
+                        bottomForm?.controls['country']?.value && !prefill?'none':'1px solid lightgray'}" type="text" name="country" [(ngModel)]="user_country"/>
                         </div>
 
                         <div class="input-div">
                         <label class="label">State</label>
-                        <input [ngClass]="bottomForm?.controls['state']?.value?'input-value':'input'" type="text" name="state" [(ngModel)]="user_state"/>
+                        <input [ngStyle]="{border: bottomForm?.controls['state']?.value && editable && prefill?'1px solid lightgray':
+                        bottomForm?.controls['state']?.value && !editable && prefill?'none': 
+                        bottomForm?.controls['state']?.value && !prefill?'none':'1px solid lightgray'}" type="text" name="state" [(ngModel)]="user_state"/>
                         </div>
 
                         <div class="input-div">
                         <label class="label">City</label>
-                        <input [ngClass]="bottomForm?.controls['city']?.value?'input-value':'input'" type="text" name="city" [(ngModel)]="user_city"/>
+                        <input [ngStyle]="{border: bottomForm?.controls['city']?.value && editable && prefill?'1px solid lightgray':
+                        bottomForm?.controls['city']?.value && !editable && prefill?'none': 
+                        bottomForm?.controls['city']?.value && !prefill?'none':'1px solid lightgray'}" type="text" name="city" [(ngModel)]="user_city"/>
                         </div>
 
                         <div class="input-div">
                         <label class="label">Postal Code</label>
-                        <input [ngClass]="bottomForm?.controls['postal_code']?.value?'input-value':'input'"  type="text" name="postal_code" [(ngModel)]="user_postal_code"/>
+                        <input [ngStyle]="{border: bottomForm?.controls['postal_code']?.value && editable && prefill?'1px solid lightgray':
+                        bottomForm?.controls['postal_code']?.value && !editable && prefill?'none': 
+                        bottomForm?.controls['postal_code']?.value && !prefill?'none':'1px solid lightgray'}"  type="text" name="postal_code" [(ngModel)]="user_postal_code"/>
                         </div>
 
                         <div class="input-div">
                         <label class="label">Locale</label>
-                        <input [ngClass]="bottomForm?.controls['locale']?.value?'input-value':'input'" type="text" name="locale" [(ngModel)]="user_locale"/>
+                        <input [ngStyle]="{border: bottomForm?.controls['locale']?.value && editable && prefill?'1px solid lightgray':
+                        bottomForm?.controls['locale']?.value && !editable && prefill?'none': 
+                        bottomForm?.controls['locale']?.value && !prefill?'none':'1px solid lightgray'}" type="text" name="locale" [(ngModel)]="user_locale"/>
                         </div>
 
                         <div class="input-div">
                         <label class="label">Time zone</label>
-                        <input [ngClass]="bottomForm?.controls['time_zone']?.value?'input-value':'input'" type="text" name="time_zone" [(ngModel)]="user_time_zone"/>
+                        <input [ngStyle]="{border: bottomForm?.controls['time_zone']?.value && editable && prefill?'1px solid lightgray':
+                        bottomForm?.controls['time_zone']?.value && !editable && prefill?'none': 
+                        bottomForm?.controls['time_zone']?.value && !prefill?'none':'1px solid lightgray'}" type="text" name="time_zone" [(ngModel)]="user_time_zone"/>
                         </div>
                     </form>
                 </div>
             </div>
             <div id="dialog-footer">
                 <div id="btn-container">
-                    <button id="submit" (click)="form_submit(topForm,bottomForm)">submit</button>
+                    <button id="submit" *ngIf="prefill" (click)="close_form()">{{editable?"Cancel":"Close"}}</button>
+                    <button *ngIf="!editable &&prefill" id="submit" (click)="edit_form()">Edit</button>
+                    <button *ngIf="editable || !prefill" id="submit" (click)="form_submit(topForm,bottomForm)">Submit</button>
                 </div>
             </div>
         </div>

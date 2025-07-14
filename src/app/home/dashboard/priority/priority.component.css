@@ -1,0 +1,68 @@
+#priority-component{
+    height: 100%;
+    width: 100%;
+    padding: 10px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0.2px rgba(0, 0, 0, 0.2);
+}
+
+#priority-content-inner{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#priority-header{
+    width: 100%;
+    height: 8%;
+    display: flex;
+    flex-direction: row;
+}
+
+#priority-header-left{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+
+#priority-header-right{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+#priority-header-right-inner{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+#refresh-div{
+    height: 27px;
+    width: 27px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#priority-container{
+    width: 100%;
+    height: 92%;
+}
+::ng-deep #priority-container canvas{
+    width: 100% !important;
+    height: 380px !important;
+}
+#priority-container-inner{
+    height: 100%;
+    width: 100%;
+}

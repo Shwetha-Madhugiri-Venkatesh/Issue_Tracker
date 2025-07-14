@@ -229,6 +229,18 @@
                             optionLabel="subCategoryDesc" placeholder="Select a City" name="subcategory" />
                     </div>
                 </div>
+                <div class="row">
+                    <div class="div">
+                        <label>Browser</label>
+                        <p-dropdown [options]="browsers" [(ngModel)]="selectedbrowser" optionLabel="browser_name"
+                            placeholder="Select browser" name="browser"/>
+                    </div>
+                    <div class="div">
+                        <label>Subcategory</label>
+                        <p-dropdown [options]="operatingSystems" [(ngModel)]="selectedOS"
+                            optionLabel="os_name" placeholder="Select OS" name="operatingSystem" />
+                    </div>
+                </div>
                 <div>
                     <label>Description</label>
                     <textarea name="description" [(ngModel)]="description"></textarea>

@@ -32,7 +32,7 @@ export class DialogComponent implements OnChanges,OnInit{
   user_created_source_type: string;
   user_created_datetime: string;
   user_company_code: string;
-  user_user_id: string;
+  user_user_id: string='';
   user_type: string;
   user_email_id: string;
   user_phone: string;
@@ -54,6 +54,7 @@ export class DialogComponent implements OnChanges,OnInit{
   login_user:{};
   user_details={uname:'',type:''};
   last_modified;
+  editable:boolean=false;
   ngOnInit(){
     this.login_user=JSON.parse(sessionStorage.getItem("login"))||{};
     this.http_service.fetch_users().subscribe((res:User[])=>{
@@ -63,17 +64,18 @@ export class DialogComponent implements OnChanges,OnInit{
     })
 
     if(this.prefill){
-      this.user_details.uname=this.prefill_user.created_source;
-      this.user_details.type=this.prefill_user.created_source_type;
+      this.user_details.uname=this.prefill_user?.created_source;
+      this.user_details.type=this.prefill_user?.created_source_type;
     }else{
-      this.user_details.uname=this.last_modified.uname;
-      this.user_details.type=this.last_modified.type;
+      this.user_details.uname=this.last_modified?.uname;
+      this.user_details.type=this.last_modified?.type;
     }
   }
-  ngOnChanges(){
-    if(this.prefill){
-      this.http_service.fetch_user(this.prefill).subscribe((res:User)=>{
+
+  prefill_fields(){
+    this.http_service.fetch_user(this.prefill).subscribe((res:User)=>{
         console.log(res);
+        this.editable=false;
         this.prefill_user=res;
         this.user_uname=res.uname;
         this.user_fname=res.fname;
@@ -99,9 +101,25 @@ export class DialogComponent implements OnChanges,OnInit{
         this.user_last_modified_source_type=res.last_modified_source_type;
         this.user_password=res.password;
       })
+  }
+  ngOnChanges(){
+    if(this.prefill){
+     this.prefill_fields();
     }else{
       this.reset_fields();
     }
+  }
+
+  close_form(){
+    if(!this.editable){
+    this.visible=false;
+    }else{
+      this.prefill_fields();
+    }
+  }
+
+  edit_form(){
+    this.editable=true;
   }
 
   form_submit(topForm:NgForm,bottomForm:NgForm){
@@ -135,8 +153,10 @@ export class DialogComponent implements OnChanges,OnInit{
   }
 
   create_user_password(event){
+    if(!this.prefill){
     this.user_password=event.target.value+'@123';
     this.user_user_id=event.target.value+'_User123';
+    }
   }
 
   reset_fields(){

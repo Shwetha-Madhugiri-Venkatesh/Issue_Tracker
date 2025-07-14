@@ -1,4 +1,5 @@
 <div id="user-content">
+    <p-toast />
     <div id="header">
         <div class="heading">
             <h2 style="width: 100px;">Users</h2>
@@ -25,7 +26,7 @@
                 </div>
                 <div>
                     <button id="add-btn"
-                        [ngStyle]="user_details.type!='Admin'?{'visibility':'hidden'}:{'visibility':'visible'}"
+                        [ngStyle]="user_details?.type!='Admin'?{'display':'none'}:{'display':'flex'}"
                         (click)="dialog_display()">Add</button>
                 </div>
             </div>
@@ -64,22 +65,22 @@
                 </div>
                 <div id="filter-form">
                     <form id="form" #form="ngForm">
-                        <input pInputText placeholder="User Name" name="uname" ngModel />
+                        <input pInputText placeholder="User Name" name="uname" [(ngModel)]="filter_user_name" />
                         <p-dropdown id="bottom" [options]="user_types" name="type" [(ngModel)]="user_type"
                             optionLabel="name" placeholder="User Type" />
-                        <input pInputText placeholder="Email ID" name="email_id" ngModel />
-                        <input pInputText placeholder="Created Source" name="created_source" ngModel />
-                        <input pInputText placeholder="Created Source Type" name="created_source_type" ngModel />
-                        <input type="datetime-local" placeholder="Created Date Time" name="created_datetime" ngModel />
-                        <input pInputText placeholder="Last Modified Source" name="last_modified_source" ngModel />
+                        <input pInputText placeholder="Email ID" name="email_id" [(ngModel)]="filter_user_email_id" />
+                        <input pInputText placeholder="Created Source" name="created_source" [(ngModel)]="filter_user_created_source" />
+                        <input pInputText placeholder="Created Source Type" name="created_source_type" [(ngModel)]="filter_user_created_source_type" />
+                        <input type="datetime-local" placeholder="Created Date Time" name="created_datetime" [(ngModel)]="filter_user_datetime" />
+                        <input pInputText placeholder="Last Modified Source" name="last_modified_source" [(ngModel)]="filter_user_last_modified_source" />
                         <input pInputText placeholder="Last Modified Source Type" name="last_modified_source_type"
-                            ngModel />
+                            [(ngModel)]="filter_user_last_modified_source_type" />
                         <input type="datetime-local" placeholder="Last Modified Date Time"
-                            name="last_modified_source_datetime" ngModel />
+                            name="last_modified_datetime" [(ngModel)]="filter_user_last_modified_datetime" />
                     </form>
                     <div id="filter-footer">
                         <div id="btn-div">
-                            <button id="reset-btn" type="button">Reset</button>
+                            <button id="reset-btn" type="button" (click)="reset_form()">Reset</button>
                             <button id="submit-btn" type="submit" (click)="filter_form_submit(form)">Apply</button>
                         </div>
                     </div>

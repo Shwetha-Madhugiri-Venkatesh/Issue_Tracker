@@ -88,7 +88,7 @@ label,input{
 }
 
 .input{
-    width: 200px;
+    width: 190px;
 }
 
 #submit{
@@ -108,15 +108,24 @@ label,input{
     justify-content: flex-end;
 }
 
+#btn-container{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
 input{
     border: 1px solid lightgray;
     border-radius: 5px;
+    padding: 2px 5px;
+    outline: none;
+    box-shadow: none;
 }
 .input-value{
     border: none;
-    background-color: white !important;
 }
 
-input:-internal-autofill-selected {
-    background-color: white;
+input:-webkit-autofill {
+  box-shadow: 0 0 0px 1000px white inset !important;
+  -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+  -webkit-text-fill-color: #000 !important;
 }

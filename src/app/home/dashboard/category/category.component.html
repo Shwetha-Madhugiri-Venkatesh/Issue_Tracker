@@ -1,0 +1,25 @@
+<div id="category-component">
+    <div id="category-content-inner">
+        <div id="category-header">
+            <div id="category-header-left">
+                <h4 id="category-heading">Categories and Subcategories</h4>
+            </div>
+            <div id="category-header-right">
+                <div id="category-header-right-inner">
+                    <div id="dropdown">
+                        <p-dropdown [options]="categories" [(ngModel)]="selectedCategory" optionLabel="categoryDesc"
+                            placeholder="Select a City" name="category" (onChange)="category_entered($event)" />
+                    </div>
+                    <div id="refresh-div">
+                        <i class="fa-solid fa-rotate-right fa-rotate-270"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="category-container">
+            <div id="category-container-inner" class="category">
+                <p-chart type="bar" [data]="data" class="h-[30rem]" [options]="category_options"/>
+            </div>
+        </div>
+    </div>
+</div>

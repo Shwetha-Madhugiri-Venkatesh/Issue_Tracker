@@ -42,8 +42,9 @@ export class LoginComponent implements OnInit{
     if(this.forgot){
       console.log(form.value);
       this.authorize.reset_password(form.value);
-      this.authorize.authentication.subscribe((res:string)=>{
+      this.sub = this.authorize.authentication.subscribe((res:string)=>{
         this.message_service.add({severity:'success', summary:'Success', detail:res});
+        this.sub.unsubscribe();
       })
     }else{
       if(!form.valid){

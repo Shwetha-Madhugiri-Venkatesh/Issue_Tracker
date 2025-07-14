@@ -1,0 +1,21 @@
+<div id="priority-component">
+    <div id="priority-content-inner">
+        <div id="priority-header">
+            <div id="priority-header-left">
+                <h4 id="priority-heading">Priorities</h4>
+            </div>
+            <div id="priority-header-right">
+                <div id="priority-header-right-inner">
+                    <div id="refresh-div">
+                        <i class="fa-solid fa-rotate-right fa-rotate-270"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="priority-container">
+            <div id="priority-container-inner">
+                <p-chart type="bar" [data]="data" class="h-[30rem]" [options]="priority_options"/>
+            </div>
+        </div>
+    </div>
+</div>

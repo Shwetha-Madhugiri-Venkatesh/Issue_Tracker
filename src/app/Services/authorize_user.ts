@@ -11,6 +11,7 @@ export class AuthorizeUser{
     route:Router=inject(Router);
     login_content:[];
     index:number;
+    login_flag:boolean=false;
     authentication = new Subject();
     status = new Subject();
     constructor(private http_service:HTTPService){}
@@ -25,6 +26,7 @@ export class AuthorizeUser{
                 return item.user_id==userId && item.password==Password;
             });
             if(this.index!=-1){
+                this.login_flag=true;
                 this.authentication.next([true]);
                 sessionStorage.setItem("login",JSON.stringify(login_details));
                 this.route.navigate(['/home',login_details]);

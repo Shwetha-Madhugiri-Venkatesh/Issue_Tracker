@@ -14,5 +14,7 @@ export class Ticket{
         public createDateTime:string, 
         public lastModifiedDateTime:string,
         public input_file:any,
+        public browser:string,
+        public operatingSystem:string,
     ){}
 }
