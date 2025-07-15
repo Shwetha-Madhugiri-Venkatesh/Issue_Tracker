@@ -41,9 +41,16 @@ export class PriorityComponent implements OnInit{
     })
 
     this.priority_options={
-      plugins: {
-        legend: { display: false },
-      },
+      maintainAspectRatio: false,
+      aspectRatio: 0.6,
+      responsive: true,
+  plugins: {
+    tooltip: {
+      enabled: true
+    },
+    legend: { display: false },
+  }
+      ,
       scales: {
         x: {
           grid: {
@@ -54,7 +61,7 @@ export class PriorityComponent implements OnInit{
           },
           title: {
             display: true,
-            text: 'Priorities'
+            text: 'Priority'
           }
         },
         y: {

@@ -47,7 +47,7 @@
     height: 100%;
 }
 
-::ng-deep .p-table{
+::ng-deep #list-container .p-table{
     width: 100%;
     height: 100%;
 }
@@ -119,15 +119,15 @@ input{
     border: 1px solid lightgray;
 }
 
-::ng-deep .p-dropdown{
+::ng-deep #list-container .p-dropdown{
     width:187px !important;
 }
 
-::ng-deep .p-autoComplete{
+::ng-deep #list-container .p-autoComplete{
     width: 187% !important;
 }
 
-::ng-deep .p-inputtext {
+::ng-deep #list-container .p-inputtext {
     padding: 4px;
 }
 
@@ -146,8 +146,8 @@ input{
     height: 40px;
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
-    justify-content: flex-start;
+    align-items: center;
+    justify-content: flex-end;
     gap: 10px;
     padding: 5px;
 }
@@ -182,4 +182,156 @@ input{
     background-color: white;
     cursor: pointer;
     border-radius: 10px;
+}
+
+::ng-deep #list-container .p-paginator .p-paginator-pages .p-paginator-page{
+     width: 5px;
+    height: 30px;
+    border-radius: 0px;
+    background: white;
+    box-shadow: none;
+    margin: 0;
+}
+
+::ng-deep #list-container .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+    background-color:#3482a2;
+    color: white;
+   border-color: lightgray;
+}
+
+::ng-deep #list-container .p-paginator .p-paginator-pages .p-paginator-page{
+    border-top:2px solid lightgray;
+    border-bottom:2px solid lightgray;
+     min-width: 30px !important;
+}
+
+::ng-deep #list-container .p-paginator .p-paginator-first{
+     border-top:2px solid lightgray;
+    border-bottom:2px solid lightgray;
+    border-left:2px solid lightgray;
+     min-width: 30px !important;
+     border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    margin: 0;
+    height: 30px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    border-right: none;
+}
+
+::ng-deep #list-container .p-paginator .p-paginator-first:hover{
+    background-color: rgb(229, 245, 249);
+   border-color: lightgray !important;
+}
+
+::ng-deep #list-container .p-paginator .p-paginator-prev{
+    border-top:2px solid lightgray;
+    border-bottom:2px solid lightgray;
+     min-width: 30px !important;
+    margin: 0;
+    height: 30px;
+   border-radius: 0px;
+    border-right: none;
+}
+
+::ng-deep #list-container .p-paginator .p-paginator-prev:hover{
+    background-color: rgb(229, 245, 249);
+   border-color: lightgray !important;
+}
+
+::ng-deep #list-container .p-paginator .p-paginator-pages .p-paginator-page{
+    border-top:2px solid lightgray;
+    border-bottom:2px solid lightgray;
+     min-width: 30px !important;
+}
+
+::ng-deep #list-container .p-paginator .p-paginator-next{
+    border-top:2px solid lightgray;
+    border-bottom:2px solid lightgray; 
+     min-width: 30px !important;
+     margin: 0;
+    height: 30px;
+   border-radius: 0px;
+    border-right: none;
+
+}
+
+#td-div{
+    width:fit-content;
+    padding: 3px 10px;
+    border-radius: 5px;
+}
+::ng-deep #list-container #table-inner .p-paginator{
+    justify-content: flex-end;
+}
+::ng-deep #list-container .p-paginator .p-paginator-next:hover{
+    background-color: rgb(229, 245, 249);
+   border-color: lightgray !important;
+}
+
+::ng-deep #list-container .p-paginator .p-paginator-last{
+     border-top:2px solid lightgray;
+    border-bottom:2px solid lightgray;
+    border-right:2px solid lightgray;
+     min-width: 30px !important;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    margin: 0;
+    height: 30px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-left: none;
+}
+::ng-deep #list-container .p-paginator .p-paginator-last:hover{
+    background-color: rgb(229, 245, 249);
+   border-color: lightgray !important;
+}
+
+::ng-deep #list-container .p-button.p-button-icon-only{
+    width: 10px !important;
+    height: 15px !important;
+}
+::ng-deep #list-container #filter-form-container .p-autoComplete{
+    width: 150px !important;
+}
+::ng-deep #list-container .p-inputtext {
+    padding: 5px;
+}
+::ng-deep #list-container #filter-form-container .p-inputtext {
+    width: 180px !important;
+    height: 30px;
+    padding: 4px;
+}
+
+::ng-deep #list-container .p-dropdown .p-dropdown-trigger{
+    width: 30px;
+}
+
+::ng-deep #list-container #filter-form-container .p-dropdown{
+    width: 180px !important;
+}
+
+.label{
+    width: 35%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.input{
+    width: 65%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+label{
+    font-size: 15px;
+    font-weight:normal;
+}
+input{
+    object-fit: cover;
+    padding: 3px;
+    border-radius: 5px;
+    border: 1px solid lightgray;
 }

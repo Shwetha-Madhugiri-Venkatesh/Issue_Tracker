@@ -23,5 +23,6 @@ export class User{
         public locale:string,
         public time_zone:string,
         public password:string,
+        public profile:any
     ) {}
 }

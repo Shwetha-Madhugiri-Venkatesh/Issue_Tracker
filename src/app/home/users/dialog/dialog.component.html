@@ -1,4 +1,4 @@
-<div class="card flex justify-center">
+<div class="card flex justify-center" id="dialog_component">
     <p-dialog header="User Details" [modal]="true" [(visible)]="visible" (onHide)="onHide()" [style]="{ width: '25rem' }">
         <div id="dialog-inner">
             <div class="top-dialog-div">
@@ -11,6 +11,28 @@
                     </div>
                 </div>
                 <div class="top-dialog-form">
+                    <div id="profile_pic">
+                        <div id="profile_pic_content">
+                            <div id="profile-pic-top" [ngStyle]="{height:profile_pic_input?'100%':'70%'}">
+                                <div id="profile-pic-div" [ngStyle]="{height:profile_pic_input?'70%':'90%'}">
+                                    <img *ngIf="!profile_pic_input" id="profile" src="../../../../assets/images/profile_avatar.jpg"/>
+                                    <div id="profile_pic_image_div" *ngIf="profile_pic_input">
+                                        <img id="profile_pic_image" [src]="profile_pic_input" alt="selected image"/>
+                                    </div>
+                                </div>
+                                <input type="file" id="fileInput" style="display: none;" (change)="profile_pic_selected($event)" accept=".jpg,.png"/>
+                                <label  *ngIf="!profile_pic_input" for="fileInput" id="plus">
+                                <div>
+                                    <i style="color: white; font-size: 20px;" class="fa-solid fa-plus"></i>
+                                </div>
+                                </label>
+                            </div>
+                            <div  *ngIf="!profile_pic_input" id="profile-pic-bottom">
+                                <p id="profile_condition1">Max file size 2MB</p>
+                                <p id="profile_condition2">Supporting formats JPG, PNG</p>
+                            </div>
+                        </div>
+                    </div>
                     <form class="form" #topForm="ngForm">
                         <div class="input-div">
                         <label class="label">User Name *</label>
@@ -173,9 +195,10 @@
             </div>
             <div id="dialog-footer">
                 <div id="btn-container">
-                    <button id="submit" *ngIf="prefill" (click)="close_form()">{{editable?"Cancel":"Close"}}</button>
-                    <button *ngIf="!editable &&prefill" id="submit" (click)="edit_form()">Edit</button>
-                    <button *ngIf="editable || !prefill" id="submit" (click)="form_submit(topForm,bottomForm)">Submit</button>
+                    <button *ngIf=" !prefill" class="submit" (click)="reset_fields()">Cancel</button>
+                    <button class="submit" *ngIf="prefill" (click)="close_form()">{{editable?"Cancel":"Close"}}</button>
+                    <button *ngIf="!editable &&prefill" class="submit" (click)="edit_form()">Edit</button>
+                    <button *ngIf="editable || !prefill" class="submit" (click)="form_submit(topForm,bottomForm)">Submit</button>
                 </div>
             </div>
         </div>

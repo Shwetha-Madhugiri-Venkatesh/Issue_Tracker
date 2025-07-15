@@ -10,13 +10,12 @@ export class LoginCanActivate implements CanActivate{
     @ViewChild(LoginComponent) login:LoginComponent;
     constructor(private route:Router){}
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-       let flag = JSON.parse(sessionStorage.getItem("logged"))||false;
+       let flag = JSON.parse(localStorage.getItem("logged"))||false;
         let logged = true;
     if(flag){
       return false;
-
     }else{
-        sessionStorage.setItem("logged",JSON.stringify(logged));
+        localStorage.setItem("logged",JSON.stringify(logged));
         return true;
     }
     }

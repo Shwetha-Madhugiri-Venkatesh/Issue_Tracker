@@ -58,7 +58,7 @@ export class KabbanComponent implements OnInit {
   user_specific;
 
   edit_comment_visible:boolean=false;
-  updated_comment:string='';
+  updated_comment:string='<div>Hello World!</div><div>PrimeNG <b>Editor</b> Rocks</div><div><br></div>';
   comment_to_be_edited;
   
 
@@ -101,7 +101,7 @@ export class KabbanComponent implements OnInit {
 
   ngOnInit(){
     this.two_way_data.current_issues_subcomponent("");
-    this.login_user=JSON.parse(sessionStorage.getItem("login"))||{};
+    this.login_user=JSON.parse(localStorage.getItem("login"))||{};
     this.http_service.fetch_users().subscribe((res:User[])=>{
     this.user_details=res.find(item=>item.user_id==this.login_user['userId']);
         console.log(this.user_details);
@@ -152,7 +152,7 @@ export class KabbanComponent implements OnInit {
         let form_data={
             reporter_name:bugForm.value.reporter_name,
             reportedId:bugForm.value.reportedId,
-            type:this.bug?"bug":"feature",
+            type:this.bug?"Bug":"Feature",
             ticketId: `${bugForm.value.category.categoryId}#${bugForm.value.subcategory.subCategoryId}#${len.length+1}`,
             categoryId:bugForm.value.category.categoryId,
             subCategoryId:bugForm.value.subcategory.subCategoryId,
@@ -202,7 +202,7 @@ export class KabbanComponent implements OnInit {
   fetch_update_comments(){
     this.tickets_comments={};
     this.http_service.fetch_comments().subscribe((res:Comment[])=>{
-      let comments =res.filter(item=>item.ticketId==this.comment_ticket.ticketId);
+      let comments =res.filter(item=>item.ticketId==this.comment_ticket.ticketId && item.message!="");
       comments.forEach(item => {
         let user = this.users_list.find(i=>i.user_id==item.userId);
         item['uname']=user?.uname;
@@ -251,6 +251,8 @@ export class KabbanComponent implements OnInit {
     console.log(comment);
     this.comment_to_be_edited=comment;
     if(val==this.login_user.userId){
+      this.updated_comment=comment.message;
+      console.log(comment.message);
       this.edit_comment_visible=true;
     }else{
       return;
@@ -372,6 +374,9 @@ export class KabbanComponent implements OnInit {
     this.filter_output=[];
     this.all_tickets=this.http_tickets;
     this.fetch_tickets_update();
+  }
+
+  close_filter(){
     this.filter=false;
   }
 
@@ -387,7 +392,6 @@ export class KabbanComponent implements OnInit {
     console.log(this.users);
   }
 
-  files_: File[] = [];
   filePayload;
 onFilesSelected(event: Event) {
   const input = event.target as HTMLInputElement;
@@ -413,5 +417,4 @@ downloadFile(base64Data: string, filename: string) {
   link.download = filename;
   link.click();
 }
-
 }

@@ -45,9 +45,15 @@ export class CategoryComponent {
       })
 
       this.category_options={
-      plugins: {
-        legend: { display: false },
-      },
+     maintainAspectRatio: false,
+      aspectRatio: 0.6,
+      responsive: true,
+  plugins: {
+    tooltip: {
+      enabled: true
+    },
+    legend: { display: false },
+  },
       scales: {
         x: {
           

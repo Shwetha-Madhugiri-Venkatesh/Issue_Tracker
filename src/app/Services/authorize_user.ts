@@ -28,7 +28,7 @@ export class AuthorizeUser{
             if(this.index!=-1){
                 this.login_flag=true;
                 this.authentication.next([true]);
-                sessionStorage.setItem("login",JSON.stringify(login_details));
+                localStorage.setItem("login",JSON.stringify(login_details));
                 this.route.navigate(['/home',login_details]);
             }else{
                 if(user){

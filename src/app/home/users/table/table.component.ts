@@ -52,7 +52,7 @@ filter_user_last_modified_datetime: any='';
 
   selectedCol:{field:string,header:string}[]=[];
   ngOnInit() {
-      this.login_user=JSON.parse(sessionStorage.getItem("login"))||{};
+      this.login_user=JSON.parse(localStorage.getItem("login"))||{};
     this.http_service.fetch_users().subscribe((res:User[])=>{
       this.selectedNum=res.length;
       this.user_details=res.find(item=>item.user_id==this.login_user['userId']);

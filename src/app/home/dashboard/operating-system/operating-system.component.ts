@@ -23,7 +23,9 @@ export class OperatingSystemComponent {
               let number_of_issues=0;
               for(let x of this.operatingSystems){
                 number_of_issues = res.filter((item1)=>item1.operatingSystem==x.os_id).length;
+                if(number_of_issues){
                 result[x.os_name]=number_of_issues;
+                }
               }
               console.log(result);
               this.data = {
@@ -33,7 +35,7 @@ export class OperatingSystemComponent {
                     label: 'Sales',
                     data: Object.values(result),
                     fill: false,
-                    backgroundColor:["orange","magenta",'pink','yellow','green','gray','red',"blue",'skyblue'],
+                    backgroundColor:["red","magenta",'pink','yellow','orange','gray','green',"blue",'skyblue'],
                     borderColor: 'white',
                     tension: 0
                   }

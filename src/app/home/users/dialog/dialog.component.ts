@@ -55,8 +55,9 @@ export class DialogComponent implements OnChanges,OnInit{
   user_details={uname:'',type:''};
   last_modified;
   editable:boolean=false;
+  profile_pic_input;
   ngOnInit(){
-    this.login_user=JSON.parse(sessionStorage.getItem("login"))||{};
+    this.login_user=JSON.parse(localStorage.getItem("login"))||{};
     this.http_service.fetch_users().subscribe((res:User[])=>{
       this.user_details=res.find(item=>item.user_id==this.login_user['userId']);
       console.log(this.user_details);
@@ -100,6 +101,7 @@ export class DialogComponent implements OnChanges,OnInit{
         this.user_time_zone=res.time_zone;
         this.user_last_modified_source_type=res.last_modified_source_type;
         this.user_password=res.password;
+        this.profile_pic_input=res.profile;
       })
   }
   ngOnChanges(){
@@ -120,12 +122,14 @@ export class DialogComponent implements OnChanges,OnInit{
 
   edit_form(){
     this.editable=true;
+    this.profile_pic_input='';
   }
 
   form_submit(topForm:NgForm,bottomForm:NgForm){
     if(this.prefill){
       console.log("prefill",topForm.value,bottomForm.value);
       let updated_user = {...topForm.value,...bottomForm.value};
+      updated_user['profile']=this.profile_pic_input;
       this.http_service.update_user(this.prefill,updated_user).subscribe((res)=>{
         console.log(res);
         this.visible=false;
@@ -134,6 +138,7 @@ export class DialogComponent implements OnChanges,OnInit{
     }else{
       console.log(topForm.value,bottomForm.value)
       this.user={...topForm.value,...bottomForm.value};
+      this.user['profile']=this.profile_pic_input;
       console.log(this.user);
       this.http_service.create_new_user(this.user).subscribe((res)=>{
       console.log(res);
@@ -159,6 +164,7 @@ export class DialogComponent implements OnChanges,OnInit{
     }
   }
 
+
   reset_fields(){
     this.user_uname='';
     this.user_fname='';
@@ -181,6 +187,29 @@ export class DialogComponent implements OnChanges,OnInit{
     this.user_postal_code='';
     this.user_locale='';
     this.user_time_zone='';
-    this.user_last_modified_source_type='';    
+    this.user_last_modified_source_type='';   
+    this.profile_pic_input=''; 
+  }
+  profile_pic_selected(event:Event){
+    const input = event.target as HTMLInputElement;
+    if(input.files && input.files.length>0){
+      let allowed_types = ['image/jpg', 'image/png'];
+      const file = input.files[0];
+      if(!allowed_types.includes(file.type)){
+        alert("not allowed");
+        return;
+      }
+
+      let maxSize = 2*1024*1024;
+      if(file.size>maxSize){
+        alert("file is large");
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload=()=>{
+        this.profile_pic_input = reader.result as string;
+      };
+      reader.readAsDataURL(file);
+    }
   }
 }

@@ -59,18 +59,14 @@
 #last{
     display: flex;
     flex-direction: row;
-    gap: 60px;
+    gap: 30px;
 }
 
-::ng-deep .p-overlay-badge .p-badge{
+::ng-deep #header-container .p-overlay-badge .p-badge{
     top:-6px;
     right: -8px;
 }
 
-::ng-deep .p-button.p-button-icon-only{
-    width: 10px;
-    height: 10px;
-}
 
 /* .navigation-btn{ 
     border: none;
@@ -94,12 +90,19 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
+    cursor: pointer;
 }
 
 .btn-container-focus{
     background-color: rgb(158, 219, 243);
 }
+.btn-container:hover .navigation-btn{
+    background-color: lightgray;
+}
 
+.btn-container:hover{
+    background-color: lightgray;
+}
 #navigation-content{
     display: flex;
     flex-direction: row;
@@ -109,6 +112,8 @@
      border: none;
     background-color: white;
     font-size: 15px;
+    outline: none;
+    box-shadow: none;
     font-weight: bold;
     text-align: start;
     cursor: pointer;
@@ -121,4 +126,40 @@
     font-weight: bold;
     text-align: start;
     cursor: pointer;
+}
+
+.img{
+    width: 20px;height: 20px;
+}
+
+@media screen and (max-width:320px){
+    #logo-container{
+        padding: 10px;
+        align-items: center;
+        justify-content: center;
+    }
+    #logo-title{
+        font-size: 18px;
+    }
+    #header-components{
+        margin: 0px;
+    }
+
+    #header-components{
+        gap:15px;
+    }
+    #last{
+        gap:15px;
+    }
+    span{
+        font-size: 15px;
+    }
+    .img{
+        width: 15px;
+        height: 15px;
+    }
+
+    .navigation-btn{
+        font-size: 13px;
+    }
 }

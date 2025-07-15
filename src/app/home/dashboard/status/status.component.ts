@@ -42,9 +42,15 @@ export class StatusComponent {
       })
 
       this.status_options={
-      plugins: {
-        legend: { display: false },
-      },
+      maintainAspectRatio: false,
+      aspectRatio: 0.6,
+      responsive: true,
+  plugins: {
+    tooltip: {
+      enabled: true
+    },
+    legend: { display: false },
+  },
       scales: {
         x: {
           grid: {
@@ -55,7 +61,7 @@ export class StatusComponent {
           },
           title: {
             display: true,
-            text: 'Priorities'
+            text: 'Status'
           }
         },
         y: {

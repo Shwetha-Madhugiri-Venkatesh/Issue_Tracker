@@ -24,7 +24,7 @@ export class TypeComponent {
         this.http_service.fetch_tickets().subscribe((res:Ticket[])=>{
           let number_of_issues=0;
           for(let x of this.types){
-            number_of_issues = res.filter((item1)=>item1.type==x.value).length;
+            number_of_issues = res.filter((item1)=>item1.type==x.type).length;
             result[x.type]=number_of_issues;
           }
           console.log(result);

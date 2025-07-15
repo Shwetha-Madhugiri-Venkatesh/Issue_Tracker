@@ -3,6 +3,10 @@
     
 }
 
+#form-div .p-inputtext{
+    width: 100%;
+}
+
 #form-div{
     overflow-y: hidden;
 }
@@ -12,6 +16,19 @@
     flex-direction: row;
 }
 
+#filter_head{
+width: 50%;
+display: flex;
+align-items: center;
+justify-content: flex-start;
+}
+
+#cross-div{
+    width: 50%;
+display: flex;
+align-items: center;
+justify-content: flex-end;
+}
 #left{
     width: 50%;
     display: flex;
@@ -19,6 +36,9 @@
     padding-left: 10px;
     justify-content: flex-start;
 }
+ #edit_div{
+    padding: 10px;
+ }
 #right{
     width: 50%;
     display: flex;
@@ -44,7 +64,7 @@ button{
     gap: 10px;
 }
 
-form{
+#form-div form{
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -87,16 +107,12 @@ form{
 ::ng-deep .p-dropdown{
     width: 100% !important;
 }
-
-::ng-deep .p-inputtext{
-    padding: 5px;
-}
 textarea{
     width: 100%;
     height: 50px;
 }
 
-::ng-deep .p-dialog .p-dialog-header{
+::ng-deep #kabban-content .p-dialog .p-dialog-header{
     padding: 5px 10px;
 }
 
@@ -105,7 +121,7 @@ label,input{
     padding: 5px;
 }
 
-::ng-deep .p-dialog .p-dialog-content{
+::ng-deep #kabban-content .p-dialog .p-dialog-content{
     padding: 0px 15px 10px 15px;
 }
 
@@ -353,7 +369,7 @@ label,input{
     padding: 5px;
 } */
 
-::ng-deep .ql-toolbar.ql-snow + .ql-container.ql-snow {
+::ng-deep #kabban-content .ql-toolbar.ql-snow + .ql-container.ql-snow {
     height: 100px !important;
 } 
 
@@ -408,6 +424,7 @@ input{
 
 #filter-overlay {
   width: 35%;
+  height: 60%;
   background-color: white;
   border: 1px solid lightgray;
   border-radius: 5px;
@@ -423,6 +440,8 @@ width: 100%;
 #filter-header{
    width: 100%;
    padding: 8px; 
+   display: flex;
+   flex-direction: row;
    border-bottom: 1px solid lightgray;
    background-color: rgba(211, 211, 211, 0.3);
 }
@@ -462,10 +481,9 @@ label{
     font-weight:normal;
 }
 input{
-    width: 187px;
     object-fit: cover;
     padding: 3px;
-    border-radius: 10px;
+    border-radius: 5px;
     border: 1px solid lightgray;
 }
 
@@ -475,18 +493,37 @@ form{
     flex-direction: column;
 }
 
-::ng-deep .p-dropdown{
+::ng-deep #kabban-content #filter-form-container .p-dropdown{
     width:187px !important;
 }
 
-::ng-deep .p-autoComplete{
-    width: 187% !important;
+::ng-deep #kabban-content .p-button.p-button-icon-only{
+    width: 10px !important;
+    height: 15px !important;
 }
-
-::ng-deep .p-inputtext {
+::ng-deep #kabban-content #filter-form-container .p-autoComplete{
+    width: 150px !important;
+}
+::ng-deep #kabban-content .p-inputtext {
+    padding: 5px;
+}
+::ng-deep #kabban-content #filter-form-container .p-inputtext {
+    width: 180px !important;
+    height: 30px;
     padding: 4px;
 }
 
+::ng-deep #kabban-content .p-dropdown .p-dropdown-trigger{
+    width: 30px;
+}
+
+::ng-deep #kabban-content #filter-form-container .p-dropdown{
+    width: 180px !important;
+}
+
+::ng-deep .p-inputtext{
+    padding: 5px !important;
+}
 #form-top{
     height: 380px;
     overflow-y: scroll;
@@ -502,8 +539,8 @@ form{
     height: 40px;
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
-    justify-content: flex-start;
+    align-items: center;
+    justify-content: flex-end;
     gap: 10px;
     padding: 5px;
 }

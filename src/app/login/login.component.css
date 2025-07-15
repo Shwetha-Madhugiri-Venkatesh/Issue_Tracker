@@ -41,7 +41,7 @@ form{
     flex-direction: column;
 }
 
-::ng-deep .p-component, .p-component * {
+::ng-deep #login-container .p-component, .p-component * {
     box-sizing: border-box;
     width: 100%;
 }

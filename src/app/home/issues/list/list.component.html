@@ -19,14 +19,14 @@
                     <ng-template pTemplate="header" let-columns>
                         <tr>
                             <th *ngFor="let col of columns" [pSortableColumnDisabled]="false" [pSortableColumn]="col.field">
-                                {{ col.header }} <i class="fa-solid fa-sort"></i>
+                                {{ col.header }} <p-sortIcon [field]="col.field" />
                             </th>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-rowData let-columns="columns">
                         <tr>
                             <td *ngFor="let col of columns">
-                                <div [ngStyle]="{color:getColor(rowData[col.field]), 'background-color':getBackGroundColor(rowData[col.field])}">{{ rowData[col.field] }}</div>
+                                <div id="td-div" [ngStyle]="{color:getColor(rowData[col.field]), 'background-color':getBackGroundColor(rowData[col.field])}">{{ rowData[col.field] }}</div>
                             </td>
                         </tr>
                     </ng-template>
@@ -47,7 +47,7 @@
                                     <div class="input">
                                         <p-autoComplete name="ticketId" [(ngModel)]="filterTicketId"
                                             field="ticketId"
-                                            [dropdown]="true" [suggestions]="tickets" (completeMethod)="search_tickets($event)" (onSelect)="assignee_id_change()" />
+                                            [dropdown]="false" [suggestions]="tickets" (completeMethod)="search_tickets($event)" (onSelect)="assignee_id_change()" />
                                     </div>
                                 </div>
                                 <div class="filter-input-div">
@@ -77,7 +77,7 @@
                                     <div class="input">
                                         <p-autoComplete name="assigneeId" [(ngModel)]="filterAssigneeId"
                                             field="user_id"
-                                            [dropdown]="true" [suggestions]="users" (completeMethod)="search($event)" (onSelect)="assignee_id_change()" />
+                                            [dropdown]="false" [suggestions]="users" (completeMethod)="search($event)" (onSelect)="assignee_id_change()" />
                                     </div>
                                 </div>
                                 <div class="filter-input-div">
@@ -147,7 +147,7 @@
                                     <div class="input">
                                         <p-autoComplete name="reporterId" [(ngModel)]="filterReporterId"
                                             field="user_id"
-                                            [dropdown]="true" [suggestions]="users" (completeMethod)="search($event)" (onSelect)="reporter_id_change()" />
+                                            [dropdown]="false" [suggestions]="users" (completeMethod)="search($event)" (onSelect)="reporter_id_change()" />
                                     </div>
                                 </div>
                                 <div class="filter-input-div">

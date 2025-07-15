@@ -16,6 +16,11 @@ export class TicketComponent {
 
   priority_name:string='';
   
+  types:{type:string,value:string}[]=[
+    {type:"Bug", value:"bug"},
+    {type:"Feature",value:"feature"},
+  ]
+  
   ngOnInit(){
     this.priority_name=this.priority.find(item=>item.priorityId==this.ticket.priorityId)?.priority;
   }

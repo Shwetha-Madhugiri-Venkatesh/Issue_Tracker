@@ -3,7 +3,7 @@
     width: 100%;
     padding: 10px;
     background-color: white;
-    border-radius: 10px;
+    border-radius: 5px;
     box-shadow: 0 0 10px 0.2px rgba(0, 0, 0, 0.2);
 }
 
@@ -56,8 +56,8 @@
     padding: 2px;
 }
 
-::ng-deep .p-dropdown .p-dropdown-trigger{
-    width: 35%;
+::ng-deep #graph-component .p-dropdown .p-dropdown-trigger{
+    width: 20%;
 }
 
 #calender-div{
@@ -94,9 +94,9 @@
     padding: 20px 10px;
 }
 
-::ng-deep .p-inputtext{
-    width: 100px;
-    padding: 3px;
+::ng-deep #graph-component  .p-inputtext{
+    width: 150px;
+    padding: 1px 3px 3px 3px;
 }
 
 ::ng-deep .p-button.p-button-icon-only{
@@ -113,13 +113,6 @@
     flex-direction: row;
     border-radius: 5px;
 }
-
-/* ::ng-deep .p-calendar .p-inputtext{
-    border:none !important;
-    outline: none !important;
-    box-shadow: none !important;
-    border-radius: 5px;
-} */
 
 #calender{
     display: flex;

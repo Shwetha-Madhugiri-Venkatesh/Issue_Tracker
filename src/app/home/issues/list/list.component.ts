@@ -244,8 +244,8 @@ export class ListComponent {
 
   getColor(val){
     switch(val){
-      case 'bug': return 'orange';
-      case 'feature': return 'blue';
+      case 'Bug': return 'orange';
+      case 'Feature': return 'blue';
       case 'Low': return 'yellowgreen';
       case 'High': return 'magenta';
       case 'Medium': return '#bbbb0d';
@@ -256,8 +256,8 @@ export class ListComponent {
 
   getBackGroundColor(val){
     switch(val){
-      case 'bug': return '#fdf0d8';
-      case 'feature': return '#def5fd';
+      case 'Bug': return '#fdf0d8';
+      case 'Feature': return '#def5fd';
       case 'Low': return '#ecfbec';
       case 'High': return '#fbe3e7';
       case 'Medium': return '#f2f2ec';

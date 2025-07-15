@@ -8,7 +8,7 @@
 #p-table-div{
     width: 100%;
 }
-::ng-deep tbody tr:hover{
+::ng-deep #user-content tbody tr:hover{
     background-color: rgb(208, 237, 249)!important;
 }
 
@@ -23,11 +23,11 @@
     display: flex;
     flex-direction: row;
 }
-::ng-deep .p-paginator {
+::ng-deep #user-content .p-paginator {
     justify-content: flex-end!important;
 }
 
-::ng-deep .p-paginator .p-paginator-first{
+::ng-deep #user-content .p-paginator .p-paginator-first{
     border-radius: 0;
    height: 30px;
     background: white;
@@ -35,7 +35,7 @@
    margin: 0;
 }
 
-::ng-deep .p-paginator .p-paginator-last{
+::ng-deep #user-content .p-paginator .p-paginator-last{
     border-radius: 0;
    height: 30px;
     background:white;
@@ -43,7 +43,7 @@
    margin: 0;
 }
 
-::ng-deep .p-paginator .p-paginator-prev{
+::ng-deep #user-content .p-paginator .p-paginator-prev{
      border-radius: 0;
     height: 30px;
      background: white;
@@ -52,7 +52,7 @@
     margin: 0;
 }
 
-::ng-deep .p-paginator .p-paginator-next{
+::ng-deep #user-content .p-paginator .p-paginator-next{
      border-radius: 0;
     height: 30px;
      background: white;
@@ -61,7 +61,7 @@
     margin: 0;
 }
 
-::ng-deep .p-paginator .p-paginator-pages .p-paginator-page{
+::ng-deep #user-content .p-paginator .p-paginator-pages .p-paginator-page{
      width: 5px;
     height: 30px;
     border-radius: 0px;
@@ -71,20 +71,20 @@
 }
 
 
-::ng-deep .p-paginator{
+::ng-deep #user-content .p-paginator{
     padding: 10px 0px;
 }
 
-::ng-deep #top{
+::ng-deep #user-content #top{
     display: flex;
     height: 30px;
-    width: 110px;
+    width: 100px;
 }
 
 ::ng-deep #top .p-inputtext{
     padding: 5px 10px!important;
 }
-::ng-deep #top .p-dropdown-label.p-placeholder{
+::ng-deep #user-content #top .p-dropdown-label.p-placeholder{
     
     font-size: 15px;
     color: rgb(45, 57, 57);
@@ -94,12 +94,12 @@
     font-size: 15px;
 }
 
-::ng-deep .p-multiselect{
+::ng-deep #user-content .p-multiselect{
     height: 30px;
     width: 200px;
 }
 
-::ng-deep .p-multiselect .p-multiselect-label.p-placeholder{
+::ng-deep #user-content .p-multiselect .p-multiselect-label.p-placeholder{
     padding: 0 0 0 4px;
     display: flex;
     color: rgb(45, 57, 57);
@@ -109,20 +109,20 @@
     font-size: 15px;
 }
 
-::ng-deep .p-multiselect .p-multiselect-trigger{
+::ng-deep #user-content .p-multiselect .p-multiselect-trigger{
     width: 30px;
 }
-::ng-deep .p-dropdown .p-dropdown-trigger{
+::ng-deep #user-content .p-dropdown .p-dropdown-trigger{
     width: 30px;
 }
 
-::ng-deep .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+::ng-deep #user-content .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
     background-color:#3482a2;
     color: white;
    border-color: lightgray;
 }
 
-::ng-deep .p-datatable-header{
+::ng-deep #user-content .p-datatable-header{
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -187,28 +187,28 @@ td{
     border-top-right-radius: 5px;
     border-bottom: 1px solid lightgrey;
 }
-::ng-deep .p-datatable.p-datatable-sm .p-datatable-thead > tr > th{
+::ng-deep #user-content .p-datatable.p-datatable-sm .p-datatable-thead > tr > th{
     padding: 10px 10px;
 }
-::ng-deep .p-datatable .p-datatable-thead > tr > th{
+::ng-deep #user-content .p-datatable .p-datatable-thead > tr > th{
     background-color: rgba(211, 211, 211,0.3);
     font-size: 16px;
 }
 
-::ng-deep .p-datatable .p-datatable-thead > tr > th:hover{
+::ng-deep #user-content .p-datatable .p-datatable-thead > tr > th:hover{
     background-color: rgba(211, 211, 211,0.3);
 }
 
-::ng-deep .p-datatable .p-sortable-column.p-highlight{
+::ng-deep #user-content .p-datatable .p-sortable-column.p-highlight{
     background-color: lightgray;
     color:black;
     border-color: lightgray;
 }
 
-::ng-deep .p-datatable .p-sortable-column:focus{
+::ng-deep #user-content .p-datatable .p-sortable-column:focus{
     box-shadow: none;
 }
-::ng-deep .p-datatable.p-datatable-sm .p-datatable-thead > tr > th:hover{
+::ng-deep #user-content .p-datatable.p-datatable-sm .p-datatable-thead > tr > th:hover{
     background-color: lightgray;
     color: black;
 }
@@ -232,7 +232,7 @@ input{
     color:  rgb(45, 57, 57);
 }
 
-::ng-deep .p-inputtext{
+::ng-deep #user-content .p-inputtext{
     color: rgb(45, 57, 57);
     font-size: 15px;
 }
@@ -242,7 +242,7 @@ input{
     gap: 10px;
 }
 
-::ng-deep #bottom .p-dropdown-label.p-placeholder{
+::ng-deep  #bottom .p-dropdown-label.p-placeholder{
     padding: 4px;
     font-size: 14px;
 }
@@ -275,19 +275,19 @@ input{
     cursor: pointer;
 }
 
-::ng-deep #filter-form .p-dropdown{
+::ng-deep #user-content #filter-form .p-dropdown{
     width: 100%;
     padding: 0;
 }
-::ng-deep #filter-form .p-dropdown .p-dropdown-label{
+::ng-deep #user-content #filter-form .p-dropdown .p-dropdown-label{
     padding: 4px;
 }
-::ng-deep .p-dropdown{
+::ng-deep  .p-dropdown{
     box-shadow: none!important;
     border-color: lightgray!important;
 }
 
-::ng-deep .p-multiselect{
+::ng-deep #user-content .p-multiselect{
     box-shadow: none!important;
     border-color: lightgray!important;
 }
@@ -303,35 +303,35 @@ input{
     gap: 10px;
 }
 
-::ng-deep .p-multiselect-panel .p-multiselect-header{
+::ng-deep #user-content .p-multiselect-panel .p-multiselect-header{
     padding: 5px 10px;
 }
 
-::ng-deep .p-multiselect-panel .p-multiselect-header .p-multiselect-filter-container .p-inputtext{
+::ng-deep #user-content .p-multiselect-panel .p-multiselect-header .p-multiselect-filter-container .p-inputtext{
     padding: 3px;
 }
 
-::ng-deep .p-inputtext:enabled:focus {
+::ng-deep #user-content .p-inputtext:enabled:focus {
     box-shadow: none;
     border-color: lightgray;
 }
 
-::ng-deep .p-checkbox .p-checkbox-box {
+::ng-deep #user-content .p-checkbox .p-checkbox-box {
     border-radius: 5px;
     border: 1px solid lightgray;
 }
 
-::ng-deep .p-multiselect-panel .p-multiselect-items .p-multiselect-item {
+::ng-deep #user-content .p-multiselect-panel .p-multiselect-items .p-multiselect-item {
     padding: 5px 10px;
     border-bottom: 1px solid lightgray;
     font-size: 15px;
 }
 
-::ng-deep .p-multiselect-panel .p-multiselect-items{
+::ng-deep #user-content .p-multiselect-panel .p-multiselect-items{
     padding: 0;
 }
 
-::ng-deep .p-multiselect .p-multiselect-label{
+::ng-deep #user-content .p-multiselect .p-multiselect-label{
     padding: 0;
     font-size: 15px;
     display: flex;
@@ -356,7 +356,7 @@ input{
     padding: 5px 10px;
 }
 
-::ng-deep .p-paginator .p-paginator-first{
+::ng-deep #user-content .p-paginator .p-paginator-first{
     border-top:2px solid lightgray;
     border-bottom:2px solid lightgray;
     border-left:2px solid lightgray;
@@ -366,40 +366,40 @@ input{
 
 }
 
-::ng-deep .p-paginator .p-paginator-first:hover{
+::ng-deep #user-content .p-paginator .p-paginator-first:hover{
     background-color: rgb(229, 245, 249);
    border-color: lightgray !important;
 }
 
-::ng-deep .p-paginator .p-paginator-prev{
+::ng-deep #user-content .p-paginator .p-paginator-prev{
     border-top:2px solid lightgray;
     border-bottom:2px solid lightgray;
      min-width: 30px !important;
 }
 
-::ng-deep .p-paginator .p-paginator-prev:hover{
+::ng-deep #user-content .p-paginator .p-paginator-prev:hover{
     background-color: rgb(229, 245, 249);
    border-color: lightgray !important;
 }
 
-::ng-deep .p-paginator .p-paginator-pages .p-paginator-page{
+::ng-deep #user-content .p-paginator .p-paginator-pages .p-paginator-page{
     border-top:2px solid lightgray;
     border-bottom:2px solid lightgray;
      min-width: 30px !important;
 }
 
-::ng-deep .p-paginator .p-paginator-next{
+::ng-deep #user-content .p-paginator .p-paginator-next{
     border-top:2px solid lightgray;
     border-bottom:2px solid lightgray; 
      min-width: 30px !important;
 
 }
-::ng-deep .p-paginator .p-paginator-next:hover{
+::ng-deep #user-content .p-paginator .p-paginator-next:hover{
     background-color: rgb(229, 245, 249);
    border-color: lightgray !important;
 }
 
-::ng-deep .p-paginator .p-paginator-last{
+::ng-deep #user-content .p-paginator .p-paginator-last{
      border-top:2px solid lightgray;
     border-bottom:2px solid lightgray;
     border-right:2px solid lightgray;
@@ -407,7 +407,7 @@ input{
       border-top-right-radius: 5px;
      border-bottom-right-radius: 5px;
 }
-::ng-deep .p-paginator .p-paginator-last:hover{
+::ng-deep #user-content .p-paginator .p-paginator-last:hover{
     background-color: rgb(229, 245, 249);
    border-color: lightgray !important;
 }
