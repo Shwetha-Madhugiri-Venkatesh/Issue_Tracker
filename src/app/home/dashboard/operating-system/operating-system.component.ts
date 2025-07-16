@@ -10,6 +10,7 @@ import { TwoWayDataBinding } from 'src/app/Services/two_way_dataBinding';
 })
 export class OperatingSystemComponent {
   data;
+operating_options: any;
         
           constructor(private http_service:HTTPService, private two_way:TwoWayDataBinding){}
         
@@ -41,6 +42,22 @@ export class OperatingSystemComponent {
                   }
                 ]
               };
+              this.operating_options = {
+    plugins: {
+    legend: {
+      labels: {
+        font:{
+              size:this.getResponsiveFontSize()
+            }
+      }
+    }
+  }
+};
             })
           }
+
+      getResponsiveFontSize() {
+    const vw = window.innerWidth / 100;
+    return Math.max(12, vw); // prevent too small
+  }    
 }

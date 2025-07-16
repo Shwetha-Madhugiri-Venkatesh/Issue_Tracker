@@ -307,7 +307,7 @@ export class KabbanComponent implements OnInit {
       ticketId:rest.ticketId?.ticketId,
       categoryId:rest.category?.categoryId,
       subCategoryId:rest.subcategory?.subCategoryId,
-      type:rest.type?.value,
+      type:rest.type?.type,
       assigneeId:rest.assigneeId?.user_id,
       reportedId:rest.reportedId?.user_id,
       statusId:rest.status?.statusId,

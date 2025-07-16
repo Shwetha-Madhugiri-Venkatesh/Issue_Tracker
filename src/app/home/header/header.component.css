@@ -1,6 +1,12 @@
 
+#header-component{
+    height: 15%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
 #header-container{
-    height: 60px;
+    height: 60%;
     display: flex;
     flex-direction: row;
     background-color: white;
@@ -78,12 +84,13 @@
 } */
 
 #navigation-container{
+    height: 40%;
     background-color: white;
     margin-top: 5px;
 }
 
 .btn-container{
-    height: 40px;
+    height: 100%;
     width: 180px;
     display: flex;
     flex-direction: row;
@@ -104,8 +111,10 @@
     background-color: lightgray;
 }
 #navigation-content{
+    height: 100%;
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .navigation-btn{
@@ -131,10 +140,35 @@
 .img{
     width: 20px;height: 20px;
 }
+@media screen and (max-width:544px){
+    #header-component{
+        height: 25%;
+    }
+    #header-container{
+        height: 35%;
+    }
+    #navigation-container{
+        height: 60%;
+    }
+    #navigation-content{
+        height: 100%;
+    }
+    .btn-container{
+        height: 33%;
+        width: 100%;
+        justify-content: flex-start;
+        padding-left: 20px;
+    }
+}
+@media screen and (max-width:500px){
+    #logo-title{
+        font-size: 4.5vw;
+    }
+}
 
-@media screen and (max-width:320px){
+@media screen and (max-width:339px){
     #logo-container{
-        padding: 10px;
+        padding: 5px;
         align-items: center;
         justify-content: center;
     }
@@ -144,7 +178,6 @@
     #header-components{
         margin: 0px;
     }
-
     #header-components{
         gap:15px;
     }
@@ -158,8 +191,89 @@
         width: 15px;
         height: 15px;
     }
+    .btn-container{
+        gap:5px;
+    }
 
     .navigation-btn{
+        font-size: 14px;
+    }
+
+    #navigation-container{
+        height: 100px;
+    }
+}
+
+@media screen and (max-width:250px){
+    #logo-container{
+        width: 100%;
+        padding: 10px;
+        align-items: center;
+        justify-content: center;
+    }
+    #header-components{
+        margin: 0px;
+        width: 100%;
+        gap:10px
+    }
+
+    #header-footer{
+        width: 100%;
+        justify-content: flex-start;
+    }
+    #header-container{
+        flex-direction: column;
+    }
+
+    #photo{
+        width: 20%;
+        height: 100%;
+    }
+
+    #last{
+        width: 80%;
+    }
+}
+
+@media screen and (max-width:130px){
+    #logo-title{
+        font-size: 15vw;
+    }
+
+     #header-components{
+        flex-direction: column;
+     }
+
+     #photo{
+        width: 40%;
+     }
+     .btn-container{
+        padding-left: 5px;
+     }
+}
+
+@media screen and (max-width:88px){
+    #last{
+        flex-direction: column;
+     }
+     span, h4{
         font-size: 13px;
+     }
+
+      .navigation-btn{
+        word-break: break-all;
+         }
+}
+
+@media screen and (max-width:78px){
+    #logo-title{
+        font-size: 14px;
+    }
+    #logo-container{
+        gap: 10px;
+        flex-direction: column;
+    }
+    #navigation-container{
+        height: 150px;
     }
 }

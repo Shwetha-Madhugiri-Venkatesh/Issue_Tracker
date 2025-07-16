@@ -1,14 +1,5 @@
-#kabban-header{
-    padding: 5px;
-    
-}
-
 #form-div .p-inputtext{
     width: 100%;
-}
-
-#form-div{
-    overflow-y: hidden;
 }
 #header-content{
     width: 100%;
@@ -46,6 +37,7 @@ justify-content: flex-end;
     justify-content: flex-end;
     gap: 10px;
     padding-right: 10px;
+    padding: 10px;
 }
 
 button{
@@ -68,7 +60,7 @@ button{
     display: flex;
     flex-direction: column;
     gap: 10px;
-    overflow-y: hidden;
+    overflow: hidden;
 }
 
 .div{
@@ -125,6 +117,9 @@ label,input{
     padding: 0px 15px 10px 15px;
 }
 
+::ng-deep .p-dialog{
+    width: 60% !important;
+}
 #submit{
     height: 30px;
     width: 100%;
@@ -504,8 +499,8 @@ form{
 ::ng-deep #kabban-content #filter-form-container .p-autoComplete{
     width: 150px !important;
 }
-::ng-deep #kabban-content .p-inputtext {
-    padding: 5px;
+::ng-deep #kabban-content #bug-form-dialog .p-inputtext {
+    padding: 5px !important;
 }
 ::ng-deep #kabban-content #filter-form-container .p-inputtext {
     width: 180px !important;
@@ -522,7 +517,7 @@ form{
 }
 
 ::ng-deep .p-inputtext{
-    padding: 5px !important;
+    padding: 3px !important;
 }
 #form-top{
     height: 380px;
@@ -543,4 +538,61 @@ form{
     justify-content: flex-end;
     gap: 10px;
     padding: 5px;
+}
+
+@media screen and (max-width:730px){
+    ::ng-deep .p-dialog{
+    width: 80% !important;
+}
+}
+
+@media screen and (max-width:520px){
+    ::ng-deep .p-dialog{
+    width: 85% !important;
+}
+    .row{
+        flex-direction: column;
+    }
+    .div{
+        width: 100%;
+    }
+}
+
+@media screen and (max-width:280px){
+
+    ::ng-deep .p-dialog .p-dialog-content:last-of-type{
+        padding: 10px;
+    }
+    ::ng-deep .p-overlay {
+    width: 80% !important;
+}
+ ::ng-deep .p-dropdown-panel .p-dropdown-items .p-dropdown-item{
+        height: 100%;
+        width: 100%;
+        padding: 5px;
+    }
+    ::ng-deep .p-dropdown-panel .p-dropdown-items .p-dropdown-item > span{
+        font-size: 13px;
+        word-break: break-all;
+    }
+}
+@media screen  and (max-width:210px){
+    #type-div{
+        flex-direction: column;
+        font-size: 13px;
+    }
+
+    label{
+        font-size: 13px;
+        word-break: break-all;
+    }
+
+    ::ng-deep .p-dialog-draggable .p-dialog-header{
+        padding: 10px;
+    }
+
+    ::ng-deep .p-dialog .p-dialog-header .p-dialog-title{
+        font-size: 16px;
+        word-break: break-all;
+    }
 }

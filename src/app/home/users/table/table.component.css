@@ -25,6 +25,7 @@
 }
 ::ng-deep #user-content .p-paginator {
     justify-content: flex-end!important;
+    padding-right: 100px !important;
 }
 
 ::ng-deep #user-content .p-paginator .p-paginator-first{
@@ -299,7 +300,8 @@ input{
 
 .icons{
     display: flex;
-    flex-direction: row;
+   align-items: center;
+   justify-content: center;
     gap: 10px;
 }
 
@@ -410,4 +412,26 @@ input{
 ::ng-deep #user-content .p-paginator .p-paginator-last:hover{
     background-color: rgb(229, 245, 249);
    border-color: lightgray !important;
+}
+
+#table-with-footer {
+  position: relative;
+}
+
+.paginator-extension {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -42px; /* Align with paginator */
+  margin-right: 5px;
+}
+
+.go-button {
+  background-color: #3482a2;
+  color: white;
+  border: 1px solid #3482a2;
+  border-radius: 4px;
+  padding: 0px 10px;
+  cursor: pointer;
+  z-index: 1;
+  margin-top:3px; height: 28px;
 }

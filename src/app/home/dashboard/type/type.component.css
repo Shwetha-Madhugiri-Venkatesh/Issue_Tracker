@@ -71,6 +71,7 @@
 }
 
 ::ng-deep #type-container canvas{
+    width: 100% !important;
     height: 400px !important;
 }
 #type-container-inner{
@@ -79,4 +80,9 @@
     align-items: center;
     justify-content: center;
     width: 100%;
+}
+@media screen and (max-width:430px){
+    ::ng-deep #type-container canvas{
+   height: auto !important;
+}
 }

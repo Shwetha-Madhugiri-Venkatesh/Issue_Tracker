@@ -37,10 +37,27 @@ export class BrowserComponent {
             fill: false,
             backgroundColor: ["orange", "magenta", 'pink', 'blue', 'green', 'gray', 'red'],
             borderColor: 'white',
-            tension: 0
+            tension: 0,
           }
         ]
       };
+
+      this.browser_options = {
+    plugins: {
+    legend: {
+      labels: {
+        font:{
+              size:this.getResponsiveFontSize()
+            }
+      }
+    }
+  }
+};
     })
+  }
+
+  getResponsiveFontSize() {
+    const vw = window.innerWidth / 100;
+    return Math.max(12, vw); // prevent too small
   }
 }

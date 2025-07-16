@@ -1,14 +1,15 @@
 #issues-content{
-    position: relative;
+    width: 100%;
     height: 100%;
     background-color: white;
     margin-top: 5px;
     z-index: 1;
+    overflow: scroll;
 }
 
 #content{
-    position: absolute;
-    z-index: 2;
+    width: 1255px;
+    height: 600px;
 }
 
 #header-div{
@@ -29,4 +30,20 @@ button{
     font-size: 15px;
     cursor: pointer;
     padding: 10px;
+}
+
+@media screen and (max-width:950px){
+    #content{
+        height: 650px;
+    }
+}
+@media screen and (max-width:540px){
+    #content{
+        height: 700px;
+    }
+}
+@media screen and (max-width:320px){
+    #content{
+        height: 420px;
+    }
 }

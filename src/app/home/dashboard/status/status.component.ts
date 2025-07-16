@@ -61,7 +61,10 @@ export class StatusComponent {
           },
           title: {
             display: true,
-            text: 'Status'
+            text: 'Status',
+             font:{
+              size:this.getResponsiveFontSize()
+            }
           }
         },
         y: {
@@ -76,10 +79,18 @@ export class StatusComponent {
             display: true,
             text: 'Number of Issues',
             rotation: 0,
-            padding: { top: 0, bottom: 5, left: 20, right: 20 }
+            padding: { top: 0, bottom: 5, left: 20, right: 20 },
+             font:{
+              size:this.getResponsiveFontSize(),
+            }
           }
         }
       }
     }
     }
+
+    getResponsiveFontSize() {
+    const vw = window.innerWidth / 100;
+    return Math.max(12, vw); 
+  }
 }

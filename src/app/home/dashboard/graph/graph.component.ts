@@ -67,7 +67,8 @@ export class GraphComponent implements OnInit {
       enabled: true
     },
     legend: { display: false },
-  },
+  }
+      ,
       scales: {
         x: {
           grid: {
@@ -78,7 +79,7 @@ export class GraphComponent implements OnInit {
           },
           title: {
             display: true,
-            text: 'Date'
+            text: 'Priority'
           }
         },
         y: {
@@ -99,7 +100,6 @@ export class GraphComponent implements OnInit {
     }
     })
   // }
-
   // scale_selected() {
   //   if (this.selectedScale.value == 'day') {
   //     this.day = true;

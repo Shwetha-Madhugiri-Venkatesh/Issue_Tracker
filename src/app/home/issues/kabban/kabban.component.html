@@ -184,8 +184,8 @@
         </div>
     </div>
 </div>
-<div class="card flex justify-center">
-    <p-dialog header="Bug Record Form" [modal]="true" [(visible)]="visible" [style]="{ width: '50rem'}">
+<div class="bug-form-dialog">
+    <p-dialog header="Bug Record Form" [modal]="true" [(visible)]="visible">
         <div id="form-div">
             <form #bugForm="ngForm" (ngSubmit)="bug_form_submit(bugForm)">
                 <div class="row">

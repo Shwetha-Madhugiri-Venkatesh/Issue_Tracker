@@ -119,3 +119,61 @@
     flex-direction: row;
     gap: 10px;
 }
+@media screen and (max-width:820px){
+    /* #graph-container-inner{
+        overflow-y: scroll;
+        
+    } */
+    #graph-header{
+    flex-direction: column;
+    gap: 5px;
+   }
+   #graph-header-left{
+    width: 100%;
+   }
+   #calender{
+    width: 90%;
+    justify-content: flex-start;
+   }
+   #refresh-div{
+    width: 10%;
+   }
+   #graph-header-right{
+    justify-content: flex-start;
+    width: 100%;
+   }
+   #graph-header-right-inner{
+    width: 100%;
+   }
+}
+@media screen and (max-width:420px){
+
+   #graph-component,#graph-content-inner{
+    height: auto;
+   }
+   ::ng-deep #graph-component .p-inputtext{
+    width: 10% !important;
+    font-size: 13px !important;
+   }
+   #graph-header-right-inner{
+    flex-direction: column;
+   }
+}
+@media screen and (max-width:300px){
+    #graph-component{
+        padding: 5px;
+    }
+    #graph-heading{
+        font-size: 15px;
+    }
+#refresh-icon{
+    font-size: 10px;
+}
+   
+}
+@media screen and (max-width:230px){
+#refresh-div{
+    width:20px;
+}
+   
+}

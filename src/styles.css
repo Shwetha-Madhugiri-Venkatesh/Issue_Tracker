@@ -31,3 +31,11 @@ html,body{
 .disabled-btn{
     background-color: antiquewhite;
 }
+
+@media screen and (max-width:320px){
+   html,body{
+    height: auto;
+    overflow-y:auto;
+    overflow-x:auto;
+   }
+}

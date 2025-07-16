@@ -37,9 +37,12 @@ export class HeaderComponent {
 
   logout(){
     if(confirm("are you sure?")){
-    let login=JSON.parse(localStorage.getItem("logged"))||{};
-    login=false;
-    localStorage.setItem("logged",login);
+    let login=JSON.parse(localStorage.getItem("login"));
+    login='';
+    localStorage.setItem("login",JSON.stringify(login));
+    let logged=JSON.parse(localStorage.getItem("logged"));
+    logged=false;
+    localStorage.setItem("login",JSON.stringify(logged));
     this.router.navigateByUrl("");
     }else{
       return;

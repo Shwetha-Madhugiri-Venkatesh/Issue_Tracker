@@ -14,7 +14,8 @@
         </div>
         <div id="table-container">
             <div id="table-inner">
-                <p-table [columns]="cols" [value]="products" [tableStyle]="{ 'min-width': '50rem' }"
+                <div id="table-with-footer">
+                <p-table #dt [columns]="cols" [value]="products" [tableStyle]="{ 'min-width': '50rem' }"
                 [paginator]="this.products.length<=5?false:true" [rows]="5">
                     <ng-template pTemplate="header" let-columns>
                         <tr>
@@ -31,6 +32,16 @@
                         </tr>
                     </ng-template>
                 </p-table>
+                </div>
+                <div class="paginator-extension" style="display: flex;gap: 5px; flex-direction: row;">
+                    <input style="width: 40px; background-color: rgba(211, 211, 211, 0.3); z-index: 1; margin-top:5px; height: 28px;"
+                     type="number"
+      [(ngModel)]="goToPageNumber"
+      min="1"
+      [max]="totalPages"
+      placeholder="Page"/>
+        <button (click)="goToPage(dt)" class="go-button">Go</button>
+      </div>
             </div>
             <div id="filter-overlay" *ngIf="filter">
                 <div id="filter-form-inner">

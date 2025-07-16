@@ -177,4 +177,18 @@ filter_user_last_modified_datetime: any='';
       return;
     }
     }
+goToPageNumber: number = 1;
+totalPages: number;
+
+    goToPage(dt: any) {
+  const rowsPerPage = 5; // Match your paginator [rows] input
+  this.totalPages = Math.ceil(this.products.length / rowsPerPage);
+  const pageIndex = this.goToPageNumber - 1;
+  if (pageIndex >= 0 && pageIndex < this.totalPages) {
+    dt.first = pageIndex * dt.rows;
+  } else {
+    alert('Invalid page number');
+  }
+}
+
 }

@@ -263,6 +263,7 @@ input{
 }
 ::ng-deep #list-container #table-inner .p-paginator{
     justify-content: flex-end;
+    padding-right: 100px;
 }
 ::ng-deep #list-container .p-paginator .p-paginator-next:hover{
     background-color: rgb(229, 245, 249);
@@ -334,4 +335,27 @@ input{
     padding: 3px;
     border-radius: 5px;
     border: 1px solid lightgray;
+}
+
+
+#table-with-footer {
+  position: relative;
+}
+
+.paginator-extension {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -42px; /* Align with paginator */
+  margin-right: 5px;
+}
+
+.go-button {
+  background-color: #3482a2;
+  color: white;
+  border: 1px solid #3482a2;
+  border-radius: 4px;
+  padding: 0px 10px;
+  cursor: pointer;
+  z-index: 1;
+  margin-top:5px; height: 28px;
 }

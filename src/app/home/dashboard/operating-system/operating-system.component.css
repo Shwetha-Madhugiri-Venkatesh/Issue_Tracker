@@ -63,6 +63,7 @@
 }
 
 ::ng-deep #operatingSystem-container canvas{
+    width: 100% !important;
     height: 400px !important;
 }
 
@@ -70,4 +71,8 @@
     height: 100%;
     width: 100%;
 }
-
+@media screen and (max-width:430px){
+    ::ng-deep #operatingSystem-container canvas{
+   height: auto !important;
+}
+}

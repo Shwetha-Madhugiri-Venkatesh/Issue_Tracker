@@ -34,8 +34,9 @@
     </div>
     <div id="content">
         <div id="p-table-div">
-            <p-table [columns]="cols" [value]="products" [tableStyle]="{ 'min-width': '50rem' }"
-                styleClass="p-datatable-sm" [paginator]="this.products.length<=5?false:true" [rows]="5">
+            <div id="table-with-footer">
+            <p-table #dt [columns]="cols" [value]="products" [tableStyle]="{ 'min-width': '50rem' }"
+                styleClass="p-datatable-sm" [paginator]="products.length>5" [rows]="5"  emptyMessage="No data found">
                 <ng-template pTemplate="header" let-columns>
                     <tr>
                         <th *ngFor="let col of columns" [pSortableColumnDisabled]="false" [pSortableColumn]="col.field">
@@ -50,13 +51,23 @@
                         </td>
                         <td>
                             <div class="icons">
-                                <i class="fa-solid fa-pen-to-square" (click)="open_form(rowData['id'])"></i>
+                                <!-- <i class="fa-solid fa-pen-to-square" (click)="open_form(rowData['id'])"></i> -->
                                 <i class="fa-solid fa-trash" (click)="delete_the_user(rowData['id'])"></i>
                             </div>
                         </td>
                     </tr>
                 </ng-template>
             </p-table>
+            </div>
+            <div class="paginator-extension" style="display: flex;gap: 5px; flex-direction: row;">
+                    <input style="width: 40px; background-color: rgba(211, 211, 211, 0.3); z-index: 1; margin-top:3px; height: 28px;"
+                     type="number"
+      [(ngModel)]="goToPageNumber"
+      min="1"
+      [max]="totalPages"
+      placeholder="Page"/>
+        <button (click)="goToPage(dt)" class="go-button">Go</button>
+      </div>
         </div>
         <ng-template [ngIf]="filter_flag">
             <div id="filter-div">

@@ -81,6 +81,7 @@ export class ListComponent {
         this.http_service.fetch_users().subscribe((res)=>{
           this.http_users=res;
         })
+       
     }
 
   toggleFilter() {
@@ -112,7 +113,7 @@ export class ListComponent {
       ticketId:rest.ticketId?.ticketId,
       categoryId:rest.category?.categoryId,
       subCategoryId:rest.subcategory?.subCategoryId,
-      type:rest.type?.value,
+      type:rest.type?.type,
       assigneeId:rest.assigneeId?.user_id,
       reportedId:rest.reportedId?.user_id,
       statusId:rest.status?.statusId,
@@ -265,4 +266,19 @@ export class ListComponent {
       default: return 'none';
     }
   }
+  goToPageNumber: number = 1;
+totalPages: number;
+
+
+goToPage(dt: any) {
+  const rowsPerPage = 5; // Match your paginator [rows] input
+  this.totalPages = Math.ceil(this.products.length / rowsPerPage);
+  const pageIndex = this.goToPageNumber - 1;
+  if (pageIndex >= 0 && pageIndex < this.totalPages) {
+    dt.first = pageIndex * dt.rows;
+  } else {
+    alert('Invalid page number');
+  }
+}
+
 }
