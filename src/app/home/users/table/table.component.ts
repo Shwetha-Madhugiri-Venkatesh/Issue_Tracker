@@ -18,7 +18,8 @@ import { MessageService, PrimeNGConfig } from 'primeng/api';
 export class TableComponent {
   login_user: any;
   user_details: User;
-
+  today=new Date().toLocaleString();
+  delete_visible:boolean=false;
 filter_user_name: any='';
 filter_user_email_id: any='';
 filter_user_created_source: any='';
@@ -51,6 +52,7 @@ filter_user_last_modified_datetime: any='';
   ];
 
   selectedCol:{field:string,header:string}[]=[];
+  dynamic_page_number={ name: 'show 5', value: 5 };
   ngOnInit() {
       this.login_user=JSON.parse(localStorage.getItem("login"))||{};
     this.http_service.fetch_users().subscribe((res:User[])=>{
@@ -71,7 +73,7 @@ filter_user_last_modified_datetime: any='';
             { field: 'created_datetime', header: 'Created Date Time' },
             { field: 'last_modified_source', header: 'Last Modified Source' },
             { field: 'last_modified_source_type', header: 'Last Modified Source Type' },
-            { field: 'last_modified_datetime', header: 'Last modified Date Time' },
+            { field: 'last_modified_datetime', header: 'Last Modified Date Time' },
         ];
         this.columns=this.cols;
         this.selectedCol=this.columns;
@@ -109,7 +111,7 @@ filter_user_last_modified_datetime: any='';
     }
 
     filter_display(){
-      this.filter_flag=!this.filter_flag;
+      this.filter_flag=true;
     }
     dialog_display(){
       console.log("btn");
@@ -140,7 +142,9 @@ filter_user_last_modified_datetime: any='';
       this.filter_user_created_source_type='';
       this.user_type='';
     }
-
+    close_filter(){
+    this.filter_flag=false;
+  }
     reset_form(){
       this.products = this.users_from_http;
       this.reset_fields();
@@ -149,7 +153,7 @@ filter_user_last_modified_datetime: any='';
     dynamic_rows(event){
       console.log(event.value);
       if(this.users_from_http.length>event.value.value){
-        this.products =this.users_from_http.slice(0,event.value.value);
+        this.dynamic_page_number=event.value;
       }else{
         this.products=this.users_from_http;
       }
@@ -173,34 +177,44 @@ filter_user_last_modified_datetime: any='';
         });
     }
     delete = false;
+    delete_id;
     delete_the_user(id:string){
     this.delete=true;
-    if(confirm("Are you sure?")){
-    if(this.user_details.type=='Admin'){
-     this.http_service.delete_user(id).subscribe(res=>{
-      console.log(res);
-      this.get_all_users();
-     })
-    }else{
-      this.message_service.add({severity:'warn', summary:'Warn', detail:"Access Denied"});
-      return;
+    this.delete_visible=true;
+    this.delete_id=id;
     }
-  }else{
-    return;
-  }
-    }
-goToPageNumber: number = 1;
+goToPageNumber = '';
 totalPages: number;
 
     goToPage(dt: any) {
   const rowsPerPage = 5; // Match your paginator [rows] input
   this.totalPages = Math.ceil(this.products.length / rowsPerPage);
-  const pageIndex = this.goToPageNumber - 1;
+  const pageIndex = Number(this.goToPageNumber) - 1;
   if (pageIndex >= 0 && pageIndex < this.totalPages) {
     dt.first = pageIndex * dt.rows;
+    this.goToPageNumber='';
   } else {
+    this.goToPageNumber='';
     alert('Invalid page number');
   }
+}
+
+delete_confirm(){
+  if(this.user_details.type=='Admin'){
+     this.http_service.delete_user(this.delete_id).subscribe(res=>{
+      console.log(res);
+      this.get_all_users();
+      this.delete_visible=false;
+     })
+    }else{
+      this.message_service.add({severity:'warn', summary:'Warn', detail:"Access Denied"});
+      this.delete_visible=false;
+      return;
+  }
+}
+
+cancel_delete(){
+  this.delete_visible=false;
 }
 
 }

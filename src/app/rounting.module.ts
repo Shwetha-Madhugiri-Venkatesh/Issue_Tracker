@@ -12,13 +12,13 @@ import { LoginCanActivate } from "./Guards/login_canactivate";
 
 const routes:Routes = [
     {path:"",component:LoginComponent,canActivate:[LoginCanActivate]},
-    {path:"home", component:HomeComponent, children:[
+    {path:"home", component:HomeComponent, canActivate:[AuthLogin], children:[
         {path:'', component:DashboardComponent},
-        {path:'issues', component:IssuesComponent, children:[
-            {path:'', component:KabbanComponent},
-            {path:'list', component:ListComponent},
+        {path:'issues', component:IssuesComponent,canActivate:[AuthLogin], children:[
+            {path:'', component:KabbanComponent, canActivate:[AuthLogin]},
+            {path:'list', component:ListComponent,canActivate:[AuthLogin]},
         ]},
-        {path:'users', component:UsersComponent},
+        {path:'users', component:UsersComponent,canActivate:[AuthLogin]},
     ]}
 ]
 @NgModule({

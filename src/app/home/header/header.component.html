@@ -45,3 +45,21 @@
         </div>
     </div>
 </div>
+<div>
+    <p-dialog header="ORG Issue Tracker" [modal]="true" [(visible)]="logout_visible" [style]="{ width: '25rem' }">
+        <div id="delete_dialog">
+            <div id="delete_dialog_content">
+                <div id="delete-dialog_top">
+                    <i id="delete" class="fa-solid fa-circle-exclamation" style="color: #74C0FC;"></i>
+                    <p id="question">Are you sure?</p>
+                </div>
+                <div id="delete-dialog-bottom">
+                    <div id="delete-dialog-btns">
+                        <button id="delete-dialog-btn1" (click)="logout_confirm()">Logout</button>
+                        <button id="delete-dialog-btn2" (click)="cancel_logout()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </p-dialog>
+</div>

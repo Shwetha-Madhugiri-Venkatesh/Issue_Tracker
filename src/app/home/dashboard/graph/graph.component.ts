@@ -18,7 +18,8 @@ export class GraphComponent implements OnInit {
   // selectedWeek={ name: "first", value: 7,start:1 };
   // show_cal: boolean = false;
   all_tickets;
-
+  today=new Date();
+  
   // scales: { scale: string, value: string }[] = [
   //   { scale: 'Daily', value: "day" },
   //   { scale: 'Weekly', value: "week" },
@@ -127,6 +128,8 @@ export class GraphComponent implements OnInit {
     console.log(this.end_date);
     this.graph_data(this.start_date,this.end_date);
   }
+
+  
   // show_calender() {
   //   this.show_cal = !this.show_cal;
   // }

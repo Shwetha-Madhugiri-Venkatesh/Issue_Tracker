@@ -140,6 +140,94 @@
 .img{
     width: 20px;height: 20px;
 }
+
+#delete_dialog{
+    height: 100%;
+}
+
+#delete_dialog_content{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+::ng-deep #delete_dialog .p-dialog{
+    width: 20% !important;
+    height: 130px !important;
+}
+::ng-deep .p-dialog .p-dialog-header{
+    padding: 5px 5px 0px 10px !important;
+}
+
+::ng-deep .p-dialog .p-dialog-content{
+    padding:5px 5px 10px 10px;
+}
+#delete-dialog_top{
+    height: 80%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+#delete-dialog-bottom{
+    height: 50%;
+}
+
+#delete-dialog-btns{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 0px 10px;
+}
+
+::ng-deep .p-dialog .p-dialog-header .p-dialog-title{
+    font-size: 18px;
+}
+#delete{
+    font-size: 25px;
+}
+#question{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 3px;
+}
+#delete-dialog-btn1{
+    height: 30px;
+    background-color:rgb(45, 57, 57);
+    color: white;
+    border: 1px solid rgb(45, 57, 57);
+    padding: 2.5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#delete-dialog-btn1:hover{
+    background-color: rgba(211, 211, 211, 0.3);
+    color: rgb(45, 57, 57);
+}
+
+#delete-dialog-btn2{
+    height: 30px;
+    background-color:rgb(45, 57, 57);
+    color: white;
+    border: 1px solid rgb(45, 57, 57);
+    padding: 2.5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#delete-dialog-btn2:hover{
+    background-color: rgba(211, 211, 211, 0.3);
+    color: rgb(45, 57, 57);
+}
 @media screen and (max-width:544px){
     #header-component{
         height: 25%;

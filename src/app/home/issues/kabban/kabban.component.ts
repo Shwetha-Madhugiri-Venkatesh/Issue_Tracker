@@ -85,7 +85,8 @@ export class KabbanComponent implements OnInit {
 
   selectedbrowser;
   selectedOS;
-  
+  delete_visible:boolean=false;
+  delete_comment_id;
   constructor(private http_service:HTTPService,private two_way_data:TwoWayDataBinding){}
 
   priorities:{priorityId:string, priority:string}[]=this.two_way_data.priorities;
@@ -254,8 +255,6 @@ export class KabbanComponent implements OnInit {
     console.log(comment);
     this.comment_to_be_edited=comment;
     if(val==this.login_user.userId){
-      this.updated_comment=comment.message;
-      console.log(comment.message);
       this.edit_comment_visible=true;
     }else{
       return;
@@ -275,14 +274,10 @@ export class KabbanComponent implements OnInit {
   }
 
   delete_comment(val){
-    if(confirm("Are you sure?")){
-    this.http_service.delete_comment(val.id).subscribe((res)=>{
-      console.log(res);
-      this.fetch_update_comments();
-    })
-  }else{
-    return;
-  }
+    this.delete_comment_id = val;
+     if(val.userId==this.login_user.userId){
+    this.delete_visible=true;
+     }
   }
 
   toggleFilter() {
@@ -316,12 +311,12 @@ export class KabbanComponent implements OnInit {
       subCategoryId:rest.subcategory?.subCategoryId,
       type:rest.type?.type,
       assigneeId:rest.assigneeId?.user_id,
-      reportedId:rest.reportedId?.user_id,
+      reportedId:rest.reporterId?.user_id,
       statusId:rest.status?.statusId,
       priorityId:rest.priority?.priorityId,
       subject:rest.subject?.trim(),
       description:rest.description.trim(),
-      createDateTime:rest.createDateTime,
+      createDateTime:new Date(rest.createDateTime).toLocaleDateString(),
     }
     if(filter_days_old){
       let today = new Date();
@@ -424,4 +419,17 @@ downloadFile(base64Data: string, filename: string) {
   link.download = filename;
   link.click();
 }
+
+delete_confirm(){
+  this.http_service.delete_comment(this.delete_comment_id.id).subscribe((res)=>{
+      console.log(res);
+      this.fetch_update_comments();
+      this.delete_visible=false;
+    })
+}
+
+cancel_delete(){
+  this.delete_visible=false;
+}
+
 }

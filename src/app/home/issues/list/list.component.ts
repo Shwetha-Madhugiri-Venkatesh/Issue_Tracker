@@ -115,12 +115,12 @@ export class ListComponent {
       subCategoryId:rest.subcategory?.subCategoryId,
       type:rest.type?.type,
       assigneeId:rest.assigneeId?.user_id,
-      reportedId:rest.reportedId?.user_id,
+      reportedId:rest.reporterId?.user_id,
       statusId:rest.status?.statusId,
       priorityId:rest.priority?.priorityId,
       subject:rest.subject?.trim(),
       description:rest.description.trim(),
-      createDateTime:rest.createDateTime,
+      createDateTime:new Date(rest.createDateTime).toLocaleDateString(),
     }
     if(filter_days_old){
       let today = new Date();
@@ -138,7 +138,7 @@ export class ListComponent {
           if(item[key]==form_data[key]){
             match=true;
           }else if(key=='createDateTime'){
-            if(item.createDateTime.includes(form_data.createDateTime)){
+            if(item.createDateTime.startsWith(form_data.createDateTime)){
               match=true;
             }
           }else{
@@ -155,6 +155,10 @@ export class ListComponent {
     })
     this.products=this.filter_output;
     console.log(this.products);
+  }
+
+  close_filter(){
+    this.filter=false;
   }
 
   assignee_id_change(){

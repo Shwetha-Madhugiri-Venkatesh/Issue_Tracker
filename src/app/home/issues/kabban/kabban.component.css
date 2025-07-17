@@ -6,7 +6,20 @@
     display: flex;
     flex-direction: row;
 }
+#filter{
+    height: 30px;
+    width: 30px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
 
+#filter:hover{
+    background-color: rgba(211, 211, 211, 0.3);
+    border:1px solid rgb(45, 57, 57);
+}
 #filter_head{
 width: 50%;
 display: flex;
@@ -50,6 +63,10 @@ button{
     cursor: pointer;
 }
 
+button:hover{
+    background-color: rgba(211, 211, 211, 0.3);
+    color: rgb(45, 57, 57);
+}
 .row{
     display: flex;
     flex-direction: row;
@@ -104,7 +121,7 @@ textarea{
     height: 50px;
 }
 
-::ng-deep #kabban-content .p-dialog .p-dialog-header{
+::ng-deep #kabban-content .bug-form-dialog .p-dialog .p-dialog-header{
     padding: 5px 10px;
 }
 
@@ -113,11 +130,11 @@ label,input{
     padding: 5px;
 }
 
-::ng-deep #kabban-content .p-dialog .p-dialog-content{
+::ng-deep #kabban-content .bug-form-dialog .p-dialog .p-dialog-content{
     padding: 0px 15px 10px 15px;
 }
 
-::ng-deep .p-dialog{
+::ng-deep #kabban-content .comment_dialog .p-dialog{
     width: 60% !important;
 }
 #submit{
@@ -262,7 +279,7 @@ label,input{
 }
 
 #comment-middle-top{
-    display: 100%;
+    width: 100%;
     display: flex;
     flex-direction: row;
 }
@@ -499,7 +516,8 @@ form{
 ::ng-deep #kabban-content #filter-form-container .p-autoComplete{
     width: 150px !important;
 }
-::ng-deep #kabban-content #bug-form-dialog .p-inputtext {
+::ng-deep .bug-form-dialog .p-inputtext {
+    width: 70% !important;
     padding: 5px !important;
 }
 ::ng-deep #kabban-content #filter-form-container .p-inputtext {
@@ -540,14 +558,154 @@ form{
     padding: 5px;
 }
 
+#delete_dialog{
+    height: 100%;
+}
+
+#delete_dialog_content{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+::ng-deep #kabban-content  #delete_dialog .p-dialog{
+    width: 20% !important;
+    height: 130px !important;
+}
+::ng-deep .bug-form-dialog .p-dialog .p-dialog-header{
+    padding: 5px 5px 0px 10px !important;
+}
+
+::ng-deep .bug-form-dialog .p-dialog .p-dialog-content{
+    padding:10px;
+}
+#delete-dialog_top{
+    height: 80%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+#delete-dialog-bottom{
+    height: 50%;
+}
+
+#delete-dialog-btns{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 0px 10px;
+}
+
+::ng-deep .bug-form-dialog .p-dialog .p-dialog-header .p-dialog-title{
+    font-size: 18px;
+}
+#delete{
+    font-size: 25px;
+}
+#question{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 3px;
+}
+#delete-dialog-btn1{
+    height: 30px;
+    background-color:rgb(45, 57, 57);
+    color: white;
+    border: 1px solid rgb(45, 57, 57);
+    padding: 2.5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#delete-dialog-btn1:hover{
+    background-color: rgba(211, 211, 211, 0.3);
+    color: rgb(45, 57, 57);
+}
+
+#delete-dialog-btn2{
+    height: 30px;
+    background-color:rgb(45, 57, 57);
+    color: white;
+    border: 1px solid rgb(45, 57, 57);
+    padding: 2.5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#delete-dialog-btn2:hover{
+    background-color: rgba(211, 211, 211, 0.3);
+    color: rgb(45, 57, 57);
+}
+
+@media screen and (max-width:1200px){
+    ::ng-deep .comment_dialog .p-dialog{
+        width: 70% !important;
+    }
+}
+
+@media screen and (max-width:1000px){
+    #comment-middle-top{
+        flex-direction: column;
+        gap:10px;
+    }
+    input{
+        width: 100%;
+    }
+    #comment-left, #comment-right{
+        width: 100%;
+    }
+    #comment-form{
+        width: 50%;
+    }
+    #comment-activity{
+        width: 50%;
+    }
+    #form-last{
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width:800px){
+    #comment-form{
+        width: 60%;
+    }
+
+    #comment-activity{
+        width: 40%;
+    }
+}
 @media screen and (max-width:730px){
-    ::ng-deep .p-dialog{
+    ::ng-deep .bug-form-dialog .p-dialog{
     width: 80% !important;
 }
 }
 
-@media screen and (max-width:520px){
-    ::ng-deep .p-dialog{
+@media screen and (max-width:672px){
+    ::ng-deep .comment_dialog .p-dialog{
+        width: 80% !important;
+    }
+    .comment-input,#comment-subject, #comment-description{
+        width: 80%;
+        gap: 8px;
+        flex-direction: column;
+    }
+    #comment-subject, #comment-description{
+        gap: 8px;
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width:530px){
+    ::ng-deep .bug-form-dialog .p-dialog{
     width: 85% !important;
 }
     .row{
@@ -556,9 +714,52 @@ form{
     .div{
         width: 100%;
     }
-}
 
-@media screen and (max-width:280px){
+    .comment-input{
+        width: 80%;
+        gap: 8px;
+        flex-direction: column;
+    }
+
+    #comment-ticket-id{
+        gap: 8px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .comment-header,.comment-footer-div{
+        flex-direction: column;
+    }
+
+    ::ng-deep .p-editor-container .p-editor-toolbar.ql-snow .ql-picker .ql-picker-label{
+        width: 80%;
+    }
+    .comment-header-left,.comment-footer-div-left{
+       width: 100%;
+    }
+    .comment-header-right,.comment-footer-div-right{
+        width: 100%;
+    }
+}
+@media screen and (max-width:372px){
+    p{
+        font-size: 13px;
+    }
+}
+@media screen and (max-width:321px){
+
+    ::ng-deep .p-editor-container .p-editor-toolbar.ql-snow .ql-picker .ql-picker-label{
+        width: 80%;
+    }
+     span,.label,p{
+        font-size: 13px;
+        word-break: break-all;
+    }
+    ::ng-deep .p-dropdown .p-dropdown-label{
+        font-size: 13px;
+        word-break: break-all;
+    }
+}
+@media screen and (max-width:295px){
 
     ::ng-deep .p-dialog .p-dialog-content:last-of-type{
         padding: 10px;
@@ -575,6 +776,9 @@ form{
         font-size: 13px;
         word-break: break-all;
     }
+    .comment-footer-div-right-inner{
+        flex-direction: column;
+    }
 }
 @media screen  and (max-width:210px){
     #type-div{
@@ -587,12 +791,20 @@ form{
         word-break: break-all;
     }
 
-    ::ng-deep .p-dialog-draggable .p-dialog-header{
+    ::ng-deep .bug-form-dialog .p-dialog-draggable .p-dialog-header{
         padding: 10px;
     }
 
     ::ng-deep .p-dialog .p-dialog-header .p-dialog-title{
         font-size: 16px;
         word-break: break-all;
+    }
+
+    ::ng-deep .p-dialog{
+        height: 30% !important;
+    }
+
+    #delete-dialog-btns{
+        flex-direction: column;
     }
 }

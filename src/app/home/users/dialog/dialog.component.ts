@@ -56,9 +56,11 @@ export class DialogComponent implements OnChanges,OnInit{
   last_modified;
   editable:boolean=false;
   profile_pic_input;
+  http_users;
   ngOnInit(){
     this.login_user=JSON.parse(localStorage.getItem("login"))||{};
     this.http_service.fetch_users().subscribe((res:User[])=>{
+      this.http_users=res;
       this.user_details=res.find(item=>item.user_id==this.login_user['userId']);
       console.log(this.user_details);
       this.last_modified=structuredClone(this.user_details);
@@ -129,6 +131,11 @@ export class DialogComponent implements OnChanges,OnInit{
     if(!topForm.valid || !bottomForm.valid){
       return;
     }
+    this.get_users();
+    let ind= this.http_users.find(item=>item.email_id==topForm.value.email_id);
+    if(ind){
+      return;
+    }
     if(this.prefill){
       console.log("prefill",topForm.value,bottomForm.value);
       let updated_user = {...topForm.value,...bottomForm.value};
@@ -156,6 +163,7 @@ export class DialogComponent implements OnChanges,OnInit{
   }
   get_users(){
      this.http_service.fetch_users().subscribe((res:User[])=>{
+      this.http_users=res;
       this.two_way.raise_emit_users(res);
     })
   }

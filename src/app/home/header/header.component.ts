@@ -12,6 +12,7 @@ import { TwoWayDataBinding } from 'src/app/Services/two_way_dataBinding';
 export class HeaderComponent {
   selected:string = 'Dashboard';
   login_user:{};
+  logout_visible:boolean=false;
   user_details={uname:'',type:'',profile:''};
    items = [
             { label: 'Dashboard', icon: 'dashboard_1828765.png', route: "/home" },
@@ -36,7 +37,10 @@ export class HeaderComponent {
   }
 
   logout(){
-    if(confirm("are you sure?")){
+    this.logout_visible=true;
+  }
+
+  logout_confirm(){
     let login=JSON.parse(localStorage.getItem("login"));
     login='';
     localStorage.setItem("login",JSON.stringify(login));
@@ -44,8 +48,9 @@ export class HeaderComponent {
     logged=false;
     localStorage.setItem("login",JSON.stringify(logged));
     this.router.navigateByUrl("");
-    }else{
-      return;
-    }
+  }
+
+  cancel_logout(){
+    this.logout_visible=false;
   }
 }

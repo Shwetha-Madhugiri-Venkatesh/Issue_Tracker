@@ -31,7 +31,9 @@ button{
     cursor: pointer;
     padding: 10px;
 }
-
+button:hover{
+    color: purple;
+}
 @media screen and (max-width:950px){
     #content{
         height: 650px;

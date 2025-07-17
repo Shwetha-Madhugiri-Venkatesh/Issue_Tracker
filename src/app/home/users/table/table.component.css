@@ -3,16 +3,22 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
+    height: 80%;
 }
 
 #p-table-div{
     width: 100%;
+    height: 100%;
 }
 ::ng-deep #user-content tbody tr:hover{
     background-color: rgb(208, 237, 249)!important;
 }
-
+::ng-deep .p-datatable>.p-datatable-wrapper{
+    height: 450px;
+    overflow-y: scroll;
+}
 #content{
+    height: 100%;
     padding-top: 15px;
     display: flex;
     flex-direction: row;
@@ -171,6 +177,15 @@ td{
     align-items: center;
     justify-content: center;
 }
+#add-btn:hover{
+    background-color: rgba(211, 211, 211, 0.3);
+    color: rgb(45, 57, 57);
+}
+
+#filter:hover{
+    color: white;
+    background-color: rgb(45, 57, 57);
+}
 #filter-div{
     width: 35%;
     height: 100%;
@@ -187,6 +202,8 @@ td{
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
     border-bottom: 1px solid lightgrey;
+    display: flex;
+   flex-direction: row;
 }
 ::ng-deep #user-content .p-datatable.p-datatable-sm .p-datatable-thead > tr > th{
     padding: 10px 10px;
@@ -336,11 +353,11 @@ input{
 ::ng-deep #user-content .p-multiselect .p-multiselect-label{
     padding: 0;
     font-size: 15px;
-    display: flex;
-    align-items: center;
+    display: block;
     margin: 5px 0px 0px 6px;
+    overflow: hidden;
+    text-overflow: ellipsis !important;
 }
-
 #multiselect-btn{
     background-color:rgb(45, 57, 57);
     color: white;
@@ -414,8 +431,9 @@ input{
    border-color: lightgray !important;
 }
 
-#table-with-footer {
-  position: relative;
+#table-with-footer { 
+position: relative; 
+  height: 100%;
 }
 
 .paginator-extension {
@@ -423,6 +441,8 @@ input{
   justify-content: flex-end;
   margin-top: -42px; /* Align with paginator */
   margin-right: 5px;
+  position: absolute;
+  right: 33px;
 }
 
 .go-button {
@@ -436,7 +456,108 @@ input{
   margin-top:3px; height: 28px;
 }
 
+.go-button:hover{
+    background-color: rgb(23, 82, 105);
+}
+#filter_head{
+width: 50%;
+display: flex;
+align-items: center;
+justify-content: flex-start;
+}
 
+#cross-div{
+    width: 50%;
+display: flex;
+align-items: center;
+justify-content: flex-end;
+}
 
+#delete_dialog{
+    height: 100%;
+}
 
+#delete_dialog_content{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+::ng-deep #delete_dialog .p-dialog{
+    width: 20% !important;
+    height: 130px !important;
+}
+::ng-deep .p-dialog .p-dialog-header{
+    padding: 5px 5px 0px 10px !important;
+}
 
+::ng-deep .p-dialog .p-dialog-content{
+    padding:5px 5px 10px 10px;
+}
+#delete-dialog_top{
+    height: 80%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+#delete-dialog-bottom{
+    height: 50%;
+}
+
+#delete-dialog-btns{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 0px 10px;
+}
+
+::ng-deep .p-dialog .p-dialog-header .p-dialog-title{
+    font-size: 18px;
+}
+#delete{
+    font-size: 25px;
+}
+#question{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 3px;
+}
+#delete-dialog-btn1{
+    height: 30px;
+    background-color:rgb(45, 57, 57);
+    color: white;
+    border: 1px solid rgb(45, 57, 57);
+    padding: 2.5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#delete-dialog-btn1:hover{
+    background-color: rgba(211, 211, 211, 0.3);
+    color: rgb(45, 57, 57);
+}
+
+#delete-dialog-btn2{
+    height: 30px;
+    background-color:rgb(45, 57, 57);
+    color: white;
+    border: 1px solid rgb(45, 57, 57);
+    padding: 2.5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#delete-dialog-btn2:hover{
+    background-color: rgba(211, 211, 211, 0.3);
+    color: rgb(45, 57, 57);
+}

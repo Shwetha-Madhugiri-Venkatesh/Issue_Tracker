@@ -65,12 +65,32 @@ width: 100%;
   flex-direction: column;
   gap: 3px;
 }
+#filter{
+    height: 30px;
+    width: 30px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    justify-content: center;
+}
+
+#filter:hover{
+    background-color: rgba(211, 211, 211, 0.3);
+    border:1px solid rgb(45, 57, 57);
+}
 
 #filter-header{
    width: 100%;
    padding: 8px; 
    border-bottom: 1px solid lightgray;
    background-color: rgba(211, 211, 211, 0.3);
+   display: flex;
+   flex-direction: row;
+}
+
+.go-button:hover{
+    background-color: rgb(23, 82, 105);
 }
 
 #filter-heading{
@@ -183,6 +203,11 @@ input{
     cursor: pointer;
     border-radius: 10px;
 }
+
+/* #search-btn:hover{
+    background-color: rgba(211, 211, 211, 0.3);
+    border: 1px solid black;
+} */
 
 ::ng-deep #list-container .p-paginator .p-paginator-pages .p-paginator-page{
      width: 5px;
@@ -358,4 +383,18 @@ input{
   cursor: pointer;
   z-index: 1;
   margin-top:5px; height: 28px;
+}
+
+#filter_head{
+width: 50%;
+display: flex;
+align-items: center;
+justify-content: flex-start;
+}
+
+#cross-div{
+    width: 50%;
+display: flex;
+align-items: center;
+justify-content: flex-end;
 }

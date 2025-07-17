@@ -101,6 +101,10 @@ width: 160px !important;
     border-radius: 5px;
     cursor: pointer;
 }
+#refresh-div:hover{
+    background-color: rgba(211, 211, 211, 0.3);
+    
+}
 
 @media screen and (max-width:380px){
     #category-content-inner{

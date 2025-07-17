@@ -6,7 +6,7 @@
                 <div class="priority">{{priority_name}}</div>
             </div>
             <div class="second">
-                <p class="ticket-id">Ticket Id:{{ticket.ticketId}}</p>
+                <label class="label">Ticket Id: <a class="ticket-id">{{ticket.ticketId}}</a></label>
                 <p class="subject">Subject:{{ticket.subject}}</p>
             </div>
         </div>
@@ -15,7 +15,7 @@
                 <div class="profile">{{ticket.reporter_name.at(0)}}</div>
             </div>
             <div class="right">
-                <i style="cursor: pointer;" class="fa-regular fa-comments" (click)="open_comment_form(ticket)"></i>
+                <i id="comment" class="fa-regular fa-comments" (click)="open_comment_form(ticket)"></i>
             </div>
         </div>
     </div>

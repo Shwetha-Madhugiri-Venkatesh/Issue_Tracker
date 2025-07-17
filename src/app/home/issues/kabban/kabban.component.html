@@ -6,7 +6,7 @@
             </div>
             <div id="right">
                 <button (click)="add_bug()">Add</button>
-                <div><i class="fa-solid fa-filter" (click)="toggleFilter()"></i></div>
+                <div id="filter"><i class="fa-solid fa-filter" (click)="toggleFilter()"></i></div>
             </div>
         </div>
     </div>
@@ -185,7 +185,7 @@
     </div>
 </div>
 <div class="bug-form-dialog">
-    <p-dialog header="Bug Record Form" [modal]="true" [(visible)]="visible">
+    <p-dialog header="Bug Record Form" [modal]="true" [(visible)]="visible" [style]="{ width: '40rem' }">
         <div id="form-div">
             <form #bugForm="ngForm" (ngSubmit)="bug_form_submit(bugForm)">
                 <div class="row">
@@ -258,7 +258,7 @@
     </p-dialog>
 </div>
 
-<div class="card flex justify-center">
+<div class="comment_dialog">
     <p-dialog header="Ticket Details" [modal]="true" [(visible)]="visible_comment" [style]="{ width: '70rem'}">
         <div id="comment-dialog-container">
             <div id="comment-form">
@@ -352,7 +352,7 @@
                 <div id="comment-bottom">
                     <p class="label">Comment:</p>
                     <div>
-                        <p-editor [(ngModel)]="comment" [style]="{ height: '320px' }" name="comment"/>
+                        <p-editor [(ngModel)]="comment" [style]="{ height: '40px' }" name="comment"/>
                     </div>
                     <div>
                         <button type="submit">Send</button>
@@ -396,13 +396,32 @@
         </div>
     </p-dialog>
 </div>
-<div class="card flex justify-content-center">
+<div class="edit_editor">
     <p-dialog header="Edit Comment" [modal]="true" [(visible)]="edit_comment_visible" [style]="{ width: '25rem' }">
         <div>
-            <p-editor [(ngModel)]="updated_comment" [style]="{ height: '320px' }"/>
+            <p-editor [(ngModel)]="updated_comment" [style]="{ height: '100px' }"/>
         </div>
         <div id="edit_div">
             <button (click)="update_comment()">Save</button>
+        </div>
+    </p-dialog>
+</div>
+
+<div>
+    <p-dialog header="ORG Issue Tracker" [modal]="true" [(visible)]="delete_visible" [style]="{ width: '25rem' }">
+        <div id="delete_dialog">
+            <div id="delete_dialog_content">
+                <div id="delete-dialog_top">
+                    <i id="delete" class="fa-solid fa-circle-exclamation" style="color: #74C0FC;"></i>
+                    <p id="question">Are you sure?</p>
+                </div>
+                <div id="delete-dialog-bottom">
+                    <div id="delete-dialog-btns">
+                        <button id="delete-dialog-btn1" (click)="delete_confirm()">Delete</button>
+                        <button id="delete-dialog-btn2" (click)="cancel_delete()">Cancel</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </p-dialog>
 </div>
