@@ -14,6 +14,7 @@ export class LoginCanActivate implements CanActivate{
        let flag2 = JSON.parse(localStorage.getItem("logged"))||false;
         let logged = true;
     if((flag1!='') && (flag2===true)){
+        this.route.navigate(['/home']);
       return false;
     }else{
         localStorage.setItem("logged",JSON.stringify(logged));

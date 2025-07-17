@@ -126,6 +126,9 @@ export class DialogComponent implements OnChanges,OnInit{
   }
 
   form_submit(topForm:NgForm,bottomForm:NgForm){
+    if(!topForm.valid || !bottomForm.valid){
+      return;
+    }
     if(this.prefill){
       console.log("prefill",topForm.value,bottomForm.value);
       let updated_user = {...topForm.value,...bottomForm.value};

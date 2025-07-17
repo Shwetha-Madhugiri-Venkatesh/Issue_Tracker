@@ -38,28 +38,28 @@
                         <label class="label">User Name *</label>
                         <input type="text"  name="uname" [(ngModel)]="user_uname" [ngStyle]="{border: topForm?.controls['uname']?.value && editable && prefill?'1px solid lightgray':
                         topForm?.controls['uname']?.value && !editable && prefill?'none': 
-                        topForm?.controls['uname']?.value && !prefill?'none':'1px solid lightgray'}" (change)="create_user_password($event)" [readOnly]="!editable && prefill"/>
+                        topForm?.controls['uname']?.value && !prefill?'none':'1px solid lightgray'}" (change)="create_user_password($event)" [readOnly]="!editable && prefill" required/>
                         </div >
 
                         <div class="input-div">
                         <label class="label">First Name *</label>
                         <input [ngStyle]="{border: topForm?.controls['fname']?.value && editable && prefill?'1px solid lightgray':
                         topForm?.controls['fname']?.value && !editable && prefill?'none': 
-                        topForm?.controls['fname']?.value && !prefill?'none':'1px solid lightgray'}" type="text" name="fname" [(ngModel)]="user_fname" [readOnly]="!editable  && prefill"/>
+                        topForm?.controls['fname']?.value && !prefill?'none':'1px solid lightgray'}" type="text" name="fname" [(ngModel)]="user_fname" [readOnly]="!editable  && prefill" required/>
                         </div>
 
                         <div class="input-div">
                         <label class="label">Middle Name *</label>
                         <input [ngStyle]="{border: topForm?.controls['mname']?.value && editable && prefill?'1px solid lightgray':
                         topForm?.controls['mname']?.value && !editable && prefill?'none': 
-                        topForm?.controls['mname']?.value && !prefill?'none':'1px solid lightgray'}" type="text" name="mname" [(ngModel)]="user_mname" [readOnly]="!editable  && prefill"/>
+                        topForm?.controls['mname']?.value && !prefill?'none':'1px solid lightgray'}" type="text" name="mname" [(ngModel)]="user_mname" [readOnly]="!editable  && prefill" required/>
                         </div>
 
                         <div class="input-div">
                         <label class="label">Last Name *</label>
                         <input [ngStyle]="{border: topForm?.controls['lname']?.value && editable && prefill?'1px solid lightgray':
                         topForm?.controls['lname']?.value && !editable && prefill?'none': 
-                        topForm?.controls['lname']?.value && !prefill?'none':'1px solid lightgray'}" type="text" name="lname" [(ngModel)]="user_lname" [readOnly]="!editable  && prefill"/>
+                        topForm?.controls['lname']?.value && !prefill?'none':'1px solid lightgray'}" type="text" name="lname" [(ngModel)]="user_lname" [readOnly]="!editable  && prefill" required/>
                         </div>
 
                         <div class="input-div">
@@ -81,7 +81,7 @@
                         <label class="label">Company Code</label>
                         <input [ngStyle]="{border: topForm?.controls['company_code']?.value && editable && prefill?'1px solid lightgray':
                         topForm?.controls['company_code']?.value && !editable && prefill?'none': 
-                        topForm?.controls['company_code']?.value && !prefill?'none':'1px solid lightgray'}" type="text" name="company_code" [(ngModel)]="user_company_code" [readOnly]="!editable  && prefill"/>
+                        topForm?.controls['company_code']?.value && !prefill?'none':'1px solid lightgray'}" type="text" name="company_code" [(ngModel)]="user_company_code" [readOnly]="!editable  && prefill" required/>
                         </div>
 
                         <div class="input-div">
@@ -102,14 +102,14 @@
                         <label class="label">Email ID</label>
                         <input [ngStyle]="{border: topForm?.controls['email_id']?.value && editable && prefill?'1px solid lightgray':
                         topForm?.controls['email_id']?.value && !editable && prefill?'none': 
-                        topForm?.controls['email_id']?.value && !prefill?'none':'1px solid lightgray'}" class="input" type="email" name="email_id" [(ngModel)]="user_email_id" [readOnly]="!editable  && prefill"/>
+                        topForm?.controls['email_id']?.value && !prefill?'none':'1px solid lightgray'}" class="input" type="email" name="email_id" [(ngModel)]="user_email_id" [readOnly]="!editable  && prefill" required/>
                         </div>
 
                         <div class="input-div">
                         <label class="label">Phone Number</label>
                         <input [ngStyle]="{border: topForm?.controls['phone']?.value && editable && prefill?'1px solid lightgray':
                         topForm?.controls['phone']?.value && !editable && prefill?'none': 
-                        topForm?.controls['phone']?.value && !prefill?'none':'1px solid lightgray'}" type="text" name="phone" [(ngModel)]="user_phone" [readOnly]="!editable  && prefill"/>
+                        topForm?.controls['phone']?.value && !prefill?'none':'1px solid lightgray'}" type="text" name="phone" [(ngModel)]="user_phone" [readOnly]="!editable  && prefill" required/>
                         </div>
 
                         <div class="input-div">
@@ -146,49 +146,49 @@
                         <label class="label">Address</label>
                         <input [ngStyle]="{border: bottomForm?.controls['address']?.value && editable && prefill?'1px solid lightgray':
                         bottomForm?.controls['address']?.value && !editable && prefill?'none': 
-                        bottomForm?.controls['address']?.value && !prefill?'none':'1px solid lightgray'}" type="text" name="address" [(ngModel)]="user_address"/>
+                        bottomForm?.controls['address']?.value && !prefill?'none':'1px solid lightgray'}" type="text" name="address" [(ngModel)]="user_address" required/>
                         </div>
 
                         <div class="input-div">
                         <label class="label">Country</label>
                         <input [ngStyle]="{border: bottomForm?.controls['country']?.value && editable && prefill?'1px solid lightgray':
                         bottomForm?.controls['country']?.value && !editable && prefill?'none': 
-                        bottomForm?.controls['country']?.value && !prefill?'none':'1px solid lightgray'}" type="text" name="country" [(ngModel)]="user_country"/>
+                        bottomForm?.controls['country']?.value && !prefill?'none':'1px solid lightgray'}" type="text" name="country" [(ngModel)]="user_country" required/>
                         </div>
 
                         <div class="input-div">
                         <label class="label">State</label>
                         <input [ngStyle]="{border: bottomForm?.controls['state']?.value && editable && prefill?'1px solid lightgray':
                         bottomForm?.controls['state']?.value && !editable && prefill?'none': 
-                        bottomForm?.controls['state']?.value && !prefill?'none':'1px solid lightgray'}" type="text" name="state" [(ngModel)]="user_state"/>
+                        bottomForm?.controls['state']?.value && !prefill?'none':'1px solid lightgray'}" type="text" name="state" [(ngModel)]="user_state" required/>
                         </div>
 
                         <div class="input-div">
                         <label class="label">City</label>
                         <input [ngStyle]="{border: bottomForm?.controls['city']?.value && editable && prefill?'1px solid lightgray':
                         bottomForm?.controls['city']?.value && !editable && prefill?'none': 
-                        bottomForm?.controls['city']?.value && !prefill?'none':'1px solid lightgray'}" type="text" name="city" [(ngModel)]="user_city"/>
+                        bottomForm?.controls['city']?.value && !prefill?'none':'1px solid lightgray'}" type="text" name="city" [(ngModel)]="user_city" required/>
                         </div>
 
                         <div class="input-div">
                         <label class="label">Postal Code</label>
                         <input [ngStyle]="{border: bottomForm?.controls['postal_code']?.value && editable && prefill?'1px solid lightgray':
                         bottomForm?.controls['postal_code']?.value && !editable && prefill?'none': 
-                        bottomForm?.controls['postal_code']?.value && !prefill?'none':'1px solid lightgray'}"  type="text" name="postal_code" [(ngModel)]="user_postal_code"/>
+                        bottomForm?.controls['postal_code']?.value && !prefill?'none':'1px solid lightgray'}"  type="text" name="postal_code" [(ngModel)]="user_postal_code" required/>
                         </div>
 
                         <div class="input-div">
                         <label class="label">Locale</label>
                         <input [ngStyle]="{border: bottomForm?.controls['locale']?.value && editable && prefill?'1px solid lightgray':
                         bottomForm?.controls['locale']?.value && !editable && prefill?'none': 
-                        bottomForm?.controls['locale']?.value && !prefill?'none':'1px solid lightgray'}" type="text" name="locale" [(ngModel)]="user_locale"/>
+                        bottomForm?.controls['locale']?.value && !prefill?'none':'1px solid lightgray'}" type="text" name="locale" [(ngModel)]="user_locale" required/>
                         </div>
 
                         <div class="input-div">
                         <label class="label">Time zone</label>
                         <input [ngStyle]="{border: bottomForm?.controls['time_zone']?.value && editable && prefill?'1px solid lightgray':
                         bottomForm?.controls['time_zone']?.value && !editable && prefill?'none': 
-                        bottomForm?.controls['time_zone']?.value && !prefill?'none':'1px solid lightgray'}" type="text" name="time_zone" [(ngModel)]="user_time_zone"/>
+                        bottomForm?.controls['time_zone']?.value && !prefill?'none':'1px solid lightgray'}" type="text" name="time_zone" [(ngModel)]="user_time_zone" required/>
                         </div>
                     </form>
                 </div>

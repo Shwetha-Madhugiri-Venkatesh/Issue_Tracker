@@ -211,44 +211,44 @@
                 </div>
                 <div class="row_">
                     <label>Subject</label>
-                    <input pInputText name="subject" [(ngModel)]="subject" />
+                    <input pInputText name="subject" type="text" [(ngModel)]="subject" required/>
                 </div>
                 <div class="row_">
                     <label>Priority</label>
                     <p-dropdown [options]="priorities" [(ngModel)]="selectedPriority" optionLabel="priority"
-                        placeholder="Select priority" name="priority" />
+                        placeholder="Select priority" name="priority" [required]="true"/>
                 </div>
                 <div class="row_">
                     <label>Attachments</label>
-                    <input type="file" accept="image/*,video/*,audio/*" multiple (change)="onFilesSelected($event)"/>
+                    <input type="file" accept="image/*,video/*,audio/*" multiple (change)="onFilesSelected($event)" required/>
                 </div>
                 <div class="row">
                     <div class="div">
                         <label>Category</label>
                         <p-dropdown [options]="categories" [(ngModel)]="selectedCategory" optionLabel="categoryDesc"
-                            placeholder="Select a Category" name="category" (onChange)="category_entered($event)" />
+                            placeholder="Select a Category" name="category" (onChange)="category_entered($event)" [required]="true"/>
                     </div>
                     <div class="div">
                         <label>Subcategory</label>
                         <p-dropdown [options]="dynamic_subcategory" [(ngModel)]="selectedSubCategory"
-                            optionLabel="subCategoryDesc" placeholder="Select Subcategory" name="subcategory" />
+                            optionLabel="subCategoryDesc" placeholder="Select Subcategory" name="subcategory" [required]="true"/>
                     </div>
                 </div>
                 <div class="row">
                     <div class="div">
                         <label>Browser</label>
                         <p-dropdown [options]="browsers" [(ngModel)]="selectedbrowser" optionLabel="browser_name"
-                            placeholder="Select browser" name="browser"/>
+                            placeholder="Select browser" name="browser" [required]="true"/>
                     </div>
                     <div class="div">
                         <label>Subcategory</label>
                         <p-dropdown [options]="operatingSystems" [(ngModel)]="selectedOS"
-                            optionLabel="os_name" placeholder="Select OS" name="operatingSystem" />
+                            optionLabel="os_name" placeholder="Select OS" name="operatingSystem" [required]="true"/>
                     </div>
                 </div>
                 <div>
                     <label>Description</label>
-                    <textarea name="description" [(ngModel)]="description"></textarea>
+                    <textarea name="description" type="text" [(ngModel)]="description" required></textarea>
                 </div>
                 <div>
                     <button id="submit" type="submit">Submit</button>

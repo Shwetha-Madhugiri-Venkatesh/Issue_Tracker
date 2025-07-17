@@ -60,6 +60,7 @@ filter_user_last_modified_datetime: any='';
     })
        this.get_all_users();
         this.two_way.emit_users.subscribe(res=>{
+          this.users_from_http=res;
           this.products=res;
         })
         this.cols = [
@@ -104,6 +105,7 @@ filter_user_last_modified_datetime: any='';
           return null;
         }
       })
+      console.log(this.products);
     }
 
     filter_display(){
@@ -115,6 +117,10 @@ filter_user_last_modified_datetime: any='';
     }
 
     open_form(id:string){
+      if(this.delete){
+        this.delete=false;
+        return;
+      }
       if(this.user_details?.type=='Admin'){
       this.display_dialog.emit([true,id]);
       }else{
@@ -166,7 +172,10 @@ filter_user_last_modified_datetime: any='';
           this.products=this.users_from_http;
         });
     }
+    delete = false;
     delete_the_user(id:string){
+    this.delete=true;
+    if(confirm("Are you sure?")){
     if(this.user_details.type=='Admin'){
      this.http_service.delete_user(id).subscribe(res=>{
       console.log(res);
@@ -176,6 +185,9 @@ filter_user_last_modified_datetime: any='';
       this.message_service.add({severity:'warn', summary:'Warn', detail:"Access Denied"});
       return;
     }
+  }else{
+    return;
+  }
     }
 goToPageNumber: number = 1;
 totalPages: number;

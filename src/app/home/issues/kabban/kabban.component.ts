@@ -143,6 +143,9 @@ export class KabbanComponent implements OnInit {
     }
   }
   bug_form_submit(bugForm:NgForm){
+    if(!bugForm.valid){
+      return;
+    }
     console.log("bug form sumbit",bugForm.value);
     bugForm.value['input_file']=this.filePayload;
     console.log("bug form sumbit",bugForm.value);
@@ -272,10 +275,14 @@ export class KabbanComponent implements OnInit {
   }
 
   delete_comment(val){
+    if(confirm("Are you sure?")){
     this.http_service.delete_comment(val.id).subscribe((res)=>{
       console.log(res);
       this.fetch_update_comments();
     })
+  }else{
+    return;
+  }
   }
 
   toggleFilter() {

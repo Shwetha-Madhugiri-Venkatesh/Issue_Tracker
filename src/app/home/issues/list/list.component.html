@@ -31,9 +31,19 @@
                             </td>
                         </tr>
                     </ng-template>
+                <ng-template pTemplate="emptymessage" let-columns>
+    <tr>
+      <td [attr.colspan]="columns.length + 1" class="p-text-center" style=" text-align: center;
+  padding: 20px;
+  color: gray;
+  font-size: 15px;">
+        No data found.
+      </td>
+    </tr>
+  </ng-template>
                 </p-table>
                 </div>
-                <div class="paginator-extension" style="display: flex;gap: 5px; flex-direction: row;">
+                <div *ngIf="products.length>5" class="paginator-extension" style="display: flex;gap: 5px; flex-direction: row;">
                     <input style="width: 40px; background-color: rgba(211, 211, 211, 0.3); z-index: 1; margin-top:5px; height: 28px;"
                      type="number"
       [(ngModel)]="goToPageNumber"
