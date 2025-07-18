@@ -23,6 +23,12 @@ export class CategoryComponent {
       let result={};
       this.http_service.fetch_tickets().subscribe((res:Ticket[])=>{
         this.all_tickets=res;
+        let category_preload=JSON.parse(localStorage.getItem("category_preload"));
+        if(Object.keys(category_preload)?.length!=0 && category_preload!=undefined){
+          this.selectedCategory=category_preload.data.datasets[0].data[0]==0?undefined:category_preload.selectedCategory;
+          this.data=category_preload.data.datasets[0].data[0]==0?undefined:category_preload.data;
+        }
+        if(this.data==undefined){
         let number_of_issues=0;
         for(let x of this.categories){
           number_of_issues = res.filter((item1)=>item1.categoryId==x.categoryId).length;
@@ -42,9 +48,8 @@ export class CategoryComponent {
             }
           ]
         };
-      })
-
-      this.category_options={
+      }
+       this.category_options={
      maintainAspectRatio: false,
       aspectRatio: 0.6,
       responsive: true,
@@ -85,6 +90,7 @@ export class CategoryComponent {
         }
       }
     }
+      })
     }
 
     category_entered(val){
@@ -110,5 +116,14 @@ export class CategoryComponent {
             }
           ]
         };
+  }
+
+  ngOnDestroy(){
+     if(Object.keys(JSON.parse(localStorage.getItem("login"))).length!=0){
+    let category_preload=JSON.parse(localStorage.getItem("category_preload"))||{};
+    category_preload['selectedCategory']=this.selectedCategory;
+    category_preload['data']=this.data;
+    localStorage.setItem("category_preload",JSON.stringify(category_preload));
+     }
   }
 }

@@ -17,7 +17,7 @@ export class GraphComponent implements OnInit {
   // selectedMonth;
   // selectedWeek={ name: "first", value: 7,start:1 };
   // show_cal: boolean = false;
-  all_tickets;
+  all_tickets=[];
   today=new Date();
   
   // scales: { scale: string, value: string }[] = [
@@ -44,6 +44,14 @@ export class GraphComponent implements OnInit {
     let today = new Date();
     this.http_service.fetch_tickets().subscribe((res: Ticket[]) => {
       this.all_tickets = res;
+      let preload_info =JSON.parse(localStorage.getItem("graph_preload"));
+    if(Object.keys(preload_info)?.length!=0 && preload_info!=undefined){
+      this.start_date=preload_info.start_date?new Date(preload_info.start_date):undefined;
+      this.end_date=preload_info.end_date?new Date(preload_info.end_date):undefined;
+      this.data=preload_info.data.datasets[0].data[0]==0?undefined:preload_info.data;
+    }
+    if(this.data==undefined){
+      console.log("p",this.data);
       let filtered_record = this.for_day(today);
       this.data = {
       labels: [today.toLocaleDateString()+""],
@@ -58,7 +66,7 @@ export class GraphComponent implements OnInit {
         }
       ]
     };
-
+  }
     this.graph_options={
       maintainAspectRatio: false,
       aspectRatio: 0.6,
@@ -259,11 +267,12 @@ export class GraphComponent implements OnInit {
 
   graph_data(start_date,end_date){
     let res=[];
+    let start = structuredClone(start_date);
     if(start_date!=undefined && end_date!=undefined){
       let labels=[];
-      for(let x=start_date.getDate(); x<=end_date.getDate();x++){
-        res.push(this.for_day(new Date(start_date.setDate(x))).length);
-        labels.push(new Date(start_date.setDate(x)).toLocaleDateString());
+      for(let x=start.getDate(); x<=end_date.getDate();x++){
+        res.push(this.for_day(new Date(start.setDate(x))).length);
+        labels.push(new Date(start.setDate(x)).toLocaleDateString());
       }
       this.data = {
       labels:labels,
@@ -282,4 +291,13 @@ export class GraphComponent implements OnInit {
     console.log(res);
   }
 
+  ngOnDestroy(){
+    if(Object.keys(JSON.parse(localStorage.getItem("login"))).length!=0){
+    let preload_info=JSON.parse(localStorage.getItem("graph_preload"))||{};
+    preload_info['start_date']=this.start_date;
+    preload_info['end_date']=this.end_date;
+    preload_info['data']=this.data;
+    localStorage.setItem("graph_preload",JSON.stringify(preload_info));
+    }
+  }
 }

@@ -13,7 +13,7 @@ export class LoginCanActivate implements CanActivate{
        let flag1 = JSON.parse(localStorage.getItem("login"))||'';
        let flag2 = JSON.parse(localStorage.getItem("logged"))||false;
         let logged = true;
-    if((flag1!='') && (flag2===true)){
+    if((Object.keys(flag1).length!=0) && (flag2===true)){
         this.route.navigate(['/home']);
       return false;
     }else{

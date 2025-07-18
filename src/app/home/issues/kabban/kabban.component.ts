@@ -99,15 +99,36 @@ export class KabbanComponent implements OnInit {
     {type:"Bug", value:"bug"},
     {type:"Feature",value:"feature"},
   ]
-
+  kanban_preload;
   ngOnInit(){
+    this.kanban_preload=JSON.parse(localStorage.getItem("kanban_preload"))||{};
+    this.filter=this.kanban_preload.filter;
+    this.filterPriority=this.kanban_preload.filterPriority;
+    this.filterAssigneeId=this.kanban_preload.filterAssigneeId;
+    this.fiterCategory=this.kanban_preload.fiterCategory;
+    this.filterSubcategory=this.kanban_preload.filterSubcategory;
+    this.filterReporterId=this.kanban_preload.filterReporterId;
+    this.filterStatus=this.kanban_preload.filterStatus;
+    this.filterType=this.kanban_preload.filterType;
+    this.filterAssignee=this.kanban_preload.filterAssignee;
+    this.filterSubject=this.kanban_preload.filterSubject;
+    this.filterDescription=this.kanban_preload.filterDescription;
+    this.filterOpenedDate=this.kanban_preload.filterOpenedDate;
+    this.filterDaysOld=this.kanban_preload.filterDaysOld;
+    this.filterReporter=this.kanban_preload.filterReporter;
+    this.filterTicketId=this.kanban_preload.filterTicketId;
+    this.filtered_tickets=this.kanban_preload.filtered_tickets;
+    if(this.kanban_preload.filter_output){
+      this.all_tickets=this.kanban_preload.filter_output;
+    }
+    this.filter_output=this.kanban_preload.filter_output;
+
     this.two_way_data.current_issues_subcomponent("");
     this.login_user=JSON.parse(localStorage.getItem("login"))||{};
     this.http_service.fetch_users().subscribe((res:User[])=>{
     this.user_details=res.find(item=>item.user_id==this.login_user['userId']);
         console.log(this.user_details);
     })
-
     this.fetch_tickets_update();
 
     this.http_service.fetch_users().subscribe((res:User[])=>{
@@ -115,11 +136,14 @@ export class KabbanComponent implements OnInit {
     })
 
     this.fetch_all_tickets();
+
       
   }
   fetch_all_tickets(){
     this.http_service.fetch_tickets().subscribe((res:Ticket[])=>{
-        this.all_tickets=res;
+        if(!this.kanban_preload.filter_output){
+          this.all_tickets=res;
+        }
         this.http_tickets=res;
         this.fetch_tickets_update();
     })
@@ -432,4 +456,26 @@ cancel_delete(){
   this.delete_visible=false;
 }
 
+
+ngOnDestroy(){
+  let kanban_preload=JSON.parse(localStorage.getItem("kanban_preload"))||{};
+  kanban_preload['filter']=this.filter;
+  kanban_preload['filterPriority']=this.filterPriority;
+  kanban_preload['filterAssigneeId']=this.filterAssigneeId;
+  kanban_preload['fiterCategory']=this.fiterCategory;
+  kanban_preload['filterSubcategory']=this.filterSubcategory;
+  kanban_preload['filterReporterId'] = this.filterReporterId;
+  kanban_preload['filterStatus']=this.filterStatus;
+  kanban_preload['filterType']=this.filterType;
+  kanban_preload['filterAssignee']=this.filterAssignee;
+  kanban_preload['filterSubject']=this.filterSubject;
+  kanban_preload['filterDescription']=this.filterDescription;
+  kanban_preload['filterOpenedDate']=this.filterOpenedDate;
+  kanban_preload['filterDaysOld']=this.filterDaysOld;
+  kanban_preload['filterReporter']=this.filterReporter;
+  kanban_preload['filterTicketId']=this.filterTicketId;
+  kanban_preload['filtered_tickets']=this.filtered_tickets;
+  kanban_preload['filter_output']=this.filter_output;
+  localStorage.setItem("kanban_preload",JSON.stringify(kanban_preload));
+}
 }

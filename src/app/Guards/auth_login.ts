@@ -12,9 +12,9 @@ export class AuthLogin implements CanActivate{
     constructor(private authorize:AuthorizeUser,private route:Router, private http_service:HTTPService){}
     @ViewChild(LoginComponent) login:LoginComponent;
     canActivate(): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-     let flag1 = JSON.parse(localStorage.getItem("login"))||'';
+     let flag1 = JSON.parse(localStorage.getItem("login"))||{};
        let flag2 = JSON.parse(localStorage.getItem("logged"))||false;
-    if((flag1!='') && (flag2===true)){
+    if((Object.keys(flag1).length!=0) && (flag2===true)){
       return true;
     }else{
         this.route.navigate(['']);

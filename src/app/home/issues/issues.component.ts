@@ -11,29 +11,44 @@ import { TwoWayDataBinding } from 'src/app/Services/two_way_dataBinding';
 export class IssuesComponent {
   constructor(private two_way:TwoWayDataBinding,private router:Router){}
   
-  kabban:boolean=false;
-  list:boolean=false;
+  kabban:boolean;
+  list:boolean;
   route:string='';
 
 
   ngOnInit(){
+    let issues_preload=JSON.parse(localStorage.getItem("issues_preload"));
     this.two_way.current_route_emit('Issues')
-    this.two_way.emit_issues_subcomponent.subscribe((res)=>{
-      if(res==""){
-        this.kabban=true;
-        this.list=false;
-      }else if(res=="list"){
-        this.list=true;
-        this.kabban=false;
-      }
-    })
+    if(issues_preload){
+    if(issues_preload.kabban==true){
+      this.kabban=true;
+      this.list=true;
+      this.router.navigateByUrl("/home/issues");
+    }
+    if(issues_preload.list==true){
+      this.list=true;
+      this.kabban=false;
+      this.router.navigateByUrl("/home/issues/list");
+    }
+    }else{
+
+    // this.two_way.emit_issues_subcomponent.subscribe((res)=>{
+    //   if(res==""){
+    //     this.kabban=true;
+    //     this.list=false;
+    //   }else if(res=="list"){
+    //     this.list=true;
+    //     this.kabban=false;
+    //   }
+    // })
+    }
   }
 
   kabban_clicked(){
     this.kabban=true;
     this.list=false;
-    this.route='/issues';
-    this.router.navigateByUrl("/home/issues/"+this.route);
+    this.route='';
+    this.router.navigateByUrl("/home/issues"+this.route);
   }
 
   list_clicked(){
@@ -41,5 +56,12 @@ export class IssuesComponent {
     this.kabban=false;
     this.route='list';
     this.router.navigateByUrl("/home/issues/"+this.route);
+  }
+
+  ngOnDestroy(){
+    let issues_preload=JSON.parse(localStorage.getItem("issues_preload"))||{};
+    issues_preload['kabban']=this.kabban;
+    issues_preload['list']=this.list;
+    localStorage.setItem("issues_preload",JSON.stringify(issues_preload));
   }
 }

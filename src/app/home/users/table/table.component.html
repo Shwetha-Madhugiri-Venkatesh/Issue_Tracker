@@ -69,15 +69,13 @@
   </ng-template>
             </p-table>
             </div>
-            <div *ngIf="this.products.length>dynamic_page_number.value" class="paginator-extension" style="display: flex;gap: 5px; flex-direction: row;">
-                    <input style="width: 40px; background-color: rgba(211, 211, 211, 0.3); z-index: 1; margin-top:3px; height: 28px;text-align: center;"
-                     type="text"
-      [(ngModel)]="goToPageNumber"
-      min="1"
-      [max]="totalPages"
-      />
-        <button (click)="goToPage(dt)" class="go-button">Go</button>
-      </div>
+            <div *ngIf="this.products.length>dynamic_page_number.value" class="paginator-extension"
+                style="display: flex;gap: 5px; flex-direction: row;">
+                <input
+                    style="width: 40px; background-color: rgba(211, 211, 211, 0.3); z-index: 1; margin-top:3px; height: 28px;text-align: center;"
+                    type="text" [(ngModel)]="goToPageNumber" min="1" [max]="totalPages" />
+                <button (click)="goToPage(dt)" class="go-button">Go</button>
+            </div>
         </div>
         <ng-template [ngIf]="filter_flag">
             <div id="filter-div">

@@ -41,12 +41,13 @@ export class HeaderComponent {
   }
 
   logout_confirm(){
-    let login=JSON.parse(localStorage.getItem("login"));
-    login='';
-    localStorage.setItem("login",JSON.stringify(login));
-    let logged=JSON.parse(localStorage.getItem("logged"));
-    logged=false;
-    localStorage.setItem("login",JSON.stringify(logged));
+    localStorage.setItem("login",JSON.stringify({}));
+    localStorage.setItem("logged",JSON.stringify(false));
+    localStorage.setItem("issues_preload",JSON.stringify({}));
+    localStorage.setItem("graph_preload",JSON.stringify({}));
+    localStorage.setItem("kanban_preload",JSON.stringify({}));
+    localStorage.setItem("list_preload",JSON.stringify({}));
+    localStorage.setItem("category_preload",JSON.stringify({}));
     this.router.navigateByUrl("");
   }
 
