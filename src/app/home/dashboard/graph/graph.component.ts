@@ -48,7 +48,8 @@ export class GraphComponent implements OnInit {
     if(Object.keys(preload_info)?.length!=0 && preload_info!=undefined){
       this.start_date=preload_info.start_date?new Date(preload_info.start_date):undefined;
       this.end_date=preload_info.end_date?new Date(preload_info.end_date):undefined;
-      this.data=preload_info.data.datasets[0].data[0]==0?undefined:preload_info.data;
+      this.data=(preload_info.data.datasets[0].data.length==1 && preload_info.data.datasets[0].data[0]==0)?undefined:preload_info.data;
+      localStorage.setItem("graph_preload",JSON.stringify({}));
     }
     if(this.data==undefined){
       console.log("p",this.data);
@@ -238,6 +239,7 @@ export class GraphComponent implements OnInit {
   // }
 
   for_day(date){
+    console.log(date.toLocaleDateString());
     let filtered_record = this.all_tickets.filter(item => item.createDateTime.startsWith(date.toLocaleDateString()));
     return filtered_record;
   }

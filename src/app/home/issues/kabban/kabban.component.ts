@@ -118,11 +118,11 @@ export class KabbanComponent implements OnInit {
     this.filterReporter=this.kanban_preload.filterReporter;
     this.filterTicketId=this.kanban_preload.filterTicketId;
     this.filtered_tickets=this.kanban_preload.filtered_tickets;
-    if(this.kanban_preload.filter_output){
+    if(this.kanban_preload.filter_output!=undefined){
       this.all_tickets=this.kanban_preload.filter_output;
     }
     this.filter_output=this.kanban_preload.filter_output;
-
+    localStorage.setItem("kanban_preload",JSON.stringify({}));
     this.two_way_data.current_issues_subcomponent("");
     this.login_user=JSON.parse(localStorage.getItem("login"))||{};
     this.http_service.fetch_users().subscribe((res:User[])=>{

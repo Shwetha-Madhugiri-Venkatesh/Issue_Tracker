@@ -24,11 +24,12 @@ export class CategoryComponent {
       this.http_service.fetch_tickets().subscribe((res:Ticket[])=>{
         this.all_tickets=res;
         let category_preload=JSON.parse(localStorage.getItem("category_preload"));
-        if(Object.keys(category_preload)?.length!=0 && category_preload!=undefined){
-          this.selectedCategory=category_preload.data.datasets[0].data[0]==0?undefined:category_preload.selectedCategory;
-          this.data=category_preload.data.datasets[0].data[0]==0?undefined:category_preload.data;
+        if(Object.keys(category_preload)?.length!=0 ){
+          this.selectedCategory=category_preload.selectedCategory;
+          this.category_entered(this.selectedCategory);
+          localStorage.setItem("category_preload",JSON.stringify({}));
         }
-        if(this.data==undefined){
+        if(this.selectedCategory==undefined){
         let number_of_issues=0;
         for(let x of this.categories){
           number_of_issues = res.filter((item1)=>item1.categoryId==x.categoryId).length;
@@ -95,6 +96,9 @@ export class CategoryComponent {
 
     category_entered(val){
     let result={};
+    if(val==undefined){
+      return;
+    }
     let number_of_issues=0;
         for(let x of this.subcategories){
           number_of_issues = this.all_tickets.filter((item1)=>x.categoryId==this.selectedCategory.categoryId && item1.subCategoryId==x.subCategoryId).length;
@@ -122,7 +126,6 @@ export class CategoryComponent {
      if(Object.keys(JSON.parse(localStorage.getItem("login"))).length!=0){
     let category_preload=JSON.parse(localStorage.getItem("category_preload"))||{};
     category_preload['selectedCategory']=this.selectedCategory;
-    category_preload['data']=this.data;
     localStorage.setItem("category_preload",JSON.stringify(category_preload));
      }
   }

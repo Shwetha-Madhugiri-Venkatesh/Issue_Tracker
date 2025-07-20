@@ -164,7 +164,7 @@ label,input{
     flex-direction: column;
     background-color:rgb(231, 238, 240);
     border-radius: 10px;
-    overflow: scroll;
+    overflow: auto;
     scrollbar-width: none;
 }
 
@@ -539,7 +539,7 @@ form{
 }
 #form-top{
     height: 380px;
-    overflow-y: scroll;
+    overflow-y: auto;
     overflow-x: hidden;
     display: flex;
     flex-direction: column;

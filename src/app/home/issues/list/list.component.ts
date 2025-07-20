@@ -76,12 +76,13 @@ export class ListComponent {
     this.filterTicketId=this.kanban_preload.filterTicketId;
     this.filtered_tickets=this.kanban_preload.filtered_tickets;
     this.filter_output=this.kanban_preload.filter_output;
-      if(this.kanban_preload.search_output?.length!=0){
-        this.products=this.kanban_preload.search_output;
-      }
-      if(this.kanban_preload.filter_output?.length!=0){
+      if(this.kanban_preload.filter_output.length!=0){
         this.products=this.kanban_preload.filter_output;
       }
+      if(this.kanban_preload.search_output.length!=0){
+        this.products=this.kanban_preload.search_output;
+      }
+      localStorage.setItem("list_preload",JSON.stringify({}));
     }
     this.two_way_data.current_issues_subcomponent("list");
       console.log("ngoninit",this.subcategories);
@@ -302,14 +303,14 @@ export class ListComponent {
       default: return 'none';
     }
   }
-  goToPageNumber: number = 1;
+  goToPageNumber='';
 totalPages: number;
 
 
 goToPage(dt: any) {
-  const rowsPerPage = 5; // Match your paginator [rows] input
+  const rowsPerPage = 5; 
   this.totalPages = Math.ceil(this.products.length / rowsPerPage);
-  const pageIndex = this.goToPageNumber - 1;
+  const pageIndex = Number(this.goToPageNumber) - 1;
   if (pageIndex >= 0 && pageIndex < this.totalPages) {
     dt.first = pageIndex * dt.rows;
   } else {

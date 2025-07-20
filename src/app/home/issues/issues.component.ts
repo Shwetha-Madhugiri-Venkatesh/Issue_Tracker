@@ -19,7 +19,7 @@ export class IssuesComponent {
   ngOnInit(){
     let issues_preload=JSON.parse(localStorage.getItem("issues_preload"));
     this.two_way.current_route_emit('Issues')
-    if(issues_preload){
+    if(Object.keys(issues_preload).length!=0){
     if(issues_preload.kabban==true){
       this.kabban=true;
       this.list=true;
@@ -30,18 +30,18 @@ export class IssuesComponent {
       this.kabban=false;
       this.router.navigateByUrl("/home/issues/list");
     }
-    }else{
-
-    // this.two_way.emit_issues_subcomponent.subscribe((res)=>{
-    //   if(res==""){
-    //     this.kabban=true;
-    //     this.list=false;
-    //   }else if(res=="list"){
-    //     this.list=true;
-    //     this.kabban=false;
-    //   }
-    // })
+    localStorage.setItem("issues_preload",JSON.stringify({}));
     }
+
+    this.two_way.emit_issues_subcomponent.subscribe((res)=>{
+      if(res==""){
+        this.kabban=true;
+        this.list=false;
+      }else if(res=="list"){
+        this.list=true;
+        this.kabban=false;
+      }
+    })
   }
 
   kabban_clicked(){

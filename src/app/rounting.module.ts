@@ -9,8 +9,6 @@ import { UsersComponent } from "./home/users/users.component";
 import { KabbanComponent } from "./home/issues/kabban/kabban.component";
 import { ListComponent } from "./home/issues/list/list.component";
 import { LoginCanActivate } from "./Guards/login_canactivate";
-import { Kanban_canActivate } from "./Guards/kanban_canactivate";
-import { list_canActivate } from "./Guards/list_canActivate";
 
 const routes:Routes = [
     {path:"",component:LoginComponent,canActivate:[LoginCanActivate]},

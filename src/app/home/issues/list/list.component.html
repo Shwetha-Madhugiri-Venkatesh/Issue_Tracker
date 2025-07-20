@@ -15,8 +15,8 @@
         <div id="table-container">
             <div id="table-inner">
                 <div id="table-with-footer">
-                <p-table #dt [columns]="cols" [value]="products" [tableStyle]="{ 'min-width': '50rem' }"
-                [paginator]="this.products.length<=5?false:true" [rows]="5">
+                <p-table #dt [columns]="cols"  [value]="products" [tableStyle]="{ 'min-width': '50rem' }"
+                [paginator]="this.products.length<=5?false:true" [rows]="5" [pageLinks]="3">
                     <ng-template pTemplate="header" let-columns>
                         <tr>
                             <th *ngFor="let col of columns" [pSortableColumnDisabled]="false" [pSortableColumn]="col.field">
@@ -44,12 +44,11 @@
                 </p-table>
                 </div>
                 <div *ngIf="products.length>5" class="paginator-extension" style="display: flex;gap: 5px; flex-direction: row;">
-                    <input style="width: 40px; background-color: rgba(211, 211, 211, 0.3); z-index: 1; margin-top:5px; height: 28px;"
-                     type="number"
+                    <input style="width: 40px; background-color: rgba(211, 211, 211, 0.3); z-index: 1; margin-top:5px; height: 28px; text-align: center;"
+                     type="text"
       [(ngModel)]="goToPageNumber"
       min="1"
-      [max]="totalPages"
-      placeholder="Page"/>
+      [max]="totalPages"/>
         <button (click)="goToPage(dt)" class="go-button">Go</button>
       </div>
             </div>

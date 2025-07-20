@@ -4,9 +4,9 @@
     background-color: white;
     padding: 15px 10px 0px 15px;
     margin: 5px 0px 0px 0px;
-    overflow: scroll;
+    overflow:auto;
 }
 #content{
-    width: 1230px;
+    width: 1240px;
     height: 650px;
 }

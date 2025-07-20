@@ -4,11 +4,11 @@
     background-color: white;
     margin-top: 5px;
     z-index: 1;
-    overflow: scroll;
+    overflow: auto;
 }
 
 #content{
-    width: 1255px;
+    width: 1270px;
     height: 600px;
 }
 
