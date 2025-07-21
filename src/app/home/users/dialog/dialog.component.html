@@ -74,7 +74,7 @@
 
                         <div class="input-div">
                         <label class="label">Created Date time</label>
-                        <input class="input-value"  type="text" name="created_datetime" [(ngModel)]="today" readonly/>
+                        <input class="input-value"  type="text" name="created_datetime" [(ngModel)]="user_created_datetime" readonly/>
                         </div>
 
                         <div class="input-div">
@@ -100,7 +100,7 @@
 
                         <div class="input-div">
                         <label class="label">Email ID *</label>
-                        <input [ngStyle]="{border: topForm?.controls['email_id']?.value && editable && prefill?'1px solid lightgray':
+                        <input style="width: 50%;" [ngStyle]="{border: topForm?.controls['email_id']?.value && editable && prefill?'1px solid lightgray':
                         topForm?.controls['email_id']?.value && !editable && prefill?'none': 
                         topForm?.controls['email_id']?.value && !prefill?'none':'1px solid lightgray'}" class="input" type="email" name="email_id" [(ngModel)]="user_email_id" [readOnly]="!editable  && prefill" required/>
                         </div>

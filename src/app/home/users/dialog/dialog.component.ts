@@ -30,7 +30,7 @@ export class DialogComponent implements OnChanges,OnInit{
   user_lname: string;
   user_created_source: string;
   user_created_source_type: string;
-  user_created_datetime: string;
+  user_created_datetime: string=this.today;
   user_company_code: string;
   user_user_id: string='';
   user_type: string;
@@ -183,7 +183,7 @@ export class DialogComponent implements OnChanges,OnInit{
     this.user_lname='';
     this.user_created_source='';
     this.user_created_source_type='';
-    this.user_created_datetime='';
+    this.user_created_datetime=this.today;
     this.user_company_code='';
     this.user_user_id='';
     this.user_type='';

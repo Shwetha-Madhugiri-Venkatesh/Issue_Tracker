@@ -385,7 +385,7 @@
                                         <p [innerHTML]="commen.message"></p>
                                     </div>
                                     <div class="comment-footer-div-right">
-                                        <div class="comment-footer-div-right-inner">
+                                        <div class="comment-footer-div-right-inner" *ngIf="tickets_comments[com][0].uname!=undefined">
                                             <i class="fa-solid fa-pen" (click)="edit_comment(commen,tickets_comments[com][0].userId)"></i>
                                             <i class="fa-solid fa-trash" (click)="delete_comment(commen)"></i>
                                         </div>
