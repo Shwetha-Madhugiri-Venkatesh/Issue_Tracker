@@ -5,8 +5,8 @@
                 <h2>Issues</h2>
             </div>
             <div id="right">
-                <button (click)="add_bug()">Add</button>
-                <div id="filter"><i class="fa-solid fa-filter" (click)="toggleFilter()"></i></div>
+                <button (click)="add_bug()" pTooltip="Add Ticket" tooltipPosition="bottom">Add</button>
+                <div id="filter" (click)="toggleFilter()" pTooltip="Filter bugs" tooltipPosition="bottom"><i class="fa-solid fa-filter"></i></div>
             </div>
         </div>
     </div>
@@ -131,7 +131,7 @@
                                 </div>
                                 <div class="filter-input-div">
                                     <div class="label">
-                                        <label>Opened date:</label>
+                                        <label>Opened Date:</label>
                                     </div>
                                     <div class="input">
                                         <input pInputText type="date" name="createDateTime" [(ngModel)]="filterOpenedDate" />
@@ -174,8 +174,12 @@
                                 </div>
                             </div>
                             <div id="form-footer">
+                                <div style="display: flex; align-items: center; justify-content: flex-start; width: 50%;">
                                 <button id="apply-btn" type="submit">Apply</button>
+                                </div>
+                                <div style="display: flex; align-items: center; justify-content: flex-end; width: 50%;">
                                 <button id="apply-btn" type="button" (click)="reset_all()">Reset</button>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -410,7 +414,7 @@
     </p-dialog>
 </div>
 
-<div>
+<div class="delete_dialog1">
     <p-dialog header="ORG Issue Tracker" [modal]="true" [(visible)]="delete_visible" [style]="{ width: '25rem' }">
         <div id="delete_dialog">
             <div id="delete_dialog_content">

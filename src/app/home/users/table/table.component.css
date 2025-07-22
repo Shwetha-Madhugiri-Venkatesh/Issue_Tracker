@@ -195,6 +195,14 @@ td{
     flex-direction: column;
     border: 1px solid lightgray;
 }
+#filter-div1{
+    width: 35%;
+    height: 100%;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    
+}
 
 #filter-header{
     width: 100%;
@@ -276,11 +284,12 @@ input{
 }
 
 #filter-footer #btn-div #reset-btn{
-    background-color: white;
-    border: 1px solid gray;
-    height: 25px;
+    background-color: black;
+    border: 1px solid black;
+    height: 30px;
     padding: 0px 10px;
     border-radius: 5px;
+    color: white;
     cursor: pointer;
 }
 
@@ -288,7 +297,7 @@ input{
     background-color:rgb(45, 57, 57);
     color: white;
     border: 1px solid rgb(45, 57, 57);
-    height: 25px;
+    height: 30px;
     padding: 0px 10px;
     border-radius: 5px;
     cursor: pointer;
@@ -363,7 +372,7 @@ input{
     background-color:rgb(45, 57, 57);
     color: white;
     border: 1px solid rgb(45, 57, 57);
-    height: 25px;
+    height: 30px;
     padding: 0px 10px;
     border-radius: 5px;
     cursor: pointer;
@@ -443,6 +452,7 @@ input{
   margin-right: 5px;
   position: absolute;
   right: 7px;
+  width: 200px;
 }
 
 .go-button {

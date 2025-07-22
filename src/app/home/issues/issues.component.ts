@@ -33,9 +33,16 @@ sub;
     localStorage.setItem("issues_preload",JSON.stringify({}));
     }
     else{
-    this.router.navigateByUrl("/home/issues");
-      this.kabban=true;
-      this.list=false;
+    this.sub = this.two_way.emit_issues_subcomponent.subscribe((res)=>{
+      if(res==""){
+        this.kabban=true;
+        this.list=false;
+      }else if(res=="list"){
+        this.list=true;
+        this.kabban=false;
+      }
+      this.sub.unsubscribe();
+    })
   }
   }
 

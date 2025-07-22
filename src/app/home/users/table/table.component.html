@@ -22,11 +22,11 @@
 
                 </div>
                 <div id="filter-div">
-                    <button id="filter" (click)="filter_display()"><i class="fa-solid fa-filter"></i> Filter</button>
+                    <button id="filter" (click)="filter_display()" pTooltip="Filter Users" tooltipPosition="bottom"><i class="fa-solid fa-filter"></i> Filter</button>
                 </div>
                 <div>
                     <button id="add-btn" [ngStyle]="user_details?.type!='Admin'?{'display':'none'}:{'display':'flex'}"
-                        (click)="dialog_display()">Add</button>
+                        (click)="dialog_display()" pTooltip="Add User" tooltipPosition="bottom">Add</button>
                 </div>
             </div>
         </div>
@@ -53,7 +53,7 @@
                             <td>
                                 <div class="icons">
                                     <!-- <i class="fa-solid fa-pen-to-square" (click)="open_form(rowData['id'])"></i> -->
-                                    <i class="fa-solid fa-trash" (click)="delete_the_user(rowData['id'])"></i>
+                                    <i style="cursor: pointer;" class="fa-solid fa-trash" (click)="delete_the_user(rowData['id'])" pTooltip="Delete User" tooltipPosition="bottom"></i>
                                 </div>
                             </td>
                         </tr>
@@ -79,7 +79,8 @@
             </div>
         </div>
         <ng-template [ngIf]="filter_flag">
-            <div id="filter-div">
+            <div id="filter-div1">
+                <div style="margin-bottom: 30px;border: 1px solid lightgray; border-radius: 5px;">
                 <div id="filter-header">
                     <div id="filter_head">
                         <h4>Filter</h4>
@@ -108,11 +109,16 @@
                             [(ngModel)]="filter_user_last_modified_datetime" />
                     </form>
                     <div id="filter-footer">
-                        <div id="btn-div">
+                        <div id="btn-div" style="width: 100%;">
+                            <div style="display: flex; align-items: center; justify-content: flex-start; width: 50%;">
                             <button id="reset-btn" type="button" (click)="reset_form()">Reset</button>
+                            </div>
+                            <div style="display: flex; align-items: center; justify-content: flex-end; width: 50%;">
                             <button id="submit-btn" type="submit" (click)="filter_form_submit(form)">Apply</button>
+                            </div>
                         </div>
                     </div>
+                </div>
                 </div>
             </div>
         </ng-template>

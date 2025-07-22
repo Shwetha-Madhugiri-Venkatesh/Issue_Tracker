@@ -81,4 +81,8 @@ export class PriorityComponent implements OnInit{
       }
     }
   }
+
+  refresh(){
+    this.ngOnInit();
+  }
 }

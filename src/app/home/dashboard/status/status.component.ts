@@ -93,4 +93,8 @@ export class StatusComponent {
     const vw = window.innerWidth / 100;
     return Math.max(12, vw); 
   }
+
+  refresh(){
+    this.ngOnInit();
+  }
 }

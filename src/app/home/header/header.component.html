@@ -17,7 +17,7 @@
                <i class="fa-regular fa-bell" pBadge value="2"></i>
             </div> -->
                 <div id="photo">
-                    <img style="width: 100%;height: 100%;border-radius: 50%;" [src]="user_details.profile" />
+                    <img style="width: 100%;height: 100%;border-radius: 50%;" [src]="user_details.profile" (click)="op.toggle($event)" />
                 </div>
                 <div id="last">
                     <div>
@@ -25,7 +25,7 @@
                         <span>{{user_details?.type}}</span>
                     </div>
                     <div style="display: flex;align-items: center;justify-content: center;">
-                        <i style="cursor: pointer;" class="fa-solid fa-arrow-right-from-bracket" title="logout"
+                        <i style="cursor: pointer;" class="fa-solid fa-arrow-right-from-bracket"  pTooltip="logout" tooltipPosition="bottom"
                             (click)="logout()"></i>
                     </div>
                 </div>
@@ -62,4 +62,30 @@
             </div>
         </div>
     </p-dialog>
+</div>
+
+<div class="card flex justify-content-center">
+    <p-overlayPanel #op>
+        <div id="overlay_profile">
+            <div>
+                <img style="width: 40px;height: 40px;border-radius: 50%;" [src]="user_details.profile" (click)="op.toggle($event)" />
+            </div>
+            <div class="input-div">
+            <p class="text1">User Name</p>
+            <p class="text">:  {{user_details.uname}}</p>
+            </div>
+            <div class="input-div">
+            <p class="text1">First Name</p>
+            <p class="text">:  {{user_details.fname}}</p>
+            </div>
+            <div class="input-div">
+            <p class="text1">Last Name</p>
+            <p class="text">:  {{user_details.lname}}</p>
+            </div>
+            <div class="input-div">
+            <p class="text1">User ID</p>
+            <p class="text">:  {{user_details.user_id}}</p>
+            </div>
+        </div>
+    </p-overlayPanel>
 </div>

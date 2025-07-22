@@ -60,4 +60,7 @@ operating_options: any;
     const vw = window.innerWidth / 100;
     return Math.max(12, vw); // prevent too small
   }    
+  refresh(){
+    this.ngOnInit();
+  }
 }

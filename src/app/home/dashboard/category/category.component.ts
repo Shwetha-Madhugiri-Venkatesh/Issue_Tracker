@@ -94,6 +94,10 @@ export class CategoryComponent {
       })
     }
 
+    refresh(){
+    this.ngOnInit();
+  }
+  
     category_entered(val){
     let result={};
     if(val==undefined){

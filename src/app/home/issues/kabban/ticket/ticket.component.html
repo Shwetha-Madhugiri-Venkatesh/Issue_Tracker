@@ -6,7 +6,7 @@
                 <div class="priority">{{priority_name}}</div>
             </div>
             <div class="second">
-                <label class="label">Ticket Id: <a class="ticket-id">{{ticket.ticketId}}</a></label>
+                <label class="label">Ticket Id: <a class="ticket-id" (click)="open_comment_form(ticket)" pTooltip="Tickets Details" tooltipPosition="bottom">{{ticket.ticketId}}</a></label>
                 <p class="subject">Subject:{{ticket.subject}}</p>
             </div>
         </div>
@@ -15,7 +15,7 @@
                 <div class="profile">{{ticket.reporter_name.at(0)}}</div>
             </div>
             <div class="right">
-                <i id="comment" class="fa-regular fa-comments" (click)="open_comment_form(ticket)"></i>
+                <i id="comment" class="fa-regular fa-comments" (click)="open_comment_form(ticket)" pTooltip="Add Comment" tooltipPosition="bottom"></i>
             </div>
         </div>
     </div>

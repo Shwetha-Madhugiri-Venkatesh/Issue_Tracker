@@ -141,11 +141,12 @@ export class TableComponent {
       }
     })
     this.products = this.filtered_output;
+    this.filter_flag=false;
     console.log(this.products);
   }
 
   filter_display() {
-    this.filter_flag = true;
+    this.filter_flag = !this.filter_flag;
   }
   dialog_display() {
     console.log("btn");

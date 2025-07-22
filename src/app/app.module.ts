@@ -22,7 +22,6 @@ import { RoutingModule } from './rounting.module';
 import { RouterModule } from '@angular/router';
 import { ToastModule } from 'primeng/toast';
 import { BadgeModule } from 'primeng/badge';
-import { TabMenuModule } from 'primeng/tabmenu';
 import { ChartModule } from 'primeng/chart';
 import { TableComponent } from './home/users/table/table.component';
 import { TableModule } from 'primeng/table';
@@ -37,7 +36,6 @@ import { TicketComponent } from './home/issues/kabban/ticket/ticket.component';
 import { FileUploadModule } from 'primeng/fileupload';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { EditorModule } from 'primeng/editor';
-import { SidebarModule } from 'primeng/sidebar';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { CalendarModule } from 'primeng/calendar';
 import { PriorityComponent } from './home/dashboard/priority/priority.component';
@@ -46,7 +44,7 @@ import { CategoryComponent } from './home/dashboard/category/category.component'
 import { TypeComponent } from './home/dashboard/type/type.component';
 import { BrowserComponent } from './home/dashboard/browser/browser.component';
 import { OperatingSystemComponent } from './home/dashboard/operating-system/operating-system.component';
-
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 
 @NgModule({
   declarations: [
@@ -82,7 +80,6 @@ import { OperatingSystemComponent } from './home/dashboard/operating-system/oper
     RouterModule,
     ToastModule,
     BadgeModule,
-    TabMenuModule,
     HttpClientModule,
    ChartModule,
    TableModule,
@@ -93,9 +90,9 @@ import { OperatingSystemComponent } from './home/dashboard/operating-system/oper
    FileUploadModule,
    ProgressBarModule,
    EditorModule,
-   SidebarModule,
    AutoCompleteModule,
    CalendarModule,
+  OverlayPanelModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

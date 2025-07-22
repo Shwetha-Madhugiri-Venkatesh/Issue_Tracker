@@ -118,7 +118,6 @@ export class ListComponent {
     }
 
   toggleFilter() {
-    this.reset_fields();
     this.filter = !this.filter;
   }
 
@@ -152,7 +151,7 @@ export class ListComponent {
       statusId:rest.status?.statusId,
       priorityId:rest.priority?.priorityId,
       subject:rest.subject?.trim(),
-      description:rest.description.trim(),
+      description:rest.description?.trim(),
       createDateTime:new Date(rest.createDateTime).toLocaleDateString(),
     }
     if(filter_days_old){
@@ -187,6 +186,7 @@ export class ListComponent {
       }
     })
     this.products=this.filter_output;
+    this.filter=false;
     console.log(this.products);
   }
 

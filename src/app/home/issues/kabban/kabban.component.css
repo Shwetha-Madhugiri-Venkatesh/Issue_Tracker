@@ -127,7 +127,6 @@ textarea{
 
 label,input{
     font-size: 15px;
-    padding: 5px;
 }
 
 ::ng-deep #kabban-content .bug-form-dialog .p-dialog .p-dialog-content{
@@ -159,12 +158,11 @@ label,input{
 
 .issues-inner{
     width: 25%;
-    height: 480px;
+    height: 100%;
     display: flex;
     flex-direction: column;
     background-color:rgb(231, 238, 240);
     border-radius: 10px;
-    overflow: auto;
     scrollbar-width: none;
 }
 
@@ -210,13 +208,18 @@ label,input{
 }
 
 #tickets{
+    height: 425px;
     display: flex;
     flex-direction: column;
     gap: 10px;
+    overflow: auto;
+    scrollbar-width: none;
+    padding: 0px 10px;
 }
 
 #tickets-div{
-    padding: 10px;
+    width: 100%;
+    padding: 10px 0px;
 }
 
 #comment-dialog-container{
@@ -346,7 +349,7 @@ label,input{
     display: flex;
     flex-direction: row;
     gap: 10px;
-    padding: 5px;
+    
 }
 
 .comment-div{
@@ -517,7 +520,6 @@ form{
     width: 150px !important;
 }
 ::ng-deep .bug-form-dialog .p-inputtext {
-    width: 70% !important;
     padding: 5px !important;
 }
 ::ng-deep #kabban-content #filter-form-container .p-inputtext {
@@ -738,6 +740,15 @@ form{
     }
     .comment-header-right,.comment-footer-div-right{
         width: 100%;
+    }
+}
+@media screen and (max-width:420px){
+     ::ng-deep .edit_editor .p-dialog{
+        width: 70% !important;
+    }
+
+     ::ng-deep .delete_dialog1 .p-dialog{
+        width: 70% !important;
     }
 }
 @media screen and (max-width:372px){

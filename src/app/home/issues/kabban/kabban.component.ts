@@ -58,7 +58,7 @@ export class KabbanComponent implements OnInit {
   user_specific;
 
   edit_comment_visible:boolean=false;
-  updated_comment:string='<div>Hello World!</div><div>PrimeNG <b>Editor</b> Rocks</div><div><br></div>';
+  updated_comment:string;
   comment_to_be_edited;
   
 
@@ -118,7 +118,7 @@ export class KabbanComponent implements OnInit {
     this.filterReporter=this.kanban_preload.filterReporter;
     this.filterTicketId=this.kanban_preload.filterTicketId;
     this.filtered_tickets=this.kanban_preload.filtered_tickets;
-    if(this.kanban_preload.filter_output!=undefined){
+    if(this.kanban_preload.filter_output!=undefined && this.kanban_preload.filter_output?.length>0){
       this.all_tickets=this.kanban_preload.filter_output;
     }
     this.filter_output=this.kanban_preload.filter_output;
@@ -141,7 +141,7 @@ export class KabbanComponent implements OnInit {
   }
   fetch_all_tickets(){
     this.http_service.fetch_tickets().subscribe((res:Ticket[])=>{
-        if(!this.kanban_preload.filter_output){
+        if(this.kanban_preload.filter_output==undefined || this.kanban_preload.filter_output?.length==0){
           this.all_tickets=res;
         }
         this.http_tickets=res;
@@ -280,6 +280,7 @@ export class KabbanComponent implements OnInit {
     this.comment_to_be_edited=comment;
     if(val==this.login_user.userId){
       this.edit_comment_visible=true;
+      this.updated_comment='';
     }else{
       return;
     }
@@ -305,7 +306,6 @@ export class KabbanComponent implements OnInit {
   }
 
   toggleFilter() {
-    this.reset_fields();
     this.filter = !this.filter;
   }
 
@@ -324,6 +324,7 @@ export class KabbanComponent implements OnInit {
     this.filterDaysOld='';
     this.filterReporter='';
     this.filterTicketId='';
+    this.fetch_tickets_update();
   }
 
   issues_filter_form_submited(issuesFilterForm:NgForm){
@@ -339,7 +340,7 @@ export class KabbanComponent implements OnInit {
       statusId:rest.status?.statusId,
       priorityId:rest.priority?.priorityId,
       subject:rest.subject?.trim(),
-      description:rest.description.trim(),
+      description:rest.description?.trim(),
       createDateTime:new Date(rest.createDateTime).toLocaleDateString(),
     }
     if(filter_days_old){
@@ -373,6 +374,7 @@ export class KabbanComponent implements OnInit {
       }
     })
     this.all_tickets=this.filter_output;
+    this.filter=false;
     console.log(this.all_tickets);
     this.fetch_tickets_update();
   }
@@ -386,6 +388,7 @@ export class KabbanComponent implements OnInit {
       }
     })
   }
+
 
   assignee_id_change(){
     this.filterAssignee =this.users_list.find(item=>item.user_id==this.filterAssigneeId.user_id)?.uname;

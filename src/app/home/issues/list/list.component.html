@@ -6,56 +6,63 @@
             </div>
             <div id="search">
                 <div id="search-div" [ngStyle]="searchBtn?{'border':'1px solid gray'}:{'border': 'none'}">
-                    <input id="search-input" type="text" [(ngModel)]="search_text" (change)="search_input($event)"/>
-                    <button id="search-btn" (click)="search_clicked()"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    <input id="search-input" type="text" [(ngModel)]="search_text" (change)="search_input($event)" />
+                    <button id="search-btn" (click)="search_clicked()" pTooltip="Search data" tooltipPosition="bottom"><i
+                            class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
-                <i id="filter" class="fa-solid fa-filter" (click)="toggleFilter()"></i>
+                <i id="filter" class="fa-solid fa-filter" (click)="toggleFilter()" pTooltip="Filter bugs" tooltipPosition="bottom"></i>
             </div>
         </div>
         <div id="table-container">
             <div id="table-inner">
                 <div id="table-with-footer">
-                <p-table #dt [columns]="cols"  [value]="products" [tableStyle]="{ 'min-width': '50rem' }"
-                [paginator]="this.products.length<=5?false:true" [rows]="5" [pageLinks]="3">
-                    <ng-template pTemplate="header" let-columns>
-                        <tr>
-                            <th *ngFor="let col of columns" [pSortableColumnDisabled]="false" [pSortableColumn]="col.field">
-                                {{ col.header }} <p-sortIcon [field]="col.field" />
-                            </th>
-                        </tr>
-                    </ng-template>
-                    <ng-template pTemplate="body" let-rowData let-columns="columns">
-                        <tr>
-                            <td *ngFor="let col of columns">
-                                <div id="td-div" [ngStyle]="{color:getColor(rowData[col.field]), 'background-color':getBackGroundColor(rowData[col.field])}">{{ rowData[col.field] }}</div>
-                            </td>
-                        </tr>
-                    </ng-template>
-                <ng-template pTemplate="emptymessage" let-columns>
-    <tr>
-      <td [attr.colspan]="columns.length + 1" class="p-text-center" style=" text-align: center;
+                    <p-table #dt [columns]="cols" [value]="products" [tableStyle]="{ 'min-width': '50rem' }"
+                        [paginator]="this.products.length<=5?false:true" [rows]="5" [pageLinks]="3">
+                        <ng-template pTemplate="header" let-columns>
+                            <tr>
+                                <th *ngFor="let col of columns" [pSortableColumnDisabled]="false"
+                                    [pSortableColumn]="col.field">
+                                    {{ col.header }} <p-sortIcon [field]="col.field" />
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-rowData let-columns="columns">
+                            <tr>
+                                <td *ngFor="let col of columns">
+                                    <div id="td-div"
+                                        [ngStyle]="{color:getColor(rowData[col.field]), 'background-color':getBackGroundColor(rowData[col.field])}">
+                                        {{ rowData[col.field] }}</div>
+                                </td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="emptymessage" let-columns>
+                            <tr>
+                                <td [attr.colspan]="columns.length + 1" class="p-text-center" style=" text-align: center;
   padding: 20px;
   color: gray;
   font-size: 15px;">
-        No data found.
-      </td>
-    </tr>
-  </ng-template>
-                </p-table>
+                                    No data found.
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
                 </div>
-                <div *ngIf="products.length>5" class="paginator-extension" style="display: flex;gap: 5px; flex-direction: row;">
-                    <input style="width: 40px; background-color: rgba(211, 211, 211, 0.3); z-index: 1; margin-top:5px; height: 28px; text-align: center;"
-                     type="text"
-      [(ngModel)]="goToPageNumber"
-      min="1"
-      [max]="totalPages"/>
-        <button (click)="goToPage(dt)" class="go-button">Go</button>
-      </div>
+                <div *ngIf="products.length>5" class="paginator-extension"
+                    style="display: flex;gap: 5px; flex-direction: row;">
+                    <input
+                        style="width: 40px; background-color: rgba(211, 211, 211, 0.3); z-index: 1; margin-top:5px; height: 28px; text-align: center;"
+                        type="text" [(ngModel)]="goToPageNumber" min="1" [max]="totalPages" />
+                    <button (click)="goToPage(dt)" class="go-button">Go</button>
+                </div>
+                <div class="paginator-extension1"
+                    style="display: flex;gap: 5px; flex-direction: row;">
+                    <p class="go-button1">{{products.length}} items</p>
+                </div>
             </div>
             <div id="filter-overlay" *ngIf="filter">
                 <div id="filter-form-inner">
                     <div id="filter-header">
-                         <div id="filter_head">
+                        <div id="filter_head">
                             <span id="filter-heading">Filter</span>
                         </div>
                         <div id="cross-div">
@@ -70,9 +77,10 @@
                                         <label>Ticket Id:</label>
                                     </div>
                                     <div class="input">
-                                        <p-autoComplete name="ticketId" [(ngModel)]="filterTicketId"
-                                            field="ticketId"
-                                            [dropdown]="false" [suggestions]="tickets" (completeMethod)="search_tickets($event)" (onSelect)="assignee_id_change()" />
+                                        <p-autoComplete name="ticketId" [(ngModel)]="filterTicketId" field="ticketId"
+                                            [dropdown]="false" [suggestions]="tickets"
+                                            (completeMethod)="search_tickets($event)"
+                                            (onSelect)="assignee_id_change()" />
                                     </div>
                                 </div>
                                 <div class="filter-input-div">
@@ -80,9 +88,8 @@
                                         <label>Type:</label>
                                     </div>
                                     <div class="input">
-                                        <p-dropdown [options]="types" [(ngModel)]="filterType"
-                                            optionLabel="type" name="type" appendTo="body"
-                                            placeholder="Select Type" />
+                                        <p-dropdown [options]="types" [(ngModel)]="filterType" optionLabel="type"
+                                            name="type" appendTo="body" placeholder="Select Type" />
                                     </div>
                                 </div>
                                 <div class="filter-input-div">
@@ -100,17 +107,18 @@
                                         <label>Assigned Id:</label>
                                     </div>
                                     <div class="input">
-                                        <p-autoComplete name="assigneeId" [(ngModel)]="filterAssigneeId"
-                                            field="user_id"
-                                            [dropdown]="false" [suggestions]="users" (completeMethod)="search($event)" (onSelect)="assignee_id_change()" />
+                                        <p-autoComplete name="assigneeId" [(ngModel)]="filterAssigneeId" field="user_id"
+                                            [dropdown]="false" [suggestions]="users" (completeMethod)="search($event)"
+                                            (onSelect)="assignee_id_change()" />
                                     </div>
                                 </div>
                                 <div class="filter-input-div">
                                     <div class="label">
-                                        <label>Assignee</label>
+                                        <label>Assignee:</label>
                                     </div>
                                     <div class="input">
-                                        <input pInputText name="filter_assignee" [(ngModel)]="filterAssignee" readonly/>
+                                        <input pInputText name="filter_assignee" [(ngModel)]="filterAssignee"
+                                            readonly />
                                     </div>
                                 </div>
                                 <div class="filter-input-div">
@@ -123,17 +131,17 @@
                                 </div>
                                 <div class="filter-input-div">
                                     <div class="label">
-                                        <label>Category</label>
+                                        <label>Category:</label>
                                     </div>
                                     <div class="input">
                                         <p-dropdown [options]="categories" [(ngModel)]="fiterCategory"
-                                            optionLabel="categoryDesc" placeholder="Select category"
-                                            name="category" (onChange)="category_entered($event)" />
+                                            optionLabel="categoryDesc" placeholder="Select category" name="category"
+                                            (onChange)="category_entered($event)" />
                                     </div>
                                 </div>
                                 <div class="filter-input-div">
                                     <div class="label">
-                                        <label>Subcategory</label>
+                                        <label>Subcategory:</label>
                                     </div>
                                     <div class="input">
                                         <p-dropdown [options]="dynamic_subcategory" [(ngModel)]="filterSubcategory"
@@ -151,7 +159,7 @@
                                 </div>
                                 <div class="filter-input-div">
                                     <div class="label">
-                                        <label>Opened date</label>
+                                        <label>Opened Date:</label>
                                     </div>
                                     <div class="input">
                                         <input type="date" name="createDateTime" [(ngModel)]="filterOpenedDate" />
@@ -159,7 +167,7 @@
                                 </div>
                                 <div class="filter-input-div">
                                     <div class="label">
-                                        <label>Days Old</label>
+                                        <label>Days Old:</label>
                                     </div>
                                     <div class="input">
                                         <input type="number" name="filter_days_old" [(ngModel)]="filterDaysOld" />
@@ -167,25 +175,26 @@
                                 </div>
                                 <div class="filter-input-div">
                                     <div class="label">
-                                        <label>Reporter Id</label>
+                                        <label>Reporter Id:</label>
                                     </div>
                                     <div class="input">
-                                        <p-autoComplete name="reporterId" [(ngModel)]="filterReporterId"
-                                            field="user_id"
-                                            [dropdown]="false" [suggestions]="users" (completeMethod)="search($event)" (onSelect)="reporter_id_change()" />
+                                        <p-autoComplete name="reporterId" [(ngModel)]="filterReporterId" field="user_id"
+                                            [dropdown]="false" [suggestions]="users" (completeMethod)="search($event)"
+                                            (onSelect)="reporter_id_change()" />
                                     </div>
                                 </div>
                                 <div class="filter-input-div">
                                     <div class="label">
-                                        <label>Reporter Name</label>
+                                        <label>Reporter Name:</label>
                                     </div>
                                     <div class="input">
-                                        <input pInputText name="filter_reporter" [(ngModel)]="filterReporter" readonly />
+                                        <input pInputText name="filter_reporter" [(ngModel)]="filterReporter"
+                                            readonly />
                                     </div>
                                 </div>
                                 <div class="filter-input-div">
                                     <div class="label">
-                                        <label>Status</label>
+                                        <label>Status:</label>
                                     </div>
                                     <div class="input">
                                         <p-dropdown [options]="statuses" [(ngModel)]="filterStatus" optionLabel="status"
@@ -194,8 +203,12 @@
                                 </div>
                             </div>
                             <div id="form-footer">
+                                <div style="display: flex; align-items: center; justify-content: flex-start; width: 50%;">
                                 <button id="apply-btn" type="submit">Apply</button>
+                                </div>
+                                <div style="display: flex; align-items: center; justify-content: flex-end; width: 50%;">
                                 <button id="apply-btn" type="button" (click)="reset_all()">Reset</button>
+                                </div>
                             </div>
                         </form>
                     </div>

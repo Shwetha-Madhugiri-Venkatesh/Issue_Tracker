@@ -10,8 +10,8 @@
                         <p-dropdown [options]="categories" [(ngModel)]="selectedCategory" optionLabel="categoryDesc"
                             placeholder="Select category" name="category" (onChange)="category_entered($event)" />
                     </div>
-                    <div id="refresh-div">
-                        <i class="fa-solid fa-rotate-right fa-rotate-270"></i>
+                    <div id="refresh-div" (click)="refresh()">
+                        <i class="fa-solid fa-rotate-right fa-rotate-270" ></i>
                     </div>
                 </div>
             </div>

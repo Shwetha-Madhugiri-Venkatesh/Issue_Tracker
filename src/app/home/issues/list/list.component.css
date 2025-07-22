@@ -185,7 +185,7 @@ input{
 #search-div{
     width: 150px;
     border-radius: 10px;
-    padding: 2px 10px;
+    padding: 2px 0px 2px 10px;
 }
 
 #search-input{
@@ -374,6 +374,13 @@ input{
   margin-right: 5px;
 }
 
+.paginator-extension1 {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: -42px; /* Align with paginator */
+  margin-right: 5px;
+}
+
 .go-button {
   background-color: #3482a2;
   color: white;
@@ -385,6 +392,10 @@ input{
   margin-top:5px; height: 28px;
 }
 
+.go-button1{
+  z-index: 2;
+  margin-top:14px;
+}
 #filter_head{
 width: 50%;
 display: flex;

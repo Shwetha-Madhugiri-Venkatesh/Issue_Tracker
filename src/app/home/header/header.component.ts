@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ConfirmationService } from 'primeng/api';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { User } from 'src/app/Models/User';
 import { HTTPService } from 'src/app/Services/http_service';
 import { TwoWayDataBinding } from 'src/app/Services/two_way_dataBinding';
@@ -7,13 +9,13 @@ import { TwoWayDataBinding } from 'src/app/Services/two_way_dataBinding';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent {
   selected:string = 'Dashboard';
   login_user:{};
   logout_visible:boolean=false;
-  user_details={uname:'',type:'',profile:''};
+  user_details={uname:'',type:'',profile:'',fname:'',lname:'',user_id:''};
    items = [
             { label: 'Dashboard', icon: 'dashboard_1828765.png', route: "/home" },
            { label: 'Issues', icon: 'bug_8786300.png', route: 'issues' },
