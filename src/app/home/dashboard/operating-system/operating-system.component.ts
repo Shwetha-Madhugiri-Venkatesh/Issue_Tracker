@@ -36,7 +36,7 @@ operating_options: any;
                     label: 'Sales',
                     data: Object.values(result),
                     fill: false,
-                    backgroundColor:["red","magenta",'pink','yellow','orange','gray','green',"blue",'skyblue'],
+                    backgroundColor:["red","magenta",'pink','saddlebrown','orange','gray','green',"blue",'skyblue'],
                     borderColor: 'white',
                     tension: 0
                   }
@@ -49,6 +49,14 @@ operating_options: any;
         font:{
               size:this.getResponsiveFontSize()
             }
+      }
+    },
+    datalabels: {
+      display: true,
+      color: 'white',
+      font: {
+        size: 14,
+        weight: 'bold'
       }
     }
   }

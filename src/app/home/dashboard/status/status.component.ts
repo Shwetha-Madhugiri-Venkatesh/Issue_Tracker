@@ -50,6 +50,14 @@ export class StatusComponent {
       enabled: true
     },
     legend: { display: false },
+    datalabels: {
+      display: true,
+      color: 'white',
+      font: {
+        size: 14,
+        weight: 'bold'
+      }
+    }
   },
       scales: {
         x: {

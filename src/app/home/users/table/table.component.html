@@ -1,5 +1,4 @@
 <div id="user-content">
-    <p-toast />
     <div id="header">
         <div class="heading">
             <h2 style="width: 100px;">Users</h2>
@@ -8,7 +7,7 @@
             <div id="header-last-inner">
                 <div>
                     <p-dropdown *ngIf="products.length>0" id="top" [options]="numbers" [(ngModel)]="dynamic_page_number"
-                        optionLabel="name" [placeholder]="'show '+selectedNum" (onChange)="dynamic_rows($event)" />
+                        optionLabel="name" [placeholder]="'Show '+selectedNum" (onChange)="dynamic_rows($event)" />
                 </div>
                 <div>
                     <p-multiSelect [options]="columns" [(ngModel)]="selectedCol" optionLabel="header"
@@ -43,14 +42,14 @@
                                 [pSortableColumn]="col.field">
                                 {{ col.header }} <p-sortIcon [field]="col.field" />
                             </th>
-                            <th>Actions</th>
+                            <th *ngIf="user_details.type!='User'">Actions</th>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-rowData let-columns="columns">
                         <tr (click)="open_form(rowData['id'])">
                             <td *ngFor="let col of columns" [innerHTML]="rowData[col.field] ">
                             </td>
-                            <td>
+                            <td *ngIf="user_details.type!='User'">
                                 <div class="icons">
                                     <!-- <i class="fa-solid fa-pen-to-square" (click)="open_form(rowData['id'])"></i> -->
                                     <i style="cursor: pointer;" class="fa-solid fa-trash" (click)="delete_the_user(rowData['id'])" pTooltip="Delete User" tooltipPosition="bottom"></i>
@@ -130,12 +129,12 @@
             <div id="delete_dialog_content">
                 <div id="delete-dialog_top">
                     <i id="delete" class="fa-solid fa-circle-exclamation" style="color: #74C0FC;"></i>
-                    <p id="question">Are you sure?</p>
+                    <p id="question">Are you sure that you want to delete?</p>
                 </div>
                 <div id="delete-dialog-bottom">
                     <div id="delete-dialog-btns">
-                        <button id="delete-dialog-btn1" (click)="delete_confirm()">Delete</button>
                         <button id="delete-dialog-btn2" (click)="cancel_delete()">Cancel</button>
+                        <button id="delete-dialog-btn1" (click)="delete_confirm()">Delete</button>
                     </div>
                 </div>
             </div>

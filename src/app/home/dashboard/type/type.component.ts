@@ -11,6 +11,7 @@ import { TwoWayDataBinding } from 'src/app/Services/two_way_dataBinding';
 export class TypeComponent {
     
       data;
+  type_options: { plugins: { legend: { labels: { font: { size: number; }; }; }; datalabels: { display: boolean; color: string; font: { size: number; weight: string; }; }; }; };
     
       constructor(private http_service:HTTPService, private two_way:TwoWayDataBinding){}
     
@@ -41,9 +42,34 @@ export class TypeComponent {
               }
             ]
           };
+          this.type_options = {
+    plugins: {
+    legend: {
+      labels: {
+        font:{
+              size:this.getResponsiveFontSize()
+            }
+      }
+    },
+    datalabels: {
+      display: true,
+      color: 'white',
+      font: {
+        size: 14,
+        weight: 'bold'
+      }
+    }
+  }
+};
         })
       }
       refresh(){
     this.ngOnInit();
   }
+
+  getResponsiveFontSize() {
+    const vw = window.innerWidth / 100;
+    return Math.max(12, vw); // prevent too small
+  }
+
 }

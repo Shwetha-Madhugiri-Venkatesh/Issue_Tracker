@@ -6,6 +6,13 @@
     display: flex;
     flex-direction: row;
 }
+#kabban-content{
+    height: 100%;
+}
+#kabban-header{
+    height: 7%;
+}
+
 #filter{
     height: 30px;
     width: 30px;
@@ -42,6 +49,8 @@ justify-content: flex-end;
 }
  #edit_div{
     padding: 10px;
+    display: flex;
+    align-items: flex-end;
  }
 #right{
     width: 50%;
@@ -147,8 +156,11 @@ label,input{
     font-size: 15px;
     cursor: pointer;
 }
-
+#issues{
+    height: 93%;
+}
 #issues-container{
+    height: 87%;
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -176,6 +188,7 @@ label,input{
     padding: 3px;
     border-bottom: 1px solid #ddd;
     width: 100%;
+    height: 8%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
@@ -208,18 +221,18 @@ label,input{
 }
 
 #tickets{
-    height: 425px;
+    height: 96%;
     display: flex;
     flex-direction: column;
     gap: 10px;
     overflow: auto;
     scrollbar-width: none;
-    padding: 0px 10px;
 }
 
 #tickets-div{
     width: 100%;
-    padding: 10px 0px;
+    height: 92%;
+    padding: 10px;
 }
 
 #comment-dialog-container{
@@ -397,17 +410,31 @@ label,input{
 }
 
 .comment-footer-div-left{
-    width: 50%;
+    width: 80%;
     display: flex;
     align-items: center;
     justify-content: flex-start;
     padding: 5px;
 }
+textarea.input,
+textarea.input-value {
+  width: 100%;
+  border: none;
+  outline: none;
+  resize: none;
+  overflow: hidden;
+  font-size: 13px;
+  font-family: inherit;
+  padding: 0;
+  background-color: transparent;
+  color: rgb(45, 57, 57);
+}
+
 
 .comment-footer-div-right{
-    width: 50%;
+    width: 20%;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: flex-end;
     padding: 5px;
 }

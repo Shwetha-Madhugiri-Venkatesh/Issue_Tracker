@@ -6,15 +6,15 @@
             </div>
             <div id="browser-header-right">
                 <div id="browser-header-right-inner">
-                    <div id="refresh-div" (click)="refresh()">
+                    <div id="refresh-div" (click)="refresh()" pTooltip="Refresh" tooltipPosition="bottom">
                         <i class="fa-solid fa-rotate-right fa-rotate-270"></i>
                     </div>
                 </div>
             </div>
         </div>
         <div id="browser-container">
-            <div id="status-container-inner">
-                <p-chart type="pie" [data]="data" class="h-[30rem]" [options]="browser_options" />
+            <div id="browser-container-inner">
+                <p-chart type="pie" [data]="data" class="h-[30rem]" [options]="browser_options" style="display: flex !important; align-items: center; justify-content: center"></p-chart>
             </div>
         </div>
     </div>

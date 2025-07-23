@@ -258,7 +258,6 @@ export class KabbanComponent implements OnInit {
       console.log(form_data);
       this.http_service.post_comment(form_data).subscribe((res)=>{
         console.log(res);
-        this.visible_comment=false;
       })
       comment_ticket_details.priorityId=commentForm.value.priority.priorityId;
       comment_ticket_details.lastModifiedDateTime=commentForm.value.lastModifiedDateTime;
@@ -270,6 +269,7 @@ export class KabbanComponent implements OnInit {
       this.http_service.update_ticket(comment_ticket_details.id,rest).subscribe((res)=>{
         console.log(res);
         this.fetch_tickets_update();
+        this.fetch_update_comments();
       })
     })
   }
@@ -326,6 +326,13 @@ export class KabbanComponent implements OnInit {
     this.filterTicketId='';
     this.fetch_tickets_update();
   }
+
+  autoResize(event: Event): void {
+  const textarea = event.target as HTMLTextAreaElement;
+  textarea.style.height = 'auto'; // reset height
+  textarea.style.height = `${textarea.scrollHeight}px`; // set to fit content
+}
+
 
   issues_filter_form_submited(issuesFilterForm:NgForm){
     console.log(issuesFilterForm.value);

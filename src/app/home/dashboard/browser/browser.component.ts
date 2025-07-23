@@ -15,7 +15,7 @@ export class BrowserComponent {
   constructor(private http_service: HTTPService, private two_way: TwoWayDataBinding) { }
 
   browsers: { browser_name: string, browser_id: string }[] = this.two_way.browsers;
-
+  // chartPlugins = [ChartDataLabels]; 
 
   ngOnInit() {
     let result = {};
@@ -49,6 +49,14 @@ export class BrowserComponent {
         font:{
               size:this.getResponsiveFontSize()
             }
+      }
+    },
+    datalabels: {
+      display: true,
+      color: 'white',
+      font: {
+        size: 14,
+        weight: 'bold'
       }
     }
   }

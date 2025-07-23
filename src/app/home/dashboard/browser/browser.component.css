@@ -64,7 +64,7 @@
     height: 92%;
 }
 ::ng-deep #browser-container canvas{
-    height: 400px !important;
+    height: 350px !important;
 }
 
 #browser-container-inner{

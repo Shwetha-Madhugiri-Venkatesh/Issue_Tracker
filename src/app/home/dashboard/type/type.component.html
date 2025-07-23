@@ -6,7 +6,7 @@
             </div>
             <div id="type-header-right">
                 <div id="type-header-right-inner">
-                    <div id="refresh-div" (click)="refresh()">
+                    <div id="refresh-div" (click)="refresh()" pTooltip="Refresh" tooltipPosition="bottom">
                         <i class="fa-solid fa-rotate-right fa-rotate-270"></i>
                     </div>
                 </div>
@@ -14,7 +14,7 @@
         </div>
         <div id="type-container">
             <div id="type-container-inner">
-                <p-chart type="pie" [data]="data" class="h-[30rem]" />
+                <p-chart type="pie" [data]="data" class="h-[30rem]" [options]="type_options"/>
             </div>
         </div>
     </div>

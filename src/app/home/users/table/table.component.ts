@@ -158,12 +158,8 @@ export class TableComponent {
       this.delete = false;
       return;
     }
-    if (this.user_details?.type == 'Admin') {
+    
       this.display_dialog.emit([true, id]);
-    } else {
-      // this.message_service.add({severity:'warn', summary:'Warn', detail:"Access Denied"});
-      return;
-    }
   }
 
   reset_fields() {

@@ -29,7 +29,7 @@ export class AuthorizeUser{
                 this.login_flag=true;
                 this.authentication.next([true]);
                 localStorage.setItem("login",JSON.stringify(login_details));
-                this.route.navigate(['/home',login_details]);
+                this.route.navigate(['/home']);
             }else{
                 if(user){
                     this.authentication.next([false,'Password is wrong']);

@@ -382,7 +382,7 @@ input{
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    padding: 5px 10px;
+    padding: 0px 15px 5px 10px;
 }
 
 ::ng-deep #user-content .p-paginator .p-paginator-first{
@@ -570,4 +570,29 @@ justify-content: flex-end;
 #delete-dialog-btn2:hover{
     background-color: rgba(211, 211, 211, 0.3);
     color: rgb(45, 57, 57);
+}
+
+::ng-deep .p-checkbox .p-checkbox-box .p-icon {
+    width: 10px;
+    height: 10px;
+}
+
+::ng-deep #user-content .p-checkbox .p-checkbox-box {
+    width: 15px;
+    height: 15px;
+}
+
+::ng-deep .p-checkbox {
+    width: 26px;
+    height: 22px;
+    display: flex;   
+    align-items: center;
+    margin: 0 !important;
+}
+
+::ng-deep .p-multiselect-panel .p-multiselect-items .p-multiselect-item.p-highlight {
+    background-color: white !important;
+}
+::ng-deep .p-multiselect-panel .p-multiselect-items .p-multiselect-item:hover {
+    background-color: #EFF6FF !important;
 }

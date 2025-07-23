@@ -13,13 +13,14 @@ import { LoginCanActivate } from "./Guards/login_canactivate";
 const routes:Routes = [
     {path:"",component:LoginComponent,canActivate:[LoginCanActivate]},
     {path:"home", component:HomeComponent, canActivate:[AuthLogin], children:[
-        {path:'', component:DashboardComponent},
+        {path:'', component:DashboardComponent,canActivate:[AuthLogin]},
         {path:'issues', component:IssuesComponent,canActivate:[AuthLogin], children:[
             {path:'', component:KabbanComponent, canActivate:[AuthLogin]},
             {path:'list', component:ListComponent,canActivate:[AuthLogin]},
         ]},
         {path:'users', component:UsersComponent,canActivate:[AuthLogin]},
-    ]}
+    ]},
+    { path: '**', redirectTo: '', pathMatch: 'full' }
 ]
 @NgModule({
    imports:[RouterModule.forRoot(routes)],

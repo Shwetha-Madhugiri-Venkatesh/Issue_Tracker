@@ -78,6 +78,14 @@ export class GraphComponent implements OnInit {
       enabled: true
     },
     legend: { display: false },
+    datalabels: {
+      display: true,
+      color: 'white',
+      font: {
+        size: 14,
+        weight: 'bold'
+      }
+    }
   }
       ,
       scales: {
@@ -90,7 +98,7 @@ export class GraphComponent implements OnInit {
           },
           title: {
             display: true,
-            text: 'Priority'
+            text: 'Dates'
           }
         },
         y: {

@@ -49,6 +49,14 @@ export class PriorityComponent implements OnInit{
       enabled: true
     },
     legend: { display: false },
+    datalabels: {
+      display: true,
+      color: 'white',
+      font: {
+        size: 14,
+        weight: 'bold'
+      }
+    }
   }
       ,
       scales: {

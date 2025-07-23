@@ -1,12 +1,13 @@
 <div id="login-container">
     <div id="inner-login-div">
         <div id="welcome-div">
-            <h1 >ORG Issue Tracker</h1>
+            <h2>ORG Issue Tracker</h2>
             <span>Enter your credentials to access your account</span>
         </div>
         <div id="form-div">
             <form #form="ngForm" (ngSubmit)="form_submit(form)">
                 <!-- <input name="dummy" ngmoz/> -->
+                <div class="input-div">
                 <label style="font-weight: bold;">User ID</label>
                 <input
                     #userIdRef="ngModel"
@@ -16,8 +17,10 @@
                     [(ngModel)]="user_Id"
                     required
                     />
-                <p *ngIf="userIdRef.invalid && userIdRef.touched">*required</p>
-                <br />
+                <p *ngIf="userIdRef.invalid && userIdRef.touched" style="color: red;">*required</p>
+                </div>
+
+                 <div class="input-div">
                 <label style="font-weight: bold;">Password</label>
                 <p-password 
                     #pass="ngModel"
@@ -29,8 +32,10 @@
                     required
                     >
                 </p-password>
-                <p *ngIf="pass.invalid && pass.touched">*required</p>
-                <br />
+                <p *ngIf="pass.invalid && pass.touched" style="color: red;">*required</p>
+                </div>
+
+                <div class="input-div">
                 <ng-container *ngIf="forgot">
                     <label style="font-weight: bold;">Confirm Password</label>
                     <p-password 
@@ -42,18 +47,19 @@
                         [(ngModel)]="confirmPassword"
                         required>
                     </p-password>
-                      <p *ngIf="!(confirmPassword==password)&&confirmPassword" >Please enter the same password</p>
-                      <p *ngIf="confirm.invalid && confirm.touched">*required</p>
+                      <p *ngIf="!(confirmPassword==password)&&confirmPassword" style="color: red;">Please enter the same password</p>
+                      <p *ngIf="confirm.invalid && confirm.touched" style="color: red;">*required</p>
                 </ng-container>
+                </div>
                 
-                <br />
+                 <div class="input-div">
                 <p-button 
                     [label]='forgot?"Reset Password":"Login"'
                     type="submit"
                 ></p-button>
-                <br />
                 <div id="forgot">
                     <button id="forgot-btn" type="button" (click)="forgot_password()">{{forgot?"Back to login":"Forgot Password?"}}</button>
+                </div>
                 </div>
             </form>
         </div>

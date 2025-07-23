@@ -31,4 +31,11 @@ export class TicketComponent {
   open_comment_form(ticket:Ticket){
     this.commentForm.emit(ticket);
   }
+
+  autoResize(event: Event): void {
+  const textarea = event.target as HTMLTextAreaElement;
+  textarea.style.height = 'auto'; // Reset
+  textarea.style.height = `${textarea.scrollHeight+10}px`; // Set new height
+}
+
 }

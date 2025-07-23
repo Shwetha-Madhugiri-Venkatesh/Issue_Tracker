@@ -9,7 +9,7 @@
 
 #content{
     width: 1270px;
-    height: 600px;
+    height: 100%;
 }
 
 #header-div{
@@ -34,7 +34,7 @@ button{
 button:hover{
     color: purple;
 }
-@media screen and (max-width:950px){
+/* @media screen and (max-width:950px){
     #content{
         height: 650px;
     }
@@ -48,4 +48,4 @@ button:hover{
     #content{
         height: 420px;
     }
-}
+} */

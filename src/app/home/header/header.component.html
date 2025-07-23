@@ -17,7 +17,7 @@
                <i class="fa-regular fa-bell" pBadge value="2"></i>
             </div> -->
                 <div id="photo">
-                    <img style="width: 100%;height: 100%;border-radius: 50%;" [src]="user_details.profile" (click)="op.toggle($event)" />
+                    <img style="width: 100%;height: 100%;border-radius: 50%;" [src]="user_details.profile?user_details.profile:'../../../assets/images/profile_avatar.jpg'" (click)="op.toggle($event)" />
                 </div>
                 <div id="last">
                     <div>
@@ -51,12 +51,12 @@
             <div id="delete_dialog_content">
                 <div id="delete-dialog_top">
                     <i id="delete" class="fa-solid fa-circle-exclamation" style="color: #74C0FC;"></i>
-                    <p id="question">Are you sure?</p>
+                    <p id="question">Are you sure you?</p>
                 </div>
                 <div id="delete-dialog-bottom">
                     <div id="delete-dialog-btns">
-                        <button id="delete-dialog-btn1" (click)="logout_confirm()">Logout</button>
                         <button id="delete-dialog-btn2" (click)="cancel_logout()">Cancel</button>
+                        <button id="delete-dialog-btn1" (click)="logout_confirm()">Logout</button>
                     </div>
                 </div>
             </div>
@@ -68,7 +68,7 @@
     <p-overlayPanel #op>
         <div id="overlay_profile">
             <div>
-                <img style="width: 40px;height: 40px;border-radius: 50%;" [src]="user_details.profile" (click)="op.toggle($event)" />
+                <img style="width: 40px;height: 40px;border-radius: 50%;" [src]="user_details.profile?user_details.profile:'../../../assets/images/profile_avatar.jpg'" (click)="op.toggle($event)" />
             </div>
             <div class="input-div">
             <p class="text1">User Name</p>

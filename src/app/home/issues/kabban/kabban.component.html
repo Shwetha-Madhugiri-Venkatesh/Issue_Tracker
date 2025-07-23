@@ -273,9 +273,16 @@
                         <span>{{comment_ticket.ticketId}}</span>
                     </div>
                     <div id="comment-subject">
-                        <span class="label">Subject:</span>
-                        <input [ngClass]="commentForm?.controls['subject']?.value?'input-value':'input'" name="subject" [(ngModel)]="comment_ticket.subject"/>
-                    </div>
+  <span class="label">Subject:</span>
+  <textarea
+    [(ngModel)]="comment_ticket.subject"
+    name="subject"
+    [ngClass]="commentForm?.controls['subject']?.value ? 'input-value' : 'input'"
+    (input)="autoResize($event)"
+    rows="1"
+  ></textarea>
+</div>
+
                     <div id="comment-description">
                         <span class="label">Description:</span>
                         <input [ngClass]="commentForm?.controls['description']?.value?'input-value':'input'" name="description" [(ngModel)]="comment_ticket.description"/>
@@ -308,7 +315,7 @@
            width="100" />
 
       <!-- Or just show file type -->
-      {{ comment_ticket.input_file ? 'File attached' : 'No file' }}
+      {{ comment_ticket.input_file ? '' : 'No file' }}
     </div>
     
     <button
@@ -361,7 +368,7 @@
                     <div>
                         <p-editor [(ngModel)]="comment" [style]="{ height: '40px' }" name="comment"/>
                     </div>
-                    <div>
+                    <div style="display: flex;align-items: center;justify-content: flex-end;">
                         <button type="submit">Send</button>
                     </div>
                 </div>
@@ -386,7 +393,7 @@
                             <div class="comment-footer">
                                 <div *ngFor="let commen of tickets_comments[com]" class="comment-footer-div">
                                     <div class="comment-footer-div-left">
-                                        <p [innerHTML]="commen.message"></p>
+                                        <label [innerHTML]="commen.message" style="word-break: break-all;"></label>
                                     </div>
                                     <div class="comment-footer-div-right">
                                         <div class="comment-footer-div-right-inner" *ngIf="tickets_comments[com][0].uname!=undefined">
@@ -420,12 +427,12 @@
             <div id="delete_dialog_content">
                 <div id="delete-dialog_top">
                     <i id="delete" class="fa-solid fa-circle-exclamation" style="color: #74C0FC;"></i>
-                    <p id="question">Are you sure?</p>
+                    <p id="question">Are you sure that you want to delete?</p>
                 </div>
                 <div id="delete-dialog-bottom">
                     <div id="delete-dialog-btns">
-                        <button id="delete-dialog-btn1" (click)="delete_confirm()">Delete</button>
                         <button id="delete-dialog-btn2" (click)="cancel_delete()">Cancel</button>
+                        <button id="delete-dialog-btn1" (click)="delete_confirm()">Delete</button>
                     </div>
                 </div>
             </div>

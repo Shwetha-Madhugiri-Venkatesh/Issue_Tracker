@@ -1,6 +1,5 @@
 .ticket-container{
     width: 100%;
-    height: 150px;
     background-color: white;
     box-shadow: 0 0 10px 0.2px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
@@ -23,6 +22,7 @@
 }
 
 .second{
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -59,6 +59,20 @@
 .label,p{
     font-size: 13px;
     color: rgb(45, 57, 57);
+}
+.label1{
+    font-size: 13px;
+    color: rgb(45, 57, 57);
+    width: 16%;
+}
+.subject{
+    width: 84%;
+    font-size: 13px;
+    border: none;
+    outline: none;
+    resize: none;
+    color: rgb(45, 57, 57);
+    word-break: break-all;
 }
 .left{
     width: 50%;

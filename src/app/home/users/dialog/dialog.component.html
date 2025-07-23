@@ -195,9 +195,9 @@
             </div>
             <div id="dialog-footer">
                 <div id="btn-container">
-                    <button *ngIf=" !prefill" class="submit" (click)="reset_fields()">Cancel</button>
-                    <button class="submit" *ngIf="prefill" (click)="close_form()">{{editable?"Cancel":"Close"}}</button>
-                    <button *ngIf="!editable &&prefill" class="submit" (click)="edit_form()">Edit</button>
+                    <button class="submit" *ngIf="prefill&&!editable" (click)="close_form_dialog()">Close</button>
+                    <button class="submit" *ngIf="prefill && editable || !prefill " (click)="close_form()">Cancel</button>
+                    <button *ngIf="last_modified?.type!='User' && !editable && prefill" class="submit" (click)="edit_form()">Edit</button>
                     <button *ngIf="editable || !prefill" class="submit" (click)="form_submit(topForm,bottomForm)">Submit</button>
                 </div>
             </div>

@@ -59,6 +59,14 @@ export class CategoryComponent {
       enabled: true
     },
     legend: { display: false },
+    datalabels: {
+      display: true,
+      color: 'white',
+      font: {
+        size: 14,
+        weight: 'bold'
+      }
+    }
   },
       scales: {
         x: {
@@ -97,7 +105,7 @@ export class CategoryComponent {
     refresh(){
     this.ngOnInit();
   }
-  
+
     category_entered(val){
     let result={};
     if(val==undefined){
@@ -121,7 +129,7 @@ export class CategoryComponent {
               backgroundColor:"blue",
               borderColor: '#42A5F5',
               tension: 0,
-            }
+            },
           ]
         };
   }

@@ -62,7 +62,7 @@ export class DialogComponent implements OnChanges, OnInit {
     this.http_service.fetch_users().subscribe((res: User[]) => {
       this.http_users = res;
       this.user_details = res.find(item => item.user_id == this.login_user['userId']);
-      console.log(this.user_details);
+      console.log(this.prefill);
       this.last_modified = structuredClone(this.user_details);
     })
 
@@ -115,9 +115,9 @@ export class DialogComponent implements OnChanges, OnInit {
   }
 
   close_form() {
-    if (!this.editable) {
-      this.visible = false;
-    } else {
+    if(!this.prefill){
+      this.reset_fields();
+    }else{
       this.prefill_fields();
     }
   }
@@ -125,6 +125,9 @@ export class DialogComponent implements OnChanges, OnInit {
   edit_form() {
     this.editable = true;
     this.profile_pic_input = '';
+  }
+  close_form_dialog(){
+    this.visible=false;
   }
 
   form_submit(topForm: NgForm, bottomForm: NgForm) {

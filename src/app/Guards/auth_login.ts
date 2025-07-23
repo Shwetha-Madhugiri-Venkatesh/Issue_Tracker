@@ -17,7 +17,7 @@ export class AuthLogin implements CanActivate{
     if((Object.keys(flag1).length!=0) && (flag2===true)){
       return true;
     }else{
-        this.route.navigate(['']);
+        this.route.navigate(['/']);
         return false;
     }
     }

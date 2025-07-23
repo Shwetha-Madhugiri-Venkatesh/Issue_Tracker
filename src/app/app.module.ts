@@ -45,6 +45,11 @@ import { TypeComponent } from './home/dashboard/type/type.component';
 import { BrowserComponent } from './home/dashboard/browser/browser.component';
 import { OperatingSystemComponent } from './home/dashboard/operating-system/operating-system.component';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+import { Chart } from 'chart.js';
+import { TooltipModule } from 'primeng/tooltip';
+
+Chart.register(ChartDataLabels);
 
 @NgModule({
   declarations: [
@@ -93,6 +98,7 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
    AutoCompleteModule,
    CalendarModule,
   OverlayPanelModule,
+  TooltipModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
