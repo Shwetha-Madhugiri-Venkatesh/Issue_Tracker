@@ -466,7 +466,7 @@ input{
 
 #filter-overlay {
   width: 35%;
-  height: 60%;
+  height: 95%;
   background-color: white;
   border: 1px solid lightgray;
   border-radius: 5px;
@@ -474,6 +474,7 @@ input{
 
 #filter-form-inner {
 width: 100%;
+height: 100%;
   display: flex;
   flex-direction: column;
   gap: 3px;
@@ -496,6 +497,7 @@ width: 100%;
 
 #filter-form-container{
     width: 100%;
+    height: 100%;
 }
 
 .filter-input-div{
@@ -531,6 +533,7 @@ input{
 
 form{
     width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
 }
@@ -567,7 +570,7 @@ form{
     padding: 3px !important;
 }
 #form-top{
-    height: 380px;
+    height: 80%;
     overflow-y: auto;
     overflow-x: hidden;
     display: flex;
@@ -578,7 +581,7 @@ form{
 }
 
 #form-footer{
-    height: 40px;
+    height: 12%;
     display: flex;
     flex-direction: row;
     align-items: center;

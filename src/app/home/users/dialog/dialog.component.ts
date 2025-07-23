@@ -111,6 +111,8 @@ export class DialogComponent implements OnChanges, OnInit {
       this.prefill_fields();
     } else {
       this.reset_fields();
+      this.user_details.uname = this.last_modified?.uname;
+      this.user_details.type = this.last_modified?.type;
     }
   }
 
@@ -124,7 +126,6 @@ export class DialogComponent implements OnChanges, OnInit {
 
   edit_form() {
     this.editable = true;
-    this.profile_pic_input = '';
   }
   close_form_dialog(){
     this.visible=false;
@@ -203,6 +204,7 @@ export class DialogComponent implements OnChanges, OnInit {
     this.user_time_zone = '';
     this.user_last_modified_source_type = '';
     this.profile_pic_input = '';
+    this.user_password='';
   }
   profile_pic_selected(event: Event) {
     const input = event.target as HTMLInputElement;

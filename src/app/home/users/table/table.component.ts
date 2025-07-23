@@ -59,6 +59,7 @@ export class TableComponent {
     this.cols = [
       { field: 'uname', header: 'User Name' },
       { field: 'email_id', header: 'Email ID' },
+      { field: 'type', header: 'User Type'},
       { field: 'created_source', header: 'Created Source' },
       { field: 'created_source_type', header: 'Created Source Type' },
       { field: 'created_datetime', header: 'Created Date Time' },

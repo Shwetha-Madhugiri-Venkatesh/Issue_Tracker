@@ -372,11 +372,11 @@
       "categoryId": "HW",
       "subCategoryId": "AH",
       "statusId": "A",
-      "subject": "shwethaasdddddddddddddfghnnnnm,kuytfrdfvbnmjhgtrefghjmsdfghjkshwethaasdddddddddddddfghnnnnm,kuytfrdfvbnmjhgtrefghjmsdfghjkshwetha",
+      "subject": "shwethaasdddddddddddddfghnnnnm,kuytfrdfvbnmjhgtrefghjmsdfghjkshwethaasdddddddddddddfghnnnnm,kuytfrdfvbnmjhgtrefghjmsdfghjkshwethasdfghjk,mnbvcsdrtyuiknbvcxcvbnm",
       "description": "description updated",
       "priorityId": "L",
       "createDateTime": "7/7/2025, 6:09:12 pm",
-      "lastModifiedDateTime": "22/7/2025, 11:57:51 pm",
+      "lastModifiedDateTime": "23/7/2025, 5:56:15 pm",
       "input_file": "C:\\fakepath\\profile_7310896.png",
       "browser": "FGC",
       "operatingSystem": "WXP"
@@ -1331,6 +1331,13 @@
       "ticketId": "AM#WA#1",
       "userId": "Kusuma_User123",
       "message": "<p>comment4</p>"
+    },
+    {
+      "id": "ca6c",
+      "commentId": "com43",
+      "ticketId": "HW#AH#1",
+      "userId": "Burger_User123",
+      "message": ""
     }
   ]
 }

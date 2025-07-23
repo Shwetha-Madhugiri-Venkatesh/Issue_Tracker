@@ -35,7 +35,8 @@
             <div id="table-with-footer">
                 <p-table #dt [columns]="cols" [value]="products" [tableStyle]="{ 'min-width': '50rem', }"
                     styleClass="p-datatable-sm" [paginator]="this.products.length>dynamic_page_number.value"
-                    [rows]="dynamic_page_number.value" [pageLinks]="3">
+                    [rows]="dynamic_page_number.value" [pageLinks]="3" [scrollable]="true"
+  scrollHeight="510px">
                     <ng-template pTemplate="header" let-columns>
                         <tr>
                             <th *ngFor="let col of columns" [pSortableColumnDisabled]="false"
@@ -67,14 +68,22 @@
                             </td>
                         </tr>
                     </ng-template>
+                    <ng-template pTemplate="paginatorright">
+                            <div *ngIf="products.length>5"  class="paginator-extension">
+                    <input
+                        style="width: 40px; background-color: rgba(211, 211, 211, 0.3); z-index: 1; height: 30px; text-align: center;"
+                        type="text" [(ngModel)]="goToPageNumber" min="1" [max]="totalPages" />
+                    <button (click)="goToPage(dt)" class="go-button">Go</button>
+                </div>
+                        </ng-template>
+
+                        <ng-template pTemplate="paginatorleft">
+                            <div class="paginator-extension1"
+                    style="display: flex;gap: 5px; flex-direction: row;">
+                    <p class="go-button1">{{products.length}} items</p>
+                </div>
+                        </ng-template>
                 </p-table>
-            </div>
-            <div *ngIf="this.products.length>dynamic_page_number.value" class="paginator-extension"
-                style="display: flex;gap: 5px; flex-direction: row;">
-                <input
-                    style="width: 40px; background-color: rgba(211, 211, 211, 0.3); z-index: 1; margin-top:3px; height: 28px;text-align: center;"
-                    type="text" [(ngModel)]="goToPageNumber" min="1" [max]="totalPages" />
-                <button (click)="goToPage(dt)" class="go-button">Go</button>
             </div>
         </div>
         <ng-template [ngIf]="filter_flag">
@@ -109,12 +118,8 @@
                     </form>
                     <div id="filter-footer">
                         <div id="btn-div" style="width: 100%;">
-                            <div style="display: flex; align-items: center; justify-content: flex-start; width: 50%;">
                             <button id="reset-btn" type="button" (click)="reset_form()">Reset</button>
-                            </div>
-                            <div style="display: flex; align-items: center; justify-content: flex-end; width: 50%;">
                             <button id="submit-btn" type="submit" (click)="filter_form_submit(form)">Apply</button>
-                            </div>
                         </div>
                     </div>
                 </div>
