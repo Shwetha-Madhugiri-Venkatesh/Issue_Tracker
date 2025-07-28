@@ -32,10 +32,9 @@ export class TableComponent {
   constructor(private http_service: HTTPService, private primeNg: PrimeNGConfig, private message_service: MessageService, private authorize: AuthorizeUser, private two_way: TwoWayDataBinding) { }
   products: User[] = [];
   users_from_http: User[];
-  cols: { field: string, header: string }[];
+  cols: { field: string, header: string}[];
   columns: { field: string, header: string }[] = [];
   filter_flag: boolean = false;
-  columns_selected: { field: string, header: string }[];
   @Output()
   display_dialog: EventEmitter<[boolean, string?]> = new EventEmitter<[boolean, string?]>;
 
@@ -43,7 +42,6 @@ export class TableComponent {
   user_types = [{ name: "User" }, { name: "Admin" }];
   user_type: string;
   selectedNum: number = 0;
-  len: number = 8;
 
   numbers = [
     { name: 'show 5', value: 5 },
@@ -52,22 +50,25 @@ export class TableComponent {
   ];
 
   selectedCol: { field: string, header: string }[] = [];
+  columns_selected: { field: string, header: string }[] = [];
   dynamic_page_number = { name: 'show 5', value: 5 };
   table_preload;
+  sel=false;
+  text=[{ field: 'uname', header: `text` }];
   ngOnInit() {
     this.table_preload = JSON.parse(localStorage.getItem("table_preload")) || {};
     this.cols = [
-      { field: 'uname', header: 'User Name' },
+      { field: 'uname', header: `User Name` },
       { field: 'email_id', header: 'Email ID' },
       { field: 'type', header: 'User Type'},
-      { field: 'created_source', header: 'Created Source' },
+      { field: 'created_source', header: 'Created Source'},
       { field: 'created_source_type', header: 'Created Source Type' },
-      { field: 'created_datetime', header: 'Created Date Time' },
-      { field: 'last_modified_source', header: 'Last Modified Source' },
+      { field: 'created_datetimeString', header: 'Created Date Time'},
+      { field: 'last_modified_source', header: 'Last Modified Source'},
       { field: 'last_modified_source_type', header: 'Last Modified Source Type' },
-      { field: 'last_modified_datetime', header: 'Last Modified Date Time' },
+      { field: 'last_modified_datetimeString', header: 'Last Modified Date Time'},
     ];
-    this.columns = this.cols;
+    this.columns =structuredClone(this.cols);
     if (Object.keys(this.table_preload).length != 0) {
       this.filter_user_name = this.table_preload.filter_user_name;
       this.filter_user_email_id = this.table_preload.filter_user_email_id;
@@ -91,10 +92,7 @@ export class TableComponent {
     } else {
       this.selectedCol = this.columns;
     }
-
-    if (this.products.length == 0) {
       this.get_all_users();
-    }
     this.login_user = JSON.parse(localStorage.getItem("login")) || {};
     this.http_service.fetch_users().subscribe((res: User[]) => {
       this.selectedNum = res.length;
@@ -103,11 +101,13 @@ export class TableComponent {
     })
 
     this.two_way.emit_users.subscribe(res => {
+       res.forEach(item=>{
+        item['created_datetimeString'] = new Date(item.created_datetime).toLocaleString();
+        item['last_modified_datetimeString'] = new Date(item.last_modified_datetime).toLocaleString();
+      })
       this.users_from_http = res;
       this.products = res;
     })
-
-
   }
   filter_form_submit(form: NgForm) {
     console.log(form.value);
@@ -119,7 +119,7 @@ export class TableComponent {
         if (form_data[key] != undefined && form_data[key] != "") {
           if (key == 'last_modified_datetime' || key == 'created_datetime') {
             let form_date = new Date(form_data[key]).toLocaleDateString();
-            if (item[key].startsWith(form_date)) {
+            if (new Date(item[key]).toLocaleString().startsWith(form_date)) {
               match = true;
             }
           } else if (key == 'uname') {
@@ -190,22 +190,30 @@ export class TableComponent {
       this.products = this.users_from_http;
     }
   }
-
   get_selected_columns(val) {
-    console.log(this.selectedCol);
-    this.columns_selected = val.value;
-    this.len = val.value.length;
+    this.cols = val.value;
+    console.log(this.cols);
+    console.log('Selected columns:', this.selectedCol);
+    console.log('Selected length:', this.selectedCol.length);
+    // this.columns_selected = val.value;
   }
 
-  dynamic_columns() {
-    this.multi.hide();
-    this.cols = this.columns_selected;
-  }
+  // dynamic_columns() {
+  //   this.sel=true;
+  //   this.multi.hide();
+  //   this.cols = this.columns_selected;
+  // }
 
   get_all_users() {
     this.http_service.fetch_users().subscribe((res: User[]) => {
+      res.forEach(item=>{
+        item['created_datetimeString'] = new Date(item.created_datetime).toLocaleString();
+        item['last_modified_datetimeString'] = new Date(item.last_modified_datetime).toLocaleString();
+      })
       this.users_from_http = res;
+      if (this.products.length == 0) {
       this.products = this.users_from_http;
+      }
     });
   }
   delete = false;
@@ -227,7 +235,7 @@ export class TableComponent {
       this.goToPageNumber = '';
     } else {
       this.goToPageNumber = '';
-      alert('Invalid page number');
+       this.message_service.add({severity:'error', summary:'Error', detail:'Invalid number'});
     }
   }
 
@@ -238,10 +246,6 @@ export class TableComponent {
         this.get_all_users();
         this.delete_visible = false;
       })
-    } else {
-      this.message_service.add({ severity: 'warn', summary: 'Warn', detail: "Access Denied" });
-      this.delete_visible = false;
-      return;
     }
   }
 

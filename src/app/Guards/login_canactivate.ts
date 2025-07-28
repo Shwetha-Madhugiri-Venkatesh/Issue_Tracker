@@ -7,7 +7,6 @@ import { LoginComponent } from "src/app/login/login.component";
     providedIn:'root',
 })
 export class LoginCanActivate implements CanActivate{
-    @ViewChild(LoginComponent) login:LoginComponent;
     constructor(private route:Router){}
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
        let flag1 = JSON.parse(localStorage.getItem("login"))||'';

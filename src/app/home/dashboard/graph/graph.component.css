@@ -24,7 +24,6 @@
 #graph-header-left{
     width: 50%;
     display: flex;
-    align-items: center;
     justify-content: flex-start;
 }
 
@@ -38,7 +37,7 @@
 #graph-header-right-inner{
     display: flex;
     flex-direction: row;
-    gap: 10px;
+    gap: 5px;
 }
 
 ::ng-deep #calender .p-dropdown{
@@ -94,12 +93,13 @@
     padding: 20px 10px;
 }
 
-::ng-deep #graph-component  .p-inputtext{
+::ng-deep #graph-component .p-inputtext{
     width: 150px;
     padding: 1px 3px 3px 3px;
+    border-radius: 5px;
 }
 
-::ng-deep .p-button.p-button-icon-only{
+::ng-deep #graph-component .p-button.p-button-icon-only{
     width: 30px;
     height: 30px;
 }
@@ -117,7 +117,7 @@
 #calender{
     display: flex;
     flex-direction: row;
-    gap: 10px;
+    gap: 5px;
 }
 
 #refresh-div:hover{

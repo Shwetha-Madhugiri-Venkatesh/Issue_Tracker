@@ -48,6 +48,8 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Chart } from 'chart.js';
 import { TooltipModule } from 'primeng/tooltip';
+import { customPipe } from './custom_pipes/custom_pipe_one';
+
 
 Chart.register(ChartDataLabels);
 
@@ -72,6 +74,7 @@ Chart.register(ChartDataLabels);
     TypeComponent,
     BrowserComponent,
     OperatingSystemComponent,
+    customPipe
   ],
   imports: [
     BrowserModule,
@@ -99,6 +102,7 @@ Chart.register(ChartDataLabels);
    CalendarModule,
   OverlayPanelModule,
   TooltipModule,
+  
   ],
   providers: [],
   bootstrap: [AppComponent]

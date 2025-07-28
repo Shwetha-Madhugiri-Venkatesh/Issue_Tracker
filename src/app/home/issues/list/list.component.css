@@ -59,12 +59,19 @@
     height: 75%;
     width: 100%;
 }
-::ng-deep #table-inner .p-datatable-table{
+/* ::ng-deep #table-inner .p-datatable-table{
     height: 100%;
-}
+} */
 
 ::ng-deep #table-inner .p-datatable .p-datatable-tbody > tr > td {
-    padding: 5px !important;
+    padding: 10px !important;
+}
+.show{
+    position: absolute;
+    z-index: 10;
+    bottom: 10px;
+    left: 10px;
+    color: rgb(45, 57, 57);
 }
 #filter-overlay {
   width: 35%;
@@ -275,6 +282,7 @@ input{
     height: 30px;
    border-radius: 0px;
     border-right: none;
+    padding-bottom: 4px;
 }
 
 ::ng-deep #list-container .p-paginator .p-paginator-prev:hover{
@@ -296,6 +304,7 @@ input{
     height: 30px;
    border-radius: 0px;
     border-right: none;
+    padding-bottom: 4px;
 
 }
 
@@ -348,6 +357,10 @@ input{
 
 ::ng-deep #list-container .p-dropdown .p-dropdown-trigger{
     width: 30px;
+}
+
+::ng-deep  .p-icon-wrapper{
+    padding-top: 5px !important;
 }
 
 ::ng-deep #list-container #filter-form-container .p-dropdown{

@@ -153,16 +153,20 @@ font-size: 12px;
     height: 100%;
     display: flex;
     flex-direction: column;
+    gap: 10px;
 }
 ::ng-deep #delete_dialog .p-dialog{
     width: 20% !important;
     height: 130px !important;
 }
-::ng-deep .p-dialog .p-dialog-header{
+::ng-deep #delete_dialog_content .p-dialog .p-dialog-header .p-dialog-title{
+    font-size: 18px;
+}
+::ng-deep  #header-container .p-dialog .p-dialog-header{
     padding: 5px 5px 0px 10px !important;
 }
 
-::ng-deep .p-dialog .p-dialog-content{
+::ng-deep #header-container .p-dialog .p-dialog-content{
     padding:5px 5px 10px 10px;
 }
 #delete-dialog_top{
@@ -187,7 +191,7 @@ font-size: 12px;
     padding: 0px 10px;
 }
 
-::ng-deep .p-dialog .p-dialog-header .p-dialog-title{
+::ng-deep #header-delete-dialog .p-dialog .p-dialog-header .p-dialog-title{
     font-size: 18px;
 }
 #delete{

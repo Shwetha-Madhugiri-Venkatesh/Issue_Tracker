@@ -60,8 +60,17 @@
                     <p class="go-button1">{{products.length}} items</p>
                 </div>
                         </ng-template>
+                        <ng-template pTemplate="paginatorlastpagelinkicon">
+                            <img src="../../../../assets/images/svg_502085.svg" style="width: 17px; height: 17px; display: flex; align-items: center; justify-content: center;"/>
+                        </ng-template>
+                        <ng-template pTemplate="paginatorfirstpagelinkicon">
+                            <img src="../../../../assets/images/svg_502087.svg" style="width: 17px; height: 17px; display: flex; align-items: center; justify-content: center;"/>
+                        </ng-template>
                     </p-table>
                 </div>
+                <div class="paginator-extension1" *ngIf="(this.products.length<=5)">
+                <p [ngClass]="{'show':(this.products.length<=5)}" class="go-button1">{{products.length}} items</p>
+            </div>
             </div>
             <div id="filter-overlay" *ngIf="filter">
                 <div id="filter-form-inner">
@@ -70,7 +79,7 @@
                             <span id="filter-heading">Filter</span>
                         </div>
                         <div id="cross-div">
-                            <i class="fa-solid fa-xmark" (click)="close_filter()"></i>
+                            <i class="fa-solid fa-xmark" (click)="close_filter()" style="cursor: pointer;"></i>
                         </div>
                     </div>
                     <div id="filter-form-container">
@@ -166,7 +175,7 @@
                                         <label>Opened Date:</label>
                                     </div>
                                     <div class="input">
-                                        <input type="date" name="createDateTime" [(ngModel)]="filterOpenedDate" />
+                                        <input style="width: 180px; padding: 6px;" type="date" name="createDateTime" [(ngModel)]="filterOpenedDate" />
                                     </div>
                                 </div>
                                 <div class="filter-input-div">
@@ -174,7 +183,7 @@
                                         <label>Days Old:</label>
                                     </div>
                                     <div class="input">
-                                        <input type="number" name="filter_days_old" [(ngModel)]="filterDaysOld" />
+                                        <input style="width: 180px; padding: 6px;"  type="number" name="filter_days_old" [(ngModel)]="filterDaysOld" />
                                     </div>
                                 </div>
                                 <div class="filter-input-div">

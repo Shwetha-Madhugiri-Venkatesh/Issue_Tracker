@@ -23,7 +23,7 @@ export class CategoryComponent {
       let result={};
       this.http_service.fetch_tickets().subscribe((res:Ticket[])=>{
         this.all_tickets=res;
-        let category_preload=JSON.parse(localStorage.getItem("category_preload"));
+        let category_preload=JSON.parse(localStorage.getItem("category_preload"))||{};
         if(Object.keys(category_preload)?.length!=0 ){
           this.selectedCategory=category_preload.selectedCategory;
           this.category_entered(this.selectedCategory);

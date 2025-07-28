@@ -44,7 +44,7 @@ export class GraphComponent implements OnInit {
     let today = new Date();
     this.http_service.fetch_tickets().subscribe((res: Ticket[]) => {
       this.all_tickets = res;
-      let preload_info =JSON.parse(localStorage.getItem("graph_preload"));
+      let preload_info =JSON.parse(localStorage.getItem("graph_preload"))||{};
     if(Object.keys(preload_info)?.length!=0 && preload_info!=undefined){
       this.start_date=preload_info.start_date?new Date(preload_info.start_date):undefined;
       this.end_date=preload_info.end_date?new Date(preload_info.end_date):undefined;
@@ -253,9 +253,9 @@ export class GraphComponent implements OnInit {
   for_day(date){
     console.log(new Date(date).toLocaleDateString());
     let filtered_record = this.all_tickets.filter(item => {
-      let idate = new Date(item.createDateTime);
+      let idate = new Date(item.createDateTime).toLocaleString();
       console.log(idate);
-      return item.createDateTime.startsWith(date.toLocaleDateString())});
+      return idate.startsWith(date.toLocaleDateString())});
     return filtered_record;
   }
 

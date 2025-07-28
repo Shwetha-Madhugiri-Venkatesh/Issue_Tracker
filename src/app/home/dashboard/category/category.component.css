@@ -28,7 +28,6 @@
 #category-header-left{
     width: 50%;
     display: flex;
-    align-items: center;
     justify-content: flex-start;
 }
 
@@ -48,12 +47,15 @@
 
 ::ng-deep #dropdown .p-dropdown{
 width: 160px !important;
+height: 27px;
+    border-radius: 5px;
 }
 
 ::ng-deep #dropdown .p-dropdown .p-dropdown-label{
-    padding-bottom: 3px !important;
-    padding-left: 5px !important;
-
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 5px;
 }
 /* ng-deep .p-dropdown .p-overlay{
     display: flex !important;
@@ -106,6 +108,12 @@ width: 160px !important;
     
 }
 
+::ng-deep #category-component  .p-dropdown .p-dropdown-trigger{
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 @media screen and (max-width:380px){
     #category-content-inner{
         gap:10px;

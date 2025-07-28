@@ -170,7 +170,7 @@ export class ListComponent {
           if(item[key]==form_data[key]){
             match=true;
           }else if(key=='createDateTime'){
-            if(item.createDateTime.startsWith(form_data.createDateTime)){
+            if(new Date(item.createDateTime).toLocaleString().startsWith(form_data.createDateTime)){
               match=true;
             }
           }else{

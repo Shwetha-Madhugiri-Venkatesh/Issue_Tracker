@@ -48,9 +48,10 @@ justify-content: flex-end;
     justify-content: flex-start;
 }
  #edit_div{
-    padding: 10px;
+    padding: 10px 0px;
     display: flex;
     align-items: flex-end;
+    justify-content: flex-end;
  }
 #right{
     width: 50%;
@@ -128,9 +129,14 @@ button:hover{
 textarea{
     width: 100%;
     height: 50px;
+    resize: vertical;
 }
 
 ::ng-deep #kabban-content .bug-form-dialog .p-dialog .p-dialog-header{
+    padding: 5px 10px;
+}
+
+::ng-deep .p-dialog .p-dialog-header{
     padding: 5px 10px;
 }
 
@@ -141,6 +147,9 @@ label,input{
 ::ng-deep #kabban-content .bug-form-dialog .p-dialog .p-dialog-content{
     padding: 0px 15px 10px 15px;
 }
+::ng-deep .p-dialog .p-dialog-content{
+    padding: 0px 15px 10px 15px;
+}
 
 ::ng-deep #kabban-content .comment_dialog .p-dialog{
     width: 60% !important;
@@ -148,7 +157,7 @@ label,input{
 #submit{
     height: 30px;
     width: 100%;
-    background-color:skyblue;
+    background-color:blue;
     border: none;
     color: white;
     padding: 2.5px 10px;
@@ -168,6 +177,9 @@ label,input{
     padding: 0px 10px 10px 10px;
 }
 
+::ng-deep .p-dropdown:not(.p-disabled).p-focus{
+    box-shadow: 2px 2px blue;
+}
 .issues-inner{
     width: 25%;
     height: 100%;
@@ -204,9 +216,9 @@ label,input{
 }
 
 .comment-input{
+    width: 100%;
     display: flex;
     flex-direction: row;
-    gap: 20px;
 }
 
 .label{
@@ -227,21 +239,24 @@ label,input{
     gap: 10px;
     overflow: auto;
     scrollbar-width: none;
+    padding: 0px 10px;
 }
-
 #tickets-div{
     width: 100%;
     height: 92%;
-    padding: 10px;
+    padding: 10px 0px;
 }
 
 #comment-dialog-container{
+    width: 100%;
+    height: auto;
     display: flex;
     flex-direction: row;
-    gap: 10px;
+    gap: 5px;
 }
 
 #comment-form{
+    height: 550px;
     border: 1px solid lightgray;
     border-radius: 10px;
     display: flex;
@@ -249,46 +264,48 @@ label,input{
     gap: 10px;
     width: 70%;
     padding: 10px;
+    overflow: auto;
 }
 
 #comment-top{
+    width: 100%;
+    height: auto;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
 }
 
 #comment-ticket-id{
+    width: 100%;
+    height: auto;
     display: flex;
-    align-items: center;
     justify-content: flex-start;
-    padding-bottom: 20px;
 }
 
 #comment-subject{
+    width: 100%;
+    height: auto;
     display: flex;
-    align-items: flex-start;
     justify-content: flex-start;
-    border-bottom: 1px solid lightgray;
-    padding-bottom: 10px;
 }
 
 #comment-description{
+    width: 100%;
     display: flex;
-    align-items: flex-start;
     justify-content: flex-start;
-    border-bottom: 1px solid lightgray;
-    padding-bottom: 10px;
 }
 
 #comment-middle{
     width: 100%;
+    height: auto;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 15px;
     padding-bottom: 10px;
 }
 
 .update-input{
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -300,16 +317,16 @@ label,input{
     flex-direction: row;
 }
 #comment-left{
-    width: 50%;
+    width: 80%;
     display: flex;
-    align-items: center;
     justify-content: flex-start;
 }
 
 #comment-left-div{
+    width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px;
 }
 
 #comment-right-div{
@@ -319,10 +336,10 @@ label,input{
 }
 
 #comment-right{
-    width: 50%;
+    width: 20%;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
 }
 
 #comment-bottom{
@@ -333,13 +350,20 @@ label,input{
 
 #comment-activity{
     width: 30%;
+    height: 550px;
     display: flex;
     flex-direction: column;
     border:1px solid lightgray;
     border-radius: 10px;
 }
 
+#comments{
+    height: 95%;
+    width: 100%;
+    overflow-y: auto;
+}
 #activity-header{
+    height: 5%;
     padding: 5px;
     display: flex;
     align-items: center;
@@ -352,7 +376,7 @@ label,input{
 }
 
 #comment-container{
-    padding: 10px;
+    padding: 5px;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -405,7 +429,6 @@ label,input{
     width: 100%;
     display: flex;
     flex-direction: row;
-    border-bottom: 1px solid lightgray;
     padding: 5px;
 }
 
@@ -415,19 +438,6 @@ label,input{
     align-items: center;
     justify-content: flex-start;
     padding: 5px;
-}
-textarea.input,
-textarea.input-value {
-  width: 100%;
-  border: none;
-  outline: none;
-  resize: none;
-  overflow: hidden;
-  font-size: 13px;
-  font-family: inherit;
-  padding: 0;
-  background-color: transparent;
-  color: rgb(45, 57, 57);
 }
 
 
@@ -440,8 +450,11 @@ textarea.input-value {
 }
 
 .comment-footer-div-right-inner{
+    height: 100%;
     display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: center;
     gap: 10px;
 }
 
@@ -462,6 +475,7 @@ input{
     width: 100%;
     display: flex;
     flex-direction: row;
+    gap: 20px;
 }
 
 #filter-overlay {
@@ -513,6 +527,25 @@ height: 100%;
     justify-content: flex-start;
 }
 
+.label1{
+    width: 26%;
+    font-size: 15px;
+}
+.comment_dialog input{
+    border: none;
+}
+.label2{
+    width: 85%;
+    color: inherit;
+    padding:0;
+    font-size: 15px;
+}
+
+textarea{
+    color: inherit;
+    font-size: 15px;
+}
+
 .input{
     width: 65%;
     display: flex;
@@ -538,6 +571,14 @@ form{
     flex-direction: column;
 }
 
+
+.comment_dialog form{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap:20px;
+}
 ::ng-deep #kabban-content #filter-form-container .p-dropdown{
     width:187px !important;
 }
@@ -549,8 +590,19 @@ form{
 ::ng-deep #kabban-content #filter-form-container .p-autoComplete{
     width: 150px !important;
 }
+::ng-deep .comment_dialog .p-autocomplete{
+    height: 28px !important;
+}
 ::ng-deep .bug-form-dialog .p-inputtext {
     padding: 5px !important;
+}
+
+::ng-deep .p-inputtext:enabled:focus{
+    box-shadow: none !important;
+}
+
+::ng-deep .p-button:enabled:focus{
+    box-shadow: none !important;
 }
 ::ng-deep #kabban-content #filter-form-container .p-inputtext {
     width: 180px !important;
@@ -593,11 +645,15 @@ form{
 #delete_dialog{
     height: 100%;
 }
+::ng-deep #delete_dialog_content .p-dialog .p-dialog-header .p-dialog-title{
+    font-size: 18px;
+}
 
 #delete_dialog_content{
     height: 100%;
     display: flex;
     flex-direction: column;
+    gap: 10px;
 }
 ::ng-deep #kabban-content  #delete_dialog .p-dialog{
     width: 20% !important;
@@ -660,6 +716,16 @@ form{
     background-color: rgba(211, 211, 211, 0.3);
     color: rgb(45, 57, 57);
 }
+.text_area{
+    text-overflow: ellipsis;width: 86.5%;overflow: hidden;
+    color: inherit;
+    padding:0;
+    font-size: 15px;
+}
+
+/* ::ng-deep .comment_dialog .p-dialog-draggable .p-dialog-header{
+    background-color: rgba(211, 211, 211) !important;
+} */
 
 #delete-dialog-btn2{
     height: 30px;
@@ -672,6 +738,14 @@ form{
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.last_modified_div{
+    width: 100%; display: flex; justify-content: flex-end; padding: 5px 5px 15px 5px; font-size: 13px;
+    gap: 5px;
+}
+
+.last_modified{
+    font-size: 13px;
 }
 #delete-dialog-btn2:hover{
     background-color: rgba(211, 211, 211, 0.3);
@@ -710,9 +784,24 @@ form{
     #comment-form{
         width: 60%;
     }
-
+    .label1{
+        width: 35%;
+    }
     #comment-activity{
         width: 40%;
+    }
+
+    .last_modified_div{
+        flex-direction: column;
+    }
+
+    .last_modified{
+        width: 100%;
+        word-break: break-all;
+    }
+
+    .last_modified_p{
+        width: 100%;
     }
 }
 @media screen and (max-width:730px){
@@ -762,8 +851,9 @@ form{
         flex-direction: column;
     }
 
-    ::ng-deep .p-editor-container .p-editor-toolbar.ql-snow .ql-picker .ql-picker-label{
-        width: 80%;
+    ::ng-deep .p-editor{
+        width: 50%;
+        height: 500px !important;
     }
     .comment-header-left,.comment-footer-div-left{
        width: 100%;
@@ -835,7 +925,6 @@ form{
     ::ng-deep .bug-form-dialog .p-dialog-draggable .p-dialog-header{
         padding: 10px;
     }
-
     ::ng-deep .p-dialog .p-dialog-header .p-dialog-title{
         font-size: 16px;
         word-break: break-all;

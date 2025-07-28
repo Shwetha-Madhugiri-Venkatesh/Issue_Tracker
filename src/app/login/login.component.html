@@ -17,7 +17,7 @@
                     [(ngModel)]="user_Id"
                     required
                     />
-                <p *ngIf="userIdRef.invalid && userIdRef.touched" style="color: red;">*required</p>
+                <p *ngIf="(userIdRef.invalid && userIdRef.touched) || (userIdRef.invalid && all_fields_invalid)" style="color: red;">*required</p>
                 </div>
 
                  <div class="input-div">
@@ -32,7 +32,7 @@
                     required
                     >
                 </p-password>
-                <p *ngIf="pass.invalid && pass.touched" style="color: red;">*required</p>
+                <p *ngIf="(pass.invalid && pass.touched)||(pass.invalid && all_fields_invalid)" style="color: red;">*required</p>
                 </div>
 
                 <div class="input-div">
@@ -48,7 +48,7 @@
                         required>
                     </p-password>
                       <p *ngIf="!(confirmPassword==password)&&confirmPassword" style="color: red;">Please enter the same password</p>
-                      <p *ngIf="confirm.invalid && confirm.touched" style="color: red;">*required</p>
+                      <p *ngIf="(confirm.invalid && confirm.touched) || (confirm.invalid && all_fields_invalid)" style="color: red;">*required</p>
                 </ng-container>
                 </div>
                 

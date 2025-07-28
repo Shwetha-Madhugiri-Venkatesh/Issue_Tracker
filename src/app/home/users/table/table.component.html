@@ -7,16 +7,16 @@
             <div id="header-last-inner">
                 <div>
                     <p-dropdown *ngIf="products.length>0" id="top" [options]="numbers" [(ngModel)]="dynamic_page_number"
-                        optionLabel="name" [placeholder]="'Show '+selectedNum" (onChange)="dynamic_rows($event)" />
+                        optionLabel="name" [placeholder]="'Show '+selectedNum" (onChange)="dynamic_rows($event)"  />
                 </div>
-                <div>
+                <div class="card flex justify-content-center"> 
                     <p-multiSelect [options]="columns" [(ngModel)]="selectedCol" optionLabel="header"
-                        [placeholder]="len+' columns are selected'" (onChange)="get_selected_columns($event)" #multi>
-                        <ng-template pTemplate="footer">
+             (onChange)="get_selected_columns($event)" [selectedItemsLabel]="selectedCol.length+' columns selected'" #multi>
+                        <!-- <ng-template pTemplate="footer">
                             <div id="multi-btn-con">
                                 <button id="multiselect-btn" (click)="dynamic_columns()">Apply</button>
                             </div>
-                        </ng-template>
+                        </ng-template> -->
                     </p-multiSelect>
 
                 </div>
@@ -79,11 +79,21 @@
 
                         <ng-template pTemplate="paginatorleft">
                             <div class="paginator-extension1"
-                    style="display: flex;gap: 5px; flex-direction: row;">
+                    style="display: flex;gap: 5px; flex-direction: row;" [ngClass]="{'show':!(this.products.length>dynamic_page_number.value)}">
                     <p class="go-button1">{{products.length}} items</p>
                 </div>
                         </ng-template>
+
+                        <ng-template pTemplate="paginatorlastpagelinkicon">
+                            <img src="../../../../assets/images/svg_502085.svg" style="width: 17px; height: 17px; display: flex; align-items: center; justify-content: center;"/>
+                        </ng-template>
+                        <ng-template pTemplate="paginatorfirstpagelinkicon">
+                            <img src="../../../../assets/images/svg_502087.svg" style="width: 17px; height: 17px; display: flex; align-items: center; justify-content: center;"/>
+                        </ng-template>
                 </p-table>
+            </div>
+            <div class="paginator-extension1" *ngIf="!(this.products.length>dynamic_page_number.value)">
+                <p [ngClass]="{'show':!(this.products.length>dynamic_page_number.value)}" class="go-button1">{{products.length}} items</p>
             </div>
         </div>
         <ng-template [ngIf]="filter_flag">
@@ -94,7 +104,7 @@
                         <h4>Filter</h4>
                     </div>
                     <div id="cross-div">
-                        <i class="fa-solid fa-xmark" (click)="close_filter()"></i>
+                        <i class="fa-solid fa-xmark" (click)="close_filter()" style="cursor: pointer;"></i>
                     </div>
                 </div>
                 <div id="filter-form">
@@ -146,3 +156,4 @@
         </div>
     </p-dialog>
 </div>
+<p-toast/>
