@@ -14,9 +14,13 @@ export class AuthorizeUser{
     login_flag:boolean=false;
     authentication = new Subject();
     status = new Subject();
+
     constructor(private http_service:HTTPService){}
+
     login(login_details:{userId:string,Password:string}){
+        //login details
         let {userId,Password}=login_details;
+        
         this.http_service.fetch_users().subscribe((res:User[])=>{
             let user:boolean=false;
             this.index=res.findIndex(item=>{
@@ -38,20 +42,14 @@ export class AuthorizeUser{
                 }
             }
         });
-        // return {auth:this.authentication,err:error_message};
-        //console.log(userId,Password);
     }
 
     reset_password(login_details){
-        console.log(login_details);
         let {userId,Password,confirmPassword}=login_details;
         this.http_service.fetch_users().subscribe((res:User[])=>{
             let user = res.find(item=>item.user_id==userId);
-            console.log(user);
             user['password']=Password;
-            console.log(user);
             this.http_service.update_user(user['id'],user).subscribe((res)=>{
-                console.log(res);
                 this.authentication.next("your password is succesfully updated");
             });
         })

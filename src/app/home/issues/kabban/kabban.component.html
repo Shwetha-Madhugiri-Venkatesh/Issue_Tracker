@@ -1,18 +1,23 @@
 <div id="kabban-content">
+    <!-- kanban Header -->
     <div id="kabban-header">
         <div id="header-content">
             <div id="left">
                 <h3>Issues</h3>
             </div>
             <div id="right">
-                <button (click)="add_bug()" pTooltip="Add Ticket" tooltipPosition="bottom">Add</button>
-                <div id="filter" (click)="toggleFilter()" pTooltip="Filter bugs" tooltipPosition="bottom"><i
+                <button (click)="visible = true;" pTooltip="Add Ticket" tooltipPosition="bottom">Add</button>
+                <div id="filter" (click)="filter = !filter;" pTooltip="Filter bugs" tooltipPosition="bottom"><i
                         class="fa-solid fa-filter" style="cursor: pointer;"></i></div>
             </div>
         </div>
     </div>
+
+    <!-- Tickets main container -->
     <div id="issues">
         <div id="issues-container">
+
+            <!-- Tickets sub containers -->
             <div *ngFor="let s of statuses" class="issues-inner">
                 <div class="issues-header">
                     <div class="left">
@@ -27,6 +32,7 @@
                         <button><i class="fa-solid fa-rotate-right fa-rotate-270"></i></button>
                     </div>
                 </div>
+                <!-- tickets -->
                 <div id="tickets-div">
                     <div id="tickets">
                         <app-ticket *ngFor="let item of s.tickets" [ticket]="item" [priority]="priorities"
@@ -34,18 +40,23 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Filter component -->
             <div id="filter-overlay" *ngIf="filter">
                 <div id="filter-form-inner">
+                    <!-- filter header -->
                     <div id="filter-header">
                         <div id="filter_head">
                             <span id="filter-heading">Filter</span>
                         </div>
                         <div id="cross-div">
-                            <i class="fa-solid fa-xmark" (click)="close_filter()" style="cursor: pointer;"></i>
+                            <i class="fa-solid fa-xmark" (click)="this.filter = false;" style="cursor: pointer;"></i>
                         </div>
                     </div>
+                    <!-- filter form -->
                     <div id="filter-form-container">
                         <form #issuesFilterForm="ngForm" (ngSubmit)="issues_filter_form_submited(issuesFilterForm)">
+                            <!-- filter top division -->
                             <div id="form-top">
                                 <div class="filter-input-div">
                                     <div class="label">
@@ -179,6 +190,7 @@
                                     </div>
                                 </div>
                             </div>
+                            <!-- filter footer -->
                             <div id="form-footer">
                                 <button id="apply-btn" type="button" (click)="reset_all()">Reset</button>
                                 <button id="apply-btn" type="submit">Apply</button>
@@ -187,17 +199,23 @@
                     </div>
                 </div>
             </div>
+            <!-- Filter component end -->
         </div>
     </div>
+    <!-- Tickets main container end -->
 </div>
+<!-- Kanban content end -->
+
+<!-- Tickets creating form -->
 <div class="bug-form-dialog">
     <p-dialog header="Bug Record Form" [modal]="true" [(visible)]="visible" [style]="{ width: '40rem' }">
         <div id="form-div">
+            <!-- Tickets creating form -->
             <form #bugForm="ngForm" (ngSubmit)="bug_form_submit(bugForm)">
                 <div class="row">
                     <div class="div">
                         <label>Reporter Name</label>
-                        <input pInputText type="text" name="reporter_name" [(ngModel)]="user_details.uname" readonly/>
+                        <input pInputText type="text" name="reporter_name" [(ngModel)]="user_details.uname" readonly />
                     </div>
                     <div class="div">
                         <label>Reporter Id</label>
@@ -209,15 +227,16 @@
                     <div id="type-div">
                         <div id="type-bug"
                             [ngStyle]="bug?{'background-color': 'blue','color': 'white'}:{'background-color': '#eff7fa','color': 'blue'}"
-                            (click)="ticket_type_bug()">Bug</div>
+                            (click)="bug = true;feature = false;">Bug</div>
                         <div id="type-feature"
                             [ngStyle]="feature?{'background-color': 'blue','color': 'white'}:{'background-color': '#eff7fa','color': 'blue'}"
-                            (click)="ticket_type_feature()">Feature</div>
+                            (click)="feature = true;bug = false;">Feature</div>
                     </div>
                 </div>
                 <div class="row_">
                     <label>Subject</label>
-                    <input pInputText name="subject" type="text" [(ngModel)]="subject" required [placeholder]="text|custom_pipe"/>
+                    <input pInputText name="subject" type="text" [(ngModel)]="subject" required
+                        [placeholder]="text|custom_pipe" />
                 </div>
                 <div class="row_">
                     <label>Priority</label>
@@ -263,52 +282,60 @@
                     <button id="submit" type="submit">Submit</button>
                 </div>
             </form>
+            <!-- Form end -->
         </div>
     </p-dialog>
 </div>
 
+<!-- Comment form -->
 <div class="comment_dialog">
     <p-dialog header="Ticket Details" [modal]="true" [(visible)]="visible_comment" [style]="{ width: '70rem'}">
         <div id="comment-dialog-container">
+            <!-- Dialog left division -->
             <div id="comment-form">
+                <!-- Comment form -->
                 <form #commentForm="ngForm" (ngSubmit)="get_comment_submit(commentForm,comment_ticket)">
+                    <!-- Comment top division -->
                     <div id="comment-top">
+                        <!-- comment top first-->
                         <div id="comment-ticket-id">
                             <span class="label1" style="width: 25.6%;">Ticket ID:</span>
                             <span class="label2">{{comment_ticket.ticketId}}</span>
                         </div>
                         <div id="comment-subject">
                             <span class="label1">Subject:</span>
-                            <input class="text_area" style="cursor: pointer;"
-                                *ngIf="!text_area" (click)="text_area_visible()" [(ngModel)]="comment_ticket.subject"
-                                name="subject" pTooltip="Subject content" tooltipPosition="bottom"/>
-                            <textarea *ngIf="text_area" class="label2" style="padding: 3px;" [(ngModel)]="comment_ticket.subject"
-                                name="subject"></textarea>
+                            <input class="text_area" style="cursor: pointer;" *ngIf="!text_area"
+                                (click)="text_area = !text_area" [(ngModel)]="comment_ticket.subject" name="subject"
+                                pTooltip="Subject content" tooltipPosition="bottom" />
+                            <textarea *ngIf="text_area" class="label2" style="padding: 3px;"
+                                [(ngModel)]="comment_ticket.subject" name="subject"></textarea>
                         </div>
                         <div id="comment-description">
                             <span class="label1">Description:</span>
-                            <input class="text_area" style="cursor: pointer;"
-                                *ngIf="!text_area2" (click)="text_area2_visible()" [(ngModel)]="comment_ticket.description"
-                                name="description"  pTooltip="Description content" tooltipPosition="bottom">
-                            <textarea *ngIf="text_area2" class="label2" style="padding: 3px;" [(ngModel)]="comment_ticket.description"
-                                name="description"></textarea>
+                            <input class="text_area" style="cursor: pointer;" *ngIf="!text_area2"
+                                (click)=" text_area2 = !text_area2;" [(ngModel)]="comment_ticket.description"
+                                name="description" pTooltip="Description content" tooltipPosition="bottom">
+                            <textarea *ngIf="text_area2" class="label2" style="padding: 3px;"
+                                [(ngModel)]="comment_ticket.description" name="description"></textarea>
                         </div>
+                        <!-- Comment top last-->
                         <div id="comment-middle">
                             <div id="comment-middle-top">
                                 <div id="comment-left">
                                     <div id="comment-left-div">
                                         <div class="comment-input">
                                             <span class="label1" style="width: 35%;">Reporter Id:</span>
-                                            <span class="label2" >{{comment_ticket.reportedId}}</span>
+                                            <span class="label2">{{comment_ticket.reportedId}}</span>
                                         </div>
                                         <div class="comment-input">
                                             <span class="label1" style="width: 35%;">Created Date Time:</span>
-                                            <span class="label2" >{{comment_ticket['CreatedDateTimeString']}}</span>
+                                            <span class="label2">{{comment_ticket['CreatedDateTimeString']}}</span>
                                         </div>
                                         <div class="comment-input">
                                             <span class="label1" style="width: 35%;">Last Modified Date Time:</span>
-                                            <input class="label2" style="outline: none;"   type="text" name="lastModifiedDateTime"
-                                                [(ngModel)]="comment_ticket['lastModifiedDateTimeString']" readonly/>
+                                            <input class="label2" style="outline: none;" type="text"
+                                                name="lastModifiedDateTime"
+                                                [(ngModel)]="comment_ticket['lastModifiedDateTimeString']" readonly />
                                         </div>
                                     </div>
                                 </div>
@@ -335,13 +362,9 @@
                             <div id="form-last">
                                 <div class="update-input">
                                     <label class="label1">Assignee:</label>
-                                    <p-autoComplete
-                                [dropdown]="true"
-                                [suggestions]="users_suggestions"
-                                (completeMethod)="filterUsers($event)"
-                                     [(ngModel)]="comment_ticket['assignee']"
-                                     field="uname"
-                                     name="assignee" appendTo="body" placeholder="Assignee..."
+                                    <p-autoComplete [dropdown]="true" [suggestions]="users_suggestions"
+                                        (completeMethod)="filterUsers($event)" [(ngModel)]="comment_ticket['assignee']"
+                                        field="uname" name="assignee" appendTo="body" placeholder="Assignee..."
                                         [readonly]="user_details.type!='Admin'" [required]="true" />
                                 </div>
                                 <div class="update-input">
@@ -356,11 +379,12 @@
                                     <p-dropdown [options]="statuses" [(ngModel)]="comment_ticket['status']"
                                         optionLabel="status" name="status" appendTo="body" placeholder="Update Status"
                                         [readonly]="user_details.type!='Admin'" [required]="true" />
-
                                 </div>
                             </div>
                         </div>
+                        <!-- Commment top last ends -->
                     </div>
+                    <!-- Comment bottom Division -->
                     <div id="comment-bottom">
                         <p class="label1" style="padding-bottom: 5px;">Comment:</p>
                         <div id="p-editor-class">
@@ -371,54 +395,68 @@
                         </div>
                     </div>
                 </form>
+                <!-- Form ends -->
             </div>
+            <!-- Dialog left division ends -->
+
+            <!-- Dialog right divison -->
             <div id="comment-activity">
+                <!-- comment activity header -->
                 <div id="activity-header">
                     <p>Activity</p>
                 </div>
+
+                <!-- Comments main container -->
                 <div id="comments">
                     <div id="comment-container">
-                        <!-- ngFor -->
+                        <!-- Comment sub container -->
                         <div *ngFor="let com of user_specific" class="comment-div">
+                            <!-- user name section -->
                             <div class="comment-header">
                                 <div class="comment-header-left">
                                     <p>{{tickets_comments[com][0]['uname']}}</p>
                                 </div>
                             </div>
+                            <!-- user comment section -->
                             <div class="comment-footer">
                                 <div *ngFor="let commen of tickets_comments[com];let i = index">
                                     <div class="last_modified_div">
                                         <p class="last_modified">Last Modified Date : </p>
-                                        <p class="last_modified_p">{{commen.last_modified_date?commen.last_modified_date:"no"}}</p>
+                                        <p class="last_modified_p">
+                                            {{commen.last_modified_date?commen.last_modified_date:"no"}}</p>
                                     </div>
-                                    <div  class="comment-footer-div">
-                                    <div class="comment-footer-div-left">
-                                        <label [innerHTML]="commen.message"
-                                            style="word-break: break-all; font-size: 15px;"></label>
-                                    </div>
-                                    <div class="comment-footer-div-right">
-                                        <div class="comment-footer-div-right-inner"
-                                            *ngIf="tickets_comments[com][0].uname!=undefined">
-                                            <i class="fa-solid fa-pen"
-                                                (click)="edit_comment(commen,tickets_comments[com][0].userId)"></i>
-                                            <i class="fa-solid fa-trash" (click)="delete_comment(commen)"></i>
+                                    <div class="comment-footer-div">
+                                        <div class="comment-footer-div-left">
+                                            <label [innerHTML]="commen.message"
+                                                style="word-break: break-all; font-size: 15px;"></label>
+                                        </div>
+                                        <div class="comment-footer-div-right">
+                                            <div class="comment-footer-div-right-inner"
+                                                *ngIf="tickets_comments[com][0].uname!=undefined">
+                                                <i class="fa-solid fa-pen"
+                                                    (click)="edit_comment(commen,tickets_comments[com][0].userId)"></i>
+                                                <i class="fa-solid fa-trash" (click)="delete_comment(commen)"></i>
+                                            </div>
                                         </div>
                                     </div>
-                                    </div>
-                                    <hr style=" border-style: none; border-top:  1px solid lightgray;" *ngIf="i!=(tickets_comments[com].length-1)"/>
+                                    <hr style=" border-style: none; border-top:  1px solid lightgray;"
+                                        *ngIf="i!=(tickets_comments[com].length-1)" />
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <!-- Dialog right division ends -->
         </div>
     </p-dialog>
 </div>
+
+<!-- Comment edit dialog -->
 <div class="edit_editor">
-    <p-dialog header="Edit Comment" [modal]="true" [(visible)]="edit_comment_visible" [style]="{ width: '25rem' }" (onShow)="onEditorShow()">
+    <p-dialog header="Edit Comment" [modal]="true" [(visible)]="edit_comment_visible" [style]="{ width: '25rem' }">
         <div>
-            <p-editor (onInit)="onEditorShow()" [(ngModel)]="updated_comment" [style]="{ height: '100px' }"/>
+            <p-editor [(ngModel)]="updated_comment" [style]="{ height: '100px' }" />
         </div>
         <div id="edit_div">
             <button (click)="update_comment()">Save</button>
@@ -426,6 +464,7 @@
     </p-dialog>
 </div>
 
+<!-- Comment delete dialog -->
 <div class="delete_dialog1">
     <p-dialog header="ORG Issue Tracker" [modal]="true" [(visible)]="delete_visible" [style]="{ width: '25rem' }">
         <div id="delete_dialog">
@@ -436,7 +475,7 @@
                 </div>
                 <div id="delete-dialog-bottom">
                     <div id="delete-dialog-btns">
-                        <button id="delete-dialog-btn2" (click)="cancel_delete()">Cancel</button>
+                        <button id="delete-dialog-btn2" (click)="delete_visible = false;">Cancel</button>
                         <button id="delete-dialog-btn1" (click)="delete_confirm()">Delete</button>
                     </div>
                 </div>

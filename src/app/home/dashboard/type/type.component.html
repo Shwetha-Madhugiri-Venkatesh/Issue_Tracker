@@ -1,20 +1,22 @@
 <div id="type-component">
     <div id="type-content-inner">
+        <!-- Type Header -->
         <div id="type-header">
             <div id="type-header-left">
                 <h4 id="type-heading">Types</h4>
             </div>
             <div id="type-header-right">
                 <div id="type-header-right-inner">
-                    <div id="refresh-div" (click)="refresh()" pTooltip="Refresh" tooltipPosition="bottom">
+                    <div id="refresh-div" (click)="ngOnInit()" pTooltip="Refresh" tooltipPosition="bottom">
                         <i class="fa-solid fa-rotate-right fa-rotate-270"></i>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- Type Graph -->
         <div id="type-container">
             <div id="type-container-inner">
-                <p-chart type="pie" [data]="data" class="h-[30rem]" [options]="type_options"/>
+                <p-chart type="pie" [data]="data" class="h-[30rem]" [options]="type_options" />
             </div>
         </div>
     </div>

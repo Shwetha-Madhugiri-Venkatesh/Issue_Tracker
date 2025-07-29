@@ -1,15 +1,18 @@
 <div id="issues-content">
     <div id="content">
-    <div id="isuues-header" style="height: 6%;">
-        <div id="header-div">
-            <button [ngStyle]="kabban?{'border-bottom':'2px solid blue','color':'blue'}:{'border':'none'}"
+        <!-- Issues header -->
+        <div id="isuues-header" style="height: 6%;">
+            <div id="header-div">
+                <button [ngStyle]="kabban?{'border-bottom':'2px solid blue','color':'blue'}:{'border':'none'}"
                     (click)="kabban_clicked()">Kanban</button>
-            <button [ngStyle]="list?{'border-bottom':'2px solid blue','color':'blue'}:{'border':'none'}"
+                <button [ngStyle]="list?{'border-bottom':'2px solid blue','color':'blue'}:{'border':'none'}"
                     (click)="list_clicked()">List</button>
+            </div>
         </div>
-    </div>
-    <div style="height: 94%;">
-        <router-outlet />
-    </div>
+
+        <!-- Issues children components division -->
+        <div style="height: 94%;">
+            <router-outlet />
+        </div>
     </div>
 </div>

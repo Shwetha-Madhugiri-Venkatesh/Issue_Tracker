@@ -1,4 +1,4 @@
-#dashboard-component{
+#dashboard-component {
     width: 100%;
     height: 100%;
     padding: 10px 0px 10px 10px;
@@ -6,7 +6,7 @@
     margin-top: 5px;
 }
 
-#dashboard-content{
+#dashboard-content {
     width: 100%;
     height: 85%;
     display: flex;
@@ -18,7 +18,7 @@
     overflow-x: hidden;
 }
 
-#first-div{
+#first-div {
     width: 100%;
     height: 450px;
     display: flex;
@@ -26,82 +26,105 @@
     gap: 5px;
 }
 
-#line-graph1{
-    width:65%;
+#line-graph1 {
+    width: 65%;
     height: 100%;
     padding: 0px 0px 0px 5px;
 }
 
-#line-graph2{
+#line-graph2 {
     width: 50%;
     height: 100%;
     padding: 0px 0px 0px 5px;
 }
-#line-graph3{
+
+#line-graph3 {
     width: 50%;
     height: 100%;
     padding: 0px 5px 0px 0px;
 }
-#line-graph6{
+
+#line-graph6 {
     width: 44%;
     height: 100%;
     padding: 0px 5px 0px 0px;
 }
-#line-graph7{
+
+#line-graph7 {
     width: 50%;
     height: 100%;
     padding: 0px 5px 0px 0px;
 }
-#line-graph4{
+
+#line-graph4 {
     width: 100%;
     height: 450px;
     padding: 0px 5px;
 }
-#line-graph5{
+
+#line-graph5 {
     width: 50%;
     height: 100%;
     padding: 0px 0px 0px 5px;
 }
-#second-div{
+
+#second-div {
     width: 100%;
     height: 450px;
     display: flex;
     flex-direction: row;
     gap: 5px;
 }
-#third-div{
+
+#third-div {
     width: 100%;
     height: 450px;
 }
-#fourth-div{
+
+#fourth-div {
     width: 100%;
     height: 450px;
     display: flex;
     flex-direction: row;
     gap: 5px;
 }
-@media screen and (max-width:900px){
-    #dashboard_component{
+
+@media screen and (max-width:900px) {
+    #dashboard_component {
         height: auto;
     }
-    #line-graph7{
-        width:49.4%;
+
+    #line-graph7 {
+        width: 49.4%;
     }
 }
-@media screen and (max-width:600px){
-    #first-div,#second-div,#third-div,#fourth-div{
+
+@media screen and (max-width:600px) {
+
+    #first-div,
+    #second-div,
+    #third-div,
+    #fourth-div {
         width: 100%;
         height: auto;
         flex-direction: column;
     }
-    #line-graph1,#line-graph2,#line-graph3,#line-graph4,#line-graph5,#line-graph6,#line-graph7{
+
+    #line-graph1,
+    #line-graph2,
+    #line-graph3,
+    #line-graph4,
+    #line-graph5,
+    #line-graph6,
+    #line-graph7 {
         width: 100%;
         height: auto;
         padding: 0px 5px;
     }
 }
-@media screen and (max-width:430px){
-    #dashboard-content{
+
+@media screen and (max-width:430px) {
+    #dashboard-content {
         height: 75%;
     }
 }

@@ -1,5 +1,6 @@
 <div id="category-component">
     <div id="category-content-inner">
+        <!-- Category Header -->
         <div id="category-header">
             <div id="category-header-left">
                 <h4 id="category-heading">Category</h4>
@@ -10,16 +11,18 @@
                         <p-dropdown [options]="categories" [(ngModel)]="selectedCategory" optionLabel="categoryDesc"
                             placeholder="Select category" name="category" (onChange)="category_entered($event)" />
                     </div>
-                    <div id="refresh-div" (click)="refresh()" pTooltip="Refresh" tooltipPosition="bottom">
-                        <i class="fa-solid fa-rotate-right fa-rotate-270" ></i>
+                    <div id="refresh-div" (click)="ngOnInit()" pTooltip="Refresh" tooltipPosition="bottom">
+                        <i class="fa-solid fa-rotate-right fa-rotate-270"></i>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- Category graph -->
         <div id="category-container">
             <div id="category-container-inner" class="category">
-                <p-chart type="bar" [data]="data" class="h-[30rem]" [options]="category_options"/>
+                <p-chart type="bar" [data]="data" class="h-[30rem]" [options]="category_options" />
             </div>
         </div>
+
     </div>
 </div>

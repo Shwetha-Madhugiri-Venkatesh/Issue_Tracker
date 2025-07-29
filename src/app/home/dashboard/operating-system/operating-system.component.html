@@ -1,20 +1,22 @@
 <div id="operatingSystem-component">
     <div id="operatingSystem-content-inner">
+        <!-- Operating system header -->
         <div id="operatingSystem-header">
             <div id="operatingSystem-header-left">
                 <h4 id="operatingSystem-heading">Operating Systems</h4>
             </div>
             <div id="operatingSystem-header-right">
                 <div id="operatingSystem-header-right-inner">
-                    <div id="refresh-div" (click)="refresh()" pTooltip="Refresh" tooltipPosition="bottom">
+                    <div id="refresh-div" (click)="ngOnInit()" pTooltip="Refresh" tooltipPosition="bottom">
                         <i class="fa-solid fa-rotate-right fa-rotate-270"></i>
                     </div>
                 </div>
             </div>
-        </div>
+        </div>  
+        <!-- Operating System Graph -->
         <div id="operatingSystem-container">
             <div id="status-container-inner">
-                <p-chart type="pie" [data]="data" class="h-[30rem]" [options]="operating_options"/>
+                <p-chart type="pie" [data]="data" class="h-[30rem]" [options]="operating_options" />
             </div>
         </div>
     </div>

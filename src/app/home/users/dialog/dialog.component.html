@@ -1,222 +1,302 @@
 <div class="card flex justify-center" id="dialog_component">
-    <p-dialog header="User Details" [modal]="true" [(visible)]="visible" (onHide)="onHide()" [style]="{ width: '25rem' }">
+    <p-dialog header="User Details" [modal]="true" [(visible)]="visible" (onHide)="visibleChange.emit(false)"
+        [style]="{ width: '25rem' }">
         <div id="dialog-inner">
             <div class="top-dialog-div">
+                <!-- Top dialog division header -->
                 <div class="top-dialog-header">
                     <div class="top-header">
                         <span class="heading">Basic Details</span>
                     </div>
-                    <!-- <div id="icon-div">
-                        <i id="icon" class="fa-solid fa-minus"></i>
-                    </div> -->
                 </div>
+
+                <!-- Top dialog form division -->
                 <div class="top-dialog-form">
+                    <!-- Profile division -->
                     <div id="profile_pic">
                         <div id="profile_pic_content">
                             <div id="profile-pic-top">
                                 <div id="profile-pic-div">
-                                    <img *ngIf="!profile_pic_input" id="profile" src="../../../../assets/images/profile_avatar.jpg"/>
+                                    <img *ngIf="!profile_pic_input" id="profile"
+                                        src="../../../../assets/images/profile_avatar.jpg" />
                                     <ng-template [ngIf]="profile_pic_input">
-                                        <img id="profile_pic_image" [src]="profile_pic_input" alt="selected image"/>
+                                        <img id="profile_pic_image" [src]="profile_pic_input" alt="selected image" />
                                     </ng-template>
                                 </div>
-                                <input type="file" id="fileInput" style="display: none;" (change)="profile_pic_selected($event)" accept=".jpg,.png"/>
-                                <label  *ngIf="(editable || !prefill)" for="fileInput" id="plus">
-                                <div>
-                                    <i style="color: white; font-size: 20px;" class="fa-solid fa-plus"></i>
-                                </div>
+                                <input type="file" id="fileInput" style="display: none;"
+                                    (change)="profile_pic_selected($event)" accept=".jpg,.png" />
+                                <label *ngIf="(editable || !prefill)" for="fileInput" id="plus">
+                                    <div>
+                                        <i style="color: white; font-size: 20px;" class="fa-solid fa-plus"></i>
+                                    </div>
                                 </label>
                             </div>
-                            <div  *ngIf="(editable || !prefill)" id="profile-pic-bottom">
+                            <div *ngIf="(editable || !prefill)" id="profile-pic-bottom">
                                 <p id="profile_condition1">Max file size 2MB</p>
                                 <p id="profile_condition2">Supporting formats JPG, PNG</p>
                             </div>
                         </div>
                     </div>
+
+                    <!-- Top form -->
                     <form class="form" #topForm="ngForm">
                         <div class="input-div">
-                        <label class="label">User Name *</label>
-                        <div style="display: flex;flex-direction: column;width: 50%;">
-                        <input style="width: 100%; word-break: break-all;" #username="ngModel" type="text"  name="uname" [(ngModel)]="user_uname" [ngStyle]="{border: editable && !prefill?'1px solid lightgray':!editable && prefill?'none':''}" (change)="create_user_password($event)" [readOnly]="!editable && prefill" required/>
-                        <p *ngIf="(username.errors?.['required'] && (username.touched || all_fields_invalid))" style="color: red;font-size: 13px;">*required</p>
+                            <label class="label">User Name *</label>
+                            <div style="display: flex;flex-direction: column;width: 50%;">
+                                <input style="width: 100%; word-break: break-all;" #username="ngModel" type="text"
+                                    name="uname" [(ngModel)]="user_uname"
+                                    [ngStyle]="{border: editable && !prefill?'1px solid lightgray':!editable && prefill?'none':''}"
+                                    (change)="create_user_password($event)" [readOnly]="!editable && prefill"
+                                    required />
+                                <p *ngIf="(username.errors?.['required'] && (username.touched || all_fields_invalid))"
+                                    style="color: red;font-size: 13px;">*required</p>
+                            </div>
                         </div>
-                        </div >
                         <div class="input-div">
-                        <label class="label">First Name *</label>
-                        <div style="display: flex;flex-direction: column;width: 50%;">
-                        <input style="width: 100%; word-break: break-all;" #firstname="ngModel" [ngStyle]="{border: editable && !prefill?'1px solid lightgray':!editable && prefill?'none':''}" type="text" name="fname" [(ngModel)]="user_fname" [readOnly]="!editable  && prefill" required/>
-                        <p *ngIf="(firstname.errors?.['required'] && (firstname.touched || all_fields_invalid))" style="color: red;font-size: 13px;">*required</p>
-                        </div>
+                            <label class="label">First Name *</label>
+                            <div style="display: flex;flex-direction: column;width: 50%;">
+                                <input style="width: 100%; word-break: break-all;" #firstname="ngModel"
+                                    [ngStyle]="{border: editable && !prefill?'1px solid lightgray':!editable && prefill?'none':''}"
+                                    type="text" name="fname" [(ngModel)]="user_fname" [readOnly]="!editable  && prefill"
+                                    required />
+                                <p *ngIf="(firstname.errors?.['required'] && (firstname.touched || all_fields_invalid))"
+                                    style="color: red;font-size: 13px;">*required</p>
+                            </div>
                         </div>
 
                         <div class="input-div">
-                        <label class="label">Middle Name *</label>
-                        <div style="display: flex;flex-direction: column;width: 50%;">
-                        <input style="width: 100%; word-break: break-all;" #middlename="ngModel" [ngStyle]="{border: editable && !prefill?'1px solid lightgray':!editable && prefill?'none':''}" type="text" name="mname" [(ngModel)]="user_mname" [readOnly]="!editable  && prefill" required/>
-                        <p *ngIf="(middlename.errors?.['required'] && (middlename.touched || all_fields_invalid))" style="color: red;font-size: 13px;">*required</p>
-                        </div>
-                        </div>
-
-                        <div class="input-div">
-                        <label class="label">Last Name *</label>
-                        <div style="display: flex;flex-direction: column;width: 50%;">
-                        <input style="width: 100%; word-break: break-all;" #lastname="ngModel" [ngStyle]="{border: editable && !prefill?'1px solid lightgray':!editable && prefill?'none':''}" type="text" name="lname" [(ngModel)]="user_lname" [readOnly]="!editable  && prefill" required />
-                        <p *ngIf="(lastname.errors?.['required'] && (lastname.touched || all_fields_invalid))" style="color: red;font-size: 13px;">*required</p>
-                        </div>
+                            <label class="label">Middle Name *</label>
+                            <div style="display: flex;flex-direction: column;width: 50%;">
+                                <input style="width: 100%; word-break: break-all;" #middlename="ngModel"
+                                    [ngStyle]="{border: editable && !prefill?'1px solid lightgray':!editable && prefill?'none':''}"
+                                    type="text" name="mname" [(ngModel)]="user_mname" [readOnly]="!editable  && prefill"
+                                    required />
+                                <p *ngIf="(middlename.errors?.['required'] && (middlename.touched || all_fields_invalid))"
+                                    style="color: red;font-size: 13px;">*required</p>
+                            </div>
                         </div>
 
                         <div class="input-div">
-                        <label class="label">Created Source</label>
-                        <input class="input-value" type="text" [value]="user_created_source" readonly/>
+                            <label class="label">Last Name *</label>
+                            <div style="display: flex;flex-direction: column;width: 50%;">
+                                <input style="width: 100%; word-break: break-all;" #lastname="ngModel"
+                                    [ngStyle]="{border: editable && !prefill?'1px solid lightgray':!editable && prefill?'none':''}"
+                                    type="text" name="lname" [(ngModel)]="user_lname" [readOnly]="!editable  && prefill"
+                                    required />
+                                <p *ngIf="(lastname.errors?.['required'] && (lastname.touched || all_fields_invalid))"
+                                    style="color: red;font-size: 13px;">*required</p>
+                            </div>
                         </div>
 
                         <div class="input-div">
-                        <label class="label">Created Source Type</label>
-                        <input class="input-value" [value]="user_created_source_type" readonly/>
+                            <label class="label">Created Source</label>
+                            <input class="input-value" type="text" [value]="user_created_source" readonly />
                         </div>
 
                         <div class="input-div">
-                        <label class="label">Created Date Time</label>
-                        <textarea class="textarea"  type="text" [value]="user_created_datetimeString" readonly></textarea>
+                            <label class="label">Created Source Type</label>
+                            <input class="input-value" [value]="user_created_source_type" readonly />
                         </div>
 
                         <div class="input-div">
-                        <label class="label">Company Code *</label>
-                        <div style="display: flex;flex-direction: column;width: 50%;">
-                        <input style="width: 100%; word-break: break-all;" #companycode="ngModel" [ngStyle]="{border: editable && !prefill?'1px solid lightgray':!editable && prefill?'none':''}" type="text" name="company_code" [(ngModel)]="user_company_code" [readOnly]="!editable  && prefill" required/>
-                        <p *ngIf="(companycode.errors?.['required'] && (companycode.touched || all_fields_invalid))" style="color: red;font-size: 13px;">*required</p>
-                        </div>
+                            <label class="label">Created Date Time</label>
+                            <textarea class="textarea" type="text" [value]="user_created_datetimeString"
+                                readonly></textarea>
                         </div>
 
                         <div class="input-div">
-                        <label class="label">Type *</label>
-                        <input *ngIf="!editable && prefill" class="input-value" name="type" [(ngModel)]="user_type" readonly/>
-                        <div *ngIf="editable || !prefill" class="radios">
-                            <label for="html"><input type="radio" id="html" value="User" name="type" [(ngModel)]="user_type" [readOnly]="!editable  && prefill">  User</label><br>
-                            <label for="css"><input type="radio" id="css" value="Admin" name="type" [(ngModel)]="user_type" [readOnly]="!editable  && prefill">  Admin</label><br>
-                        </div>
-                        </div>
-
-                        <div class="input-div">
-                        <label class="label">User ID</label>
-                        <input class="input-value" type="text" [value]="user_user_id" readonly/>
+                            <label class="label">Company Code *</label>
+                            <div style="display: flex;flex-direction: column;width: 50%;">
+                                <input style="width: 100%; word-break: break-all;" #companycode="ngModel"
+                                    [ngStyle]="{border: editable && !prefill?'1px solid lightgray':!editable && prefill?'none':''}"
+                                    type="text" name="company_code" [(ngModel)]="user_company_code"
+                                    [readOnly]="!editable  && prefill" required />
+                                <p *ngIf="(companycode.errors?.['required'] && (companycode.touched || all_fields_invalid))"
+                                    style="color: red;font-size: 13px;">*required</p>
+                            </div>
                         </div>
 
                         <div class="input-div">
-                        <label class="label">Email ID *</label>
-                        <div style="display: flex;flex-direction: column;width: 50%;">
-                        <textarea  #email="ngModel" style="width: 100%; word-break: break-all;" [ngStyle]="{border: editable && !prefill?'1px solid lightgray':!editable && prefill?'none':''}" class="textarea2" type="email" name="email_id" [(ngModel)]="user_email_id" [readOnly]="!editable  && prefill" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" required></textarea>
-                        <p *ngIf="(email.errors?.['required'] && (email.touched || all_fields_invalid))" style="color: red;font-size: 13px;">*required</p>
-                        <div *ngIf="email.errors?.['pattern']&& email.dirty" style="color: red;font-size: 13px;">Invalid email format</div>
-                        </div>
-                        </div>
-
-                        <div class="input-div">
-                        <label class="label">Phone Number *</label>
-                        <div style="display: flex;flex-direction: column;width: 50%;">
-                        <input style="width: 100%; word-break: break-all;" #phonenumber="ngModel" [ngStyle]="{border: editable && !prefill?'1px solid lightgray':!editable && prefill?'none':''}" type="text" name="phone" maxlength="10" minlength="10" [(ngModel)]="user_phone" [readOnly]="!editable  && prefill" required/>
-                        <p *ngIf="(phonenumber.errors?.['required'] && (phonenumber.touched || all_fields_invalid))" style="color: red;font-size: 13px;">*required</p>
-                        <p *ngIf="(phonenumber.errors?.['minlength'] || phonenumber.errors?.['maxlength']) && phonenumber.dirty" style="color: red;font-size: 13px;">the phone number should be of 10 characters</p>
-                        </div>
+                            <label class="label">Type *</label>
+                            <input *ngIf="!editable && prefill" class="input-value" name="type" [(ngModel)]="user_type"
+                                readonly />
+                            <div *ngIf="editable || !prefill" class="radios">
+                                <label for="html"><input type="radio" id="html" value="User" name="type"
+                                        [(ngModel)]="user_type" [readOnly]="!editable  && prefill"> User</label><br>
+                                <label for="css"><input type="radio" id="css" value="Admin" name="type"
+                                        [(ngModel)]="user_type" [readOnly]="!editable  && prefill"> Admin</label><br>
+                            </div>
                         </div>
 
                         <div class="input-div">
-                        <label class="label">Last Modified Source</label>
-                        <input class="input-value" type="text" [value]="user_last_modified_source" readonly/>
+                            <label class="label">User ID</label>
+                            <input class="input-value" type="text" [value]="user_user_id" readonly />
                         </div>
 
                         <div class="input-div">
-                        <label class="label">Last Modified Source Type</label>
-                        <input class="input-value" [value]="user_last_modified_source_type" readonly/>
+                            <label class="label">Email ID *</label>
+                            <div style="display: flex;flex-direction: column;width: 50%;">
+                                <textarea #email="ngModel" style="width: 100%; word-break: break-all;"
+                                    [ngStyle]="{border: editable && !prefill?'1px solid lightgray':!editable && prefill?'none':''}"
+                                    class="textarea2" type="email" name="email_id" [(ngModel)]="user_email_id"
+                                    [readOnly]="!editable  && prefill"
+                                    pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" required></textarea>
+                                <p *ngIf="(email.errors?.['required'] && (email.touched || all_fields_invalid))"
+                                    style="color: red;font-size: 13px;">*required</p>
+                                <div *ngIf="email.errors?.['pattern']&& email.dirty"
+                                    style="color: red;font-size: 13px;">Invalid email format</div>
+                            </div>
                         </div>
 
                         <div class="input-div">
-                        <label class="label">Last Modified Date Time</label>
-                        <textarea class="textarea"  type="text" [value]="user_last_datetimeString"  readonly></textarea>
+                            <label class="label">Phone Number *</label>
+                            <div style="display: flex;flex-direction: column;width: 50%;">
+                                <input style="width: 100%; word-break: break-all;" #phonenumber="ngModel"
+                                    [ngStyle]="{border: editable && !prefill?'1px solid lightgray':!editable && prefill?'none':''}"
+                                    type="text" name="phone" maxlength="10" minlength="10" [(ngModel)]="user_phone"
+                                    [readOnly]="!editable  && prefill" required />
+                                <p *ngIf="(phonenumber.errors?.['required'] && (phonenumber.touched || all_fields_invalid))"
+                                    style="color: red;font-size: 13px;">*required</p>
+                                <p *ngIf="(phonenumber.errors?.['minlength'] || phonenumber.errors?.['maxlength']) && phonenumber.dirty"
+                                    style="color: red;font-size: 13px;">the phone number should be of 10 characters</p>
+                            </div>
                         </div>
 
                         <div class="input-div">
-                        <label class="label">Password</label>
-                        <input class="input-value" type="text" [value]="user_password" readonly/>
+                            <label class="label">Last Modified Source</label>
+                            <input class="input-value" type="text" [value]="user_last_modified_source" readonly />
+                        </div>
+
+                        <div class="input-div">
+                            <label class="label">Last Modified Source Type</label>
+                            <input class="input-value" [value]="user_last_modified_source_type" readonly />
+                        </div>
+
+                        <div class="input-div">
+                            <label class="label">Last Modified Date Time</label>
+                            <textarea class="textarea" type="text" [value]="user_last_datetimeString"
+                                readonly></textarea>
+                        </div>
+
+                        <div class="input-div">
+                            <label class="label">Password</label>
+                            <input class="input-value" type="text" [value]="user_password" readonly />
                         </div>
                     </form>
+                    <!-- Top form ends -->
                 </div>
             </div>
+
+            <!-- Dailog Bottom form -->
             <div class="top-dialog-div">
+                <!-- Bottom form header -->
                 <div class="top-dialog-header">
                     <div class="top-header">
                         <span class="heading">Address Details</span>
                     </div>
                 </div>
+
+                <!-- Bottom form division -->
                 <div class="top-dialog-form">
-                    <form class="form"  id="bottom-form" #bottomForm="ngForm">
+                    <form class="form" id="bottom-form" #bottomForm="ngForm">
                         <div class="input-div">
-                        <label class="label">Address *</label>
-                        <div style="display: flex;flex-direction: column;width: 50%;">
-                        <input style="width: 100%; word-break: break-all;" #address="ngModel" [ngStyle]="{border: editable && !prefill?'1px solid lightgray':!editable && prefill?'none':''}" type="text" name="address" [(ngModel)]="user_address" required [readOnly]="!editable  && prefill"/>
-                        <p *ngIf="(address.errors?.['required'] && (address.touched || all_fields_invalid))" style="color: red;font-size: 13px;">*required</p>
-                        </div>
+                            <label class="label">Address *</label>
+                            <div style="display: flex;flex-direction: column;width: 50%;">
+                                <input style="width: 100%; word-break: break-all;" #address="ngModel"
+                                    [ngStyle]="{border: editable && !prefill?'1px solid lightgray':!editable && prefill?'none':''}"
+                                    type="text" name="address" [(ngModel)]="user_address" required
+                                    [readOnly]="!editable  && prefill" />
+                                <p *ngIf="(address.errors?.['required'] && (address.touched || all_fields_invalid))"
+                                    style="color: red;font-size: 13px;">*required</p>
+                            </div>
                         </div>
 
                         <div class="input-div">
-                        <label class="label">Country *</label>
-                        <div style="display: flex;flex-direction: column;width: 50%;">
-                        <input style="width: 100%; word-break: break-all;" #country="ngModel" [ngStyle]="{border: editable && !prefill?'1px solid lightgray':!editable && prefill?'none':''}" type="text" name="country" [(ngModel)]="user_country" required [readOnly]="!editable  && prefill"/>
-                        <p *ngIf="(country.errors?.['required'] && (country.touched || all_fields_invalid))" style="color: red;font-size: 13px;">*required</p>
-                        </div>
-                        </div>
-
-                        <div class="input-div">
-                        <label class="label">State *</label>
-                        <div style="display: flex;flex-direction: column;width: 50%;">
-                        <input style="width: 100%; word-break: break-all;" #state="ngModel" [ngStyle]="{border: editable && !prefill?'1px solid lightgray':!editable && prefill?'none':''}" type="text" name="state" [(ngModel)]="user_state" required [readOnly]="!editable  && prefill"/>
-                        <p *ngIf="(state.errors?.['required'] && (state.touched || all_fields_invalid))" style="color: red;font-size: 13px;">*required</p>
-                        </div>
+                            <label class="label">Country *</label>
+                            <div style="display: flex;flex-direction: column;width: 50%;">
+                                <input style="width: 100%; word-break: break-all;" #country="ngModel"
+                                    [ngStyle]="{border: editable && !prefill?'1px solid lightgray':!editable && prefill?'none':''}"
+                                    type="text" name="country" [(ngModel)]="user_country" required
+                                    [readOnly]="!editable  && prefill" />
+                                <p *ngIf="(country.errors?.['required'] && (country.touched || all_fields_invalid))"
+                                    style="color: red;font-size: 13px;">*required</p>
+                            </div>
                         </div>
 
                         <div class="input-div">
-                        <label class="label">City *</label>
-                        <div style="display: flex;flex-direction: column;width: 50%;">
-                        <input style="width: 100%; word-break: break-all;" #city="ngModel" [ngStyle]="{border: editable && !prefill?'1px solid lightgray':!editable && prefill?'none':''}" type="text" name="city" [(ngModel)]="user_city" required [readOnly]="!editable  && prefill"/>
-                        <p *ngIf="(city.errors?.['required'] && (city.touched || all_fields_invalid))" style="color: red;font-size: 13px;">*required</p>
-                        </div>
-                        </div>
-
-                        <div class="input-div">
-                        <label class="label">Postal Code *</label>
-                        <div style="display: flex;flex-direction: column;width: 50%;">
-                        <input style="width: 100%; word-break: break-all;" #postalcode="ngModel" [ngStyle]="{border: editable && !prefill?'1px solid lightgray':!editable && prefill?'none':''}"  type="text" name="postal_code" [(ngModel)]="user_postal_code" required [readOnly]="!editable  && prefill"/>
-                        <p *ngIf="(postalcode.errors?.['required'] && (postalcode.touched || all_fields_invalid))" style="color: red;font-size: 13px;">*required</p>
-                        </div>
+                            <label class="label">State *</label>
+                            <div style="display: flex;flex-direction: column;width: 50%;">
+                                <input style="width: 100%; word-break: break-all;" #state="ngModel"
+                                    [ngStyle]="{border: editable && !prefill?'1px solid lightgray':!editable && prefill?'none':''}"
+                                    type="text" name="state" [(ngModel)]="user_state" required
+                                    [readOnly]="!editable  && prefill" />
+                                <p *ngIf="(state.errors?.['required'] && (state.touched || all_fields_invalid))"
+                                    style="color: red;font-size: 13px;">*required</p>
+                            </div>
                         </div>
 
                         <div class="input-div">
-                        <label class="label">Locale *</label>
-                        <div style="display: flex;flex-direction: column;width: 50%;">
-                        <input style="width: 100%; word-break: break-all;" #locale="ngModel" [ngStyle]="{border: editable && !prefill?'1px solid lightgray':!editable && prefill?'none':''}" type="text" name="locale" [(ngModel)]="user_locale" required [readOnly]="!editable  && prefill"/>
-                        <p *ngIf="(locale.errors?.['required'] && (locale.touched || all_fields_invalid))" style="color: red;font-size: 13px;">*required</p>
-                        </div>
+                            <label class="label">City *</label>
+                            <div style="display: flex;flex-direction: column;width: 50%;">
+                                <input style="width: 100%; word-break: break-all;" #city="ngModel"
+                                    [ngStyle]="{border: editable && !prefill?'1px solid lightgray':!editable && prefill?'none':''}"
+                                    type="text" name="city" [(ngModel)]="user_city" required
+                                    [readOnly]="!editable  && prefill" />
+                                <p *ngIf="(city.errors?.['required'] && (city.touched || all_fields_invalid))"
+                                    style="color: red;font-size: 13px;">*required</p>
+                            </div>
                         </div>
 
                         <div class="input-div">
-                        <label class="label">Time zone *</label>
-                        <div style="display: flex;flex-direction: column;width: 50%;">
-                        <input style="width: 100%; word-break: break-all;" #timezone="ngModel" [ngStyle]="{border: editable && !prefill?'1px solid lightgray':!editable && prefill?'none':''}" type="text" name="time_zone" [(ngModel)]="user_time_zone" required [readOnly]="!editable  && prefill"/>
-                        <p *ngIf="(timezone.errors?.['required'] && (timezone.touched || all_fields_invalid))" style="color: red;font-size: 13px;">*required</p>
+                            <label class="label">Postal Code *</label>
+                            <div style="display: flex;flex-direction: column;width: 50%;">
+                                <input style="width: 100%; word-break: break-all;" #postalcode="ngModel"
+                                    [ngStyle]="{border: editable && !prefill?'1px solid lightgray':!editable && prefill?'none':''}"
+                                    type="text" name="postal_code" [(ngModel)]="user_postal_code" required
+                                    [readOnly]="!editable  && prefill" />
+                                <p *ngIf="(postalcode.errors?.['required'] && (postalcode.touched || all_fields_invalid))"
+                                    style="color: red;font-size: 13px;">*required</p>
+                            </div>
                         </div>
+
+                        <div class="input-div">
+                            <label class="label">Locale *</label>
+                            <div style="display: flex;flex-direction: column;width: 50%;">
+                                <input style="width: 100%; word-break: break-all;" #locale="ngModel"
+                                    [ngStyle]="{border: editable && !prefill?'1px solid lightgray':!editable && prefill?'none':''}"
+                                    type="text" name="locale" [(ngModel)]="user_locale" required
+                                    [readOnly]="!editable  && prefill" />
+                                <p *ngIf="(locale.errors?.['required'] && (locale.touched || all_fields_invalid))"
+                                    style="color: red;font-size: 13px;">*required</p>
+                            </div>
+                        </div>
+
+                        <div class="input-div">
+                            <label class="label">Time zone *</label>
+                            <div style="display: flex;flex-direction: column;width: 50%;">
+                                <input style="width: 100%; word-break: break-all;" #timezone="ngModel"
+                                    [ngStyle]="{border: editable && !prefill?'1px solid lightgray':!editable && prefill?'none':''}"
+                                    type="text" name="time_zone" [(ngModel)]="user_time_zone" required
+                                    [readOnly]="!editable  && prefill" />
+                                <p *ngIf="(timezone.errors?.['required'] && (timezone.touched || all_fields_invalid))"
+                                    style="color: red;font-size: 13px;">*required</p>
+                            </div>
                         </div>
                     </form>
                 </div>
             </div>
             <div id="dialog-footer">
                 <div id="btn-container">
-                    <button class="submit" *ngIf="prefill&&!editable" (click)="close_form_dialog()">Close</button>
-                    <button class="submit" *ngIf="prefill && editable || !prefill " (click)="close_form()">Cancel</button>
-                    <button *ngIf="user_details?.type!='User' && !editable && prefill" class="submit" (click)="edit_form()">Edit</button>
-                    <button *ngIf="editable || !prefill" class="submit" (click)="form_submit(topForm,bottomForm)">Submit</button>
+                    <button class="submit" *ngIf="prefill&&!editable" (click)="visible = false;">Close</button>
+                    <button class="submit" *ngIf="prefill && editable || !prefill "
+                        (click)="close_form()">Cancel</button>
+                    <button *ngIf="user_details?.type!='User' && !editable && prefill" class="submit"
+                        (click)="editable = true;">Edit</button>
+                    <button *ngIf="editable || !prefill" class="submit"
+                        (click)="form_submit(topForm,bottomForm)">Submit</button>
                 </div>
             </div>
         </div>
     </p-dialog>
 </div>
-<p-toast/>
+<p-toast />

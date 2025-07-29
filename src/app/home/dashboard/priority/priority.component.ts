@@ -8,31 +8,35 @@ import { TwoWayDataBinding } from 'src/app/Services/two_way_dataBinding';
   templateUrl: './priority.component.html',
   styleUrls: ['./priority.component.css']
 })
-export class PriorityComponent implements OnInit{
-
+export class PriorityComponent implements OnInit {
   data;
   priority_options;
-  constructor(private http_service:HTTPService, private two_way:TwoWayDataBinding){}
 
-  priorities:{priorityId:string, priority:string}[]=this.two_way.priorities;
+  constructor(private http_service: HTTPService, private two_way: TwoWayDataBinding) { }
 
-  ngOnInit(){
-    let result={};
-    this.http_service.fetch_tickets().subscribe((res:Ticket[])=>{
-      let number_of_issues=0;
-      for(let x of this.priorities){
-        number_of_issues = res.filter((item1)=>item1.priorityId==x.priorityId).length;
-        result[x.priority]=number_of_issues;
+  //data from TwoWayDataBinding server
+  priorities: { priorityId: string, priority: string }[] = this.two_way.priorities;
+
+  ngOnInit() {
+    let result = {}; //{priority_name : number_of_issues}
+
+    //the initial data load
+    this.http_service.fetch_tickets().subscribe((res: Ticket[]) => {
+      let number_of_issues = 0;
+      //filtering the tickets according to priority Ids
+      for (let x of this.priorities) {
+        number_of_issues = res.filter((item1) => item1.priorityId == x.priorityId).length;
+        result[x.priority] = number_of_issues;
       }
-      console.log(result);
+
       this.data = {
-         labels: Object.keys(result),
-       datasets: [
+        labels: Object.keys(result), //result object keys as priority names
+        datasets: [
           {
             label: 'Sales',
-            data: Object.values(result),
+            data: Object.values(result), //result object values as number of issues
             fill: false,
-            backgroundColor:"blue",
+            backgroundColor: "blue",
             borderColor: '#42A5F5',
             tension: 0
           }
@@ -40,32 +44,32 @@ export class PriorityComponent implements OnInit{
       };
     })
 
-    this.priority_options={
+    this.priority_options = {
       maintainAspectRatio: false,
       aspectRatio: 0.6,
       responsive: true,
-  plugins: {
-    tooltip: {
-      enabled: true
-    },
-    legend: { display: false },
-    datalabels: {
-      display: true,
-      color: 'white',
-      font: {
-        size: 14,
-        weight: 'bold'
+      plugins: {
+        tooltip: {
+          enabled: true
+        },
+        legend: { display: false },
+        datalabels: {
+          display: true,
+          color: 'white',
+          font: {
+            size: 14,
+            weight: 'bold'
+          }
+        }
       }
-    }
-  }
       ,
       scales: {
         x: {
           grid: {
-            
+
             drawBorder: false,
-            drawOnChartArea: false,    
-            display: false  
+            drawOnChartArea: false,
+            display: false
           },
           title: {
             display: true,
@@ -74,7 +78,7 @@ export class PriorityComponent implements OnInit{
         },
         y: {
           grid: {
-            
+
             drawBorder: false,
             drawOnChartArea: false,
             display: false
@@ -88,9 +92,5 @@ export class PriorityComponent implements OnInit{
         }
       }
     }
-  }
-
-  refresh(){
-    this.ngOnInit();
   }
 }

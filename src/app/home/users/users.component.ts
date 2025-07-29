@@ -7,21 +7,18 @@ import { TwoWayDataBinding } from 'src/app/Services/two_way_dataBinding';
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent {
-  dialog_flag:boolean=false;
-  prefill_id:string='';
+  dialog_flag: boolean = false;
+  prefill_id: string = '';
 
-  constructor(private two_way:TwoWayDataBinding){}
+  constructor(private two_way: TwoWayDataBinding) { }
 
-  ngOnInit(){
+  ngOnInit() {
     this.two_way.current_route_emit('Users');
   }
-  dialog(data:[boolean,string?]){
-    console.log(data);
-    this.dialog_flag=data[0];
-    this.prefill_id=data[1];
+
+  //function for handling the dialog display 
+  dialog(data: [boolean, string?]) {
+    this.dialog_flag = data[0];
+    this.prefill_id = data[1];
   }
-  set_dialogFlag(val:boolean){
-    this.dialog_flag=val;
-  }
- 
 }

@@ -1,4 +1,4 @@
-#operatingSystem-component{
+#operatingSystem-component {
     height: 100%;
     width: 100%;
     padding: 10px;
@@ -7,41 +7,41 @@
     box-shadow: 0 0 10px 0.2px rgba(0, 0, 0, 0.2);
 }
 
-#operatingSystem-content-inner{
+#operatingSystem-content-inner {
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
 }
 
-#operatingSystem-header{
+#operatingSystem-header {
     width: 100%;
     height: 8%;
     display: flex;
     flex-direction: row;
 }
 
-#operatingSystem-header-left{
+#operatingSystem-header-left {
     width: 50%;
     display: flex;
     justify-content: flex-start;
 }
 
 
-#operatingSystem-header-right{
+#operatingSystem-header-right {
     width: 50%;
     display: flex;
     align-items: center;
     justify-content: flex-end;
 }
 
-#operatingSystem-header-right-inner{
+#operatingSystem-header-right-inner {
     display: flex;
     flex-direction: row;
     gap: 10px;
 }
 
-#refresh-div{
+#refresh-div {
     height: 27px;
     width: 27px;
     background-color: white;
@@ -53,7 +53,7 @@
     cursor: pointer;
 }
 
-#operatingSystem-container{
+#operatingSystem-container {
     width: 100%;
     height: 92%;
     display: flex;
@@ -61,20 +61,23 @@
     justify-content: center;
 }
 
-::ng-deep #operatingSystem-container canvas{
+::ng-deep #operatingSystem-container canvas {
     width: 100% !important;
     height: 400px !important;
 }
-#refresh-div:hover{
+
+#refresh-div:hover {
     background-color: rgba(211, 211, 211, 0.3);
-    
+
 }
-#operatingSystem-container-inner{
+
+#operatingSystem-container-inner {
     height: 100%;
     width: 100%;
 }
-@media screen and (max-width:430px){
-    ::ng-deep #operatingSystem-container canvas{
-   height: auto !important;
-}
+
+@media screen and (max-width:430px) {
+    ::ng-deep #operatingSystem-container canvas {
+        height: auto !important;
+    }
 }

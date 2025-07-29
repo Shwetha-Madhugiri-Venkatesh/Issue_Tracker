@@ -1,20 +1,22 @@
 <div id="status-component">
     <div id="status-content-inner">
+        <!-- Status header -->
         <div id="status-header">
             <div id="status-header-left">
                 <h4 id="status-heading">Status</h4>
             </div>
             <div id="status-header-right">
                 <div id="status-header-right-inner">
-                    <div id="refresh-div" (click)="refresh()" pTooltip="Refresh" tooltipPosition="bottom">
+                    <div id="refresh-div" (click)="ngOnInit()" pTooltip="Refresh" tooltipPosition="bottom">
                         <i class="fa-solid fa-rotate-right fa-rotate-270"></i>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- Status Graph -->
         <div id="status-container">
             <div id="status-container-inner">
-                <p-chart type="bar" [data]="data" class="h-[30rem]" [options]="status_options"/>
+                <p-chart type="bar" [data]="data" class="h-[30rem]" [options]="status_options" />
             </div>
         </div>
     </div>

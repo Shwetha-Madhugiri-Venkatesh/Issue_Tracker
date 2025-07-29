@@ -1,11 +1,11 @@
-#dialog-inner{
+#dialog-inner {
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-.top-dialog-div{
+.top-dialog-div {
     display: flex;
     flex-direction: column;
     border: 1px solid lightgray;
@@ -13,89 +13,92 @@
     border-bottom: 1px solid lightgray;
 }
 
-.top-dialog-header{
+.top-dialog-header {
     border-bottom: 1px solid lightgray;
     display: flex;
     flex-direction: row;
-    background-color: rgba(211, 211, 211,0.3);
+    background-color: rgba(211, 211, 211, 0.3);
     padding: 3px 10px;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 }
 
-.top-header{
+.top-header {
     width: 50%;
 }
 
-.heading{
+.heading {
     font-size: 15px;
     font-weight: bold;
 }
-#icon-div{
+
+#icon-div {
     width: 50%;
     display: flex;
     justify-content: flex-end;
     padding-right: 10px;
 }
 
-#icon{
+#icon {
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.input-div{
+
+.input-div {
     display: flex;
     flex-direction: row;
     gap: 30px;
 }
 
 ::ng-deep #dialog_component .p-dialog {
-    width: 90%!important;
+    width: 90% !important;
 }
 
-.top-dialog-form{
+.top-dialog-form {
     margin: 10px;
     display: flex;
     flex-direction: row;
     gap: 10px;
 }
 
-.form{
+.form {
     width: 100%;
     display: grid;
     grid-template-columns: auto auto;
     row-gap: 10px;
 }
 
-#profile_pic{
+#profile_pic {
     width: 25%;
     background-color: rgba(211, 211, 211, 0.3);
-     position: relative;
+    position: relative;
 }
 
-.label{
+.label {
     width: 200px;
     display: flex;
-        align-items: center;
-        justify-content: flex-start;
+    align-items: center;
+    justify-content: flex-start;
 }
 
-label,input{
+label,
+input {
     font-size: 15px;
 }
 
-::ng-deep #dialog_component .p-dialog .p-dialog-content{
+::ng-deep #dialog_component .p-dialog .p-dialog-content {
     padding: 10px 15px;
 }
 
-#profile_pic_content{
+#profile_pic_content {
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
 }
 
-#profile-pic-top{
+#profile-pic-top {
     width: 100%;
     height: 80%;
     display: flex;
@@ -103,13 +106,15 @@ label,input{
     justify-content: center;
 }
 
-#profile_condition1{
-    font-size: 15px ;
+#profile_condition1 {
+    font-size: 15px;
 }
-#profile_condition2{
-    font-size: 13px ;
+
+#profile_condition2 {
+    font-size: 13px;
 }
-#profile-pic-bottom{
+
+#profile-pic-bottom {
     width: 100%;
     height: 30%;
     display: flex;
@@ -118,16 +123,19 @@ label,input{
     justify-content: center;
     gap: 5px;
 }
-#profile_pic_image_div{
-     width: 100%;
+
+#profile_pic_image_div {
+    width: 100%;
     height: 100%;
 }
-#profile_pic_image{
+
+#profile_pic_image {
     width: 100%;
-  height: 100%;
-  border-radius: 50%;
+    height: 100%;
+    border-radius: 50%;
 }
-#profile-pic-div{
+
+#profile-pic-div {
     width: 70%;
     height: 150px;
     border-radius: 50%;
@@ -138,35 +146,37 @@ label,input{
     justify-content: center;
 }
 
-#profile{
+#profile {
     width: 100%;
     height: 100%;
     border-radius: 50%;
 }
-::ng-deep #dialog_component .p-dialog .p-dialog-header{
+
+::ng-deep #dialog_component .p-dialog .p-dialog-header {
     padding: 3px 15px;
 }
 
-.radios{
+.radios {
     display: flex;
     flex-direction: row;
     gap: 10px;
 }
- #plus{
+
+#plus {
     position: absolute;
     background-color: rgb(158, 219, 243);
     border-radius: 50%;
     width: 40px;
-    height:40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
     bottom: 26%;
     cursor: pointer;
- }
+}
 
-.submit{
-    background-color:rgb(45, 57, 57);
+.submit {
+    background-color: rgb(45, 57, 57);
     color: white;
     border: 1px solid rgb(45, 57, 57);
     height: 25px;
@@ -175,96 +185,114 @@ label,input{
     cursor: pointer;
 }
 
-#dialog-footer{
+#dialog-footer {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: flex-end;
 }
 
-#btn-container{
+#btn-container {
     display: flex;
     flex-direction: row;
     gap: 10px;
 }
-input{
+
+input {
     border: 1px solid lightgray;
     border-radius: 5px;
     padding: 2px 5px;
     outline: none;
     box-shadow: none;
 }
-.input-value{
+
+.input-value {
     border: none;
 }
 
-.textarea{
-    resize: none; font-size: 15px; margin-top: 2px; scrollbar-width: none; width: 50%; padding-left: 5px;
+.textarea {
+    resize: none;
+    font-size: 15px;
+    margin-top: 2px;
+    scrollbar-width: none;
+    width: 50%;
+    padding-left: 5px;
     height: 15px;
     border: none;
     outline: none;
 }
 
-.textarea2{
-    resize: none; font-size: 15px; margin-top: 2px; scrollbar-width: none; width: 50%;
+.textarea2 {
+    resize: none;
+    font-size: 15px;
+    margin-top: 2px;
+    scrollbar-width: none;
+    width: 50%;
     border-color: lightgray;
     height: 25px;
     border-radius: 5px;
-   padding-left: 5px;
+    padding-left: 5px;
 }
 
 input:-webkit-autofill {
-  box-shadow: 0 0 0px 1000px white inset !important;
-  -webkit-box-shadow: 0 0 0px 1000px white inset !important;
-  -webkit-text-fill-color: #000 !important;
+    box-shadow: 0 0 0px 1000px white inset !important;
+    -webkit-box-shadow: 0 0 0px 1000px white inset !important;
+    -webkit-text-fill-color: #000 !important;
 }
 
-@media screen and (max-width:1300px){
-    .input-div{
-        gap:10px
+@media screen and (max-width:1300px) {
+    .input-div {
+        gap: 10px
     }
-    .label{
+
+    .label {
         width: 40%;
-        
+
     }
-    input{
+
+    input {
         width: 40%;
     }
 
-    #profile_pic{
+    #profile_pic {
         height: 250px;
     }
 }
 
 
-@media screen and (max-width:833px){
-    #profile_pic{
+@media screen and (max-width:833px) {
+    #profile_pic {
         width: 50%;
         height: 250px;
     }
-    
 
-    .form{
+
+    .form {
         grid-template-columns: auto;
     }
-    .textarea{
+
+    .textarea {
         height: auto;
     }
-    .textarea2{
+
+    .textarea2 {
         height: auto;
     }
 }
 
-@media screen and (max-width:467px){
-    #profile_pic{
+@media screen and (max-width:467px) {
+    #profile_pic {
         width: 70%;
     }
-    #profile_condition1,#profile_condition2{
+
+    #profile_condition1,
+    #profile_condition2 {
         font-size: 13px;
     }
 }
-@media screen and (max-width:375px){
-    .top-dialog-form{
+
+@media screen and (max-width:375px) {
+    .top-dialog-form {
         flex-direction: column;
     }
 
@@ -276,70 +304,80 @@ input:-webkit-autofill {
     }
 }
 
-@media screen and (max-width:210px){
-    .input-div{
+@media screen and (max-width:210px) {
+    .input-div {
         flex-direction: column;
     }
 
-    .label,input{
+    .label,
+    input {
         width: 99%;
     }
 }
 
-@media screen and (max-width:210px){
-    ::ng-deep .p-dialog .p-dialog-header .p-dialog-title{
+@media screen and (max-width:210px) {
+    ::ng-deep .p-dialog .p-dialog-header .p-dialog-title {
         font-size: 18px;
     }
-     #profile_condition1,#profile_condition2{
+
+    #profile_condition1,
+    #profile_condition2 {
         font-size: 12px;
         word-break: break-all;
     }
-    .label,input{
+
+    .label,
+    input {
         font-size: 13px;
     }
 
-    #btn-container{
+    #btn-container {
         flex-direction: column;
     }
 
 }
 
-@media screen and (max-width:180px){
-     input{
+@media screen and (max-width:180px) {
+    input {
         width: 70%;
     }
-    #profile-pic-bottom{
+
+    #profile-pic-bottom {
         align-items: flex-end;
         gap: 2px;
     }
 
-    #plus{
+    #plus {
         width: 20px;
         height: 20px;
         bottom: 30%;
     }
 
-    #plus >i{
+    #plus>i {
         font-size: 10px;
     }
 }
 
-@media screen and (max-width:143px){
-     input{
+@media screen and (max-width:143px) {
+    input {
         width: 50%;
     }
-    label{
+
+    label {
         word-break: break-all;
     }
-    #plus{
+
+    #plus {
         width: 20px;
         height: 20px;
         bottom: 35%;
     }
-    #profile-pic-top{
+
+    #profile-pic-top {
         height: 60%;
     }
-    #plus >i{
+
+    #plus>i {
         font-size: 10px;
     }
 }

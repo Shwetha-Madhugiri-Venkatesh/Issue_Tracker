@@ -1,20 +1,22 @@
 <div id="priority-component">
     <div id="priority-content-inner">
+        <!-- Priority header -->
         <div id="priority-header">
             <div id="priority-header-left">
                 <h4 id="priority-heading">Priority</h4>
             </div>
             <div id="priority-header-right">
                 <div id="priority-header-right-inner">
-                    <div id="refresh-div" (click)="refresh()" pTooltip="Refresh" tooltipPosition="bottom">
+                    <div id="refresh-div" (click)="ngOnInit()" pTooltip="Refresh" tooltipPosition="bottom">
                         <i class="fa-solid fa-rotate-right fa-rotate-270"></i>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- Priority Graph -->
         <div id="priority-container">
             <div id="priority-container-inner">
-                <p-chart type="bar" [data]="data" class="h-[30rem]" [options]="priority_options"/>
+                <p-chart type="bar" [data]="data" class="h-[30rem]" [options]="priority_options" />
             </div>
         </div>
     </div>

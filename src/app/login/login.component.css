@@ -1,15 +1,15 @@
-#login-container{
+#login-container {
     height: 100%;
     width: 100%;
     background: url("../../assets/images/login.jpg");
     background-repeat: no-repeat;
-    background-size:cover;
+    background-size: cover;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-#inner-login-div{
+#inner-login-div {
     position: absolute;
     background-color: white;
     display: flex;
@@ -21,7 +21,7 @@
     border-radius: 10px;
 }
 
-#welcome-div{
+#welcome-div {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -30,123 +30,137 @@
     gap: 5px;
 }
 
-.input-div{
+.input-div {
     display: flex;
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
 
-#form-div{
+#form-div {
     width: 100%;
 }
 
-form{
+form {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-::ng-deep #login-container .p-component, .p-component * {
+::ng-deep #login-container .p-component,
+.p-component * {
     box-sizing: border-box;
     width: 100%;
 }
 
-::ng-deep #login-container .p-inputtext{
+::ng-deep #login-container .p-inputtext {
     padding: 10px;
 }
-#forgot{
+
+#forgot {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-#forgot-btn{
+#forgot-btn {
     border: none;
     background-color: white;
-    font-size: 13px; 
-    color:blue;
+    font-size: 13px;
+    color: blue;
 }
-h1{
+
+h1 {
     font-weight: bold;
 }
-p{
-    font-size: 15px;
-}
-label{
+
+p {
     font-size: 15px;
 }
 
-@media screen and (max-width:425px){
-    #inner-login-div{
-    width: 80%;
+label {
+    font-size: 15px;
+}
+
+@media screen and (max-width:425px) {
+    #inner-login-div {
+        width: 80%;
     }
 }
 
-@media screen and (max-width:320px){
-   #login-container{
-    height: 600px;
-   }
+@media screen and (max-width:320px) {
+    #login-container {
+        height: 600px;
+    }
 }
 
-@media screen and (max-width:247px){
-   h1{
-    font-size: 25px;
-   }
-   span{
-    font-size: 15px;
-   }
-   label,p{
-    font-size: 15px;
-   }
-   
-   #inner-login-div{
-    gap: 10px;
-    padding: 10px;
-   }
-   ::ng-deep .p-inputtext{
-    padding: 5px !important;
-   }
+@media screen and (max-width:247px) {
+    h1 {
+        font-size: 25px;
+    }
 
-   ::ng-deep .p-button .p-button-label{
-    font-size: 15px !important;
-   }
+    span {
+        font-size: 15px;
+    }
+
+    label,
+    p {
+        font-size: 15px;
+    }
+
+    #inner-login-div {
+        gap: 10px;
+        padding: 10px;
+    }
+
+    ::ng-deep .p-inputtext {
+        padding: 5px !important;
+    }
+
+    ::ng-deep .p-button .p-button-label {
+        font-size: 15px !important;
+    }
 }
 
-@media screen and (max-width:158px){
-   h1{
-    font-size: 18px;
-    word-break: break-all;
-   }
-   span{
-    font-size: 13px;
-    word-break: break-all;
-   }
-   ::ng-deep .p-button .p-button-label{
-    font-size: 13px !important;
-    word-break: break-all;
-   }
+@media screen and (max-width:158px) {
+    h1 {
+        font-size: 18px;
+        word-break: break-all;
+    }
 
-   label,p{
-    font-size: 13px;
-    word-break: break-all;
-   }
-   #inner-login-div{
-    gap: 10px;
-    padding: 10px;
-   }
-   ::ng-deep .p-inputtext{
-    padding: 5px !important;
-   }
+    span {
+        font-size: 13px;
+        word-break: break-all;
+    }
 
-   #forgot-btn{
-    font-size: 13px;
-    word-break: break-all;
-   }
+    ::ng-deep .p-button .p-button-label {
+        font-size: 13px !important;
+        word-break: break-all;
+    }
+
+    label,
+    p {
+        font-size: 13px;
+        word-break: break-all;
+    }
+
+    #inner-login-div {
+        gap: 10px;
+        padding: 10px;
+    }
+
+    ::ng-deep .p-inputtext {
+        padding: 5px !important;
+    }
+
+    #forgot-btn {
+        font-size: 13px;
+        word-break: break-all;
+    }
 }
 
-@media screen and (max-width:90px){
-    #login-container{
-    height: 900px;
-   }
+@media screen and (max-width:90px) {
+    #login-container {
+        height: 900px;
+    }
 }

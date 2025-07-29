@@ -1,7 +1,5 @@
-import { NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { MessageService, PrimeNGConfig } from 'primeng/api';
 import { customPipe } from 'src/app/custom_pipes/custom_pipe_one';
 import { Comment } from 'src/app/Models/comment';
 import { Ticket } from 'src/app/Models/ticket';
@@ -9,15 +7,14 @@ import { User } from 'src/app/Models/User';
 import { HTTPService } from 'src/app/Services/http_service';
 import { TwoWayDataBinding } from 'src/app/Services/two_way_dataBinding';
 
-
 @Component({
   selector: 'app-kabban',
   templateUrl: './kabban.component.html',
   styleUrls: ['./kabban.component.css'],
-  providers:[customPipe]
+  providers: [customPipe]
 })
 export class KabbanComponent implements OnInit {
-  text="shwetha"
+  text = "shwetha"
   visible: boolean = false;
   selectedPriority = '';
   selectedCategory = '';
@@ -32,13 +29,14 @@ export class KabbanComponent implements OnInit {
   today = new Date();
   dynamic_subcategory: { subCategoryId: string, categoryId: string, subCategoryDesc: string }[];
   all_tickets: Ticket[] = [];
-
   visible_comment: boolean = false;
   comment: string = '';
   users_list: User[] = [];
   selectedUser: string = '';
   updatePriority;
   updateStatus;
+  text_area: boolean = false;
+  text_area2: boolean = false;
   comment_ticket: Ticket = {
     reporter_name: '',
     ticketId: '',
@@ -63,8 +61,6 @@ export class KabbanComponent implements OnInit {
   edit_comment_visible: boolean = false;
   updated_comment: string;
   comment_to_be_edited;
-
-
   filter: boolean = false;
   filterPriority;
   filterAssigneeId;
@@ -85,25 +81,32 @@ export class KabbanComponent implements OnInit {
   filter_output = [];
   tickets;
   http_tickets: Ticket[];
-
   selectedbrowser;
   selectedOS;
   delete_visible: boolean = false;
   delete_comment_id;
+  kanban_preload;
+  original_comment_ticket;
+  users_suggestions;
+  filePayload;
+
   constructor(private http_service: HTTPService, private two_way_data: TwoWayDataBinding) { }
 
+  //Data from TwoWayDataBinding server
   priorities: { priorityId: string, priority: string }[] = this.two_way_data.priorities;
   statuses: { statusId: string, status: string, tickets: Ticket[] }[] = this.two_way_data.statuses;
   categories: { categoryId: string, categoryDesc: string }[] = this.two_way_data.categories;
   subcategories: { subCategoryId: string, categoryId: string, subCategoryDesc: string }[] = this.two_way_data.subcategories;
   browsers: { browser_name: string, browser_id: string }[] = this.two_way_data.browsers;
   operatingSystems: { os_name: string, os_id: string }[] = this.two_way_data.operatingSystems;
+
   types: { type: string, value: string }[] = [
     { type: "Bug", value: "bug" },
     { type: "Feature", value: "feature" },
   ]
-  kanban_preload;
+
   ngOnInit() {
+    //Preloading the data
     this.kanban_preload = JSON.parse(localStorage.getItem("kanban_preload")) || {};
     this.filter = this.kanban_preload.filter;
     this.filterPriority = this.kanban_preload.filterPriority;
@@ -125,13 +128,18 @@ export class KabbanComponent implements OnInit {
       this.all_tickets = this.kanban_preload.filter_output;
     }
     this.filter_output = this.kanban_preload.filter_output;
+    //setting the preload object to empty
     localStorage.setItem("kanban_preload", JSON.stringify({}));
+
+    //emitting the current route name
     this.two_way_data.current_issues_subcomponent("");
+
+    //Logged in user details
     this.login_user = JSON.parse(localStorage.getItem("login")) || {};
     this.http_service.fetch_users().subscribe((res: User[]) => {
       this.user_details = res.find(item => item.user_id == this.login_user['userId']);
-      console.log(this.user_details);
     })
+
     this.fetch_tickets_update();
 
     this.http_service.fetch_users().subscribe((res: User[]) => {
@@ -139,9 +147,9 @@ export class KabbanComponent implements OnInit {
     })
 
     this.fetch_all_tickets();
-
-
   }
+
+  //HTTP Request to fetch Tickets
   fetch_all_tickets() {
     this.http_service.fetch_tickets().subscribe((res: Ticket[]) => {
       if (this.kanban_preload.filter_output == undefined || this.kanban_preload.filter_output?.length == 0) {
@@ -153,37 +161,25 @@ export class KabbanComponent implements OnInit {
   }
 
   category_entered(val) {
-    console.log(val.value);
     this.dynamic_subcategory = this.subcategories.filter(item => item.categoryId == val.value.categoryId);
   }
-  ticket_type_bug() {
-    this.bug = true;
-    this.feature = false;
-  }
-  ticket_type_feature() {
-    this.feature = true;
-    this.bug = false;
-  }
-  onEditorShow() {
-    this.updated_comment = this.comment_to_be_edited.message || '<p>hi</p>';
-  }
 
-
+  //Fetching the updated tickets
   fetch_tickets_update() {
     for (let s of this.statuses) {
       s.tickets = this.all_tickets.filter(item => item.statusId == s.statusId);
     }
   }
+
+  //Tickets creating form submit
   bug_form_submit(bugForm: NgForm) {
     if (!bugForm.valid) {
       return;
     }
-    console.log("bug form sumbit", bugForm.value);
     bugForm.value['input_file'] = this.filePayload;
-    console.log("bug form sumbit", bugForm.value);
+
     this.http_service.fetch_tickets().subscribe((res: Ticket[]) => {
       let len = res.filter(item => item.categoryId == bugForm.value.category.categoryId && item.subCategoryId == bugForm.value.subcategory.subCategoryId);
-      console.log(len.length);
       let form_data = {
         reporter_name: bugForm.value.reporter_name,
         reportedId: bugForm.value.reportedId,
@@ -202,19 +198,14 @@ export class KabbanComponent implements OnInit {
         browser: bugForm.value.browser.browser_id,
         operatingSystem: bugForm.value.operatingSystem.os_id,
       }
-      console.log(form_data);
       this.http_service.post_ticket(form_data).subscribe((res) => {
-        console.log(res);
         this.fetch_all_tickets();
       })
       this.visible = false;
     })
   }
 
-  add_bug() {
-    this.visible = true;
-  }
-
+  //Reseting the Ticket creating form fields
   reset_form_fields() {
     this.selectedPriority = '';
     this.selectedCategory = '';
@@ -223,23 +214,22 @@ export class KabbanComponent implements OnInit {
     this.description = '';
     this.files = '';
   }
-  original_comment_ticket;
+
+  //Accessing the ticket for which comment form has to be opened
   get_comment_ticket(ticket: Ticket) {
     this.reset_comment_fields();
     this.visible_comment = true;
-    console.log(ticket);
     ticket['assignee'] = this.users_list.find(item => item.user_id == ticket.assigneeId);
     ticket['priority'] = this.priorities.find(item => item.priorityId == ticket.priorityId);
     ticket['status'] = this.statuses.find(item => item.statusId == ticket.statusId);
     ticket['lastModifiedDateTimeString'] = new Date(ticket['lastModifiedDateTime']).toLocaleString();
     ticket['CreatedDateTimeString'] = new Date(ticket['createDateTime']).toLocaleString();
-    console.log(ticket['lastModifiedDateTimeString']);
     this.comment_ticket = ticket;
     this.original_comment_ticket = structuredClone(this.comment_ticket);
-    console.log(this.comment_ticket);
     this.fetch_update_comments();
   }
 
+  //Fetching updated comments
   fetch_update_comments() {
     this.tickets_comments = {};
     this.http_service.fetch_comments().subscribe((res: Comment[]) => {
@@ -252,12 +242,10 @@ export class KabbanComponent implements OnInit {
         let res = comments.filter(fil_item => {
           return item.userId == fil_item.userId;
         })
-        console.log(res);
         if (res.length != 0) {
           this.tickets_comments[item.userId] = res;
         }
       })
-      console.log(this.tickets_comments);
       this.user_specific = Object.keys(this.tickets_comments);
       for (let x of this.user_specific) {
         for (let y of this.tickets_comments[x]) {
@@ -266,10 +254,10 @@ export class KabbanComponent implements OnInit {
       }
     })
   }
+
+  //The comment form submit function
   get_comment_submit(commentForm: NgForm, comment_ticket_details) {
-    console.log(commentForm.value);
     if (this.comment != "") {
-      // this.http_service.fetch_comments().toPromise().then((value)=>{console.log(value)});
       this.http_service.fetch_comments().subscribe((res: Comment[]) => {
         let form_data = {
           commented_person: this.user_details.uname,
@@ -280,9 +268,7 @@ export class KabbanComponent implements OnInit {
           commented_date: new Date(),
           last_modified_date: new Date(),
         }
-        console.log(form_data);
         this.http_service.post_comment(form_data).subscribe((res) => {
-          console.log(res);
         })
       })
     }
@@ -308,52 +294,41 @@ export class KabbanComponent implements OnInit {
     if (modified == true) {
       comment_ticket_details.lastModifiedDateTime = new Date();
     }
-    console.log(comment_ticket_details);
     let { assignee, priority, status, ...rest } = comment_ticket_details;
 
     this.http_service.update_ticket(comment_ticket_details.id, rest).subscribe((res) => {
-      console.log(res);
       this.fetch_tickets_update();
       this.get_comment_ticket(this.comment_ticket);
       this.fetch_update_comments();
     })
   }
-  users_suggestions;
+
+  //For autocomplete component in comment form
   filterUsers(val) {
     this.users_suggestions = this.users_list.filter(item => item.uname.toLowerCase().startsWith(val.query));
   }
 
+  //Accessing the comment for which edit dialog has to open
   edit_comment(comment, val) {
-    console.log(val);
-    console.log(comment);
     this.comment_to_be_edited = comment;
     if (val == this.login_user.userId) {
       this.updated_comment = this.comment_to_be_edited.message;
       this.edit_comment_visible = true;
-    } 
+    }
   }
 
-  text_area: boolean = false;
-  text_area_visible() {
-    this.text_area = !this.text_area;
-  }
-  text_area2: boolean = false;
-  text_area2_visible() {
-    this.text_area2 = !this.text_area2;
-  }
+  //Update the comment
   update_comment() {
-    console.log(this.updated_comment);
     this.edit_comment_visible = false;
     let { uname, ...rest } = this.comment_to_be_edited;
     rest.message = this.updated_comment;
     rest.last_modified_date = new Date();
-    console.log(rest);
     this.http_service.update_comment(rest.id, rest).subscribe((res) => {
-      console.log(res);
       this.fetch_update_comments();
     })
   }
 
+  //Delete the comment
   delete_comment(val) {
     this.delete_comment_id = val;
     if (val.userId == this.login_user.userId) {
@@ -361,10 +336,7 @@ export class KabbanComponent implements OnInit {
     }
   }
 
-  toggleFilter() {
-    this.filter = !this.filter;
-  }
-
+  //Reset the filter fields
   reset_fields() {
     this.filterPriority = '';
     this.filterAssigneeId = '';
@@ -383,8 +355,8 @@ export class KabbanComponent implements OnInit {
     this.fetch_tickets_update();
   }
 
+  //the filter form submit function
   issues_filter_form_submited(issuesFilterForm: NgForm) {
-    console.log(issuesFilterForm.value);
     let { filter_assignee, filter_reporter, filter_days_old, ...rest } = issuesFilterForm.value;
     let form_data = {
       ticketId: rest.ticketId?.ticketId,
@@ -404,7 +376,6 @@ export class KabbanComponent implements OnInit {
       today.setDate(today.getDate() - filter_days_old);
       form_data.createDateTime = today.toLocaleDateString();
     }
-    console.log(form_data);
     let keys = Object.keys(form_data);
 
     this.filter_output = this.http_tickets.filter(item => {
@@ -431,16 +402,17 @@ export class KabbanComponent implements OnInit {
     })
     this.all_tickets = this.filter_output;
     this.filter = false;
-    console.log(this.all_tickets);
     this.fetch_tickets_update();
   }
 
+  //resetting comment form fields
   reset_comment_fields() {
     this.comment = '';
     this.text_area = false;
     this.text_area2 = false;
   }
 
+  //For autocomplete for tickets ID in filter form
   search_tickets(val) {
     this.tickets = [];
     let search = val.query.toLowerCase();
@@ -451,15 +423,17 @@ export class KabbanComponent implements OnInit {
     })
   }
 
-
+  //finding the filter_assignee from Autocomplete for assigneeId field
   assignee_id_change() {
     this.filterAssignee = this.users_list.find(item => item.user_id == this.filterAssigneeId.user_id)?.uname;
   }
 
+  //finding the filter_reporter from Autocomplete for reporterId field
   reporter_id_change() {
     this.filterReporter = this.users_list.find(item => item.user_id == this.filterReporterId.user_id)?.uname;
   }
 
+  //Filter reset function
   reset_all() {
     this.reset_fields();
     this.filter_output = [];
@@ -467,23 +441,18 @@ export class KabbanComponent implements OnInit {
     this.fetch_tickets_update();
   }
 
-  close_filter() {
-    this.filter = false;
-  }
-
+  //Autocomplete function for both reporter ID and assignee ID fields
   search(val) {
     this.users = [];
-    console.log(val.query);
     let search = val.query.toLowerCase();
     this.users_list.forEach((item) => {
       if (item.user_id.toLowerCase().startsWith(search)) {
         this.users.push(item);
       }
     })
-    console.log(this.users);
   }
 
-  filePayload;
+  //Profile selected function in ticket creating form
   onFilesSelected(event: Event) {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
@@ -502,6 +471,7 @@ export class KabbanComponent implements OnInit {
     }
   }
 
+  //Download the file function in comment form
   downloadFile(base64Data: string, filename: string) {
     const link = document.createElement('a');
     link.href = base64Data;
@@ -509,19 +479,15 @@ export class KabbanComponent implements OnInit {
     link.click();
   }
 
+  //delete confirm fuction for comment
   delete_confirm() {
     this.http_service.delete_comment(this.delete_comment_id.id).subscribe((res) => {
-      console.log(res);
       this.fetch_update_comments();
       this.delete_visible = false;
     })
   }
 
-  cancel_delete() {
-    this.delete_visible = false;
-  }
-
-
+  //Storing the preloading data for kanban component
   ngOnDestroy() {
     let kanban_preload = JSON.parse(localStorage.getItem("kanban_preload")) || {};
     kanban_preload['filter'] = this.filter;

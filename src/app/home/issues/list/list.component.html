@@ -1,5 +1,6 @@
 <div id="list-container">
     <div id="list-inner">
+        <!-- List component header -->
         <div id="header">
             <div id="heading">
                 <h2>Issues</h2>
@@ -7,18 +8,22 @@
             <div id="search">
                 <div id="search-div" [ngStyle]="searchBtn?{'border':'1px solid gray'}:{'border': 'none'}">
                     <input id="search-input" type="text" [(ngModel)]="search_text" (change)="search_input($event)" />
-                    <button id="search-btn" (click)="search_clicked()" pTooltip="Search data" tooltipPosition="bottom"><i
-                            class="fa-solid fa-magnifying-glass"></i></button>
+                    <button id="search-btn" (click)="searchBtn = !searchBtn;" pTooltip="Search data"
+                        tooltipPosition="bottom"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </div>
-                <i id="filter" class="fa-solid fa-filter" (click)="toggleFilter()" pTooltip="Filter bugs" tooltipPosition="bottom"></i>
+                <i id="filter" class="fa-solid fa-filter" (click)="filter = !filter;" pTooltip="Filter bugs"
+                    tooltipPosition="bottom"></i>
             </div>
         </div>
+
+        <!-- list table main container -->
         <div id="table-container">
             <div id="table-inner">
+                <!-- Table division -->
                 <div id="table-with-footer">
                     <p-table #dt [columns]="cols" [value]="products" [tableStyle]="{ 'min-width': '50rem' }"
                         [paginator]="this.products.length<=5?false:true" [rows]="5" [pageLinks]="3" [scrollable]="true"
-  scrollHeight="500px">
+                        scrollHeight="500px">
                         <ng-template pTemplate="header" let-columns>
                             <tr>
                                 <th *ngFor="let col of columns" [pSortableColumnDisabled]="false"
@@ -38,50 +43,54 @@
                         </ng-template>
                         <ng-template pTemplate="emptymessage" let-columns>
                             <tr>
-                                <td [attr.colspan]="columns.length + 1" class="p-text-center" style=" text-align: center;
-  padding: 20px;
-  color: gray;
-  font-size: 15px;">
+                                <td [attr.colspan]="columns.length + 1" class="p-text-center"
+                                    style=" text-align: center;padding: 20px;color: gray;font-size: 15px;">
                                     No data found.
                                 </td>
                             </tr>
                         </ng-template>
                         <ng-template pTemplate="paginatorright">
-                            <div *ngIf="products.length>5"  class="paginator-extension">
-                    <input
-                        style="width: 40px; background-color: rgba(211, 211, 211, 0.3); z-index: 1; height: 30px; text-align: center;"
-                        type="text" [(ngModel)]="goToPageNumber" min="1" [max]="totalPages" />
-                    <button (click)="goToPage(dt)" class="go-button">Go</button>
-                </div>
+                            <div *ngIf="products.length>5" class="paginator-extension">
+                                <input
+                                    style="width: 40px; background-color: rgba(211, 211, 211, 0.3); z-index: 1; height: 30px; text-align: center;"
+                                    type="text" [(ngModel)]="goToPageNumber" min="1" [max]="totalPages" />
+                                <button (click)="goToPage(dt)" class="go-button">Go</button>
+                            </div>
                         </ng-template>
                         <ng-template pTemplate="paginatorleft">
-                            <div class="paginator-extension1"
-                    style="display: flex;gap: 5px; flex-direction: row;">
-                    <p class="go-button1">{{products.length}} items</p>
-                </div>
+                            <div class="paginator-extension1" style="display: flex;gap: 5px; flex-direction: row;">
+                                <p class="go-button1">{{products.length}} items</p>
+                            </div>
                         </ng-template>
                         <ng-template pTemplate="paginatorlastpagelinkicon">
-                            <img src="../../../../assets/images/svg_502085.svg" style="width: 17px; height: 17px; display: flex; align-items: center; justify-content: center;"/>
+                            <img src="../../../../assets/images/svg_502085.svg"
+                                style="width: 17px; height: 17px; display: flex; align-items: center; justify-content: center;" />
                         </ng-template>
                         <ng-template pTemplate="paginatorfirstpagelinkicon">
-                            <img src="../../../../assets/images/svg_502087.svg" style="width: 17px; height: 17px; display: flex; align-items: center; justify-content: center;"/>
+                            <img src="../../../../assets/images/svg_502087.svg"
+                                style="width: 17px; height: 17px; display: flex; align-items: center; justify-content: center;" />
                         </ng-template>
                     </p-table>
                 </div>
                 <div class="paginator-extension1" *ngIf="(this.products.length<=5)">
-                <p [ngClass]="{'show':(this.products.length<=5)}" class="go-button1">{{products.length}} items</p>
+                    <p [ngClass]="{'show':(this.products.length<=5)}" class="go-button1">{{products.length}} items</p>
+                </div>
             </div>
-            </div>
+            <!-- Table Division ends -->
+
+            <!-- Table Filter Component -->
             <div id="filter-overlay" *ngIf="filter">
                 <div id="filter-form-inner">
+                    <!-- Filter header -->
                     <div id="filter-header">
                         <div id="filter_head">
                             <span id="filter-heading">Filter</span>
                         </div>
                         <div id="cross-div">
-                            <i class="fa-solid fa-xmark" (click)="close_filter()" style="cursor: pointer;"></i>
+                            <i class="fa-solid fa-xmark" (click)="filter = false" style="cursor: pointer;"></i>
                         </div>
                     </div>
+                    <!-- Filter form division -->
                     <div id="filter-form-container">
                         <form #issuesFilterForm="ngForm" (ngSubmit)="issues_filter_form_submited(issuesFilterForm)">
                             <div id="form-top">
@@ -175,7 +184,8 @@
                                         <label>Opened Date:</label>
                                     </div>
                                     <div class="input">
-                                        <input style="width: 180px; padding: 6px;" type="date" name="createDateTime" [(ngModel)]="filterOpenedDate" />
+                                        <input style="width: 180px; padding: 6px;" type="date" name="createDateTime"
+                                            [(ngModel)]="filterOpenedDate" />
                                     </div>
                                 </div>
                                 <div class="filter-input-div">
@@ -183,7 +193,8 @@
                                         <label>Days Old:</label>
                                     </div>
                                     <div class="input">
-                                        <input style="width: 180px; padding: 6px;"  type="number" name="filter_days_old" [(ngModel)]="filterDaysOld" />
+                                        <input style="width: 180px; padding: 6px;" type="number" name="filter_days_old"
+                                            [(ngModel)]="filterDaysOld" />
                                     </div>
                                 </div>
                                 <div class="filter-input-div">
@@ -221,8 +232,10 @@
                             </div>
                         </form>
                     </div>
+                    <!-- Filter form division ends -->
                 </div>
             </div>
+            <!-- Filter components ends -->
         </div>
     </div>
 </div>

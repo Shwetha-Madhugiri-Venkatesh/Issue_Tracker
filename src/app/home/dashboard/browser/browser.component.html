@@ -1,21 +1,25 @@
 <div id="browser-component">
     <div id="browser-content-inner">
+        <!-- Browser Header -->
         <div id="browser-header">
             <div id="browser-header-left">
                 <h4 id="browser-heading">Browsers</h4>
             </div>
             <div id="browser-header-right">
                 <div id="browser-header-right-inner">
-                    <div id="refresh-div" (click)="refresh()" pTooltip="Refresh" tooltipPosition="bottom">
+                    <div id="refresh-div" (click)="ngOnInit()" pTooltip="Refresh" tooltipPosition="bottom">
                         <i class="fa-solid fa-rotate-right fa-rotate-270"></i>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- Browser Graph -->
         <div id="browser-container">
             <div id="browser-container-inner">
-                <p-chart type="pie" [data]="data" class="h-[30rem]" [options]="browser_options" style="display: flex !important; align-items: center; justify-content: center"></p-chart>
+                <p-chart type="pie" [data]="data" class="h-[30rem]" [options]="browser_options"
+                    style="display: flex !important; align-items: center; justify-content: center"></p-chart>
             </div>
         </div>
+
     </div>
 </div>

@@ -8,8 +8,11 @@ import { TwoWayDataBinding } from 'src/app/Services/two_way_dataBinding';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
+
   constructor(private two_way:TwoWayDataBinding){}
+  
   ngOnInit(){
-    this.two_way.current_route_emit('Dashboard');
+    //calling TwoWayDataBinding server function
+    this.two_way.current_route_emit('Dashboard'); //emits that the current route is dashboard
   }
 }

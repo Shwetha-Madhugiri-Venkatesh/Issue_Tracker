@@ -1,4 +1,4 @@
-#issues-content{
+#issues-content {
     width: 100%;
     height: 100%;
     background-color: white;
@@ -7,24 +7,25 @@
     overflow: auto;
 }
 
-#content{
+#content {
     width: 1270px;
     height: 100%;
 }
 
-#header-div{
+#header-div {
     display: flex;
     flex-direction: row;
     margin-left: 10px;
 }
-#isuues-header{
+
+#isuues-header {
     display: flex;
     align-items: center;
     justify-content: flex-start;
     border-bottom: 1px solid lightgray;
 }
 
-button{
+button {
     border: none;
     background-color: white;
     width: 80px;
@@ -32,21 +33,7 @@ button{
     cursor: pointer;
     padding: 10px;
 }
-button:hover{
+
+button:hover {
     color: purple;
 }
-/* @media screen and (max-width:950px){
-    #content{
-        height: 650px;
-    }
-}
-@media screen and (max-width:540px){
-    #content{
-        height: 700px;
-    }
-}
-@media screen and (max-width:320px){
-    #content{
-        height: 420px;
-    }
-} */

@@ -1,6 +1,7 @@
 <div id="table-container">
     <div id="content">
-    <app-table (display_dialog)="dialog($event)"></app-table>
-    <app-dialog [(visible)]="dialog_flag" [prefill]="prefill_id" (visibleChange)="set_dialogFlag($event)"></app-dialog>
+        <app-table (display_dialog)="dialog($event)"></app-table>
+        <app-dialog [(visible)]="dialog_flag" [prefill]="prefill_id"
+            (visibleChange)="this.dialog_flag = $event;"></app-dialog>
     </div>
 </div>

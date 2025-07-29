@@ -9,76 +9,76 @@ import { TwoWayDataBinding } from 'src/app/Services/two_way_dataBinding';
   styleUrls: ['./status.component.css']
 })
 export class StatusComponent {
-  
-    data;
-    status_options;
+  data;
+  status_options;
 
-    constructor(private http_service:HTTPService, private two_way:TwoWayDataBinding){}
-  
-    statuses:{statusId:string, status:string,tickets:Ticket[]}[]=this.two_way.statuses;
-  
-    ngOnInit(){
-      let result={};
-      this.http_service.fetch_tickets().subscribe((res:Ticket[])=>{
-        let number_of_issues=0;
-        for(let x of this.statuses){
-          number_of_issues = res.filter((item1)=>item1.statusId==x.statusId).length;
-          result[x.status]=number_of_issues;
-        }
-        console.log(result);
-        this.data = {
-           labels: Object.keys(result),
-         datasets: [
-            {
-              label: 'Sales',
-              data: Object.values(result),
-              fill: false,
-              backgroundColor:"blue",
-              borderColor: '#42A5F5',
-              tension: 0
-            }
-          ]
-        };
-      })
+  constructor(private http_service: HTTPService, private two_way: TwoWayDataBinding) { }
 
-      this.status_options={
+  //data from TwoWayDataBinding server
+  statuses: { statusId: string, status: string, tickets: Ticket[] }[] = this.two_way.statuses;
+
+  ngOnInit() {
+    let result = {}; //{status_name : number_of_issues}
+
+    //the initial data load
+    this.http_service.fetch_tickets().subscribe((res: Ticket[]) => {
+      let number_of_issues = 0;
+      //filtering the tickets
+      for (let x of this.statuses) {
+        number_of_issues = res.filter((item1) => item1.statusId == x.statusId).length;
+        result[x.status] = number_of_issues;
+      }
+
+      this.data = {
+        labels: Object.keys(result), //result object keys as status names
+        datasets: [
+          {
+            label: 'Sales',
+            data: Object.values(result), //result object values as number of issues
+            fill: false,
+            backgroundColor: "blue",
+            borderColor: '#42A5F5',
+            tension: 0
+          }
+        ]
+      };
+    })
+
+    this.status_options = {
       maintainAspectRatio: false,
       aspectRatio: 0.6,
       responsive: true,
-  plugins: {
-    tooltip: {
-      enabled: true
-    },
-    legend: { display: false },
-    datalabels: {
-      display: true,
-      color: 'white',
-      font: {
-        size: 14,
-        weight: 'bold'
-      }
-    }
-  },
+      plugins: {
+        tooltip: {
+          enabled: true
+        },
+        legend: { display: false },
+        datalabels: {
+          display: true,
+          color: 'white',
+          font: {
+            size: 14,
+            weight: 'bold'
+          }
+        }
+      },
       scales: {
         x: {
           grid: {
-            
+
             drawBorder: false,
-            drawOnChartArea: false,    
-            display: false  
+            drawOnChartArea: false,
+            display: false
           },
           title: {
             display: true,
             text: 'Status',
-             font:{
-              size:this.getResponsiveFontSize()
-            }
           }
         },
         y: {
-          
+
           grid: {
-            
+
             drawBorder: false,
             drawOnChartArea: false,
             display: false
@@ -88,21 +88,9 @@ export class StatusComponent {
             text: 'Number of Issues',
             rotation: 0,
             padding: { top: 0, bottom: 5, left: 20, right: 20 },
-             font:{
-              size:this.getResponsiveFontSize(),
-            }
           }
         }
       }
     }
-    }
-
-    getResponsiveFontSize() {
-    const vw = window.innerWidth / 100;
-    return Math.max(12, vw); 
-  }
-
-  refresh(){
-    this.ngOnInit();
   }
 }

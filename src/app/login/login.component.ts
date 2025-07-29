@@ -11,12 +11,6 @@ import { HTTPService } from '../Services/http_service';
   providers: [MessageService]
 })
 export class LoginComponent implements OnInit{
-
-  constructor(private primeNg:PrimeNGConfig,
-              private message_service:MessageService,
-              private authorize:AuthorizeUser,
-            ){}
-
   forgot:boolean=false;
   password:string='';
   confirmPassword:string='';
@@ -24,15 +18,21 @@ export class LoginComponent implements OnInit{
   log:boolean;
   err:string='Credentials are wrong!';
   sub;
+  all_fields_invalid=false;
   login_content:[{userId:string,Password:string,isLogged:boolean}];
-
   @ViewChild('form') form:NgForm;
+
+  constructor(private primeNg:PrimeNGConfig,
+              private message_service:MessageService,
+              private authorize:AuthorizeUser,
+            ){}
+
   ngOnInit(){
     this.all_fields_invalid=false;
     this.primeNg.ripple=true;
-     console.log("ngOnInit");
   }
 
+  //Forgot password clicked
   forgot_password(){
     this.form.reset();
     this.all_fields_invalid=false;
@@ -40,15 +40,14 @@ export class LoginComponent implements OnInit{
     this.password='';
     this.user_Id='';
   }
- all_fields_invalid=false;
+
+  // Login form submit function
   form_submit(form:NgForm){
-    console.log(form);
     if(this.forgot){
       if(!form.valid){
       this.all_fields_invalid=true;
       return;
     }
-      console.log(form.value);
       this.authorize.reset_password(form.value);
       this.sub = this.authorize.authentication.subscribe((res:string)=>{
         this.message_service.add({severity:'success', summary:'Success', detail:res});

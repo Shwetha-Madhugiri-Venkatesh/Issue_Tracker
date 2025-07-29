@@ -12,7 +12,7 @@ import { MessageService } from 'primeng/api';
   selector: 'app-dialog',
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.css'],
-  providers:[MessageService],
+  providers: [MessageService],
 })
 export class DialogComponent implements OnChanges, OnInit {
 
@@ -40,7 +40,7 @@ export class DialogComponent implements OnChanges, OnInit {
   user_email_id: string;
   user_phone: string;
   user_last_modified_source: string;
-  user_last_modified_datetime: Date=this.today;
+  user_last_modified_datetime: Date = this.today;
   user_last_datetimeString = this.today.toLocaleString();
   user_address: string;
   user_country: string;
@@ -51,8 +51,6 @@ export class DialogComponent implements OnChanges, OnInit {
   user_time_zone: string;
   user_last_modified_source_type: string;
   user_password: string = '';
-
-  constructor(private http_service: HTTPService, private two_way: TwoWayDataBinding,private message_service:MessageService) { };
   user: User;
   prefill_user: User;
   login_user: {};
@@ -60,12 +58,18 @@ export class DialogComponent implements OnChanges, OnInit {
   editable: boolean = false;
   profile_pic_input;
   http_users;
+  all_fields_invalid = false;
+  @ViewChild('topForm') topForm: NgForm;
+  @ViewChild('bottomForm') bottomForm: NgForm;
+
+  constructor(private http_service: HTTPService, private two_way: TwoWayDataBinding, private message_service: MessageService) { };
+ 
   ngOnInit() {
+    //Accessing the user details who had logged in
     this.login_user = JSON.parse(localStorage.getItem("login")) || {};
     this.http_service.fetch_users().subscribe((res: User[]) => {
       this.http_users = res;
       this.user_details = res.find(item => item.user_id == this.login_user['userId']);
-      console.log(this.prefill);
       this.user_created_source = this.user_details.uname;
       this.user_created_source_type = this.user_details.type;
       this.user_last_modified_source = this.user_details.uname;
@@ -73,9 +77,9 @@ export class DialogComponent implements OnChanges, OnInit {
     })
   }
 
+  //prefilling the fields for view mode and edit mode
   prefill_fields() {
     this.http_service.fetch_user(this.prefill).subscribe((res: User) => {
-      console.log(res);
       this.editable = false;
       this.prefill_user = res;
       this.user_uname = res.uname;
@@ -105,11 +109,9 @@ export class DialogComponent implements OnChanges, OnInit {
       this.user_password = res.password;
       this.profile_pic_input = res.profile;
     })
-
   }
-  @ViewChild('topForm') topForm: NgForm;
-@ViewChild('bottomForm') bottomForm: NgForm;
 
+  //for opening the dialog again
   ngOnChanges() {
     if (this.prefill) {
       this.all_fields_invalid = false;
@@ -118,7 +120,7 @@ export class DialogComponent implements OnChanges, OnInit {
       this.reset_fields();
       this.topForm.reset();
       this.bottomForm.reset();
-      this.all_fields_invalid=false;
+      this.all_fields_invalid = false;
       this.user_created_source = this.user_details.uname;
       this.user_created_source_type = this.user_details.type;
       this.user_last_modified_source = this.user_details.uname;
@@ -126,75 +128,62 @@ export class DialogComponent implements OnChanges, OnInit {
     }
   }
 
+  //cancel button functionality
   close_form() {
-    if(!this.prefill){
+    if (!this.prefill) {
       this.reset_fields();
-    }else{
+    } else {
       this.prefill_fields();
     }
   }
-
-  edit_form() {
-    this.editable = true;
-  }
-  close_form_dialog(){
-    this.visible=false;
-  }
-
-  all_fields_invalid=false;
+ 
+  //dialog form submit function
   form_submit(topForm: NgForm, bottomForm: NgForm) {
     if (!topForm.valid || !bottomForm.valid) {
-      this.all_fields_invalid=true;
+      this.all_fields_invalid = true;
       return;
     }
     this.get_users();
     if (this.prefill) {
-      console.log("prefill", topForm.value, bottomForm.value);
       let updated_user = { ...topForm.value, ...bottomForm.value };
       updated_user['profile'] = this.profile_pic_input;
       updated_user['last_modified_source'] = this.user_details.uname;
-      updated_user['last_modified_source_type']= this.user_details.type;
+      updated_user['last_modified_source_type'] = this.user_details.type;
       updated_user['last_modified_datetime'] = new Date();
       updated_user['created_source'] = this.user_created_source;
-      updated_user['created_source_type']= this.user_created_source_type;
-      updated_user['created_datetime']=this.user_created_datetime;
-      updated_user['user_id']=this.user_user_id;
-      updated_user['password']=this.user_password;
-      console.log(updated_user);
+      updated_user['created_source_type'] = this.user_created_source_type;
+      updated_user['created_datetime'] = this.user_created_datetime;
+      updated_user['user_id'] = this.user_user_id;
+      updated_user['password'] = this.user_password;
       this.http_service.update_user(this.prefill, updated_user).subscribe((res) => {
-        console.log(res);
         this.visible = false;
         this.get_users();
       })
-       this.message_service.add({severity:'success', summary:'Success', detail:"Updated User Successfully"});
+      this.message_service.add({ severity: 'success', summary: 'Success', detail: "Updated User Successfully" });
     } else {
       let ind = this.http_users.find(item => item.email_id == topForm.value.email_id);
       if (ind) {
         return;
       }
-      console.log(topForm.value, bottomForm.value)
       this.user = { ...topForm.value, ...bottomForm.value };
       this.user['profile'] = this.profile_pic_input;
       this.user['created_source'] = this.user_details.uname;
-      this.user['created_source_type']= this.user_details.type;
-      this.user['created_datetime']=new Date();
+      this.user['created_source_type'] = this.user_details.type;
+      this.user['created_datetime'] = new Date();
       this.user['last_modified_source'] = this.user_details.uname;
-      this.user['last_modified_source_type']= this.user_details.type;
+      this.user['last_modified_source_type'] = this.user_details.type;
       this.user['last_modified_datetime'] = new Date();
-      this.user['user_id']=this.user_user_id;
-      this.user['password']=this.user_password;
-      console.log(this.user);
+      this.user['user_id'] = this.user_user_id;
+      this.user['password'] = this.user_password;
       this.http_service.create_new_user(this.user).subscribe((res) => {
-        console.log(res);
         this.visible = false;
         this.get_users();
       })
-       this.message_service.add({severity:'success', summary:'Success', detail:"Added User Successfully"});
+      this.message_service.add({ severity: 'success', summary: 'Success', detail: "Added User Successfully" });
     }
   }
-  onHide() {
-    this.visibleChange.emit(false);
-  }
+
+  //Emitted the updating users as soon as the new user is added
   get_users() {
     this.http_service.fetch_users().subscribe((res: User[]) => {
       this.http_users = res;
@@ -202,6 +191,7 @@ export class DialogComponent implements OnChanges, OnInit {
     })
   }
 
+  //Creating password and User Id
   create_user_password(event) {
     if (!this.prefill) {
       this.user_password = event.target.value + '@123';
@@ -209,7 +199,7 @@ export class DialogComponent implements OnChanges, OnInit {
     }
   }
 
-
+  //reseting the fields for dialog form
   reset_fields() {
     this.user_uname = '';
     this.user_fname = '';
@@ -236,11 +226,10 @@ export class DialogComponent implements OnChanges, OnInit {
     this.user_time_zone = '';
     this.user_last_modified_source_type = '';
     this.profile_pic_input = '';
-    this.user_password='';
-    
-    // this.topForm.resetForm(); 
-    // this.bottomForm.resetForm();
+    this.user_password = '';
   }
+  
+  //Profile image converted readable string
   profile_pic_selected(event: Event) {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {

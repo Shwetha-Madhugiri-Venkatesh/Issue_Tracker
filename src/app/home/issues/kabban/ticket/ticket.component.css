@@ -1,34 +1,35 @@
-.ticket-container{
+.ticket-container {
     width: 100%;
     background-color: white;
     box-shadow: 0 0 10px 0.2px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
 }
 
-.ticket-inner{
+.ticket-inner {
     display: flex;
     flex-direction: column;
 }
 
-.top{
+.top {
     border-bottom: 1px solid lightgray;
 }
 
-.first{
+.first {
     display: flex;
     flex-direction: row;
     gap: 10px;
     padding: 10px;
 }
 
-.second{
+.second {
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 10px;
     padding: 10px;
 }
-.ticket-type{
+
+.ticket-type {
     background-color: rgb(84, 193, 236);
     width: 70px;
     padding: 3px 10px;
@@ -37,10 +38,10 @@
     text-align: center;
     border-radius: 20px;
     color: white;
-    
+
 }
 
-.priority{
+.priority {
     background-color: rgb(6, 168, 6);
     width: 70px;
     padding: 3px 10px;
@@ -51,21 +52,24 @@
     color: white;
 }
 
-.bottom{
+.bottom {
     display: flex;
     flex-direction: row;
 }
 
-.label,p{
+.label,
+p {
     font-size: 13px;
     color: rgb(45, 57, 57);
 }
-.label1{
+
+.label1 {
     font-size: 13px;
     color: rgb(45, 57, 57);
     width: 16%;
 }
-.subject{
+
+.subject {
     width: 84%;
     font-size: 13px;
     border: none;
@@ -74,7 +78,8 @@
     color: rgb(45, 57, 57);
     word-break: break-all;
 }
-.left{
+
+.left {
     width: 50%;
     display: flex;
     align-items: center;
@@ -82,7 +87,7 @@
     padding: 10px;
 }
 
-.right{
+.right {
     width: 50%;
     display: flex;
     align-items: center;
@@ -90,7 +95,7 @@
     padding: 10px;
 }
 
-.profile{
+.profile {
     width: 30px;
     height: 30px;
     border-radius: 50%;
@@ -100,25 +105,25 @@
     justify-content: center;
 }
 
-.ticket-id{
+.ticket-id {
     font-size: 13px;
     color: rgb(84, 193, 236);
-    border-bottom:1px solid rgb(84, 193, 236);
+    border-bottom: 1px solid rgb(84, 193, 236);
     cursor: pointer;
 }
 
-.ticket-id:hover{
+.ticket-id:hover {
     color: purple;
-    border-bottom:1px solid purple;
+    border-bottom: 1px solid purple;
 }
 
-#comment{
+#comment {
     cursor: pointer;
     padding: 5px;
     border-radius: 50%;
 }
 
-#comment:hover{
+#comment:hover {
     background-color: rgb(45, 57, 57);
     color: white;
 }

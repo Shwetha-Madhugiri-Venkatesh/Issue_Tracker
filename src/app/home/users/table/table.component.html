@@ -1,4 +1,5 @@
 <div id="user-content">
+    <!-- Table header division -->
     <div id="header">
         <div class="heading">
             <h2 style="width: 100px;">Users</h2>
@@ -7,36 +8,35 @@
             <div id="header-last-inner">
                 <div>
                     <p-dropdown *ngIf="products.length>0" id="top" [options]="numbers" [(ngModel)]="dynamic_page_number"
-                        optionLabel="name" [placeholder]="'Show '+selectedNum" (onChange)="dynamic_rows($event)"  />
+                        optionLabel="name" [placeholder]="'Show '+selectedNum" (onChange)="dynamic_rows($event)" />
                 </div>
-                <div class="card flex justify-content-center"> 
+                <div class="card flex justify-content-center">
                     <p-multiSelect [options]="columns" [(ngModel)]="selectedCol" optionLabel="header"
-             (onChange)="get_selected_columns($event)" [selectedItemsLabel]="selectedCol.length+' columns selected'" #multi>
-                        <!-- <ng-template pTemplate="footer">
-                            <div id="multi-btn-con">
-                                <button id="multiselect-btn" (click)="dynamic_columns()">Apply</button>
-                            </div>
-                        </ng-template> -->
+                        (onChange)="cols = $event.value;"
+                        [selectedItemsLabel]="selectedCol.length+' columns selected'" #multi>
                     </p-multiSelect>
 
                 </div>
                 <div id="filter-div">
-                    <button id="filter" (click)="filter_display()" pTooltip="Filter Users" tooltipPosition="bottom"><i class="fa-solid fa-filter"></i> Filter</button>
+                    <button id="filter" (click)="filter_flag = !filter_flag;" pTooltip="Filter Users" tooltipPosition="bottom"><i
+                            class="fa-solid fa-filter"></i> Filter</button>
                 </div>
                 <div>
                     <button id="add-btn" [ngStyle]="user_details?.type!='Admin'?{'display':'none'}:{'display':'flex'}"
-                        (click)="dialog_display()" pTooltip="Add User" tooltipPosition="bottom">Add</button>
+                        (click)="display_dialog.emit([true])" pTooltip="Add User" tooltipPosition="bottom">Add</button>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Users Table division -->
     <div id="content">
         <div id="p-table-div">
+            <!-- Users Table -->
             <div id="table-with-footer">
                 <p-table #dt [columns]="cols" [value]="products" [tableStyle]="{ 'min-width': '50rem', }"
                     styleClass="p-datatable-sm" [paginator]="this.products.length>dynamic_page_number.value"
-                    [rows]="dynamic_page_number.value" [pageLinks]="3" [scrollable]="true"
-  scrollHeight="510px">
+                    [rows]="dynamic_page_number.value" [pageLinks]="3" [scrollable]="true" scrollHeight="510px">
                     <ng-template pTemplate="header" let-columns>
                         <tr>
                             <th *ngFor="let col of columns" [pSortableColumnDisabled]="false"
@@ -52,92 +52,99 @@
                             </td>
                             <td *ngIf="user_details.type!='User'">
                                 <div class="icons">
-                                    <!-- <i class="fa-solid fa-pen-to-square" (click)="open_form(rowData['id'])"></i> -->
-                                    <i style="cursor: pointer;" class="fa-solid fa-trash" (click)="delete_the_user(rowData['id'])" pTooltip="Delete User" tooltipPosition="bottom"></i>
+                                    <i style="cursor: pointer;" class="fa-solid fa-trash"
+                                        (click)="delete_the_user(rowData['id'])" pTooltip="Delete User"
+                                        tooltipPosition="bottom"></i>
                                 </div>
                             </td>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="emptymessage" let-columns>
                         <tr>
-                            <td [attr.colspan]="columns.length + 1" class="p-text-center" style=" text-align: center;
-  padding: 20px;
-  color: gray;
-  font-size: 15px;">
+                            <td [attr.colspan]="columns.length + 1" class="p-text-center"
+                                style=" text-align: center;padding: 20px;color: gray;font-size: 15px;">
                                 No data found.
                             </td>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="paginatorright">
-                            <div *ngIf="products.length>5"  class="paginator-extension">
-                    <input
-                        style="width: 40px; background-color: rgba(211, 211, 211, 0.3); z-index: 1; height: 30px; text-align: center;"
-                        type="text" [(ngModel)]="goToPageNumber" min="1" [max]="totalPages" />
-                    <button (click)="goToPage(dt)" class="go-button">Go</button>
-                </div>
-                        </ng-template>
+                        <div *ngIf="products.length>5" class="paginator-extension">
+                            <input
+                                style="width: 40px; background-color: rgba(211, 211, 211, 0.3); z-index: 1; height: 30px; text-align: center;"
+                                type="text" [(ngModel)]="goToPageNumber" min="1" [max]="totalPages" />
+                            <button (click)="goToPage(dt)" class="go-button">Go</button>
+                        </div>
+                    </ng-template>
 
-                        <ng-template pTemplate="paginatorleft">
-                            <div class="paginator-extension1"
-                    style="display: flex;gap: 5px; flex-direction: row;" [ngClass]="{'show':!(this.products.length>dynamic_page_number.value)}">
-                    <p class="go-button1">{{products.length}} items</p>
-                </div>
-                        </ng-template>
+                    <ng-template pTemplate="paginatorleft">
+                        <div class="paginator-extension1" style="display: flex;gap: 5px; flex-direction: row;"
+                            [ngClass]="{'show':!(this.products.length>dynamic_page_number.value)}">
+                            <p class="go-button1">{{products.length}} items</p>
+                        </div>
+                    </ng-template>
 
-                        <ng-template pTemplate="paginatorlastpagelinkicon">
-                            <img src="../../../../assets/images/svg_502085.svg" style="width: 17px; height: 17px; display: flex; align-items: center; justify-content: center;"/>
-                        </ng-template>
-                        <ng-template pTemplate="paginatorfirstpagelinkicon">
-                            <img src="../../../../assets/images/svg_502087.svg" style="width: 17px; height: 17px; display: flex; align-items: center; justify-content: center;"/>
-                        </ng-template>
+                    <ng-template pTemplate="paginatorlastpagelinkicon">
+                        <img src="../../../../assets/images/svg_502085.svg"
+                            style="width: 17px; height: 17px; display: flex; align-items: center; justify-content: center;" />
+                    </ng-template>
+                    <ng-template pTemplate="paginatorfirstpagelinkicon">
+                        <img src="../../../../assets/images/svg_502087.svg"
+                            style="width: 17px; height: 17px; display: flex; align-items: center; justify-content: center;" />
+                    </ng-template>
                 </p-table>
             </div>
             <div class="paginator-extension1" *ngIf="!(this.products.length>dynamic_page_number.value)">
-                <p [ngClass]="{'show':!(this.products.length>dynamic_page_number.value)}" class="go-button1">{{products.length}} items</p>
+                <p [ngClass]="{'show':!(this.products.length>dynamic_page_number.value)}" class="go-button1">
+                    {{products.length}} items</p>
             </div>
         </div>
+
+        <!-- Users Filter divison -->
         <ng-template [ngIf]="filter_flag">
             <div id="filter-div1">
                 <div style="margin-bottom: 30px;border: 1px solid lightgray; border-radius: 5px;">
-                <div id="filter-header">
-                    <div id="filter_head">
-                        <h4>Filter</h4>
-                    </div>
-                    <div id="cross-div">
-                        <i class="fa-solid fa-xmark" (click)="close_filter()" style="cursor: pointer;"></i>
-                    </div>
-                </div>
-                <div id="filter-form">
-                    <form id="form" #form="ngForm">
-                        <input pInputText placeholder="User Name" name="uname" [(ngModel)]="filter_user_name" />
-                        <p-dropdown id="bottom" [options]="user_types" name="type" [(ngModel)]="user_type"
-                            optionLabel="name" placeholder="User Type" />
-                        <input pInputText placeholder="Email ID" name="email_id" [(ngModel)]="filter_user_email_id" />
-                        <input pInputText placeholder="Created Source" name="created_source"
-                            [(ngModel)]="filter_user_created_source" />
-                        <input pInputText placeholder="Created Source Type" name="created_source_type"
-                            [(ngModel)]="filter_user_created_source_type" />
-                        <input type="datetime-local" placeholder="Created Date Time" name="created_datetime"
-                            [(ngModel)]="filter_user_datetime" />
-                        <input pInputText placeholder="Last Modified Source" name="last_modified_source"
-                            [(ngModel)]="filter_user_last_modified_source" />
-                        <input pInputText placeholder="Last Modified Source Type" name="last_modified_source_type"
-                            [(ngModel)]="filter_user_last_modified_source_type" />
-                        <input type="datetime-local" placeholder="Last Modified Date Time" name="last_modified_datetime"
-                            [(ngModel)]="filter_user_last_modified_datetime" />
-                    </form>
-                    <div id="filter-footer">
-                        <div id="btn-div" style="width: 100%;">
-                            <button id="reset-btn" type="button" (click)="reset_form()">Reset</button>
-                            <button id="submit-btn" type="submit" (click)="filter_form_submit(form)">Apply</button>
+                    <div id="filter-header">
+                        <div id="filter_head">
+                            <h4>Filter</h4>
+                        </div>
+                        <div id="cross-div">
+                            <i class="fa-solid fa-xmark" (click)="filter_flag = false;" style="cursor: pointer;"></i>
                         </div>
                     </div>
-                </div>
+                    <div id="filter-form">
+                        <form id="form" #form="ngForm">
+                            <input pInputText placeholder="User Name" name="uname" [(ngModel)]="filter_user_name" />
+                            <p-dropdown id="bottom" [options]="user_types" name="type" [(ngModel)]="user_type"
+                                optionLabel="name" placeholder="User Type" />
+                            <input pInputText placeholder="Email ID" name="email_id"
+                                [(ngModel)]="filter_user_email_id" />
+                            <input pInputText placeholder="Created Source" name="created_source"
+                                [(ngModel)]="filter_user_created_source" />
+                            <input pInputText placeholder="Created Source Type" name="created_source_type"
+                                [(ngModel)]="filter_user_created_source_type" />
+                            <input type="datetime-local" placeholder="Created Date Time" name="created_datetime"
+                                [(ngModel)]="filter_user_datetime" />
+                            <input pInputText placeholder="Last Modified Source" name="last_modified_source"
+                                [(ngModel)]="filter_user_last_modified_source" />
+                            <input pInputText placeholder="Last Modified Source Type" name="last_modified_source_type"
+                                [(ngModel)]="filter_user_last_modified_source_type" />
+                            <input type="datetime-local" placeholder="Last Modified Date Time"
+                                name="last_modified_datetime" [(ngModel)]="filter_user_last_modified_datetime" />
+                        </form>
+                        <div id="filter-footer">
+                            <div id="btn-div" style="width: 100%;">
+                                <button id="reset-btn" type="button" (click)="reset_form()">Reset</button>
+                                <button id="submit-btn" type="submit" (click)="filter_form_submit(form)">Apply</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </ng-template>
     </div>
 </div>
+
+<!-- Delete dialog for user deletion -->
 <div>
     <p-dialog header="ORG Issue Tracker" [modal]="true" [(visible)]="delete_visible" [style]="{ width: '25rem' }">
         <div id="delete_dialog">
@@ -148,7 +155,7 @@
                 </div>
                 <div id="delete-dialog-bottom">
                     <div id="delete-dialog-btns">
-                        <button id="delete-dialog-btn2" (click)="cancel_delete()">Cancel</button>
+                        <button id="delete-dialog-btn2" (click)="delete_visible = false;">Cancel</button>
                         <button id="delete-dialog-btn1" (click)="delete_confirm()">Delete</button>
                     </div>
                 </div>
@@ -156,4 +163,5 @@
         </div>
     </p-dialog>
 </div>
-<p-toast/>
+
+<p-toast />

@@ -1,19 +1,22 @@
-#form-div .p-inputtext{
+#form-div .p-inputtext {
     width: 100%;
 }
-#header-content{
+
+#header-content {
     width: 100%;
     display: flex;
     flex-direction: row;
 }
-#kabban-content{
+
+#kabban-content {
     height: 100%;
 }
-#kabban-header{
+
+#kabban-header {
     height: 7%;
 }
 
-#filter{
+#filter {
     height: 30px;
     width: 30px;
     border-radius: 5px;
@@ -23,37 +26,41 @@
     cursor: pointer;
 }
 
-#filter:hover{
+#filter:hover {
     background-color: rgba(211, 211, 211, 0.3);
-    border:1px solid rgb(45, 57, 57);
-}
-#filter_head{
-width: 50%;
-display: flex;
-align-items: center;
-justify-content: flex-start;
+    border: 1px solid rgb(45, 57, 57);
 }
 
-#cross-div{
+#filter_head {
     width: 50%;
-display: flex;
-align-items: center;
-justify-content: flex-end;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 }
-#left{
+
+#cross-div {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+#left {
     width: 50%;
     display: flex;
     align-items: center;
     padding-left: 10px;
     justify-content: flex-start;
 }
- #edit_div{
+
+#edit_div {
     padding: 10px 0px;
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
- }
-#right{
+}
+
+#right {
     width: 50%;
     display: flex;
     align-items: center;
@@ -63,9 +70,9 @@ justify-content: flex-end;
     padding: 10px;
 }
 
-button{
+button {
     height: 30px;
-    background-color:rgb(45, 57, 57);
+    background-color: rgb(45, 57, 57);
     color: white;
     border: 1px solid rgb(45, 57, 57);
     padding: 2.5px 10px;
@@ -73,43 +80,45 @@ button{
     cursor: pointer;
 }
 
-button:hover{
+button:hover {
     background-color: rgba(211, 211, 211, 0.3);
     color: rgb(45, 57, 57);
 }
-.row{
+
+.row {
     display: flex;
     flex-direction: row;
     gap: 10px;
 }
 
-#form-div form{
+#form-div form {
     display: flex;
     flex-direction: column;
     gap: 10px;
     overflow: hidden;
 }
 
-.div{
+.div {
     width: 50%;
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
 
-#type-div{
+#type-div {
     display: flex;
     flex-direction: row;
 }
 
-#type-bug{
+#type-bug {
     padding: 5px 10px;
     text-align: center;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     cursor: pointer;
 }
-#type-feature{
+
+#type-feature {
     padding: 5px 10px;
     text-align: center;
     border-top-right-radius: 5px;
@@ -117,47 +126,51 @@ button:hover{
     cursor: pointer;
 }
 
-.row_{
+.row_ {
     display: flex;
     flex-direction: column;
-    gap:3px;
+    gap: 3px;
 }
 
-::ng-deep .p-dropdown{
+::ng-deep .p-dropdown {
     width: 100% !important;
 }
-textarea{
+
+textarea {
     width: 100%;
     height: 50px;
     resize: vertical;
 }
 
-::ng-deep #kabban-content .bug-form-dialog .p-dialog .p-dialog-header{
+::ng-deep #kabban-content .bug-form-dialog .p-dialog .p-dialog-header {
     padding: 5px 10px;
 }
 
-::ng-deep .p-dialog .p-dialog-header{
+::ng-deep .p-dialog .p-dialog-header {
     padding: 5px 10px;
 }
 
-label,input{
+label,
+input {
     font-size: 15px;
 }
 
-::ng-deep #kabban-content .bug-form-dialog .p-dialog .p-dialog-content{
-    padding: 0px 15px 10px 15px;
-}
-::ng-deep .p-dialog .p-dialog-content{
+::ng-deep #kabban-content .bug-form-dialog .p-dialog .p-dialog-content {
     padding: 0px 15px 10px 15px;
 }
 
-::ng-deep #kabban-content .comment_dialog .p-dialog{
+::ng-deep .p-dialog .p-dialog-content {
+    padding: 0px 15px 10px 15px;
+}
+
+::ng-deep #kabban-content .comment_dialog .p-dialog {
     width: 60% !important;
 }
-#submit{
+
+#submit {
     height: 30px;
     width: 100%;
-    background-color:blue;
+    background-color: blue;
     border: none;
     color: white;
     padding: 2.5px 10px;
@@ -165,10 +178,12 @@ label,input{
     font-size: 15px;
     cursor: pointer;
 }
-#issues{
+
+#issues {
     height: 93%;
 }
-#issues-container{
+
+#issues-container {
     height: 87%;
     width: 100%;
     display: flex;
@@ -177,26 +192,27 @@ label,input{
     padding: 0px 10px 10px 10px;
 }
 
-::ng-deep .p-dropdown:not(.p-disabled).p-focus{
+::ng-deep .p-dropdown:not(.p-disabled).p-focus {
     box-shadow: 2px 2px blue;
 }
-.issues-inner{
+
+.issues-inner {
     width: 25%;
     height: 100%;
     display: flex;
     flex-direction: column;
-    background-color:rgb(231, 238, 240);
+    background-color: rgb(231, 238, 240);
     border-radius: 10px;
     scrollbar-width: none;
 }
 
-.issues-header{
+.issues-header {
     display: flex;
     flex-direction: row;
     position: sticky;
     top: 0;
-    background-color: white;  /* Required to avoid content bleed-through */
-    z-index: 10;               /* Ensure it stays above other content */
+    background-color: white;
+    z-index: 10;
     padding: 3px;
     border-bottom: 1px solid #ddd;
     width: 100%;
@@ -204,27 +220,28 @@ label,input{
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-#issues{
+#issues {
     width: 100%;
 }
 
-.left{
+.left {
     width: 50%;
     display: flex;
     align-items: center;
     justify-content: flex-start;
 }
 
-.comment-input{
+.comment-input {
     width: 100%;
     display: flex;
     flex-direction: row;
 }
 
-.label{
+.label {
     font-weight: bold;
 }
-.right{
+
+.right {
     width: 50%;
     display: flex;
     align-items: center;
@@ -232,7 +249,7 @@ label,input{
     gap: 10px;
 }
 
-#tickets{
+#tickets {
     height: 96%;
     display: flex;
     flex-direction: column;
@@ -241,13 +258,14 @@ label,input{
     scrollbar-width: none;
     padding: 0px 10px;
 }
-#tickets-div{
+
+#tickets-div {
     width: 100%;
     height: 92%;
     padding: 10px 0px;
 }
 
-#comment-dialog-container{
+#comment-dialog-container {
     width: 100%;
     height: auto;
     display: flex;
@@ -255,7 +273,7 @@ label,input{
     gap: 5px;
 }
 
-#comment-form{
+#comment-form {
     height: 550px;
     border: 1px solid lightgray;
     border-radius: 10px;
@@ -267,7 +285,7 @@ label,input{
     overflow: auto;
 }
 
-#comment-top{
+#comment-top {
     width: 100%;
     height: auto;
     display: flex;
@@ -275,27 +293,27 @@ label,input{
     gap: 15px;
 }
 
-#comment-ticket-id{
+#comment-ticket-id {
     width: 100%;
     height: auto;
     display: flex;
     justify-content: flex-start;
 }
 
-#comment-subject{
+#comment-subject {
     width: 100%;
     height: auto;
     display: flex;
     justify-content: flex-start;
 }
 
-#comment-description{
+#comment-description {
     width: 100%;
     display: flex;
     justify-content: flex-start;
 }
 
-#comment-middle{
+#comment-middle {
     width: 100%;
     height: auto;
     display: flex;
@@ -304,65 +322,67 @@ label,input{
     padding-bottom: 10px;
 }
 
-.update-input{
+.update-input {
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
 
-#comment-middle-top{
+#comment-middle-top {
     width: 100%;
     display: flex;
     flex-direction: row;
 }
-#comment-left{
+
+#comment-left {
     width: 80%;
     display: flex;
     justify-content: flex-start;
 }
 
-#comment-left-div{
+#comment-left-div {
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
 
-#comment-right-div{
+#comment-right-div {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-#comment-right{
+#comment-right {
     width: 20%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-#comment-bottom{
+#comment-bottom {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-#comment-activity{
+#comment-activity {
     width: 30%;
     height: 550px;
     display: flex;
     flex-direction: column;
-    border:1px solid lightgray;
+    border: 1px solid lightgray;
     border-radius: 10px;
 }
 
-#comments{
+#comments {
     height: 95%;
     width: 100%;
     overflow-y: auto;
 }
-#activity-header{
+
+#activity-header {
     height: 5%;
     padding: 5px;
     display: flex;
@@ -371,68 +391,62 @@ label,input{
     background-color: rgb(219, 235, 241);
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    /* position: sticky;
-    z-index: 10; */
 }
 
-#comment-container{
+#comment-container {
     padding: 5px;
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-#form-last{
+#form-last {
     display: flex;
     flex-direction: row;
     gap: 10px;
-    
+
 }
 
-.comment-div{
+.comment-div {
     display: flex;
     flex-direction: column;
     border: 1px solid lightgray;
     border-radius: 5px;
 }
 
-.comment-header{
+.comment-header {
     display: flex;
     flex-direction: row;
     border-bottom: 1px solid lightgray;
     padding: 5px;
 }
 
-.comment-header-left{
+.comment-header-left {
     width: 50%;
     display: flex;
     align-items: center;
     justify-content: flex-start;
 }
 
-.comment-header-right{
+.comment-header-right {
     width: 50%;
     display: flex;
     align-items: center;
     justify-content: flex-end;
 }
 
-/* .comment-footer{
-    padding: 5px;
-} */
-
-::ng-deep #kabban-content .ql-toolbar.ql-snow + .ql-container.ql-snow {
+::ng-deep #kabban-content .ql-toolbar.ql-snow+.ql-container.ql-snow {
     height: 100px !important;
-} 
+}
 
-.comment-footer-div{
+.comment-footer-div {
     width: 100%;
     display: flex;
     flex-direction: row;
     padding: 5px;
 }
 
-.comment-footer-div-left{
+.comment-footer-div-left {
     width: 80%;
     display: flex;
     align-items: center;
@@ -441,7 +455,7 @@ label,input{
 }
 
 
-.comment-footer-div-right{
+.comment-footer-div-right {
     width: 20%;
     display: flex;
     align-items: flex-end;
@@ -449,7 +463,7 @@ label,input{
     padding: 5px;
 }
 
-.comment-footer-div-right-inner{
+.comment-footer-div-right-inner {
     height: 100%;
     display: flex;
     flex-direction: row;
@@ -458,20 +472,21 @@ label,input{
     gap: 10px;
 }
 
-input{
+input {
     border: 1px solid lightgray;
     border-radius: 5px;
 }
-.input-value{
+
+.input-value {
     border: none;
     background-color: white !important;
 }
 
-#filter-form-container{
+#filter-form-container {
     width: 100%;
 }
 
-.filter-input-div{
+.filter-input-div {
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -479,92 +494,95 @@ input{
 }
 
 #filter-overlay {
-  width: 35%;
-  height: 95%;
-  background-color: white;
-  border: 1px solid lightgray;
-  border-radius: 5px;
+    width: 35%;
+    height: 95%;
+    background-color: white;
+    border: 1px solid lightgray;
+    border-radius: 5px;
 }
 
 #filter-form-inner {
-width: 100%;
-height: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
 }
 
-#filter-header{
-   width: 100%;
-   padding: 8px; 
-   display: flex;
-   flex-direction: row;
-   border-bottom: 1px solid lightgray;
-   background-color: rgba(211, 211, 211, 0.3);
+#filter-header {
+    width: 100%;
+    padding: 8px;
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid lightgray;
+    background-color: rgba(211, 211, 211, 0.3);
 }
 
-#filter-heading{
+#filter-heading {
     font-size: 15px;
-    color:rgb(45, 57, 57);
+    color: rgb(45, 57, 57);
     font-weight: bold;
 }
 
-#filter-form-container{
+#filter-form-container {
     width: 100%;
     height: 100%;
 }
 
-.filter-input-div{
+.filter-input-div {
     width: 100%;
     display: flex;
     flex-direction: row;
 }
 
-.label{
+.label {
     width: 35%;
     display: flex;
     align-items: center;
     justify-content: flex-start;
 }
 
-.label1{
+.label1 {
     width: 26%;
     font-size: 15px;
 }
-.comment_dialog input{
+
+.comment_dialog input {
     border: none;
 }
-.label2{
+
+.label2 {
     width: 85%;
     color: inherit;
-    padding:0;
+    padding: 0;
     font-size: 15px;
 }
 
-textarea{
+textarea {
     color: inherit;
     font-size: 15px;
 }
 
-.input{
+.input {
     width: 65%;
     display: flex;
     align-items: center;
     justify-content: flex-start;
 }
 
-label{
+label {
     font-size: 15px;
-    font-weight:normal;
+    font-weight: normal;
 }
-input{
+
+input {
     object-fit: cover;
     padding: 3px;
     border-radius: 5px;
     border: 1px solid lightgray;
 }
 
-form{
+form {
     width: 100%;
     height: 100%;
     display: flex;
@@ -572,56 +590,62 @@ form{
 }
 
 
-.comment_dialog form{
+.comment_dialog form {
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
-    gap:20px;
-}
-::ng-deep #kabban-content #filter-form-container .p-dropdown{
-    width:187px !important;
+    gap: 20px;
 }
 
-::ng-deep #kabban-content .p-button.p-button-icon-only{
+::ng-deep #kabban-content #filter-form-container .p-dropdown {
+    width: 187px !important;
+}
+
+::ng-deep #kabban-content .p-button.p-button-icon-only {
     width: 10px !important;
     height: 15px !important;
 }
-::ng-deep #kabban-content #filter-form-container .p-autoComplete{
+
+::ng-deep #kabban-content #filter-form-container .p-autoComplete {
     width: 150px !important;
 }
-::ng-deep .comment_dialog .p-autocomplete{
+
+::ng-deep .comment_dialog .p-autocomplete {
     height: 28px !important;
 }
+
 ::ng-deep .bug-form-dialog .p-inputtext {
     padding: 5px !important;
 }
 
-::ng-deep .p-inputtext:enabled:focus{
+::ng-deep .p-inputtext:enabled:focus {
     box-shadow: none !important;
 }
 
-::ng-deep .p-button:enabled:focus{
+::ng-deep .p-button:enabled:focus {
     box-shadow: none !important;
 }
+
 ::ng-deep #kabban-content #filter-form-container .p-inputtext {
     width: 180px !important;
     height: 30px;
     padding: 4px;
 }
 
-::ng-deep #kabban-content .p-dropdown .p-dropdown-trigger{
+::ng-deep #kabban-content .p-dropdown .p-dropdown-trigger {
     width: 30px;
 }
 
-::ng-deep #kabban-content #filter-form-container .p-dropdown{
+::ng-deep #kabban-content #filter-form-container .p-dropdown {
     width: 180px !important;
 }
 
-::ng-deep .p-inputtext{
+::ng-deep .p-inputtext {
     padding: 3px !important;
 }
-#form-top{
+
+#form-top {
     height: 80%;
     overflow-y: auto;
     overflow-x: hidden;
@@ -632,7 +656,7 @@ form{
     padding: 10px;
 }
 
-#form-footer{
+#form-footer {
     height: 12%;
     display: flex;
     flex-direction: row;
@@ -642,31 +666,35 @@ form{
     padding: 5px;
 }
 
-#delete_dialog{
+#delete_dialog {
     height: 100%;
 }
-::ng-deep #delete_dialog_content .p-dialog .p-dialog-header .p-dialog-title{
+
+::ng-deep #delete_dialog_content .p-dialog .p-dialog-header .p-dialog-title {
     font-size: 18px;
 }
 
-#delete_dialog_content{
+#delete_dialog_content {
     height: 100%;
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
-::ng-deep #kabban-content  #delete_dialog .p-dialog{
+
+::ng-deep #kabban-content #delete_dialog .p-dialog {
     width: 20% !important;
     height: 130px !important;
 }
-::ng-deep .bug-form-dialog .p-dialog .p-dialog-header{
+
+::ng-deep .bug-form-dialog .p-dialog .p-dialog-header {
     padding: 5px 5px 0px 10px !important;
 }
 
-::ng-deep .bug-form-dialog .p-dialog .p-dialog-content{
-    padding:10px;
+::ng-deep .bug-form-dialog .p-dialog .p-dialog-content {
+    padding: 10px;
 }
-#delete-dialog_top{
+
+#delete-dialog_top {
     height: 80%;
     display: flex;
     flex-direction: row;
@@ -675,11 +703,11 @@ form{
     gap: 10px;
 }
 
-#delete-dialog-bottom{
+#delete-dialog-bottom {
     height: 50%;
 }
 
-#delete-dialog-btns{
+#delete-dialog-btns {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -688,21 +716,24 @@ form{
     padding: 0px 10px;
 }
 
-::ng-deep .bug-form-dialog .p-dialog .p-dialog-header .p-dialog-title{
+::ng-deep .bug-form-dialog .p-dialog .p-dialog-header .p-dialog-title {
     font-size: 18px;
 }
-#delete{
+
+#delete {
     font-size: 25px;
 }
-#question{
+
+#question {
     display: flex;
     align-items: center;
     justify-content: center;
     padding-top: 3px;
 }
-#delete-dialog-btn1{
+
+#delete-dialog-btn1 {
     height: 30px;
-    background-color:rgb(45, 57, 57);
+    background-color: rgb(45, 57, 57);
     color: white;
     border: 1px solid rgb(45, 57, 57);
     padding: 2.5px 10px;
@@ -712,24 +743,24 @@ form{
     align-items: center;
     justify-content: center;
 }
-#delete-dialog-btn1:hover{
+
+#delete-dialog-btn1:hover {
     background-color: rgba(211, 211, 211, 0.3);
     color: rgb(45, 57, 57);
 }
-.text_area{
-    text-overflow: ellipsis;width: 86.5%;overflow: hidden;
+
+.text_area {
+    text-overflow: ellipsis;
+    width: 86.5%;
+    overflow: hidden;
     color: inherit;
-    padding:0;
+    padding: 0;
     font-size: 15px;
 }
 
-/* ::ng-deep .comment_dialog .p-dialog-draggable .p-dialog-header{
-    background-color: rgba(211, 211, 211) !important;
-} */
-
-#delete-dialog-btn2{
+#delete-dialog-btn2 {
     height: 30px;
-    background-color:rgb(45, 57, 57);
+    background-color: rgb(45, 57, 57);
     color: white;
     border: 1px solid rgb(45, 57, 57);
     padding: 2.5px 10px;
@@ -739,202 +770,244 @@ form{
     align-items: center;
     justify-content: center;
 }
-.last_modified_div{
-    width: 100%; display: flex; justify-content: flex-end; padding: 5px 5px 15px 5px; font-size: 13px;
+
+.last_modified_div {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding: 5px 5px 15px 5px;
+    font-size: 13px;
     gap: 5px;
 }
 
-.last_modified{
+.last_modified {
     font-size: 13px;
 }
-#delete-dialog-btn2:hover{
+
+#delete-dialog-btn2:hover {
     background-color: rgba(211, 211, 211, 0.3);
     color: rgb(45, 57, 57);
 }
 
-@media screen and (max-width:1200px){
-    ::ng-deep .comment_dialog .p-dialog{
+@media screen and (max-width:1200px) {
+    ::ng-deep .comment_dialog .p-dialog {
         width: 70% !important;
     }
 }
 
-@media screen and (max-width:1000px){
-    #comment-middle-top{
+@media screen and (max-width:1000px) {
+    #comment-middle-top {
         flex-direction: column;
-        gap:10px;
+        gap: 10px;
     }
-    input{
+
+    input {
         width: 100%;
     }
-    #comment-left, #comment-right{
+
+    #comment-left,
+    #comment-right {
         width: 100%;
     }
-    #comment-form{
+
+    #comment-form {
         width: 50%;
     }
-    #comment-activity{
+
+    #comment-activity {
         width: 50%;
     }
-    #form-last{
+
+    #form-last {
         flex-direction: column;
     }
 }
 
-@media screen and (max-width:800px){
-    #comment-form{
+@media screen and (max-width:800px) {
+    #comment-form {
         width: 60%;
     }
-    .label1{
+
+    .label1 {
         width: 35%;
     }
-    #comment-activity{
+
+    #comment-activity {
         width: 40%;
     }
 
-    .last_modified_div{
+    .last_modified_div {
         flex-direction: column;
     }
 
-    .last_modified{
+    .last_modified {
         width: 100%;
         word-break: break-all;
     }
 
-    .last_modified_p{
+    .last_modified_p {
         width: 100%;
     }
 }
-@media screen and (max-width:730px){
-    ::ng-deep .bug-form-dialog .p-dialog{
-    width: 80% !important;
-}
-}
 
-@media screen and (max-width:672px){
-    ::ng-deep .comment_dialog .p-dialog{
+@media screen and (max-width:730px) {
+    ::ng-deep .bug-form-dialog .p-dialog {
         width: 80% !important;
     }
-    .comment-input,#comment-subject, #comment-description{
+}
+
+@media screen and (max-width:672px) {
+    ::ng-deep .comment_dialog .p-dialog {
+        width: 80% !important;
+    }
+
+    .comment-input,
+    #comment-subject,
+    #comment-description {
         width: 80%;
         gap: 8px;
         flex-direction: column;
     }
-    #comment-subject, #comment-description{
+
+    #comment-subject,
+    #comment-description {
         gap: 8px;
         flex-direction: column;
     }
 }
 
-@media screen and (max-width:530px){
-    ::ng-deep .bug-form-dialog .p-dialog{
-    width: 85% !important;
-}
-    .row{
+@media screen and (max-width:530px) {
+    ::ng-deep .bug-form-dialog .p-dialog {
+        width: 85% !important;
+    }
+
+    .row {
         flex-direction: column;
     }
-    .div{
+
+    .div {
         width: 100%;
     }
 
-    .comment-input{
+    .comment-input {
         width: 80%;
         gap: 8px;
         flex-direction: column;
     }
 
-    #comment-ticket-id{
+    #comment-ticket-id {
         gap: 8px;
         flex-direction: column;
         align-items: flex-start;
     }
-    .comment-header,.comment-footer-div{
+
+    .comment-header,
+    .comment-footer-div {
         flex-direction: column;
     }
 
-    ::ng-deep .p-editor{
+    ::ng-deep .p-editor {
         width: 50%;
         height: 500px !important;
     }
-    .comment-header-left,.comment-footer-div-left{
-       width: 100%;
+
+    .comment-header-left,
+    .comment-footer-div-left {
+        width: 100%;
     }
-    .comment-header-right,.comment-footer-div-right{
+
+    .comment-header-right,
+    .comment-footer-div-right {
         width: 100%;
     }
 }
-@media screen and (max-width:420px){
-     ::ng-deep .edit_editor .p-dialog{
+
+@media screen and (max-width:420px) {
+    ::ng-deep .edit_editor .p-dialog {
         width: 70% !important;
     }
 
-     ::ng-deep .delete_dialog1 .p-dialog{
+    ::ng-deep .delete_dialog1 .p-dialog {
         width: 70% !important;
     }
 }
-@media screen and (max-width:372px){
-    p{
+
+@media screen and (max-width:372px) {
+    p {
         font-size: 13px;
     }
 }
-@media screen and (max-width:321px){
 
-    ::ng-deep .p-editor-container .p-editor-toolbar.ql-snow .ql-picker .ql-picker-label{
+@media screen and (max-width:321px) {
+
+    ::ng-deep .p-editor-container .p-editor-toolbar.ql-snow .ql-picker .ql-picker-label {
         width: 80%;
     }
-     span,.label,p{
+
+    span,
+    .label,
+    p {
         font-size: 13px;
         word-break: break-all;
     }
-    ::ng-deep .p-dropdown .p-dropdown-label{
+
+    ::ng-deep .p-dropdown .p-dropdown-label {
         font-size: 13px;
         word-break: break-all;
     }
 }
-@media screen and (max-width:295px){
 
-    ::ng-deep .p-dialog .p-dialog-content:last-of-type{
+@media screen and (max-width:295px) {
+
+    ::ng-deep .p-dialog .p-dialog-content:last-of-type {
         padding: 10px;
     }
+
     ::ng-deep .p-overlay {
-    width: 80% !important;
-}
- ::ng-deep .p-dropdown-panel .p-dropdown-items .p-dropdown-item{
+        width: 80% !important;
+    }
+
+    ::ng-deep .p-dropdown-panel .p-dropdown-items .p-dropdown-item {
         height: 100%;
         width: 100%;
         padding: 5px;
     }
-    ::ng-deep .p-dropdown-panel .p-dropdown-items .p-dropdown-item > span{
+
+    ::ng-deep .p-dropdown-panel .p-dropdown-items .p-dropdown-item>span {
         font-size: 13px;
         word-break: break-all;
     }
-    .comment-footer-div-right-inner{
+
+    .comment-footer-div-right-inner {
         flex-direction: column;
     }
 }
-@media screen  and (max-width:210px){
-    #type-div{
+
+@media screen and (max-width:210px) {
+    #type-div {
         flex-direction: column;
         font-size: 13px;
     }
 
-    label{
+    label {
         font-size: 13px;
         word-break: break-all;
     }
 
-    ::ng-deep .bug-form-dialog .p-dialog-draggable .p-dialog-header{
+    ::ng-deep .bug-form-dialog .p-dialog-draggable .p-dialog-header {
         padding: 10px;
     }
-    ::ng-deep .p-dialog .p-dialog-header .p-dialog-title{
+
+    ::ng-deep .p-dialog .p-dialog-header .p-dialog-title {
         font-size: 16px;
         word-break: break-all;
     }
 
-    ::ng-deep .p-dialog{
+    ::ng-deep .p-dialog {
         height: 30% !important;
     }
 
-    #delete-dialog-btns{
+    #delete-dialog-btns {
         flex-direction: column;
     }
 }

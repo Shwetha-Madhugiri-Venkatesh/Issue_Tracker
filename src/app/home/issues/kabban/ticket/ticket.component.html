@@ -1,24 +1,28 @@
 <div class="ticket-container">
     <div class="ticket-inner">
+        <!-- ticket top divison -->
         <div class="top">
             <div class="first">
                 <div class="ticket-type">{{ticket.type}}</div>
                 <div class="priority">{{priority_name}}</div>
             </div>
             <div class="second">
-                <label class="label">Ticket Id: <a class="ticket-id" (click)="open_comment_form(ticket)" pTooltip="Tickets Details" tooltipPosition="bottom">{{ticket.ticketId}}</a></label>
+                <label class="label">Ticket Id: <a class="ticket-id" (click)="commentForm.emit(ticket);"
+                        pTooltip="Tickets Details" tooltipPosition="bottom">{{ticket.ticketId}}</a></label>
                 <div style="width: 100%;display: flex;flex-direction: row; gap: 5px; height: auto;">
-                <label class="label1">Subject:</label>
-                <label class="subject" (input)="autoResize($event)">{{ticket.subject}}</label>
+                    <label class="label1">Subject:</label>
+                    <label class="subject">{{ticket.subject}}</label>
                 </div>
             </div>
         </div>
+        <!-- ticket bottom divison -->
         <div class="bottom">
             <div class="left">
                 <div class="profile">{{ticket.reporter_name.at(0)}}</div>
             </div>
             <div class="right">
-                <i id="comment" class="fa-regular fa-comments" (click)="open_comment_form(ticket)" pTooltip="Add Comment" tooltipPosition="bottom"></i>
+                <i id="comment" class="fa-regular fa-comments" (click)="commentForm.emit(ticket);"
+                    pTooltip="Add Comment" tooltipPosition="bottom"></i>
             </div>
         </div>
     </div>

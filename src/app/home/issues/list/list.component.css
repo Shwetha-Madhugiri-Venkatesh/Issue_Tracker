@@ -1,32 +1,32 @@
-#list-container{
+#list-container {
     display: flex;
     padding: 10px;
     width: 100%;
     height: 100%;
 }
 
-#list-inner{
+#list-inner {
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-#header{
+#header {
     display: flex;
     flex-direction: row;
     width: 100%;
     padding: 0px 10px;
 }
 
-#heading{
+#heading {
     width: 50%;
     display: flex;
     align-items: center;
     justify-content: flex-start;
 }
 
-#search{
+#search {
     width: 50%;
     display: flex;
     gap: 15px;
@@ -34,7 +34,7 @@
     justify-content: flex-end;
 }
 
-#table-container{
+#table-container {
     width: 100%;
     height: 100%;
     display: flex;
@@ -42,52 +42,53 @@
     gap: 10px;
 }
 
-#table-inner{
+#table-inner {
     width: 100%;
     height: 100%;
 }
 
-::ng-deep #table-inner .p-table{
+::ng-deep #table-inner .p-table {
     width: 100%;
-    
+
 }
-::ng-deep #table-inner .p-datatable{
+
+::ng-deep #table-inner .p-datatable {
     height: 100%;
 }
 
-::ng-deep #table-inner .p-datatable>.p-datatable-wrapper{
+::ng-deep #table-inner .p-datatable>.p-datatable-wrapper {
     height: 75%;
     width: 100%;
 }
-/* ::ng-deep #table-inner .p-datatable-table{
-    height: 100%;
-} */
 
-::ng-deep #table-inner .p-datatable .p-datatable-tbody > tr > td {
+::ng-deep #table-inner .p-datatable .p-datatable-tbody>tr>td {
     padding: 10px !important;
 }
-.show{
+
+.show {
     position: absolute;
     z-index: 10;
     bottom: 10px;
     left: 10px;
     color: rgb(45, 57, 57);
 }
+
 #filter-overlay {
-  width: 35%;
-  background-color: white;
-  border-radius: 5px;
+    width: 35%;
+    background-color: white;
+    border-radius: 5px;
 }
 
 #filter-form-inner {
-width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  border: 1px solid lightgray;
-  border-radius: 5px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
 }
-#filter{
+
+#filter {
     height: 30px;
     width: 30px;
     border-radius: 5px;
@@ -97,63 +98,65 @@ width: 100%;
     justify-content: center;
 }
 
-#filter:hover{
+#filter:hover {
     background-color: rgba(211, 211, 211, 0.3);
-    border:1px solid rgb(45, 57, 57);
+    border: 1px solid rgb(45, 57, 57);
 }
 
-#filter-header{
-   width: 100%;
-   padding: 8px; 
-   border-bottom: 1px solid lightgray;
-   background-color: rgba(211, 211, 211, 0.3);
-   display: flex;
-   flex-direction: row;
+#filter-header {
+    width: 100%;
+    padding: 8px;
+    border-bottom: 1px solid lightgray;
+    background-color: rgba(211, 211, 211, 0.3);
+    display: flex;
+    flex-direction: row;
 }
 
-.go-button:hover{
+.go-button:hover {
     background-color: rgb(23, 82, 105);
 }
 
-#filter-heading{
+#filter-heading {
     font-size: 15px;
-    color:rgb(45, 57, 57);
+    color: rgb(45, 57, 57);
     font-weight: bold;
 }
 
-#filter-form-container{
+#filter-form-container {
     width: 100%;
 }
 
-form{
+form {
     width: 100%;
     display: flex;
     flex-direction: column;
 }
 
-.filter-input-div{
+.filter-input-div {
     width: 100%;
     display: flex;
     flex-direction: row;
 }
-.label{
+
+.label {
     width: 35%;
     display: flex;
     align-items: center;
     justify-content: flex-start;
 }
 
-.input{
+.input {
     width: 65%;
     display: flex;
     align-items: center;
     justify-content: flex-start;
 }
 
-label{
+label {
     font-size: 15px;
 }
-input{
+
+input {
     width: 187px;
     object-fit: cover;
     padding: 3px;
@@ -161,11 +164,11 @@ input{
     border: 1px solid lightgray;
 }
 
-::ng-deep #list-container .p-dropdown{
-    width:187px !important;
+::ng-deep #list-container .p-dropdown {
+    width: 187px !important;
 }
 
-::ng-deep #list-container .p-autoComplete{
+::ng-deep #list-container .p-autoComplete {
     width: 187% !important;
 }
 
@@ -173,7 +176,7 @@ input{
     padding: 4px;
 }
 
-#form-top{
+#form-top {
     height: 380px;
     overflow-y: auto;
     overflow-x: hidden;
@@ -184,7 +187,7 @@ input{
     padding: 10px;
 }
 
-#form-footer{
+#form-footer {
     height: 50px;
     display: flex;
     flex-direction: row;
@@ -194,9 +197,9 @@ input{
     padding: 10px;
 }
 
-#apply-btn{
+#apply-btn {
     height: 30px;
-    background-color:rgb(45, 57, 57);
+    background-color: rgb(45, 57, 57);
     color: white;
     border: 1px solid rgb(45, 57, 57);
     padding: 2.5px 10px;
@@ -204,21 +207,21 @@ input{
     cursor: pointer;
 }
 
-#search-div{
+#search-div {
     width: 150px;
     border-radius: 10px;
     padding: 2px 0px 2px 10px;
 }
 
-#search-input{
-    border: none!important;
+#search-input {
+    border: none !important;
     outline: none !important;
     box-shadow: none !important;
     width: 80%;
     background-color: transparent;
 }
 
-#search-btn{
+#search-btn {
     border: none;
     width: 20%;
     background-color: white;
@@ -226,13 +229,8 @@ input{
     border-radius: 10px;
 }
 
-/* #search-btn:hover{
-    background-color: rgba(211, 211, 211, 0.3);
-    border: 1px solid black;
-} */
-
-::ng-deep #list-container .p-paginator .p-paginator-pages .p-paginator-page{
-     width: 5px;
+::ng-deep #list-container .p-paginator .p-paginator-pages .p-paginator-page {
+    width: 5px;
     height: 30px;
     border-radius: 0px;
     background: white;
@@ -241,26 +239,28 @@ input{
 }
 
 ::ng-deep #list-container .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
-    background-color:#3482a2 !important;
+    background-color: #3482a2 !important;
     color: white;
-   border-color: lightgray;
+    border-color: lightgray;
 }
 
-::ng-deep #list-container .p-paginator .p-paginator-pages .p-paginator-page{
-    border-top:1px solid lightgray;
-    border-bottom:1px solid lightgray;
-     min-width: 30px !important;
+::ng-deep #list-container .p-paginator .p-paginator-pages .p-paginator-page {
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+    min-width: 30px !important;
 }
-::ng-deep #list-container .p-paginator .p-paginator-pages .p-paginator-page:hover{
-     background-color: rgb(229, 245, 249);
-   border-color: lightgray !important;
+
+::ng-deep #list-container .p-paginator .p-paginator-pages .p-paginator-page:hover {
+    background-color: rgb(229, 245, 249);
+    border-color: lightgray !important;
 }
-::ng-deep #list-container .p-paginator .p-paginator-first{
-     border-top:1px solid lightgray;
-    border-bottom:1px solid lightgray;
-    border-left:1px solid lightgray;
-     min-width: 30px !important;
-     border-top-left-radius: 5px;
+
+::ng-deep #list-container .p-paginator .p-paginator-first {
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+    border-left: 1px solid lightgray;
+    min-width: 30px !important;
+    border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     margin: 0;
     height: 30px;
@@ -269,63 +269,65 @@ input{
     border-right: none;
 }
 
-::ng-deep #list-container .p-paginator .p-paginator-first:hover{
+::ng-deep #list-container .p-paginator .p-paginator-first:hover {
     background-color: rgb(229, 245, 249);
-   border-color: lightgray !important;
+    border-color: lightgray !important;
 }
 
-::ng-deep #list-container .p-paginator .p-paginator-prev{
-    border-top:1px solid lightgray;
-    border-bottom:1px solid lightgray;
-     min-width: 30px !important;
+::ng-deep #list-container .p-paginator .p-paginator-prev {
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+    min-width: 30px !important;
     margin: 0;
     height: 30px;
-   border-radius: 0px;
+    border-radius: 0px;
     border-right: none;
     padding-bottom: 4px;
 }
 
-::ng-deep #list-container .p-paginator .p-paginator-prev:hover{
+::ng-deep #list-container .p-paginator .p-paginator-prev:hover {
     background-color: rgb(229, 245, 249);
-   border-color: lightgray !important;
+    border-color: lightgray !important;
 }
 
-::ng-deep #list-container .p-paginator .p-paginator-pages .p-paginator-page{
-    border-top:1px solid lightgray;
-    border-bottom:1px solid lightgray;
-     min-width: 30px !important;
+::ng-deep #list-container .p-paginator .p-paginator-pages .p-paginator-page {
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+    min-width: 30px !important;
 }
 
-::ng-deep #list-container .p-paginator .p-paginator-next{
-    border-top:1px solid lightgray;
-    border-bottom:1px solid lightgray; 
-     min-width: 30px !important;
-     margin: 0;
+::ng-deep #list-container .p-paginator .p-paginator-next {
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+    min-width: 30px !important;
+    margin: 0;
     height: 30px;
-   border-radius: 0px;
+    border-radius: 0px;
     border-right: none;
     padding-bottom: 4px;
 
 }
 
-#td-div{
+#td-div {
     padding: 3px 10px;
     border-radius: 5px;
 }
-::ng-deep #list-container #table-inner .p-paginator{
+
+::ng-deep #list-container #table-inner .p-paginator {
     justify-content: flex-end;
     padding: 10px !important;
 }
-::ng-deep #list-container .p-paginator .p-paginator-next:hover{
+
+::ng-deep #list-container .p-paginator .p-paginator-next:hover {
     background-color: rgb(229, 245, 249);
-   border-color: lightgray !important;
+    border-color: lightgray !important;
 }
 
-::ng-deep #list-container .p-paginator .p-paginator-last{
-     border-top:1px solid lightgray;
-    border-bottom:1px solid lightgray;
-    border-right:1px solid lightgray;
-     min-width: 30px !important;
+::ng-deep #list-container .p-paginator .p-paginator-last {
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+    border-right: 1px solid lightgray;
+    min-width: 30px !important;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     margin: 0;
@@ -334,58 +336,63 @@ input{
     border-bottom-left-radius: 0px;
     border-left: none;
 }
-::ng-deep #list-container .p-paginator .p-paginator-last:hover{
+
+::ng-deep #list-container .p-paginator .p-paginator-last:hover {
     background-color: rgb(229, 245, 249);
-   border-color: lightgray !important;
+    border-color: lightgray !important;
 }
 
-::ng-deep #list-container .p-button.p-button-icon-only{
+::ng-deep #list-container .p-button.p-button-icon-only {
     width: 10px !important;
     height: 15px !important;
 }
-::ng-deep #list-container #filter-form-container .p-autoComplete{
+
+::ng-deep #list-container #filter-form-container .p-autoComplete {
     width: 150px !important;
 }
+
 ::ng-deep #list-container .p-inputtext {
     padding: 5px;
 }
+
 ::ng-deep #list-container #filter-form-container .p-inputtext {
     width: 180px !important;
     height: 30px;
     padding: 4px;
 }
 
-::ng-deep #list-container .p-dropdown .p-dropdown-trigger{
+::ng-deep #list-container .p-dropdown .p-dropdown-trigger {
     width: 30px;
 }
 
-::ng-deep  .p-icon-wrapper{
+::ng-deep .p-icon-wrapper {
     padding-top: 5px !important;
 }
 
-::ng-deep #list-container #filter-form-container .p-dropdown{
+::ng-deep #list-container #filter-form-container .p-dropdown {
     width: 180px !important;
 }
 
-.label{
+.label {
     width: 35%;
     display: flex;
     align-items: center;
     justify-content: flex-start;
 }
 
-.input{
+.input {
     width: 65%;
     display: flex;
     align-items: center;
     justify-content: flex-start;
 }
 
-label{
+label {
     font-size: 15px;
-    font-weight:normal;
+    font-weight: normal;
 }
-input{
+
+input {
     object-fit: cover;
     padding: 3px;
     border-radius: 5px;
@@ -395,52 +402,54 @@ input{
 
 #table-with-footer {
     position: relative;
-height: 100%;
+    height: 100%;
 }
 
 
 .paginator-extension {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-    gap: 5px; 
- flex-direction: row;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    flex-direction: row;
 }
 
-::ng-deep .p-paginator-right-content{
+::ng-deep .p-paginator-right-content {
     margin-left: 4px !important;
 }
+
 .paginator-extension1 {
-  display: flex;
-  justify-content: flex-start;
- align-items: center;
- justify-self: center;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    justify-self: center;
 }
 
 .go-button {
-  background-color: #3482a2;
-  color: white;
-  border: 1px solid #3482a2;
-  border-radius: 4px;
-  cursor: pointer;
-  z-index: 1;
-  height: 30px;
-  width: 40px;
+    background-color: #3482a2;
+    color: white;
+    border: 1px solid #3482a2;
+    border-radius: 4px;
+    cursor: pointer;
+    z-index: 1;
+    height: 30px;
+    width: 40px;
 }
 
-.go-button1{
-  z-index: 2;
-}
-#filter_head{
-width: 50%;
-display: flex;
-align-items: center;
-justify-content: flex-start;
+.go-button1 {
+    z-index: 2;
 }
 
-#cross-div{
+#filter_head {
     width: 50%;
-display: flex;
-align-items: center;
-justify-content: flex-end;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+#cross-div {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }

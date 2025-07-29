@@ -29,12 +29,12 @@ export class TableComponent {
   filter_user_last_modified_source_type: any = '';
   filter_user_last_modified_datetime: any = '';
   filtered_output;
-  constructor(private http_service: HTTPService, private primeNg: PrimeNGConfig, private message_service: MessageService, private authorize: AuthorizeUser, private two_way: TwoWayDataBinding) { }
   products: User[] = [];
   users_from_http: User[];
-  cols: { field: string, header: string}[];
+  cols: { field: string, header: string }[];
   columns: { field: string, header: string }[] = [];
   filter_flag: boolean = false;
+
   @Output()
   display_dialog: EventEmitter<[boolean, string?]> = new EventEmitter<[boolean, string?]>;
 
@@ -53,22 +53,32 @@ export class TableComponent {
   columns_selected: { field: string, header: string }[] = [];
   dynamic_page_number = { name: 'show 5', value: 5 };
   table_preload;
-  sel=false;
-  text=[{ field: 'uname', header: `text` }];
+  delete = false;
+  delete_id;
+  goToPageNumber = '';
+  totalPages: number;
+
+  constructor(private http_service: HTTPService, private primeNg: PrimeNGConfig, private message_service: MessageService, private authorize: AuthorizeUser, private two_way: TwoWayDataBinding) { }
+  
   ngOnInit() {
+    //Preloading the data if it is present in local storage
     this.table_preload = JSON.parse(localStorage.getItem("table_preload")) || {};
+
+    //Table columns
     this.cols = [
       { field: 'uname', header: `User Name` },
       { field: 'email_id', header: 'Email ID' },
-      { field: 'type', header: 'User Type'},
-      { field: 'created_source', header: 'Created Source'},
+      { field: 'type', header: 'User Type' },
+      { field: 'created_source', header: 'Created Source' },
       { field: 'created_source_type', header: 'Created Source Type' },
-      { field: 'created_datetimeString', header: 'Created Date Time'},
-      { field: 'last_modified_source', header: 'Last Modified Source'},
+      { field: 'created_datetimeString', header: 'Created Date Time' },
+      { field: 'last_modified_source', header: 'Last Modified Source' },
       { field: 'last_modified_source_type', header: 'Last Modified Source Type' },
-      { field: 'last_modified_datetimeString', header: 'Last Modified Date Time'},
+      { field: 'last_modified_datetimeString', header: 'Last Modified Date Time' },
     ];
-    this.columns =structuredClone(this.cols);
+    this.columns = structuredClone(this.cols);
+
+    //Assigning the preloaded data
     if (Object.keys(this.table_preload).length != 0) {
       this.filter_user_name = this.table_preload.filter_user_name;
       this.filter_user_email_id = this.table_preload.filter_user_email_id;
@@ -92,16 +102,19 @@ export class TableComponent {
     } else {
       this.selectedCol = this.columns;
     }
-      this.get_all_users();
+
+    this.get_all_users();
+
+    //Accessing the current user who logged in
     this.login_user = JSON.parse(localStorage.getItem("login")) || {};
     this.http_service.fetch_users().subscribe((res: User[]) => {
       this.selectedNum = res.length;
       this.user_details = res.find(item => item.user_id == this.login_user['userId']);
-      console.log(this.user_details);
     })
 
+    //Event which is defined in TwoWayDataBinding server to get the updated user from dialog component
     this.two_way.emit_users.subscribe(res => {
-       res.forEach(item=>{
+      res.forEach(item => {
         item['created_datetimeString'] = new Date(item.created_datetime).toLocaleString();
         item['last_modified_datetimeString'] = new Date(item.last_modified_datetime).toLocaleString();
       })
@@ -109,13 +122,13 @@ export class TableComponent {
       this.products = res;
     })
   }
+
+  //User filter form submit function
   filter_form_submit(form: NgForm) {
-    console.log(form.value);
     let form_data = { ...form.value, type: (form.value.type == undefined) ? undefined : form.value.type['name'] };
     this.filtered_output = this.users_from_http.filter(item => {
       let match: boolean = false;
       for (let key in form_data) {
-        console.log(form[key]);
         if (form_data[key] != undefined && form_data[key] != "") {
           if (key == 'last_modified_datetime' || key == 'created_datetime') {
             let form_date = new Date(form_data[key]).toLocaleDateString();
@@ -123,14 +136,14 @@ export class TableComponent {
               match = true;
             }
           } else if (key == 'uname') {
-            if(item[key].toLowerCase().startsWith(form_data[key].toLowerCase())){
-              match=true;
-            }
-          }else if (item[key].toLowerCase() == form_data[key].toLowerCase()) {
+            if (item[key].toLowerCase().startsWith(form_data[key].toLowerCase())) {
               match = true;
+            }
+          } else if (item[key].toLowerCase() == form_data[key].toLowerCase()) {
+            match = true;
           } else {
-              match = false;
-              break;
+            match = false;
+            break;
           }
         }
       }
@@ -142,27 +155,19 @@ export class TableComponent {
       }
     })
     this.products = this.filtered_output;
-    this.filter_flag=false;
-    console.log(this.products);
+    this.filter_flag = false;
   }
 
-  filter_display() {
-    this.filter_flag = !this.filter_flag;
-  }
-  dialog_display() {
-    console.log("btn");
-    this.display_dialog.emit([true]);
-  }
-
+  //open dailog box to add new user
   open_form(id: string) {
     if (this.delete) {
       this.delete = false;
       return;
     }
-    
-      this.display_dialog.emit([true, id]);
+    this.display_dialog.emit([true, id]);
   }
 
+  //resetting the filter form fields
   reset_fields() {
     this.filter_user_name = '';
     this.filter_user_email_id = '';
@@ -174,60 +179,46 @@ export class TableComponent {
     this.filter_user_created_source_type = '';
     this.user_type = '';
   }
-  close_filter() {
-    this.filter_flag = false;
-  }
+  
+  //filter reset button function
   reset_form() {
     this.products = this.users_from_http;
     this.reset_fields();
   }
 
+  //Dynamic rows dropdown selected function
   dynamic_rows(event) {
-    console.log(event.value);
     if (this.users_from_http.length > event.value.value) {
       this.dynamic_page_number = event.value;
     } else {
       this.products = this.users_from_http;
     }
   }
-  get_selected_columns(val) {
-    this.cols = val.value;
-    console.log(this.cols);
-    console.log('Selected columns:', this.selectedCol);
-    console.log('Selected length:', this.selectedCol.length);
-    // this.columns_selected = val.value;
-  }
-
-  // dynamic_columns() {
-  //   this.sel=true;
-  //   this.multi.hide();
-  //   this.cols = this.columns_selected;
-  // }
-
+  
+  //fetch all the users from json through HTTP Request
   get_all_users() {
     this.http_service.fetch_users().subscribe((res: User[]) => {
-      res.forEach(item=>{
+      res.forEach(item => {
         item['created_datetimeString'] = new Date(item.created_datetime).toLocaleString();
         item['last_modified_datetimeString'] = new Date(item.last_modified_datetime).toLocaleString();
       })
       this.users_from_http = res;
       if (this.products.length == 0) {
-      this.products = this.users_from_http;
+        this.products = this.users_from_http;
       }
     });
   }
-  delete = false;
-  delete_id;
+
+  //Delete dialog box open function
   delete_the_user(id: string) {
     this.delete = true;
     this.delete_visible = true;
     this.delete_id = id;
   }
-  goToPageNumber = '';
-  totalPages: number;
 
+  //paginator go button function
   goToPage(dt: any) {
-    const rowsPerPage = 5; 
+    const rowsPerPage = 5;
     this.totalPages = Math.ceil(this.products.length / rowsPerPage);
     const pageIndex = Number(this.goToPageNumber) - 1;
     if (pageIndex >= 0 && pageIndex < this.totalPages) {
@@ -235,24 +226,21 @@ export class TableComponent {
       this.goToPageNumber = '';
     } else {
       this.goToPageNumber = '';
-       this.message_service.add({severity:'error', summary:'Error', detail:'Invalid number'});
+      this.message_service.add({ severity: 'error', summary: 'Error', detail: 'Invalid number' });
     }
   }
 
+  //user delete function
   delete_confirm() {
     if (this.user_details.type == 'Admin') {
       this.http_service.delete_user(this.delete_id).subscribe(res => {
-        console.log(res);
         this.get_all_users();
         this.delete_visible = false;
       })
     }
   }
 
-  cancel_delete() {
-    this.delete_visible = false;
-  }
-
+  //Storing the data which need to be preloaded
   ngOnDestroy() {
     let table_preload = JSON.parse(localStorage.getItem("table_preload")) || {};
     table_preload['filter_user_name'] = this.filter_user_name;
@@ -269,5 +257,4 @@ export class TableComponent {
     table_preload['filtered_output'] = this.filtered_output;
     localStorage.setItem("table_preload", JSON.stringify(table_preload));
   }
-
 }
