@@ -14,6 +14,10 @@
     flex-direction: column;
 }
 
+::ng-deep .p-inputtext:enabled:focus{
+    box-shadow: none !important;
+}
+
 #graph-header {
     width: 100%;
     height: 8%;

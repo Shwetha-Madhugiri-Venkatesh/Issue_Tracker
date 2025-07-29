@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { MessageService } from 'primeng/api';
+import { catchError, throwError } from 'rxjs';
 import { Ticket } from 'src/app/Models/ticket';
 import { HTTPService } from 'src/app/Services/http_service';
 import { TwoWayDataBinding } from 'src/app/Services/two_way_dataBinding';
@@ -6,13 +8,14 @@ import { TwoWayDataBinding } from 'src/app/Services/two_way_dataBinding';
 @Component({
   selector: 'app-status',
   templateUrl: './status.component.html',
-  styleUrls: ['./status.component.css']
+  styleUrls: ['./status.component.css'],
+  providers: [MessageService]
 })
 export class StatusComponent {
   data;
   status_options;
 
-  constructor(private http_service: HTTPService, private two_way: TwoWayDataBinding) { }
+  constructor(private http_service: HTTPService, private two_way: TwoWayDataBinding, private message_service:MessageService) { }
 
   //data from TwoWayDataBinding server
   statuses: { statusId: string, status: string, tickets: Ticket[] }[] = this.two_way.statuses;
@@ -21,7 +24,16 @@ export class StatusComponent {
     let result = {}; //{status_name : number_of_issues}
 
     //the initial data load
-    this.http_service.fetch_tickets().subscribe((res: Ticket[]) => {
+    this.http_service.fetch_tickets()
+    .pipe(catchError((err) => {
+                    this.message_service.add({
+                      severity: 'error',
+                      summary: 'Error',
+                      detail: err.error?.message || 'Tickets fetch failed'
+                    });
+                    return throwError(() => err);
+                  }))
+    .subscribe((res: Ticket[]) => {
       let number_of_issues = 0;
       //filtering the tickets
       for (let x of this.statuses) {

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MessageService } from 'primeng/api';
+import { catchError, throwError } from 'rxjs';
 import { Ticket } from 'src/app/Models/ticket';
 import { HTTPService } from 'src/app/Services/http_service';
 import { TwoWayDataBinding } from 'src/app/Services/two_way_dataBinding';
@@ -6,7 +8,8 @@ import { TwoWayDataBinding } from 'src/app/Services/two_way_dataBinding';
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
-  styleUrls: ['./category.component.css']
+  styleUrls: ['./category.component.css'],
+   providers: [MessageService]
 })
 export class CategoryComponent implements OnInit{
 
@@ -15,7 +18,7 @@ export class CategoryComponent implements OnInit{
   all_tickets;
   category_options;
 
-  constructor(private http_service: HTTPService, private two_way: TwoWayDataBinding) { }
+  constructor(private http_service: HTTPService, private two_way: TwoWayDataBinding,  private message_service:MessageService) { }
 
   //Data from TwoWayDataBinding server
   categories: { categoryId: string, categoryDesc: string }[] = this.two_way.categories;
@@ -23,7 +26,16 @@ export class CategoryComponent implements OnInit{
 
   ngOnInit() {
     let result = {};//{category_name: number_of_issues}
-    this.http_service.fetch_tickets().subscribe((res: Ticket[]) => {
+    this.http_service.fetch_tickets()
+    .pipe(catchError((err) => {
+                    this.message_service.add({
+                      severity: 'error',
+                      summary: 'Error',
+                      detail: err.error?.message || 'Tickets fetch failed'
+                    });
+                    return throwError(() => err);
+                  }))
+    .subscribe((res: Ticket[]) => {
       this.all_tickets = res;
 
       //fetching preload data from localstorage if present

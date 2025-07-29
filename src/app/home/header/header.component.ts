@@ -1,5 +1,7 @@
 import { Component} from '@angular/core';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
+import { catchError, throwError } from 'rxjs';
 import { User } from 'src/app/Models/User';
 import { HTTPService } from 'src/app/Services/http_service';
 import { TwoWayDataBinding } from 'src/app/Services/two_way_dataBinding';
@@ -8,6 +10,7 @@ import { TwoWayDataBinding } from 'src/app/Services/two_way_dataBinding';
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
+  providers: [MessageService]
 })
 export class HeaderComponent {
   selected: string = 'Dashboard';
@@ -20,7 +23,7 @@ export class HeaderComponent {
     { label: 'Users', icon: 'profile_7310896.png', route: 'users' },
   ];
 
-  constructor(public router: Router, private two_way: TwoWayDataBinding, private http_service: HTTPService) { }
+  constructor(public router: Router, private two_way: TwoWayDataBinding, private http_service: HTTPService, private message_service:MessageService) { }
 
   ngOnInit() {
     //subscribing to the event in server to know the cuurent component in run, (Dashboard,Issues,Users)
@@ -30,9 +33,18 @@ export class HeaderComponent {
 
     //Accessing the current logged in user
     this.login_user = JSON.parse(localStorage.getItem("login")) || {};
-    this.http_service.fetch_users().subscribe((res: User[]) => {
-      this.user_details = res.find(item => item.user_id == this.login_user['userId']);
-    })
+    this.http_service.fetch_users()
+      .pipe(catchError((err) => {
+        this.message_service.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: err.error?.message || 'User fetch failed'
+        });
+        return throwError(() => err);
+      }))
+      .subscribe((res: User[]) => {
+        this.user_details = res.find(item => item.user_id == this.login_user['userId']);
+      })
   }
 
   //naviage function for nav bar menu

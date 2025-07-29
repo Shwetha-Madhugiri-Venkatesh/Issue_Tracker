@@ -2,7 +2,7 @@ import { EventEmitter, inject, Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { User } from "../Models/User";
 import { HTTPService } from "./http_service";
-import { Subject } from "rxjs";
+import { catchError, Subject, throwError } from "rxjs";
 
 @Injectable({
     providedIn:'root',
@@ -21,7 +21,12 @@ export class AuthorizeUser{
         //login details
         let {userId,Password}=login_details;
         
-        this.http_service.fetch_users().subscribe((res:User[])=>{
+        this.http_service.fetch_users()
+        .pipe(catchError((err) => {
+                this.authentication.next([false,err.error.message]);
+                  return throwError(() => err);
+                }))
+        .subscribe((res:User[])=>{
             let user:boolean=false;
             this.index=res.findIndex(item=>{
                 if(item.user_id==userId){
@@ -46,10 +51,20 @@ export class AuthorizeUser{
 
     reset_password(login_details){
         let {userId,Password,confirmPassword}=login_details;
-        this.http_service.fetch_users().subscribe((res:User[])=>{
+        this.http_service.fetch_users()
+        .pipe(catchError((err) => {
+                this.authentication.next([false,err.error.message]);
+                  return throwError(() => err);
+                }))
+        .subscribe((res:User[])=>{
             let user = res.find(item=>item.user_id==userId);
             user['password']=Password;
-            this.http_service.update_user(user['id'],user).subscribe((res)=>{
+            this.http_service.update_user(user['id'],user)
+            .pipe(catchError((err) => {
+                this.authentication.next([false,err.error.message]);
+                return throwError(() => err);
+              }))
+            .subscribe((res)=>{
                 this.authentication.next("your password is succesfully updated");
             });
         })

@@ -208,55 +208,55 @@
 
 <!-- Tickets creating form -->
 <div class="bug-form-dialog">
-    <p-dialog header="Bug Record Form" [modal]="true" [(visible)]="visible" [style]="{ width: '40rem' }">
+    <p-dialog header="Bug Record Form" [modal]="true" [(visible)]="visible" [style]="{ width: '70rem' }">
         <div id="form-div">
             <!-- Tickets creating form -->
             <form #bugForm="ngForm" (ngSubmit)="bug_form_submit(bugForm)">
                 <div class="row">
                     <div class="div">
-                        <label>Reporter Name</label>
-                        <input pInputText type="text" name="reporter_name" [(ngModel)]="user_details.uname" readonly />
+                        <label class="bug-label">REPORTER NAME</label>
+                        <input class="bug-input" pInputText type="text" name="reporter_name" [(ngModel)]="user_details.uname" readonly />
                     </div>
                     <div class="div">
-                        <label>Reporter Id</label>
-                        <input pInputText name="reportedId" [(ngModel)]="user_details.user_id" readonly />
+                        <label class="bug-label">REPORTER ID</label>
+                        <input class="bug-input" pInputText name="reportedId" [(ngModel)]="user_details.user_id" readonly />
                     </div>
                 </div>
                 <div class="row_">
-                    <label>Type</label>
+                    <label class="bug-label">TYPE</label>
                     <div id="type-div">
-                        <div id="type-bug"
-                            [ngStyle]="bug?{'background-color': 'blue','color': 'white'}:{'background-color': '#eff7fa','color': 'blue'}"
+                        <div class="bug-input" id="type-bug"
+                            [ngStyle]="bug?{'background-color': 'blue','color': 'white'}:{'background-color': '#f2f2f7','color': 'blue'}"
                             (click)="bug = true;feature = false;">Bug</div>
-                        <div id="type-feature"
-                            [ngStyle]="feature?{'background-color': 'blue','color': 'white'}:{'background-color': '#eff7fa','color': 'blue'}"
+                        <div class="bug-input" id="type-feature"
+                            [ngStyle]="feature?{'background-color': 'blue','color': 'white'}:{'background-color': '#f2f2f7','color': 'blue'}"
                             (click)="feature = true;bug = false;">Feature</div>
                     </div>
                 </div>
                 <div class="row_">
-                    <label>Subject</label>
-                    <input pInputText name="subject" type="text" [(ngModel)]="subject" required
+                    <label class="bug-label">SUBJECT</label>
+                    <input class="bug-input" pInputText name="subject" type="text" [(ngModel)]="subject" required
                         [placeholder]="text|custom_pipe" />
                 </div>
                 <div class="row_">
-                    <label>Priority</label>
+                    <label class="bug-label">PRIORITY</label>
                     <p-dropdown [options]="priorities" [(ngModel)]="selectedPriority" optionLabel="priority"
                         placeholder="Select priority" name="priority" [required]="true" />
                 </div>
                 <div class="row_">
-                    <label>Attachments</label>
-                    <input type="file" accept="image/*,video/*,audio/*" multiple (change)="onFilesSelected($event)"
+                    <label class="bug-label">ATTACHMENTS <span style="color:gray">(Optional)</span></label>
+                    <input class="bug-input" type="file" accept="image/*,video/*,audio/*" multiple (change)="onFilesSelected($event)"
                         required />
                 </div>
                 <div class="row">
                     <div class="div">
-                        <label>Category</label>
+                        <label class="bug-label">CATEGORY</label>
                         <p-dropdown [options]="categories" [(ngModel)]="selectedCategory" optionLabel="categoryDesc"
                             placeholder="Select a Category" name="category" (onChange)="category_entered($event)"
                             [required]="true" />
                     </div>
                     <div class="div">
-                        <label>Subcategory</label>
+                        <label class="bug-label">SUBCATEGORY</label>
                         <p-dropdown [options]="dynamic_subcategory" [(ngModel)]="selectedSubCategory"
                             optionLabel="subCategoryDesc" placeholder="Select Subcategory" name="subcategory"
                             [required]="true" />
@@ -264,21 +264,21 @@
                 </div>
                 <div class="row">
                     <div class="div">
-                        <label>Browser</label>
+                        <label class="bug-label">BROWSER</label>
                         <p-dropdown [options]="browsers" [(ngModel)]="selectedbrowser" optionLabel="browser_name"
                             placeholder="Select browser" name="browser" [required]="true" />
                     </div>
                     <div class="div">
-                        <label>Subcategory</label>
+                        <label class="bug-label">OPERATING SYSTEM</label>
                         <p-dropdown [options]="operatingSystems" [(ngModel)]="selectedOS" optionLabel="os_name"
                             placeholder="Select OS" name="operatingSystem" [required]="true" />
                     </div>
                 </div>
                 <div>
-                    <label>Description</label>
-                    <textarea name="description" type="text" [(ngModel)]="description" required></textarea>
+                    <label class="bug-label">DESCRIPTION</label>
+                    <textarea name="description" class="bug-input" type="text" [(ngModel)]="description" required></textarea>
                 </div>
-                <div>
+                <div style="display: flex;align-items: center;justify-content: flex-end;">
                     <button id="submit" type="submit">Submit</button>
                 </div>
             </form>
@@ -483,3 +483,4 @@
         </div>
     </p-dialog>
 </div>
+<p-toast/>

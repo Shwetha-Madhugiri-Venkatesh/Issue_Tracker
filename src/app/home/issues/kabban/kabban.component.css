@@ -88,7 +88,7 @@ button:hover {
 .row {
     display: flex;
     flex-direction: row;
-    gap: 10px;
+    gap: 15px;
 }
 
 #form-div form {
@@ -116,6 +116,7 @@ button:hover {
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     cursor: pointer;
+    font-size: 14px;
 }
 
 #type-feature {
@@ -124,6 +125,7 @@ button:hover {
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     cursor: pointer;
+    font-size: 14px;
 }
 
 .row_ {
@@ -169,14 +171,17 @@ input {
 
 #submit {
     height: 30px;
-    width: 100%;
-    background-color: blue;
+    width: 60px;
+    background-color: rgb(45, 57, 57);
     border: none;
     color: white;
-    padding: 2.5px 10px;
+    padding: 5px;
     border-radius: 5px;
-    font-size: 15px;
     cursor: pointer;
+}
+
+::ng-deep .p-dropdown-panel .p-dropdown-items{
+    padding: 0;
 }
 
 #issues {
@@ -193,9 +198,25 @@ input {
 }
 
 ::ng-deep .p-dropdown:not(.p-disabled).p-focus {
-    box-shadow: 2px 2px blue;
+    box-shadow: none;
 }
 
+::ng-deep .p-dropdown-panel .p-dropdown-items .p-dropdown-item{
+    padding: 7px 10px;
+    
+}
+
+::ng-deep .p-dropdown-panel .p-dropdown-items .p-dropdown-item:hover{
+   background-color: #EFF6FF !important;
+}
+
+::ng-deep .p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight{
+    background-color: white !important;
+}
+
+::ng-deep .p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight:hover{
+    background-color: #EFF6FF !important;
+}
 .issues-inner {
     width: 25%;
     height: 100%;
@@ -616,6 +637,7 @@ form {
 }
 
 ::ng-deep .bug-form-dialog .p-inputtext {
+    font-size: 15px !important;
     padding: 5px !important;
 }
 
@@ -681,6 +703,16 @@ form {
     gap: 10px;
 }
 
+.bug-label{
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.bug-input{
+    font-size: 15px;
+    border-radius:0px;
+}
+
 ::ng-deep #kabban-content #delete_dialog .p-dialog {
     width: 20% !important;
     height: 130px !important;
@@ -691,7 +723,7 @@ form {
 }
 
 ::ng-deep .bug-form-dialog .p-dialog .p-dialog-content {
-    padding: 10px;
+    padding: 5px 15px 15px 15px;
 }
 
 #delete-dialog_top {
@@ -787,6 +819,10 @@ form {
 #delete-dialog-btn2:hover {
     background-color: rgba(211, 211, 211, 0.3);
     color: rgb(45, 57, 57);
+}
+
+::ng-deep .bug-form-dialog .p-dropdown{
+    border-radius: 0px !important;
 }
 
 @media screen and (max-width:1200px) {

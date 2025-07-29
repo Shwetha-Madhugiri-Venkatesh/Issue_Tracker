@@ -1,5 +1,7 @@
 import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { MessageService } from 'primeng/api';
+import { catchError, throwError } from 'rxjs';
 import { Ticket } from 'src/app/Models/ticket';
 import { User } from 'src/app/Models/User';
 import { HTTPService } from 'src/app/Services/http_service';
@@ -8,7 +10,8 @@ import { TwoWayDataBinding } from 'src/app/Services/two_way_dataBinding';
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
-  styleUrls: ['./list.component.css']
+  styleUrls: ['./list.component.css'],
+   providers: [MessageService]
 })
 export class ListComponent {
   products: Ticket[] = [];
@@ -42,7 +45,7 @@ export class ListComponent {
   goToPageNumber = '';
   totalPages: number;
 
-  constructor(private http_service: HTTPService, private two_way_data: TwoWayDataBinding) { }
+  constructor(private http_service: HTTPService, private two_way_data: TwoWayDataBinding,private message_service:MessageService) { }
 
   //Data from TwoWayDataBinding server
   priorities: { priorityId: string, priority: string }[] = this.two_way_data.priorities;
@@ -92,13 +95,31 @@ export class ListComponent {
     this.two_way_data.current_issues_subcomponent("list");
 
     //The initial table data
-    this.http_service.fetch_tickets().subscribe((res: Ticket[]) => {
+    this.http_service.fetch_tickets()
+    .pipe(catchError((err) => {
+                this.message_service.add({
+                  severity: 'error',
+                  summary: 'Error',
+                  detail: err.error?.message || 'Tickets fetch failed'
+                });
+                return throwError(() => err);
+              }))
+    .subscribe((res: Ticket[]) => {
       this.http_tickets = res;
       res.forEach(item => {
         item['priority'] = this.priorities.find(i => i.priorityId == item.priorityId)?.priority;
         item['category'] = this.categories.find(i => i.categoryId == item.categoryId)?.categoryDesc;
         item['subcategory'] = this.subcategories.find(i => i.subCategoryId == item.subCategoryId)?.subCategoryDesc;
-        this.http_service.fetch_users().subscribe((res_users: User[]) => {
+        this.http_service.fetch_users()
+        .pipe(catchError((err) => {
+                this.message_service.add({
+                  severity: 'error',
+                  summary: 'Error',
+                  detail: err.error?.message || 'User fetch failed'
+                });
+                return throwError(() => err);
+              }))
+        .subscribe((res_users: User[]) => {
           item['assignee'] = (res_users.find(i => i.user_id == item.assigneeId)?.uname) ? (res_users.find(i => i.user_id == item.assigneeId)?.uname) : "---";
           if ((this.kanban_preload.search_output?.length == 0 && this.kanban_preload.filter_output?.length == 0) || (this.kanban_preload.search_output?.length == undefined && this.kanban_preload.filter_output?.length == undefined)) {
             this.products = res;
@@ -118,7 +139,16 @@ export class ListComponent {
     ];
 
     // Fetching users
-    this.http_service.fetch_users().subscribe((res) => {
+    this.http_service.fetch_users()
+    .pipe(catchError((err) => {
+            this.message_service.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: err.error?.message || 'User fetch failed'
+            });
+            return throwError(() => err);
+          }))
+    .subscribe((res) => {
       this.http_users = res;
     })
   }

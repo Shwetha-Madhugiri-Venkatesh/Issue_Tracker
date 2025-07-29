@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Observable, Subject } from 'rxjs';
+import { catchError, Observable, Subject, throwError } from 'rxjs';
 import { User } from 'src/app/Models/User';
 import { DialogComponent } from '../dialog/dialog.component';
 import { HTTPService } from 'src/app/Services/http_service';
@@ -107,7 +107,16 @@ export class TableComponent {
 
     //Accessing the current user who logged in
     this.login_user = JSON.parse(localStorage.getItem("login")) || {};
-    this.http_service.fetch_users().subscribe((res: User[]) => {
+    this.http_service.fetch_users()
+    .pipe(catchError((err) => {
+            this.message_service.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: err.error?.message || 'User fetch failed'
+            });
+            return throwError(() => err);
+          }))
+    .subscribe((res: User[]) => {
       this.selectedNum = res.length;
       this.user_details = res.find(item => item.user_id == this.login_user['userId']);
     })
@@ -197,7 +206,16 @@ export class TableComponent {
   
   //fetch all the users from json through HTTP Request
   get_all_users() {
-    this.http_service.fetch_users().subscribe((res: User[]) => {
+    this.http_service.fetch_users()
+    .pipe(catchError((err) => {
+        this.message_service.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: err.error?.message || 'User fetch failed'
+        });
+        return throwError(() => err);
+      }))
+    .subscribe((res: User[]) => {
       res.forEach(item => {
         item['created_datetimeString'] = new Date(item.created_datetime).toLocaleString();
         item['last_modified_datetimeString'] = new Date(item.last_modified_datetime).toLocaleString();
@@ -233,7 +251,16 @@ export class TableComponent {
   //user delete function
   delete_confirm() {
     if (this.user_details.type == 'Admin') {
-      this.http_service.delete_user(this.delete_id).subscribe(res => {
+      this.http_service.delete_user(this.delete_id)
+      .pipe(catchError((err) => {
+                this.message_service.add({
+                  severity: 'error',
+                  summary: 'Error',
+                  detail: err.error?.message || 'User delete failed'
+                });
+                return throwError(() => err);
+              }))
+      .subscribe(res => {
         this.get_all_users();
         this.delete_visible = false;
       })

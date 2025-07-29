@@ -3,7 +3,7 @@ import { TableComponent } from '../table/table.component';
 import { NgForm } from '@angular/forms';
 import { User } from 'src/app/Models/User';
 import { HTTPService } from 'src/app/Services/http_service';
-import { Subject } from 'rxjs';
+import { catchError, Subject, throwError } from 'rxjs';
 import { AuthorizeUser } from 'src/app/Services/authorize_user';
 import { TwoWayDataBinding } from 'src/app/Services/two_way_dataBinding';
 import { MessageService } from 'primeng/api';
@@ -67,7 +67,16 @@ export class DialogComponent implements OnChanges, OnInit {
   ngOnInit() {
     //Accessing the user details who had logged in
     this.login_user = JSON.parse(localStorage.getItem("login")) || {};
-    this.http_service.fetch_users().subscribe((res: User[]) => {
+    this.http_service.fetch_users()
+    .pipe(catchError((err) => {
+        this.message_service.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: err.error?.message || 'User fetch failed'
+        });
+        return throwError(() => err);
+      }))
+    .subscribe((res: User[]) => {
       this.http_users = res;
       this.user_details = res.find(item => item.user_id == this.login_user['userId']);
       this.user_created_source = this.user_details.uname;
@@ -79,7 +88,16 @@ export class DialogComponent implements OnChanges, OnInit {
 
   //prefilling the fields for view mode and edit mode
   prefill_fields() {
-    this.http_service.fetch_user(this.prefill).subscribe((res: User) => {
+    this.http_service.fetch_user(this.prefill)
+    .pipe(catchError((err) => {
+                this.message_service.add({
+                  severity: 'error',
+                  summary: 'Error',
+                  detail: err.error?.message || 'User fetch failed! Check your path'
+                });
+                return throwError(() => err);
+            }))
+    .subscribe((res: User) => {
       this.editable = false;
       this.prefill_user = res;
       this.user_uname = res.uname;
@@ -118,8 +136,8 @@ export class DialogComponent implements OnChanges, OnInit {
       this.prefill_fields();
     } else {
       this.reset_fields();
-      this.topForm.reset();
-      this.bottomForm.reset();
+      this.topForm?.reset();
+      this.bottomForm?.reset();
       this.all_fields_invalid = false;
       this.user_created_source = this.user_details.uname;
       this.user_created_source_type = this.user_details.type;
@@ -155,11 +173,20 @@ export class DialogComponent implements OnChanges, OnInit {
       updated_user['created_datetime'] = this.user_created_datetime;
       updated_user['user_id'] = this.user_user_id;
       updated_user['password'] = this.user_password;
-      this.http_service.update_user(this.prefill, updated_user).subscribe((res) => {
+      this.http_service.update_user(this.prefill, updated_user)
+       .pipe(catchError((err) => {
+                this.message_service.add({
+                  severity: 'error',
+                  summary: 'Error',
+                  detail: err.error?.message || 'User update failed'
+                });
+                return throwError(() => err);
+              }))
+      .subscribe((res) => {
         this.visible = false;
         this.get_users();
+        this.message_service.add({ severity: 'success', summary: 'Success', detail: "Updated User Successfully" });
       })
-      this.message_service.add({ severity: 'success', summary: 'Success', detail: "Updated User Successfully" });
     } else {
       let ind = this.http_users.find(item => item.email_id == topForm.value.email_id);
       if (ind) {
@@ -175,17 +202,35 @@ export class DialogComponent implements OnChanges, OnInit {
       this.user['last_modified_datetime'] = new Date();
       this.user['user_id'] = this.user_user_id;
       this.user['password'] = this.user_password;
-      this.http_service.create_new_user(this.user).subscribe((res) => {
-        this.visible = false;
-        this.get_users();
+      this.http_service.create_new_user(this.user)
+        .pipe(catchError((err) => {
+          this.message_service.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: err.error?.message || 'User creation failed'
+          });
+          return throwError(() => err);
+        }))
+        .subscribe((res) => {
+          this.visible = false;
+          this.get_users();
+          this.message_service.add({ severity: 'success', summary: 'Success', detail: "Added User Successfully" });
       })
-      this.message_service.add({ severity: 'success', summary: 'Success', detail: "Added User Successfully" });
     }
   }
 
   //Emitted the updating users as soon as the new user is added
   get_users() {
-    this.http_service.fetch_users().subscribe((res: User[]) => {
+    this.http_service.fetch_users()
+    .pipe(catchError((err) => {
+        this.message_service.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: err.error?.message || 'User fetch failed'
+        });
+        return throwError(() => err);
+      }))
+    .subscribe((res: User[]) => {
       this.http_users = res;
       this.two_way.raise_emit_users(res);
     })

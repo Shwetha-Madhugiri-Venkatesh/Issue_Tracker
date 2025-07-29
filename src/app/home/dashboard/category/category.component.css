@@ -43,11 +43,11 @@
 #category-header-right-inner {
     display: flex;
     flex-direction: row;
-    gap: 12px;
+    gap: 5px;
 }
 
 ::ng-deep #dropdown .p-dropdown {
-    width: 160px !important;
+    width: 150px !important;
     height: 27px;
     border-radius: 5px;
 }
@@ -55,8 +55,11 @@
 ::ng-deep #dropdown .p-dropdown .p-dropdown-label {
     display: flex;
     align-items: center;
-    justify-content: center;
     padding-bottom: 5px;
+}
+
+::ng-deep .p-dropdown:not(.p-disabled).p-focus{
+    box-shadow: none !important;
 }
 
 #category-div {

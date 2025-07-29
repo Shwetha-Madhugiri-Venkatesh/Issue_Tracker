@@ -43,14 +43,14 @@
                                 [pSortableColumn]="col.field">
                                 {{ col.header }} <p-sortIcon [field]="col.field" />
                             </th>
-                            <th *ngIf="user_details.type!='User'">Actions</th>
+                            <th *ngIf="user_details?.type!='User'">Actions</th>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-rowData let-columns="columns">
                         <tr (click)="open_form(rowData['id'])">
                             <td *ngFor="let col of columns" [innerHTML]="rowData[col.field] ">
                             </td>
-                            <td *ngIf="user_details.type!='User'">
+                            <td *ngIf="user_details?.type!='User'">
                                 <div class="icons">
                                     <i style="cursor: pointer;" class="fa-solid fa-trash"
                                         (click)="delete_the_user(rowData['id'])" pTooltip="Delete User"

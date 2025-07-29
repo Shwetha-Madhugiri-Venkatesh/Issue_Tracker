@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { MessageService } from 'primeng/api';
+import { catchError, throwError } from 'rxjs';
 import { Ticket } from 'src/app/Models/ticket';
 import { HTTPService } from 'src/app/Services/http_service';
 
 @Component({
   selector: 'app-graph',
   templateUrl: './graph.component.html',
-  styleUrls: ['./graph.component.css']
+  styleUrls: ['./graph.component.css'],
+   providers: [MessageService]
 })
 export class GraphComponent implements OnInit {
 
@@ -15,12 +18,21 @@ export class GraphComponent implements OnInit {
   data: { labels: string[]; datasets: { label: string; data: number[]; fill: boolean; backgroundColor: string, borderColor: string; tension: number; }[]; };
   graph_options;
 
-  constructor(private http_service: HTTPService) { }
+  constructor(private http_service: HTTPService, private message_service:MessageService) { }
 
   ngOnInit() {
     let today = new Date();
     //The initial data load
-    this.http_service.fetch_tickets().subscribe((res: Ticket[]) => {
+    this.http_service.fetch_tickets()
+    .pipe(catchError((err) => {
+                    this.message_service.add({
+                      severity: 'error',
+                      summary: 'Error',
+                      detail: err.error?.message || 'Tickets fetch failed'
+                    });
+                    return throwError(() => err);
+                  }))
+    .subscribe((res: Ticket[]) => {
       this.all_tickets = res;
 
       //fetching the preload data from localstorage if present
