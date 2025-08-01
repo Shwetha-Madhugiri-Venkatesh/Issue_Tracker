@@ -88,6 +88,7 @@ export class TableComponent {
       this.filter_user_last_modified_datetime = this.table_preload.filter_user_last_modified_datetime;
       this.filter_user_last_modified_source = this.table_preload.filter_user_last_modified_source;
       this.filter_user_last_modified_source_type = this.table_preload.filter_user_last_modified_source_type;
+      this.user_type=this.table_preload?.user_type;
       this.filter_flag = this.table_preload.filter_flag;
       this.dynamic_page_number = this.table_preload.dynamic_page_number;
       this.selectedCol = this.table_preload.selectedCol;
@@ -107,26 +108,23 @@ export class TableComponent {
 
     //Accessing the current user who logged in
     this.login_user = JSON.parse(localStorage.getItem("login")) || {};
-    this.http_service.fetch_users()
-    .pipe(catchError((err) => {
-            this.message_service.add({
-              severity: 'error',
-              summary: 'Error',
-              detail: err.error?.message || 'User fetch failed'
-            });
-            return throwError(() => err);
-          }))
-    .subscribe((res: User[]) => {
+    this.http_service.fetch_users().subscribe((res: User[]) => {
       this.selectedNum = res.length;
       this.user_details = res.find(item => item.user_id == this.login_user['userId']);
-    })
+    },
+
+    (err)=>{
+      this.message_service.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: err+', User fetch failed'
+            });
+    }
+  
+  )
 
     //Event which is defined in TwoWayDataBinding server to get the updated user from dialog component
     this.two_way.emit_users.subscribe(res => {
-      res.forEach(item => {
-        item['created_datetimeString'] = new Date(item.created_datetime).toLocaleString();
-        item['last_modified_datetimeString'] = new Date(item.last_modified_datetime).toLocaleString();
-      })
       this.users_from_http = res;
       this.products = res;
     })
@@ -206,25 +204,21 @@ export class TableComponent {
   
   //fetch all the users from json through HTTP Request
   get_all_users() {
-    this.http_service.fetch_users()
-    .pipe(catchError((err) => {
-        this.message_service.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: err.error?.message || 'User fetch failed'
-        });
-        return throwError(() => err);
-      }))
-    .subscribe((res: User[]) => {
-      res.forEach(item => {
-        item['created_datetimeString'] = new Date(item.created_datetime).toLocaleString();
-        item['last_modified_datetimeString'] = new Date(item.last_modified_datetime).toLocaleString();
-      })
+    this.http_service.fetch_users().subscribe((res: User[]) => {
       this.users_from_http = res;
       if (this.products.length == 0) {
         this.products = this.users_from_http;
       }
-    });
+    },
+    
+    (err)=>{
+      this.message_service.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: err+', User fetch failed'
+        });
+    }
+  );
   }
 
   //Delete dialog box open function
@@ -251,19 +245,19 @@ export class TableComponent {
   //user delete function
   delete_confirm() {
     if (this.user_details.type == 'Admin') {
-      this.http_service.delete_user(this.delete_id)
-      .pipe(catchError((err) => {
-                this.message_service.add({
-                  severity: 'error',
-                  summary: 'Error',
-                  detail: err.error?.message || 'User delete failed'
-                });
-                return throwError(() => err);
-              }))
-      .subscribe(res => {
+      this.http_service.delete_user(this.delete_id).subscribe(res => {
         this.get_all_users();
         this.delete_visible = false;
-      })
+      },
+      
+      (err)=>{
+        this.message_service.add({
+                  severity: 'error',
+                  summary: 'Error',
+                  detail: err+', User delete failed'
+                });
+      }
+    )
     }
   }
 
@@ -282,6 +276,7 @@ export class TableComponent {
     table_preload['dynamic_page_number'] = this.dynamic_page_number;
     table_preload['selectedCol'] = this.selectedCol;
     table_preload['filtered_output'] = this.filtered_output;
+    table_preload['user_type'] = this.user_type;
     localStorage.setItem("table_preload", JSON.stringify(table_preload));
   }
 }

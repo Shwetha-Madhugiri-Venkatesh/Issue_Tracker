@@ -23,16 +23,7 @@ export class GraphComponent implements OnInit {
   ngOnInit() {
     let today = new Date();
     //The initial data load
-    this.http_service.fetch_tickets()
-    .pipe(catchError((err) => {
-                    this.message_service.add({
-                      severity: 'error',
-                      summary: 'Error',
-                      detail: err.error?.message || 'Tickets fetch failed'
-                    });
-                    return throwError(() => err);
-                  }))
-    .subscribe((res: Ticket[]) => {
+    this.http_service.fetch_tickets().subscribe((res: Ticket[]) => {
       this.all_tickets = res;
 
       //fetching the preload data from localstorage if present
@@ -112,7 +103,15 @@ export class GraphComponent implements OnInit {
           }
         }
       }
-    })
+    },
+    (err)=>{
+      this.message_service.add({
+                      severity: 'error',
+                      summary: 'Error',
+                      detail: err+', Tickets fetch failed'
+                    });
+    }
+  )
     //end of initial data load
   }
   

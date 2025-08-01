@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { User } from "../Models/User";
 import { Ticket } from "../Models/ticket";
@@ -15,7 +15,9 @@ export class HTTPService{
     }
 
     fetch_users(){
-        return this.http.get("http://localhost:3001/users");
+        let header = new HttpHeaders();
+        header = header.set('data_type','users');
+        return this.http.get("http://localhost:3001/users",{headers:header});
     }
 
     fetch_user(id:string){
@@ -39,7 +41,9 @@ export class HTTPService{
     }
 
     fetch_tickets(){
-        return this.http.get("http://localhost:3001/tickets");
+        let header = new HttpHeaders();
+        header = header.set('data_type','tickets');
+        return this.http.get("http://localhost:3001/tickets",{headers:header});
     }
 
     post_comment(comment_details:Comment){
@@ -54,6 +58,8 @@ export class HTTPService{
         return this.http.delete(`http://localhost:3001/comments/${id}`);
     }
     fetch_comments(){
-        return this.http.get("http://localhost:3001/comments");
+        let header = new HttpHeaders();
+        header = header.set('data_type','comments');
+        return this.http.get("http://localhost:3001/comments",{headers:header});
     }
 }

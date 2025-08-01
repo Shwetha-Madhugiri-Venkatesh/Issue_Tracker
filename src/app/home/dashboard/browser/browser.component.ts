@@ -22,17 +22,8 @@ export class BrowserComponent implements OnInit {
   browsers: { browser_name: string, browser_id: string }[] = this.two_way.browsers;
 
   ngOnInit() {
-    let result = {}; //{Brosername: number_of_issues}
-    this.http_service.fetch_tickets()
-    .pipe(catchError((err) => {
-                    this.message_service.add({
-                      severity: 'error',
-                      summary: 'Error',
-                      detail: err.error?.message || 'Tickets fetch failed'
-                    });
-                    return throwError(() => err);
-                  }))
-    .subscribe((res: Ticket[]) => {
+    let result = {}; //{Browsername: number_of_issues}
+    this.http_service.fetch_tickets().subscribe((res: Ticket[]) => {
       let number_of_issues = 0;
       //filtering the browsers based on their ids
       for (let x of this.browsers) {
@@ -68,6 +59,14 @@ export class BrowserComponent implements OnInit {
           }
         }
       };
-    })
+    },
+    (err)=>{
+       this.message_service.add({
+                      severity: 'error',
+                      summary: 'Error',
+                      detail: err+', Tickets fetch failed'
+                    });
+    }
+  )
   }
 }

@@ -138,55 +138,55 @@ export class KabbanComponent implements OnInit {
 
     //Logged in user details
     this.login_user = JSON.parse(localStorage.getItem("login")) || {};
-    this.http_service.fetch_users()
-    .pipe(catchError((err) => {
-            this.message_service.add({
+    this.http_service.fetch_users().subscribe((res: User[]) => {
+      this.user_details = res.find(item => item.user_id == this.login_user['userId']);
+    },
+    (err)=>{
+      this.message_service.add({
               severity: 'error',
               summary: 'Error',
-              detail: err.error?.message || 'User fetch failed'
+              detail: err+ ', User fetch failed'
             });
-            return throwError(() => err);
-      }))
-    .subscribe((res: User[]) => {
-      this.user_details = res.find(item => item.user_id == this.login_user['userId']);
-    })
+    }
+  )
 
     this.fetch_tickets_update();
 
-    this.http_service.fetch_users()
-    .pipe(catchError((err) => {
-            this.message_service.add({
+    this.http_service.fetch_users().subscribe((res: User[]) => {
+      this.users_list = res;
+    },
+
+    (err)=>{
+      this.message_service.add({
               severity: 'error',
               summary: 'Error',
-              detail: err.error?.message || 'User fetch failed'
+              detail: err + ', User fetch failed'
             });
-            return throwError(() => err);
-          }))
-    .subscribe((res: User[]) => {
-      this.users_list = res;
-    })
+    }
+  )
 
     this.fetch_all_tickets();
   }
 
   //HTTP Request to fetch Tickets
   fetch_all_tickets() {
-    this.http_service.fetch_tickets()
-    .pipe(catchError((err) => {
-                this.message_service.add({
-                  severity: 'error',
-                  summary: 'Error',
-                  detail: err.error?.message || 'Tickets fetch failed'
-                });
-                return throwError(() => err);
-              }))
-    .subscribe((res: Ticket[]) => {
+    this.http_service.fetch_tickets().subscribe((res: Ticket[]) => {
+      console.log(res);
       if (this.kanban_preload.filter_output == undefined || this.kanban_preload.filter_output?.length == 0) {
         this.all_tickets = res;
       }
       this.http_tickets = res;
       this.fetch_tickets_update();
-    })
+    },
+
+    (err)=>{
+       this.message_service.add({
+                  severity: 'error',
+                  summary: 'Error',
+                  detail: err+ ', Tickets fetch failed'
+                });
+    }
+  )
   }
 
   category_entered(val) {
@@ -207,16 +207,7 @@ export class KabbanComponent implements OnInit {
     }
     bugForm.value['input_file'] = this.filePayload;
 
-    this.http_service.fetch_tickets()
-    .pipe(catchError((err) => {
-                this.message_service.add({
-                  severity: 'error',
-                  summary: 'Error',
-                  detail: err.error?.message || 'Tickets fetch failed'
-                });
-                return throwError(() => err);
-              }))
-    .subscribe((res: Ticket[]) => {
+    this.http_service.fetch_tickets().subscribe((res: Ticket[]) => {
       let len = res.filter(item => item.categoryId == bugForm.value.category.categoryId && item.subCategoryId == bugForm.value.subcategory.subCategoryId);
       let form_data = {
         reporter_name: bugForm.value.reporter_name,
@@ -236,20 +227,29 @@ export class KabbanComponent implements OnInit {
         browser: bugForm.value.browser.browser_id,
         operatingSystem: bugForm.value.operatingSystem.os_id,
       }
-      this.http_service.post_ticket(form_data)
-      .pipe(catchError((err) => {
-                this.message_service.add({
+      this.http_service.post_ticket(form_data).subscribe((res) => {
+        this.fetch_all_tickets();
+      },
+
+      (err)=>{
+        this.message_service.add({
                   severity: 'error',
                   summary: 'Error',
-                  detail: err.error?.message || 'Ticket post failed'
+                  detail: err+', Ticket post failed'
                 });
-                return throwError(() => err);
-              }))
-      .subscribe((res) => {
-        this.fetch_all_tickets();
-      })
+      }
+    )
       this.visible = false;
-    })
+    },
+    
+    (err)=>{
+      this.message_service.add({
+                  severity: 'error',
+                  summary: 'Error',
+                  detail: err+', Tickets fetch failed'
+        });
+    }
+  )
   }
 
   //Reseting the Ticket creating form fields
@@ -267,11 +267,8 @@ export class KabbanComponent implements OnInit {
     this.reset_comment_fields();
     this.visible_comment = true;
     ticket['assignee'] = this.users_list.find(item => item.user_id == ticket.assigneeId);
-    ticket['priority'] = this.priorities.find(item => item.priorityId == ticket.priorityId);
-    ticket['status'] = this.statuses.find(item => item.statusId == ticket.statusId);
-    ticket['lastModifiedDateTimeString'] = new Date(ticket['lastModifiedDateTime']).toLocaleString();
-    ticket['CreatedDateTimeString'] = new Date(ticket['createDateTime']).toLocaleString();
     this.comment_ticket = ticket;
+    console.log(this.comment_ticket);
     this.original_comment_ticket = structuredClone(this.comment_ticket);
     this.fetch_update_comments();
   }
@@ -279,16 +276,7 @@ export class KabbanComponent implements OnInit {
   //Fetching updated comments
   fetch_update_comments() {
     this.tickets_comments = {};
-    this.http_service.fetch_comments()
-    .pipe(catchError((err) => {
-        this.message_service.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: err.error?.message || 'Comments fetch failed'
-        });
-        return throwError(() => err);
-      }))
-    .subscribe((res: Comment[]) => {
+    this.http_service.fetch_comments().subscribe((res: Comment[]) => {
       let comments = res.filter(item => item.ticketId == this.comment_ticket.ticketId);
       comments.forEach(item => {
         let user = this.users_list.find(i => i.user_id == item.userId);
@@ -303,27 +291,23 @@ export class KabbanComponent implements OnInit {
         }
       })
       this.user_specific = Object.keys(this.tickets_comments);
-      for (let x of this.user_specific) {
-        for (let y of this.tickets_comments[x]) {
-          y.last_modified_date = new Date(y.last_modified_date).toLocaleString();
-        }
-      }
-    })
+    },
+
+
+    (err)=>{
+      this.message_service.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: err || 'Comments fetch failed'
+        });
+    }
+  )
   }
 
   //The comment form submit function
   get_comment_submit(commentForm: NgForm, comment_ticket_details) {
     if (this.comment != "") {
-      this.http_service.fetch_comments()
-      .pipe(catchError((err) => {
-        this.message_service.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: err.error?.message || 'Comments fetch failed'
-        });
-        return throwError(() => err);
-      }))
-      .subscribe((res: Comment[]) => {
+      this.http_service.fetch_comments().subscribe((res: Comment[]) => {
         let form_data = {
           commented_person: this.user_details.uname,
           commentId: `com${res.length + 1}`,
@@ -333,18 +317,17 @@ export class KabbanComponent implements OnInit {
           commented_date: new Date(),
           last_modified_date: new Date(),
         }
-        this.http_service.post_comment(form_data)
-        .pipe(catchError((err) => {
+        this.http_service.post_comment(form_data).subscribe((err) => {
+        })
+      },
+      (err)=>{
         this.message_service.add({
           severity: 'error',
           summary: 'Error',
-          detail: err.error?.message || 'Comment post failed'
+          detail: err+', Comments fetch failed'
         });
-        return throwError(() => err);
-      }))
-        .subscribe((res) => {
-        })
-      })
+      }
+    )
     }
     let modified = false;
     if (this.original_comment_ticket.priorityId != commentForm.value.priority.priorityId) {
@@ -370,20 +353,19 @@ export class KabbanComponent implements OnInit {
     }
     let { assignee, priority, status, ...rest } = comment_ticket_details;
 
-    this.http_service.update_ticket(comment_ticket_details.id, rest)
-    .pipe(catchError((err) => {
-                this.message_service.add({
-                  severity: 'error',
-                  summary: 'Error',
-                  detail: err.error?.message || 'Ticket Update failed'
-                });
-                return throwError(() => err);
-              }))
-    .subscribe((res) => {
+    this.http_service.update_ticket(comment_ticket_details.id, rest).subscribe((res) => {
       this.fetch_tickets_update();
       this.get_comment_ticket(this.comment_ticket);
       this.fetch_update_comments();
-    })
+    },
+    (err)=>{
+       this.message_service.add({
+                  severity: 'error',
+                  summary: 'Error',
+                  detail: err+', Ticket Update failed'
+                });
+    }
+  )
   }
 
   //For autocomplete component in comment form
@@ -406,18 +388,17 @@ export class KabbanComponent implements OnInit {
     let { uname, ...rest } = this.comment_to_be_edited;
     rest.message = this.updated_comment;
     rest.last_modified_date = new Date();
-    this.http_service.update_comment(rest.id, rest)
-    .pipe(catchError((err) => {
-        this.message_service.add({
+    this.http_service.update_comment(rest.id, rest).subscribe((res) => {
+      this.fetch_update_comments();
+    },
+    (err)=>{
+      this.message_service.add({
           severity: 'error',
           summary: 'Error',
-          detail: err.error?.message || 'Comment Update failed'
+          detail: err+', Comment Update failed'
         });
-        return throwError(() => err);
-      }))
-    .subscribe((res) => {
-      this.fetch_update_comments();
-    })
+    }
+  )
   }
 
   //Delete the comment
@@ -573,19 +554,18 @@ export class KabbanComponent implements OnInit {
 
   //delete confirm fuction for comment
   delete_confirm() {
-    this.http_service.delete_comment(this.delete_comment_id.id)
-    .pipe(catchError((err) => {
-        this.message_service.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: err.error?.message || 'Comment deletion failed'
-        });
-        return throwError(() => err);
-      }))
-    .subscribe((res) => {
+    this.http_service.delete_comment(this.delete_comment_id.id).subscribe((res) => {
       this.fetch_update_comments();
       this.delete_visible = false;
-    })
+    },
+    (err)=>{
+      this.message_service.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: err+', Comment deletion failed'
+        });
+    }
+  )
   }
 
   //Storing the preloading data for kanban component

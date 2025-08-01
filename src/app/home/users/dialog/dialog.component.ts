@@ -67,37 +67,28 @@ export class DialogComponent implements OnChanges, OnInit {
   ngOnInit() {
     //Accessing the user details who had logged in
     this.login_user = JSON.parse(localStorage.getItem("login")) || {};
-    this.http_service.fetch_users()
-    .pipe(catchError((err) => {
-        this.message_service.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: err.error?.message || 'User fetch failed'
-        });
-        return throwError(() => err);
-      }))
-    .subscribe((res: User[]) => {
+    this.http_service.fetch_users().subscribe((res: User[]) => {
       this.http_users = res;
       this.user_details = res.find(item => item.user_id == this.login_user['userId']);
       this.user_created_source = this.user_details.uname;
       this.user_created_source_type = this.user_details.type;
       this.user_last_modified_source = this.user_details.uname;
       this.user_last_modified_source_type = this.user_details.type;
-    })
+    },
+    
+    (err)=>{
+      this.message_service.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: err+', User fetch failed'
+        });
+    }
+  )
   }
 
   //prefilling the fields for view mode and edit mode
   prefill_fields() {
-    this.http_service.fetch_user(this.prefill)
-    .pipe(catchError((err) => {
-                this.message_service.add({
-                  severity: 'error',
-                  summary: 'Error',
-                  detail: err.error?.message || 'User fetch failed! Check your path'
-                });
-                return throwError(() => err);
-            }))
-    .subscribe((res: User) => {
+    this.http_service.fetch_user(this.prefill).subscribe((res: User) => {
       this.editable = false;
       this.prefill_user = res;
       this.user_uname = res.uname;
@@ -126,7 +117,16 @@ export class DialogComponent implements OnChanges, OnInit {
       this.user_last_modified_source_type = res.last_modified_source_type;
       this.user_password = res.password;
       this.profile_pic_input = res.profile;
-    })
+    },
+  
+    (err)=>{
+       this.message_service.add({
+                  severity: 'error',
+                  summary: 'Error',
+                  detail: err+', User fetch failed! Check your path'
+                });
+    }
+  )
   }
 
   //for opening the dialog again
@@ -173,20 +173,20 @@ export class DialogComponent implements OnChanges, OnInit {
       updated_user['created_datetime'] = this.user_created_datetime;
       updated_user['user_id'] = this.user_user_id;
       updated_user['password'] = this.user_password;
-      this.http_service.update_user(this.prefill, updated_user)
-       .pipe(catchError((err) => {
-                this.message_service.add({
-                  severity: 'error',
-                  summary: 'Error',
-                  detail: err.error?.message || 'User update failed'
-                });
-                return throwError(() => err);
-              }))
-      .subscribe((res) => {
+      this.http_service.update_user(this.prefill, updated_user).subscribe((res) => {
         this.visible = false;
         this.get_users();
         this.message_service.add({ severity: 'success', summary: 'Success', detail: "Updated User Successfully" });
-      })
+      },
+
+      (err)=>{
+        this.message_service.add({
+                  severity: 'error',
+                  summary: 'Error',
+                  detail: err+', User update failed'
+                });
+      }
+    )
     } else {
       let ind = this.http_users.find(item => item.email_id == topForm.value.email_id);
       if (ind) {
@@ -203,37 +203,36 @@ export class DialogComponent implements OnChanges, OnInit {
       this.user['user_id'] = this.user_user_id;
       this.user['password'] = this.user_password;
       this.http_service.create_new_user(this.user)
-        .pipe(catchError((err) => {
-          this.message_service.add({
-            severity: 'error',
-            summary: 'Error',
-            detail: err.error?.message || 'User creation failed'
-          });
-          return throwError(() => err);
-        }))
         .subscribe((res) => {
           this.visible = false;
           this.get_users();
           this.message_service.add({ severity: 'success', summary: 'Success', detail: "Added User Successfully" });
-      })
+      },
+      (err)=>{
+        this.message_service.add({
+            severity: 'error',
+            summary: 'Error',
+            detail: err+', User Insertion failed'
+          });
+      }
+    )
     }
   }
 
   //Emitted the updating users as soon as the new user is added
   get_users() {
-    this.http_service.fetch_users()
-    .pipe(catchError((err) => {
-        this.message_service.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: err.error?.message || 'User fetch failed'
-        });
-        return throwError(() => err);
-      }))
-    .subscribe((res: User[]) => {
+    this.http_service.fetch_users().subscribe((res: User[]) => {
       this.http_users = res;
       this.two_way.raise_emit_users(res);
-    })
+    },
+    (err)=>{
+      this.message_service.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: err+', User fetch failed'
+        });
+    }
+  )
   }
 
   //Creating password and User Id

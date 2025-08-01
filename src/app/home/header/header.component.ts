@@ -33,18 +33,18 @@ export class HeaderComponent {
 
     //Accessing the current logged in user
     this.login_user = JSON.parse(localStorage.getItem("login")) || {};
-    this.http_service.fetch_users()
-      .pipe(catchError((err) => {
+    this.http_service.fetch_users().subscribe((res: User[]) => {
+        this.user_details = res.find(item => item.user_id == this.login_user['userId']);
+      },
+      
+      (err)=>{
         this.message_service.add({
           severity: 'error',
           summary: 'Error',
-          detail: err.error?.message || 'User fetch failed'
+          detail: err+', User fetch failed'
         });
-        return throwError(() => err);
-      }))
-      .subscribe((res: User[]) => {
-        this.user_details = res.find(item => item.user_id == this.login_user['userId']);
-      })
+      }
+    )
   }
 
   //naviage function for nav bar menu

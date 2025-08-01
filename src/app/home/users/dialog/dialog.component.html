@@ -157,7 +157,7 @@
                                     [readOnly]="!editable  && prefill" required />
                                 <p *ngIf="(phonenumber.errors?.['required'] && (phonenumber.touched || all_fields_invalid))"
                                     style="color: red;font-size: 13px;">*required</p>
-                                <p *ngIf="(phonenumber.errors?.['minlength'] || phonenumber.errors?.['maxlength']) && phonenumber.dirty"
+                                <p *ngIf="((phonenumber.errors?.['minlength'] || phonenumber.errors?.['maxlength']) && phonenumber.dirty) || (editable && (phonenumber.errors?.['minlength'] || phonenumber.errors?.['maxlength']))"
                                     style="color: red;font-size: 13px;">the phone number should be of 10 characters</p>
                             </div>
                         </div>

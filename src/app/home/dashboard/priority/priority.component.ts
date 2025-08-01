@@ -24,16 +24,7 @@ export class PriorityComponent implements OnInit {
     let result = {}; //{priority_name : number_of_issues}
 
     //the initial data load
-    this.http_service.fetch_tickets()
-    .pipe(catchError((err) => {
-                    this.message_service.add({
-                      severity: 'error',
-                      summary: 'Error',
-                      detail: err.error?.message || 'Tickets fetch failed'
-                    });
-                    return throwError(() => err);
-                  }))
-    .subscribe((res: Ticket[]) => {
+    this.http_service.fetch_tickets().subscribe((res: Ticket[]) => {
       let number_of_issues = 0;
       //filtering the tickets according to priority Ids
       for (let x of this.priorities) {
@@ -54,7 +45,16 @@ export class PriorityComponent implements OnInit {
           }
         ]
       };
-    })
+    },
+    
+    (err)=>{
+       this.message_service.add({
+                      severity: 'error',
+                      summary: 'Error',
+                      detail: err+', Tickets fetch failed'
+                    });
+    }
+  )
 
     this.priority_options = {
       maintainAspectRatio: false,

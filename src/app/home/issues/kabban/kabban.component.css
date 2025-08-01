@@ -663,7 +663,7 @@ form {
     width: 180px !important;
 }
 
-::ng-deep .p-inputtext {
+::ng-deep .comment_dialog .p-inputtext {
     padding: 3px !important;
 }
 

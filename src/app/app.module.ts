@@ -11,7 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './home/dashboard/dashboard.component';
 
 import { FormsModule } from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InputTextModule } from 'primeng/inputtext';
@@ -49,6 +49,8 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Chart } from 'chart.js';
 import { TooltipModule } from 'primeng/tooltip';
 import { customPipe } from './custom_pipes/custom_pipe_one';
+import { HTTPInterceptors } from './Interceptors/http_interceptors';
+import { ErrorInterceptor } from './Interceptors/error_intercepters';
 
 
 Chart.register(ChartDataLabels);
@@ -104,7 +106,10 @@ Chart.register(ChartDataLabels);
   TooltipModule,
   
   ],
-  providers: [],
+  providers: [
+    {provide:HTTP_INTERCEPTORS, useClass:HTTPInterceptors, multi:true},
+    {provide:HTTP_INTERCEPTORS, useClass:ErrorInterceptor, multi:true},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

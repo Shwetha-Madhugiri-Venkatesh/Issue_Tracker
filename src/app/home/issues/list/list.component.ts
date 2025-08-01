@@ -95,38 +95,36 @@ export class ListComponent {
     this.two_way_data.current_issues_subcomponent("list");
 
     //The initial table data
-    this.http_service.fetch_tickets()
-    .pipe(catchError((err) => {
-                this.message_service.add({
-                  severity: 'error',
-                  summary: 'Error',
-                  detail: err.error?.message || 'Tickets fetch failed'
-                });
-                return throwError(() => err);
-              }))
-    .subscribe((res: Ticket[]) => {
+    this.http_service.fetch_tickets().subscribe((res: Ticket[]) => {
       this.http_tickets = res;
       res.forEach(item => {
-        item['priority'] = this.priorities.find(i => i.priorityId == item.priorityId)?.priority;
-        item['category'] = this.categories.find(i => i.categoryId == item.categoryId)?.categoryDesc;
-        item['subcategory'] = this.subcategories.find(i => i.subCategoryId == item.subCategoryId)?.subCategoryDesc;
-        this.http_service.fetch_users()
-        .pipe(catchError((err) => {
-                this.message_service.add({
-                  severity: 'error',
-                  summary: 'Error',
-                  detail: err.error?.message || 'User fetch failed'
-                });
-                return throwError(() => err);
-              }))
-        .subscribe((res_users: User[]) => {
+        this.http_service.fetch_users().subscribe((res_users: User[]) => {
           item['assignee'] = (res_users.find(i => i.user_id == item.assigneeId)?.uname) ? (res_users.find(i => i.user_id == item.assigneeId)?.uname) : "---";
+          item['priority'] = item['priority'].priority;
           if ((this.kanban_preload.search_output?.length == 0 && this.kanban_preload.filter_output?.length == 0) || (this.kanban_preload.search_output?.length == undefined && this.kanban_preload.filter_output?.length == undefined)) {
             this.products = res;
           }
-        })
+        },
+
+        (err)=>{
+          this.message_service.add({
+                  severity: 'error',
+                  summary: 'Error',
+                  detail: err+', User fetch failed'
+              });
+        }
+      )
       })
-    })
+    },
+
+    (err)=>{
+      this.message_service.add({
+                  severity: 'error',
+                  summary: 'Error',
+                  detail: err+', Tickets fetch failed'
+      });
+    }
+  )
 
     //Table columns
     this.cols = [
@@ -139,18 +137,17 @@ export class ListComponent {
     ];
 
     // Fetching users
-    this.http_service.fetch_users()
-    .pipe(catchError((err) => {
-            this.message_service.add({
+    this.http_service.fetch_users().subscribe((res) => {
+      this.http_users = res;
+    },
+    (err)=>{
+      this.message_service.add({
               severity: 'error',
               summary: 'Error',
-              detail: err.error?.message || 'User fetch failed'
+              detail: err|| ', User fetch failed'
             });
-            return throwError(() => err);
-          }))
-    .subscribe((res) => {
-      this.http_users = res;
-    })
+    }
+  )
   }
   //ngOnInit ends
 
@@ -277,10 +274,6 @@ export class ListComponent {
     if (inp != '') {
       let search_input_array = this.filter_output.length != 0 ? this.filter_output : this.http_tickets;
       this.search_output = search_input_array.filter(item => {
-        item['category'] = this.categories.find(j => j.categoryId == item.categoryId).categoryDesc;
-        item['subcategory'] = this.subcategories.find(j => j.subCategoryId == item.subCategoryId).subCategoryDesc;
-        item['priority'] = this.priorities.find(j => j.priorityId == item.priorityId).priority;
-        item['status'] = this.statuses.find(j => j.statusId == item.statusId).status;
         let keys = Object.keys(item);
         let match = false;
         for (let key of keys) {
