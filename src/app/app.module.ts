@@ -51,7 +51,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { customPipe } from './custom_pipes/custom_pipe_one';
 import { HTTPInterceptors } from './Interceptors/http_interceptors';
 import { ErrorInterceptor } from './Interceptors/error_intercepters';
-
+import { GridsterModule } from 'angular-gridster2';
 
 Chart.register(ChartDataLabels);
 
@@ -104,6 +104,7 @@ Chart.register(ChartDataLabels);
    CalendarModule,
   OverlayPanelModule,
   TooltipModule,
+  GridsterModule,
   
   ],
   providers: [

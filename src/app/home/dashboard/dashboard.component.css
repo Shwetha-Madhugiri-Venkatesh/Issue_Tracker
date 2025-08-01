@@ -1,4 +1,4 @@
-#dashboard-component {
+/* #dashboard-component {
     width: 100%;
     height: 100%;
     padding: 10px 0px 10px 10px;
@@ -127,4 +127,37 @@
     #dashboard-content {
         height: 75%;
     }
+} */
+
+#line-graph{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.gridster-wrapper {
+  height:81%;         
+  overflow-y: auto;     
+  border: 1px solid #ccc;
+}
+
+gridster {
+  height:1900px;  
+  background-color: rgba(211, 211, 211);     
+}
+
+.btn{
+    width: 50px;
+    height: 30px;
+    border-radius: 5px;
+    background-color: rgb(45, 57, 57);
+    color: white;
+    cursor: pointer;
+    border-color: rgb(45, 57, 57);
+    border-style: none;
+}
+
+.btn:focus-within{
+    background-color: white;
+    color: rgb(45, 57, 57);
 }
