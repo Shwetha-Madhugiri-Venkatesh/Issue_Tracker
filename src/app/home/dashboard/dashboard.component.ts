@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { GridsterConfig, GridsterItem } from 'angular-gridster2';
+import { GridListItem, IGridsterOptions } from '@hyperviewhq/angular2gridster';
+import { HTTPService } from 'src/app/Services/http_service';
 import { TwoWayDataBinding } from 'src/app/Services/two_way_dataBinding';
 
 @Component({
@@ -9,19 +10,20 @@ import { TwoWayDataBinding } from 'src/app/Services/two_way_dataBinding';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
-  item1:GridsterItem={cols:2,rows:2,x:0,y:0};
-  item2:GridsterItem={cols:2,rows:2,x:2,y:0};
-  item3:GridsterItem={cols:2,rows:2,x:0,y:2};
-  item4:GridsterItem={cols:2,rows:2,x:2,y:2};
-  item5:GridsterItem={cols:4,rows:2,x:0,y:4};
-  item6:GridsterItem={cols:2,rows:2,x:0,y:6};
-  item7:GridsterItem={cols:2,rows:2,x:2,y:6};
-  item8:GridsterItem={cols:2,rows:2,x:2,y:8};
 
-  items=[this.item1,this.item2,this.item3,this.item4,this.item5,this.item6,this.item7,this.item8];
-  preload_data = structuredClone(this.items);
+  item1={x:0,y:0,w:2,h:2};
+  item2={x:2,y:0,w:2,h:2};
+  item3={w:2,h:2,x:0,y:2};
+  item4={w:2,h:2,x:2,y:2};
+  item5={w:4,h:2,x:0,y:4};
+  item6={w:2,h:2,x:0,y:6};
+  item7={w:2,h:2,x:2,y:6};
+
+  items=[this.item1,this.item2,this.item3,this.item4,this.item5,this.item6,this.item7];
 
   edit_flag:boolean=false;
+  save_flag:boolean=false;
+  previus_items=[];
 
   static itemChange(item, itemComponent) {
      console.info('itemChanged', item, itemComponent);
@@ -30,64 +32,63 @@ export class DashboardComponent {
    static itemResize(item, itemComponent) {
       console.info('itemResized',item, itemComponent);
    }
-  constructor(private two_way:TwoWayDataBinding){}
-  options:GridsterConfig|undefined;
+  constructor(private two_way:TwoWayDataBinding, public http_service:HTTPService){}
+  options:IGridsterOptions;
 
   ngOnInit(){
     this.options={
-      resizable:{
-        enabled:false
-      },
-      draggable:{
-        enabled:false
-      },
-      gridType:'fit',
-      displayGrid:'onDrag&Resize',
-      margin:5,
-      maxCols:4,
-      maxRows:8,
-      //disableWindowResize:true,
-      scrollToNewItems:true,
-      pushResizeItems:true,
-      itemChangeCallback: DashboardComponent.itemChange,
-       itemResizeCallback: DashboardComponent.itemResize,
+    lanes: 4, 
+    direction: 'vertical',
+      floating: true, 
+  dragAndDrop: true,
+    resizable: true,
   //     gridType: 'fixed',
-  // fixedColWidth: 612,      // Each column is 120px wide
-  // fixedRowHeight: 450,     // Each row is 100px tall
+  // fixedColWidth: 612,    
+  // fixedRowHeight: 450, 
   // draggable: { enabled: true },
   // resizable: { enabled: true },
   // displayGrid: 'always'
     }
     //calling TwoWayDataBinding server function
     this.two_way.current_route_emit('Dashboard'); //emits that the current route is dashboard
+    let preload_data = JSON.parse(localStorage.getItem("dashboard"));
+    if(Object.keys(preload_data).length!=0){
+      this.items=preload_data;
+    }
   }
-
-  changedOptions() {
-    this.options.api?.optionsChanged?.();
+  @HostListener('window:beforeunload', ['$event'])
+  onBeforeUnload(event: BeforeUnloadEvent) {
+    if(this.save_flag==true){
+    localStorage.setItem("dashboard",JSON.stringify(this.items));
+    }
   }
 
   edit(){
+    this.previus_items=structuredClone(this.items);
     this.edit_flag=true;
+    this.save_flag=false;
     this.options={
       ...this.options,
-      resizable:{
-        enabled:true,
-      },
-      draggable:{
-        enabled:true
-      },
+      resizable:true,
+      dragAndDrop:true,
     }
   }
 
   save(){
+    this.save_flag=true;
     this.options={
       ...this.options,
-      resizable:{
-        enabled:false,
-      },
-      draggable:{
-        enabled:false
-      },
+      resizable:false,
+      dragAndDrop:false,
+    }
+  }
+
+  cancel(){
+    this.items=this.previus_items;
+    this.options={
+      ...this.options,
+     resizable:false,
+      dragAndDrop:false,
     }
   }
 }

@@ -62,4 +62,16 @@ export class HTTPService{
         header = header.set('data_type','comments');
         return this.http.get("http://localhost:3001/comments",{headers:header});
     }
+
+    // dashboard_put(arr,id){
+    //     return this.http.put(`http://localhost:3001/dashboard/${id}`,arr);
+    // }
+
+    // dashboard_get(){
+    //     return this.http.get(`http://localhost:3001/dashboard`);
+    // }
+
+    // dashboard_post(arr){
+    //     return this.http.post(`http://localhost:3001/dashboard`,arr);
+    // }
 }

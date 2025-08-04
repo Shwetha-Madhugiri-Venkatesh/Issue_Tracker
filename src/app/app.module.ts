@@ -51,7 +51,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { customPipe } from './custom_pipes/custom_pipe_one';
 import { HTTPInterceptors } from './Interceptors/http_interceptors';
 import { ErrorInterceptor } from './Interceptors/error_intercepters';
-import { GridsterModule } from 'angular-gridster2';
+import { GridsterModule, GridsterPrototypeService } from '@hyperviewhq/angular2gridster';
 
 Chart.register(ChartDataLabels);
 
@@ -91,23 +91,23 @@ Chart.register(ChartDataLabels);
     ToastModule,
     BadgeModule,
     HttpClientModule,
-   ChartModule,
-   TableModule,
-   CommonModule,
-   DropdownModule,
-   MultiSelectModule,
-   DialogModule,
-   FileUploadModule,
-   ProgressBarModule,
-   EditorModule,
-   AutoCompleteModule,
-   CalendarModule,
-  OverlayPanelModule,
-  TooltipModule,
-  GridsterModule,
-  
-  ],
+    ChartModule,
+    TableModule,
+    CommonModule,
+    DropdownModule,
+    MultiSelectModule,
+    DialogModule,
+    FileUploadModule,
+    ProgressBarModule,
+    EditorModule,
+    AutoCompleteModule,
+    CalendarModule,
+    OverlayPanelModule,
+    TooltipModule,
+    GridsterModule,
+],
   providers: [
+    GridsterPrototypeService,
     {provide:HTTP_INTERCEPTORS, useClass:HTTPInterceptors, multi:true},
     {provide:HTTP_INTERCEPTORS, useClass:ErrorInterceptor, multi:true},
   ],

@@ -161,3 +161,12 @@ gridster {
     background-color: white;
     color: rgb(45, 57, 57);
 }
+
+::ng-deep ngx-gridster-item .gridster-item-inner {
+  height: 100% !important;
+  padding: 5px;
+}
+
+::ng-deep .gridster-container{
+    height: 100% !important;
+}
