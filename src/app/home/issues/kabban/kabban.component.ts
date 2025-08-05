@@ -171,7 +171,6 @@ export class KabbanComponent implements OnInit {
   //HTTP Request to fetch Tickets
   fetch_all_tickets() {
     this.http_service.fetch_tickets().subscribe((res: Ticket[]) => {
-      console.log(res);
       if (this.kanban_preload.filter_output == undefined || this.kanban_preload.filter_output?.length == 0) {
         this.all_tickets = res;
       }
@@ -268,7 +267,6 @@ export class KabbanComponent implements OnInit {
     this.visible_comment = true;
     ticket['assignee'] = this.users_list.find(item => item.user_id == ticket.assigneeId);
     this.comment_ticket = ticket;
-    console.log(this.comment_ticket);
     this.original_comment_ticket = structuredClone(this.comment_ticket);
     this.fetch_update_comments();
   }

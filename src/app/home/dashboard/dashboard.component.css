@@ -1,172 +1,39 @@
-/* #dashboard-component {
-    width: 100%;
-    height: 100%;
-    padding: 10px 0px 10px 10px;
-    background-color: white;
-    margin-top: 5px;
-}
-
 #dashboard-content {
     width: 100%;
-    height: 85%;
-    display: flex;
-    flex-direction: column;
-    padding: 5px 0px;
-    background-color: rgba(211, 211, 211, 0.3);
-    gap: 5px;
-    overflow-y: auto;
-    overflow-x: hidden;
-}
-
-#first-div {
-    width: 100%;
-    height: 450px;
-    display: flex;
-    flex-direction: row;
-    gap: 5px;
-}
-
-#line-graph1 {
-    width: 65%;
     height: 100%;
-    padding: 0px 0px 0px 5px;
-}
-
-#line-graph2 {
-    width: 50%;
-    height: 100%;
-    padding: 0px 0px 0px 5px;
-}
-
-#line-graph3 {
-    width: 50%;
-    height: 100%;
-    padding: 0px 5px 0px 0px;
-}
-
-#line-graph6 {
-    width: 44%;
-    height: 100%;
-    padding: 0px 5px 0px 0px;
-}
-
-#line-graph7 {
-    width: 50%;
-    height: 100%;
-    padding: 0px 5px 0px 0px;
-}
-
-#line-graph4 {
-    width: 100%;
-    height: 450px;
-    padding: 0px 5px;
-}
-
-#line-graph5 {
-    width: 50%;
-    height: 100%;
-    padding: 0px 0px 0px 5px;
-}
-
-#second-div {
-    width: 100%;
-    height: 450px;
-    display: flex;
-    flex-direction: row;
-    gap: 5px;
-}
-
-#third-div {
-    width: 100%;
-    height: 450px;
-}
-
-#fourth-div {
-    width: 100%;
-    height: 450px;
-    display: flex;
-    flex-direction: row;
-    gap: 5px;
-}
-
-@media screen and (max-width:900px) {
-    #dashboard_component {
-        height: auto;
-    }
-
-    #line-graph7 {
-        width: 49.4%;
-    }
-}
-
-@media screen and (max-width:600px) {
-
-    #first-div,
-    #second-div,
-    #third-div,
-    #fourth-div {
-        width: 100%;
-        height: auto;
-        flex-direction: column;
-    }
-
-    #line-graph1,
-    #line-graph2,
-    #line-graph3,
-    #line-graph4,
-    #line-graph5,
-    #line-graph6,
-    #line-graph7 {
-        width: 100%;
-        height: auto;
-        padding: 0px 5px;
-    }
-}
-
-@media screen and (max-width:430px) {
-    #dashboard-content {
-        height: 75%;
-    }
-} */
-
-#line-graph{
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-}
-
-.gridster-wrapper {
-  height:81%;         
-  overflow-y: auto;     
-  border: 1px solid #ccc;
-}
-
-gridster {
-  height:1900px;  
-  background-color: rgba(211, 211, 211);     
-}
-
-.btn{
-    width: 50px;
-    height: 30px;
-    border-radius: 5px;
-    background-color: rgb(45, 57, 57);
-    color: white;
-    cursor: pointer;
-    border-color: rgb(45, 57, 57);
-    border-style: none;
-}
-
-.btn:focus-within{
     background-color: white;
-    color: rgb(45, 57, 57);
+    margin-top: 5px;
+    z-index: 1;
+    overflow: auto;
 }
 
-::ng-deep ngx-gridster-item .gridster-item-inner {
-  height: 100% !important;
-  padding: 5px;
+#content {
+    width: 1270px;
+    height: 100%;
 }
 
-::ng-deep .gridster-container{
-    height: 100% !important;
+#header-div {
+    display: flex;
+    flex-direction: row;
+    margin-left: 10px;
+}
+
+#dashboard-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border-bottom: 1px solid lightgray;
+}
+
+button {
+    border: none;
+    background-color: white;
+    width: 80px;
+    font-size: 15px;
+    cursor: pointer;
+    padding: 10px;
+}
+
+button:hover {
+    color: purple;
 }

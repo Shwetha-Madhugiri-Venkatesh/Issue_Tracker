@@ -1,127 +1,18 @@
-<!-- <div id="dashboard-component">
-    <div id="dashboard-content">
-
-        <div id="first-div"> -->
-<!-- Graph Component -->
-<!-- <div id="line-graph1">
-                <app-graph></app-graph>
-            </div> -->
-<!-- Broswer Component -->
-<!-- <div id="line-graph6">
-                <app-browser></app-browser>
+<div id="dashboard-content">
+    <div id="content">
+        <!-- Issues header -->
+        <div id="dashboard-header" style="height: 6%;">
+            <div id="header-div">
+                <button [ngStyle]="home?{'border-bottom':'2px solid blue','color':'blue'}:{'border':'none'}"
+                    (click)="home_clicked()">Home</button>
+                <button [ngStyle]="custom?{'border-bottom':'2px solid blue','color':'blue'}:{'border':'none'}"
+                    (click)="custom_clicked()">Custom</button>
             </div>
         </div>
 
-        <div id="second-div"> -->
-<!-- Priority Component -->
-<!-- <div id="line-graph2">
-                <app-priority></app-priority>
-            </div> -->
-<!-- Status Component -->
-<!-- <div id="line-graph3">
-                <app-status></app-status>
-            </div>
-        </div>
-
-        <div id="third-div"> -->
-<!-- Category Component -->
-<!-- <div id="line-graph4">
-                <app-category></app-category>
-            </div>
-        </div>
-
-        <div id="fourth-div"> -->
-<!-- Type Component -->
-<!-- <div id="line-graph5">
-                <app-type></app-type>
-            </div> -->
-<!-- Operating System Component -->
-<!-- <div id="line-graph7">
-                <app-operating-system></app-operating-system>
-            </div>
+        <!-- Issues children components division -->
+        <div style="height: 94%;">
+            <router-outlet />
         </div>
     </div>
-</div> -->
-<div style="height: 100%;position: relative;">
-<div class="gridster-wrapper">
-<ngx-gridster [options]="options">
-    <ngx-gridster-item 
-        [(x)]="items[0].x"
-        [(y)]="items[0].y"
-        [(w)]="items[0].w"
-        [(h)]="items[0].h"
-    >
-        <div id="line-graph">
-            <app-graph></app-graph>
-        </div>
-    </ngx-gridster-item>
-    <ngx-gridster-item 
-    [(x)]="items[1].x"
-        [(y)]="items[1].y"
-        [(w)]="items[1].w"
-        [(h)]="items[1].h">
-        <div id="line-graph">
-            <app-browser></app-browser>
-        </div>
-    </ngx-gridster-item>
-    <ngx-gridster-item 
-   [(x)]="items[2].x"
-        [(y)]="items[2].y"
-        [(w)]="items[2].w"
-        [(h)]="items[2].h">
-        <div id="line-graph">
-            <app-priority></app-priority>
-        </div>
-    </ngx-gridster-item>
-    <ngx-gridster-item 
-    [(x)]="items[3].x"
-        [(y)]="items[3].y"
-        [(w)]="items[3].w"
-        [(h)]="items[3].h">
-        <div id="line-graph">
-            <app-status></app-status>
-        </div>
-    </ngx-gridster-item>
-    <ngx-gridster-item 
-    [(x)]="items[4].x"
-        [(y)]="items[4].y"
-        [(w)]="items[4].w"
-        [(h)]="items[4].h">
-        <div id="line-graph">
-            <app-category></app-category>
-        </div>
-    </ngx-gridster-item>
-    <ngx-gridster-item 
-    [(x)]="items[5].x"
-        [(y)]="items[5].y"
-        [(w)]="items[5].w"
-        [(h)]="items[5].h">
-        <div id="line-graph">
-            <app-type></app-type>
-        </div>
-    </ngx-gridster-item>
-    <ngx-gridster-item 
-    [(x)]="items[6].x"
-        [(y)]="items[6].y"
-        [(w)]="items[6].w"
-        [(h)]="items[6].h">
-        <div id="line-graph">
-            <app-operating-system></app-operating-system>
-        </div>
-    </ngx-gridster-item>
-    <!-- <gridster-item *ngIf="edit_flag" [item]="item8">
-        <div id="line-graph">
-            <app-operating-system></app-operating-system>
-        </div>
-    </gridster-item> -->
-</ngx-gridster>
-</div>
-
-<div style="height: 40px;position: absolute; background-color: rgba(211, 211, 211);bottom: 15%; z-index: 1; width: 100%; display: flex; align-items: flex-end; justify-content: flex-end; padding:5px 5px">
-    <div style="display: flex; flex-direction: row; gap: 10px;">
-        <button class="btn" (click)="cancel()">Cancel</button>
-        <button class="btn" (click)="edit()">edit</button>
-        <button class="btn" (click)="save()">save</button>
-    </div>
-</div>
 </div>

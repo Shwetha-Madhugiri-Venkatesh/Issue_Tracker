@@ -1,0 +1,60 @@
+<div id="custom-dashboard-component">
+    <div id="custom-dashboard-content">
+        <!-- header -->
+        <div id="custom-header">
+            <button id="plus" (click)="open_add_dialog()"><i class="fa-solid fa-plus"></i></button>
+        </div>
+        <!-- gridster -->
+         <div id="custom-gridster">
+            <ngx-gridster [options]="options" #gridsterComponent>
+                <ngx-gridster-item *ngFor="let item of items"
+                    [(x)]="item.x"
+                    [(y)]="item.y"
+                    [(w)]="item.w"
+                    [(h)]="item.h"
+                >
+                <div style="width: 100%;height: 100%;box-shadow: 0 0 10px 0.2px rgba(0, 0, 0, 0.2);border-radius: 5px;">
+                    <div style="height: 10%;padding: 10px;">
+                         <p style="font-weight: bold;">{{item.title}}</p>
+                    </div>
+                    <div style="display: flex;align-items: center;justify-content: center;height: 90%;width: 100%;">
+                        <p>{{item.input}}</p>
+                    </div>
+                </div>
+                </ngx-gridster-item>
+            </ngx-gridster>
+         </div>
+         <div style="height: 40px;position: absolute; background-color: rgba(211, 211, 211);bottom: 0%; z-index: 1; width: 100%; display: flex; align-items: flex-end; justify-content: flex-end; padding:5px 5px">
+    <div style="display: flex; flex-direction: row; gap: 10px;">
+        <button class="btn" (click)="cancel()">Cancel</button>
+        <button class="btn" (click)="edit()">edit</button>
+        <button class="btn" (click)="save()">save</button>
+    </div>
+</div>
+    </div>
+</div>
+
+<div class="custom-dashboard-component-dialog">
+    <p-dialog header="Edit Profile" [modal]="true" [(visible)]="add_visible" [style]="{ width: '25rem' }">
+        <div id="form-div">
+            <form #addForm="ngForm" (ngSubmit)="add_component(addForm)">
+                <div id="top-form">
+                <div class="input-div">
+                    <label class="label">Title:</label>
+                    <input class="input" pInputText name="title" [(ngModel)]="title"/>
+                </div>
+                <div class="input-div">
+                    <label class="label">Input:</label>
+                    <input class="input" pInputText name="input" [(ngModel)]="input"/>
+                </div>
+                </div>
+                <div id="form-footer">
+                    <div id="form-footer-inner">
+                        <button class="btn" style="width: 70px;" type="button" (click)="cancel_change()">Cancel</button>
+                        <button class="btn" type="submit">Add</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </p-dialog>
+</div>

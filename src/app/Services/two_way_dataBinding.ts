@@ -79,4 +79,10 @@ export class TwoWayDataBinding{
     current_issues_subcomponent(label:string){
       this.emit_issues_subcomponent.emit(label);
     }
+
+    emit_dashboard_subcomponent:EventEmitter<string>=new EventEmitter<string>;
+
+    current_dashboard_subcomponent(label:string){
+      this.emit_dashboard_subcomponent.emit(label);
+    }
 }

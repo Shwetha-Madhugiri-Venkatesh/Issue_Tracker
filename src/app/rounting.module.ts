@@ -9,11 +9,16 @@ import { UsersComponent } from "./home/users/users.component";
 import { KabbanComponent } from "./home/issues/kabban/kabban.component";
 import { ListComponent } from "./home/issues/list/list.component";
 import { LoginCanActivate } from "./Guards/login_canactivate";
+import { DashboardHomeComponent } from "./home/dashboard/dashboard-home/dashboard-home.component";
+import { CustomDashboardComponent } from "./home/dashboard/custom-dashboard/custom-dashboard.component";
 
 const routes:Routes = [
     {path:"",component:LoginComponent,canActivate:[LoginCanActivate]},
     {path:"home", component:HomeComponent, canActivate:[AuthLogin], children:[
-        {path:'', component:DashboardComponent,canActivate:[AuthLogin]},
+        {path:'', component:DashboardComponent,canActivate:[AuthLogin], children:[
+            {path:'', component:DashboardHomeComponent, canActivate:[AuthLogin]},
+            {path:'custom', component:CustomDashboardComponent,canActivate:[AuthLogin]},
+        ]},
         {path:'issues', component:IssuesComponent,canActivate:[AuthLogin], children:[
             {path:'', component:KabbanComponent, canActivate:[AuthLogin]},
             {path:'list', component:ListComponent,canActivate:[AuthLogin]},

@@ -1,7 +1,6 @@
-import { Component, EventEmitter, HostListener, Output } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { GridListItem, IGridsterOptions } from '@hyperviewhq/angular2gridster';
-import { HTTPService } from 'src/app/Services/http_service';
+import { Component, HostListener} from '@angular/core';
+import { Router } from '@angular/router';
+import { Ticket } from 'src/app/Models/ticket';
 import { TwoWayDataBinding } from 'src/app/Services/two_way_dataBinding';
 
 @Component({
@@ -10,85 +9,78 @@ import { TwoWayDataBinding } from 'src/app/Services/two_way_dataBinding';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
+  home: boolean;
+  custom: boolean;
+  route: string = '';
+  sub;
 
-  item1={x:0,y:0,w:2,h:2};
-  item2={x:2,y:0,w:2,h:2};
-  item3={w:2,h:2,x:0,y:2};
-  item4={w:2,h:2,x:2,y:2};
-  item5={w:4,h:2,x:0,y:4};
-  item6={w:2,h:2,x:0,y:6};
-  item7={w:2,h:2,x:2,y:6};
+  constructor(private two_way: TwoWayDataBinding, private router: Router) { }
 
-  items=[this.item1,this.item2,this.item3,this.item4,this.item5,this.item6,this.item7];
+  ngOnInit() {
+    //Preloading the data if present in local storage
+    let dashboard_preload = JSON.parse(localStorage.getItem("dashboard_preload"))||{};
 
-  edit_flag:boolean=false;
-  save_flag:boolean=false;
-  previus_items=[];
-
-  static itemChange(item, itemComponent) {
-     console.info('itemChanged', item, itemComponent);
-   }
-
-   static itemResize(item, itemComponent) {
-      console.info('itemResized',item, itemComponent);
-   }
-  constructor(private two_way:TwoWayDataBinding, public http_service:HTTPService){}
-  options:IGridsterOptions;
-
-  ngOnInit(){
-    this.options={
-    lanes: 4, 
-    direction: 'vertical',
-      floating: true, 
-  dragAndDrop: true,
-    resizable: true,
-  //     gridType: 'fixed',
-  // fixedColWidth: 612,    
-  // fixedRowHeight: 450, 
-  // draggable: { enabled: true },
-  // resizable: { enabled: true },
-  // displayGrid: 'always'
-    }
-    //calling TwoWayDataBinding server function
+    //Emitting the current component name as issues
     this.two_way.current_route_emit('Dashboard'); //emits that the current route is dashboard
-    let preload_data = JSON.parse(localStorage.getItem("dashboard"));
-    if(Object.keys(preload_data).length!=0){
-      this.items=preload_data;
+
+    //If Preloading data is present
+    if (Object.keys(dashboard_preload).length != 0) {
+      if (dashboard_preload.home == true) {
+        this.router.navigateByUrl("/home");
+        this.home = true;
+        this.custom = false;
+      }
+      if (dashboard_preload.custom == true) {
+        this.router.navigateByUrl("/home/custom");
+        this.custom = true;
+        this.home = false;
+      }
+      localStorage.setItem("dashboard_preload", JSON.stringify({}));
+    }
+    else {
+      this.sub = this.two_way.emit_dashboard_subcomponent.subscribe((res) => {
+        if (res == "") {
+          this.home = true;
+          this.custom = false;
+        } else if (res == "list") {
+          this.custom = true;
+          this.home = false;
+        }
+        this.sub.unsubscribe();
+      })
     }
   }
+
+  //navigation function for kanban button
+  home_clicked() {
+    this.home = true;
+    this.custom = false;
+    this.route = '';
+    this.router.navigateByUrl("/home" + this.route);
+  }
+
+  //navigation function for list button
+  custom_clicked() {
+    this.custom = true;
+    this.home = false;
+    this.route = 'custom';
+    this.router.navigateByUrl("/home/" + this.route);
+  }
+
+  set_preload(){
+    let dashboard_preload = JSON.parse(localStorage.getItem("dashboard_preload")) || {};
+    dashboard_preload['home'] = this.home;
+    dashboard_preload['custom'] = this.custom;
+    localStorage.setItem("dashboard_preload", JSON.stringify(dashboard_preload));
+  }
+
   @HostListener('window:beforeunload', ['$event'])
-  onBeforeUnload(event: BeforeUnloadEvent) {
-    if(this.save_flag==true){
-    localStorage.setItem("dashboard",JSON.stringify(this.items));
+    onBeforeUnload(event: BeforeUnloadEvent) {
+     this.set_preload();
     }
-  }
-
-  edit(){
-    this.previus_items=structuredClone(this.items);
-    this.edit_flag=true;
-    this.save_flag=false;
-    this.options={
-      ...this.options,
-      resizable:true,
-      dragAndDrop:true,
-    }
-  }
-
-  save(){
-    this.save_flag=true;
-    this.options={
-      ...this.options,
-      resizable:false,
-      dragAndDrop:false,
-    }
-  }
-
-  cancel(){
-    this.items=this.previus_items;
-    this.options={
-      ...this.options,
-     resizable:false,
-      dragAndDrop:false,
-    }
+  
+  //Storing the data which needs to be preloaded when the user navigates
+  ngOnDestroy() {
+    this.set_preload();
   }
 }

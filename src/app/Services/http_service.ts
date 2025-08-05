@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { User } from "../Models/User";
 import { Ticket } from "../Models/ticket";
 import { Comment } from "../Models/comment";
+import { customDashboard } from "../Models/customDashboard";
 
 @Injectable({
     providedIn:'root',
@@ -74,4 +75,16 @@ export class HTTPService{
     // dashboard_post(arr){
     //     return this.http.post(`http://localhost:3001/dashboard`,arr);
     // }
+
+    custom_dashboard_post(custom:customDashboard){
+        return this.http.post("http://localhost:3001/dashboard",custom);
+    }
+
+    custom_dashboard_fetch(){
+        return this.http.get("http://localhost:3001/dashboard");
+    }
+
+    custom_dashboard_put(updated,id){
+        return this.http.put(`http://localhost:3001/dashboard/${id}`,updated)
+    }
 }

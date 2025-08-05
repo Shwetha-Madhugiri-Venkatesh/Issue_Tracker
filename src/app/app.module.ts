@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { IssuesComponent } from './home/issues/issues.component';
 import { UsersComponent } from './home/users/users.component';
-import { GraphComponent } from './home/dashboard/graph/graph.component';
+import { GraphComponent } from './home/dashboard/dashboard-home/graph/graph.component';
 import { HeaderComponent } from './home/header/header.component';
 import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './home/dashboard/dashboard.component';
@@ -38,12 +38,12 @@ import { ProgressBarModule } from 'primeng/progressbar';
 import { EditorModule } from 'primeng/editor';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { CalendarModule } from 'primeng/calendar';
-import { PriorityComponent } from './home/dashboard/priority/priority.component';
-import { StatusComponent } from './home/dashboard/status/status.component';
-import { CategoryComponent } from './home/dashboard/category/category.component';
-import { TypeComponent } from './home/dashboard/type/type.component';
-import { BrowserComponent } from './home/dashboard/browser/browser.component';
-import { OperatingSystemComponent } from './home/dashboard/operating-system/operating-system.component';
+import { PriorityComponent } from './home/dashboard/dashboard-home/priority/priority.component';
+import { StatusComponent } from './home/dashboard/dashboard-home/status/status.component';
+import { CategoryComponent } from './home/dashboard/dashboard-home/category/category.component';
+import { TypeComponent } from './home/dashboard/dashboard-home/type/type.component';
+import { BrowserComponent } from './home/dashboard/dashboard-home/browser/browser.component';
+import { OperatingSystemComponent } from './home/dashboard/dashboard-home/operating-system/operating-system.component';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Chart } from 'chart.js';
@@ -52,6 +52,8 @@ import { customPipe } from './custom_pipes/custom_pipe_one';
 import { HTTPInterceptors } from './Interceptors/http_interceptors';
 import { ErrorInterceptor } from './Interceptors/error_intercepters';
 import { GridsterModule, GridsterPrototypeService } from '@hyperviewhq/angular2gridster';
+import { DashboardHomeComponent } from './home/dashboard/dashboard-home/dashboard-home.component';
+import { CustomDashboardComponent } from './home/dashboard/custom-dashboard/custom-dashboard.component';
 
 Chart.register(ChartDataLabels);
 
@@ -76,7 +78,9 @@ Chart.register(ChartDataLabels);
     TypeComponent,
     BrowserComponent,
     OperatingSystemComponent,
-    customPipe
+    customPipe,
+    DashboardHomeComponent,
+    CustomDashboardComponent
   ],
   imports: [
     BrowserModule,

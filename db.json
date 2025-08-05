@@ -734,5 +734,43 @@
       "commented_date": "2025-07-31T12:09:51.835Z",
       "last_modified_date": "2025-07-31T12:09:51.835Z"
     }
+  ],
+  "dashboard": [
+    {
+      "id": "8b5b",
+      "title": "Component 6",
+      "input": "Arvind",
+      "w": 2,
+      "h": 2,
+      "x": 0,
+      "y": 0
+    },
+    {
+      "id": "9462",
+      "title": "Component 7",
+      "input": "Arvind",
+      "w": 2,
+      "h": 2,
+      "x": 2,
+      "y": 0
+    },
+    {
+      "id": "9a1e",
+      "title": "Component 7",
+      "input": "Arvind",
+      "w": 2,
+      "h": 2,
+      "x": 0,
+      "y": 2
+    },
+    {
+      "id": "da9d",
+      "title": "Component 7",
+      "input": "Arvind",
+      "w": 2,
+      "h": 2,
+      "x": 2,
+      "y": 2
+    }
   ]
 }
