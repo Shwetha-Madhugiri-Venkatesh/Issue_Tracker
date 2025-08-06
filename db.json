@@ -737,40 +737,67 @@
   ],
   "dashboard": [
     {
-      "id": "8b5b",
-      "title": "Component 6",
-      "input": "Arvind",
+      "id": "5af8",
+      "title": "Component 5",
+      "input": "graph",
       "w": 2,
       "h": 2,
       "x": 0,
       "y": 0
     },
     {
-      "id": "9462",
-      "title": "Component 7",
-      "input": "Arvind",
+      "id": "309f",
+      "title": "Component 5",
+      "input": "priority",
       "w": 2,
       "h": 2,
       "x": 2,
       "y": 0
     },
     {
-      "id": "9a1e",
-      "title": "Component 7",
-      "input": "Arvind",
+      "id": "a1df",
+      "title": "Component 5",
+      "input": "status",
       "w": 2,
       "h": 2,
-      "x": 0,
-      "y": 2
+      "x": 4,
+      "y": 0
     },
     {
-      "id": "da9d",
-      "title": "Component 7",
-      "input": "Arvind",
+      "id": "f1a2",
+      "title": "Component 5",
+      "input": "category",
       "w": 2,
       "h": 2,
-      "x": 2,
-      "y": 2
+      "x": 6,
+      "y": 0
+    },
+    {
+      "id": "be4d",
+      "title": "Component 5",
+      "input": "type",
+      "w": 2,
+      "h": 2,
+      "x": 8,
+      "y": 1
+    },
+    {
+      "id": "3845",
+      "title": "Component 5",
+      "input": "operatingSystem",
+      "w": 2,
+      "h": 2,
+      "x": 10,
+      "y": 1
+    },
+    {
+      "id": "868d",
+      "title": "Component 5",
+      "input": "browser",
+      "w": 2,
+      "h": 2,
+      "x": 1,
+      "y": 5
     }
   ]
 }

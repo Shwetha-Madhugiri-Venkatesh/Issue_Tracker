@@ -14,11 +14,31 @@
                     [(h)]="item.h"
                 >
                 <div style="width: 100%;height: 100%;box-shadow: 0 0 10px 0.2px rgba(0, 0, 0, 0.2);border-radius: 5px;">
-                    <div style="height: 10%;padding: 10px;">
+                    <div style="height: 15%;padding: 5px;">
                          <p style="font-weight: bold;">{{item.title}}</p>
                     </div>
-                    <div style="display: flex;align-items: center;justify-content: center;height: 90%;width: 100%;">
-                        <p>{{item.input}}</p>
+                    <div style="display: flex;align-items: center;justify-content: center;height: 85%;width: 100%;">
+                        <div id="line-graph" *ngIf="item.input=='graph'">
+                            <app-graph></app-graph>
+                        </div>
+                        <div id="line-graph" *ngIf="item.input=='browser'">
+                            <app-browser></app-browser>
+                        </div>
+                        <div id="line-graph" *ngIf="item.input=='priority'">
+                            <app-priority></app-priority>
+                        </div>
+                        <div id="line-graph" *ngIf="item.input=='status'">
+                            <app-status></app-status>
+                        </div>
+                        <div id="line-graph" *ngIf="item.input=='category'">
+                            <app-category></app-category>
+                        </div>
+                        <div id="line-graph" *ngIf="item.input=='type'">
+                            <app-type></app-type>
+                        </div>
+                        <div id="line-graph" *ngIf="item.input=='operatingSystem'">
+                            <app-operating-system></app-operating-system>
+                        </div>
                     </div>
                 </div>
                 </ngx-gridster-item>
@@ -35,7 +55,7 @@
 </div>
 
 <div class="custom-dashboard-component-dialog">
-    <p-dialog header="Edit Profile" [modal]="true" [(visible)]="add_visible" [style]="{ width: '25rem' }">
+    <p-dialog header="Components details" [modal]="true" [(visible)]="add_visible" [style]="{ width: '25rem' }">
         <div id="form-div">
             <form #addForm="ngForm" (ngSubmit)="add_component(addForm)">
                 <div id="top-form">
@@ -45,7 +65,14 @@
                 </div>
                 <div class="input-div">
                     <label class="label">Input:</label>
-                    <input class="input" pInputText name="input" [(ngModel)]="input"/>
+                    <p-autoComplete 
+                    name="input" 
+                    class="input"
+                    [(ngModel)]="input" 
+                    [dropdown]="true" 
+                    field="label"
+                    [suggestions]="suggestions" 
+                    (completeMethod)="search($event)" />
                 </div>
                 </div>
                 <div id="form-footer">

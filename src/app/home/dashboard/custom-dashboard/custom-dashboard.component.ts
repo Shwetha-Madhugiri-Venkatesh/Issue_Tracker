@@ -20,14 +20,25 @@ export class CustomDashboardComponent {
   edit_flag:boolean=false;
   save_flag:boolean=false;
   previus_items=[];
+  sorted_items;
 
+  comp_types=[
+    {label:'number_of_Issues',component:'graph'},
+    {label:'browsers',component:'browser'},
+    {label:'priority',component:'priority'},
+    {label:'status',component:'status'},
+    {label:'category',component:'category'},
+    {label:'type',component:'type'},
+    {label:'operating_system',component:'operatingSystem'},
+  ]
+suggestions;
   @ViewChild('gridsterComponent') gridster_component:GridsterComponent;
   constructor(public two_way:TwoWayDataBinding,public http_service:HTTPService){}
   ngOnInit(){
     this.two_way.current_dashboard_subcomponent("custom");
 
     this.options={
-      lanes:4,
+      lanes:12,
       direction:'vertical',
       floating:false,
       resizable:false,
@@ -47,10 +58,11 @@ export class CustomDashboardComponent {
     this.cancel_change();
     this.add_visible=true;
   }
-
+  filtered=[]
   fetch_items(){
     this.http_service.custom_dashboard_fetch().subscribe((res:customDashboard[])=>{
       this.items=res;
+      this.sorted_items=this.items;
     })
   }
   add_component(add_form:NgForm){
@@ -64,16 +76,41 @@ export class CustomDashboardComponent {
       y: 0
     };
     item.title=add_form.value.title;
-    item.input=add_form.value.input;
+    item.input=add_form.value.input['component'];
     item.w=2;
     item.h=2;
-    if(this.items[this.items.length-1]?.x!=undefined){
-      if(this.items[this.items.length-1]?.x==0){
-        item.x=2;
-        item.y=this.items[this.items.length-1]?.y||0;
+    let y = this.sorted_items?.sort((item1,item2)=>{return item2.y-item1.y})[0]?.y;
+    let h = this.sorted_items?.sort((item1,item2)=>{return item2.y-item1.y})[0]?.h;
+    let y_greater = this.items.filter(item=>(item.y+item.h)>y+h);
+    console.log(y_greater);
+    if(y_greater.length==0){
+      this.filtered = this.sorted_items?.filter(item=>item.y==y);
+      let h_ind = this.filtered?.findIndex(item=>item.h!=this.filtered[0]?.h);
+      if(h_ind!=-1){
+        this.filtered.sort((item1,item2)=>{return item2.h-item1.h});
+      }else{
+      this.filtered.sort((item1,item2)=>{return item2.x-item1.x});
+      }
+    }else{
+      this.filtered=y_greater;
+      let h_ind = this.filtered.findIndex(item=>(item.h+item.y)!=(this.filtered[0]?.h+this.filtered[0]?.y));
+      if(h_ind!=-1){
+        this.filtered.sort((item1,item2)=>{return (item2.h+item2.y)-(item1.h+item1.y)});
+      }else{
+      this.filtered.sort((item1,item2)=>{return item2.x-item1.x});
+      }
+    }
+    console.log(this.sorted_items);
+    console.log(this.filtered);
+    let i;
+    if(this.filtered[0]?.x!=undefined){
+      if(this.filtered[0]?.x<this.options.lanes-2){
+        item.x=this.filtered[0].x+this.filtered[0].w;
+        i = this.items.find(item=>((item.y+item.h)>=this.filtered[0].y && (item.y+item.h)<(this.filtered[0].y+this.filtered[0].h)) && (item.x>=this.filtered[0].x+this.filtered[0].w && item.x<this.filtered[0].x+this.filtered[0].w+2));
+        item.y=i?i?.y+i?.h:(this.filtered[0]?.y||0);
       }else{
         item.x=0;
-        item.y=(this.items[this.items.length-1]?.y||0)+2;
+        item.y=i?i?.y+i?.h:(this.filtered[0]?.y||0)+this.filtered[0]?.h;
       }
     }
   //   if(this.items.length>0){
@@ -116,6 +153,9 @@ export class CustomDashboardComponent {
     this.save_flag=false;
     this.gridster_component.setOption('resizable', true);
     this.gridster_component.setOption('dragAndDrop', true);
+  }
+  search(query){
+    this.suggestions = this.comp_types.filter(item=>item.label.startsWith(query.query));
   }
 
   save(){
