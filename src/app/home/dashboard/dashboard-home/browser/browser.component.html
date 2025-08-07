@@ -3,12 +3,12 @@
         <!-- Browser Header -->
         <div id="browser-header" [ngStyle]="other_header">
             <div id="browser-header-left">
-                <h4 id="browser-heading">Browsers</h4>
+                <h4 id="browser-heading" [ngStyle]="font">Browsers</h4>
             </div>
             <div id="browser-header-right">
                 <div id="browser-header-right-inner">
-                    <div id="refresh-div" (click)="ngOnInit()" pTooltip="Refresh" tooltipPosition="bottom">
-                        <i class="fa-solid fa-rotate-right fa-rotate-270"></i>
+                    <div id="refresh-div" [ngStyle]="font?{'width':'20px','height':'20px'}:{'width':'27px','height':'27px'}" (click)="ngOnInit()" pTooltip="Refresh" tooltipPosition="bottom">
+                        <i [ngStyle]="font" class="fa-solid fa-rotate-right fa-rotate-270"></i>
                     </div>
                 </div>
             </div>
@@ -16,8 +16,7 @@
         <!-- Browser Graph -->
         <div id="browser-container">
             <div id="browser-container-inner">
-                <p-chart type="pie" [data]="data" class="h-[30rem]" [options]="browser_options"
-                    style="display: flex !important; align-items: center; justify-content: center"></p-chart>
+                <google-chart *ngIf="pieChart?.dataTable?.length" [data]="pieChart" #gc></google-chart>
             </div>
         </div>
 

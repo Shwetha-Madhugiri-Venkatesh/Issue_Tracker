@@ -1,28 +1,28 @@
-<div id="graph-component">
+<div id="graph-component" [ngStyle]="graph_header?{'padding':'0px 5px 5px 5px','box-shadow':'none'}:{'padding':'10px'}">
     <div id="graph-content-inner">
         <!-- Graph Header -->
         <div id="graph-header" [ngStyle]="graph_header">
-            <div id="graph-header-left">
-                <h4 id="graph-heading">Number of Issues</h4>
+            <div id="graph-header-left" [ngStyle]="graph_header_right">
+                <h4 id="graph-heading" [ngStyle]="font" >Number of Issues</h4>
             </div>
             <div id="graph-header-right" [ngStyle]="graph_header_right">
                 <div id="graph-header-right-inner">
-                    <div id="calender" [ngStyle]="graph_header">
-                        <p-calendar placeholder="Start Date" [(ngModel)]="start_date" dateFormat="yy-mm-dd"
+                    <div id="calender">
+                        <p-calendar [styleClass]="font ? 'font' : 'nofont'" placeholder="Start Date" [(ngModel)]="start_date" dateFormat="yy-mm-dd"
                             (onSelect)="graph_data(start_date, end_date)"></p-calendar>
-                        <p-calendar placeholder="End Date" [(ngModel)]="end_date" dateFormat="yy-mm-dd"
+                        <p-calendar [styleClass]="font ? 'font' : 'nofont'" placeholder="End Date" [(ngModel)]="end_date" dateFormat="yy-mm-dd"
                             (onSelect)="graph_data(start_date, end_date)"></p-calendar>
                     </div>
-                    <div id="refresh-div" (click)="ngOnInit()" pTooltip="Refresh" tooltipPosition="bottom">
-                        <i id="refresh-icon" class="fa-solid fa-rotate-right fa-rotate-270"></i>
+                    <div id="refresh-div" [ngStyle]="font?{'width':'20px','height':'20px'}:{'width':'27px','height':'27px'}" (click)="ngOnInit()" pTooltip="Refresh" tooltipPosition="bottom">
+                        <i [ngStyle]="font" id="refresh-icon" class="fa-solid fa-rotate-right fa-rotate-270"></i>
                     </div>
                 </div>
             </div>
         </div>
         <!-- Graph component graph -->
         <div id="graph-container">
-            <div id="graph-container-inner">
-                <p-chart type="bar" [data]="data" class="h-[30rem]" [options]="graph_options" />
+            <div id="graph-container-inner" [ngStyle]="graph_header?{'padding':'0px'}:{'padding':'10px'}">
+                <google-chart *ngIf="pieChart?.dataTable?.length" [data]="pieChart" #gc></google-chart>
             </div>
         </div>
     </div>

@@ -1,14 +1,15 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { catchError, throwError } from 'rxjs';
 import { Ticket } from 'src/app/Models/ticket';
 import { HTTPService } from 'src/app/Services/http_service';
+import { GoogleChartComponent, GoogleChartInterface, GoogleChartType } from 'ng2-google-charts';
 
 @Component({
   selector: 'app-graph',
   templateUrl: './graph.component.html',
   styleUrls: ['./graph.component.css'],
-   providers: [MessageService]
+  providers: [MessageService]
 })
 export class GraphComponent implements OnInit {
 
@@ -18,9 +19,17 @@ export class GraphComponent implements OnInit {
   data: { labels: string[]; datasets: { label: string; data: number[]; fill: boolean; backgroundColor: string, borderColor: string; tension: number; }[]; };
   graph_options;
 
+  public pieChart: GoogleChartInterface = {
+    chartType: GoogleChartType.ColumnChart,
+    options: { 'title': 'Tasks' },
+  };
+
   @Input() graph_header;
   @Input() graph_header_right;
-  constructor(private http_service: HTTPService, private message_service:MessageService) { }
+  @Input() font;
+
+  @ViewChild('gc') google: GoogleChartComponent;
+  constructor(private http_service: HTTPService, private message_service: MessageService) { }
 
   ngOnInit() {
     let today = new Date();
@@ -42,81 +51,40 @@ export class GraphComponent implements OnInit {
       //if preload data is not present, the data is undefined
       if (this.data == undefined) {
         let filtered_record = this.for_day(today); //calling method to filter records
-        this.data = {
-          labels: [today.toLocaleDateString() + ""],
-          datasets: [
-            {
-              label: 'Sales',
-              data: [filtered_record.length],
-              fill: false,
-              backgroundColor: 'blue',
-              borderColor: '#42A5F5',
-              tension: 0,
-            }
-          ]
+        this.pieChart = {
+          ...this.pieChart,
+          dataTable: [
+            ['Dates', 'Number of Issues'],
+            [today.toLocaleDateString() + "", filtered_record.length]
+          ],
+          options: {
+            vAxis: {
+              title: 'Number of Issues',
+              minValue: 0
+            },
+            hAxis: {
+              title: 'Dates',
+              minValue: 0
+            },
+            width:this.graph_header?180:600,
+            height:this.graph_header?130:500,
+          },
         };
-      }
 
-      this.graph_options = {
-        maintainAspectRatio: false,
-        aspectRatio: 0.6,
-        responsive: true,
-        plugins: {
-          tooltip: {
-            enabled: true
-          },
-          legend: { display: false },
-          datalabels: {
-            display: true,
-            color: 'white',
-            font: {
-              size: 14,
-              weight: 'bold'
-            }
-          }
-        }
-        ,
-        scales: {
-          x: {
-            grid: {
-
-              drawBorder: false,
-              drawOnChartArea: false,
-              display: false
-            },
-            title: {
-              display: true,
-              text: 'Dates'
-            }
-          },
-          y: {
-            grid: {
-
-              drawBorder: false,
-              drawOnChartArea: false,
-              display: false
-            },
-            title: {
-              display: true,
-              text: 'Number of Issues',
-              rotation: 0,
-              padding: { top: 0, bottom: 5, left: 20, right: 20 }
-            }
-          }
-        }
+        this.google?.draw(this.pieChart);
       }
     },
-    (err)=>{
-      this.message_service.add({
-                      severity: 'error',
-                      summary: 'Error',
-                      detail: err+', Tickets fetch failed'
-                    });
-    }
-  )
+      (err) => {
+        this.message_service.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: err + ', Tickets fetch failed'
+        });
+      }
+    )
     //end of initial data load
   }
-  
+
   //method to filter the tickets specific to the date which is passed as a parameter
   for_day(date) {
     let filtered_record = this.all_tickets.filter(item => {
@@ -139,20 +107,14 @@ export class GraphComponent implements OnInit {
         result.push(this.for_day(new Date(start.setDate(x))).length);
         labels.push(new Date(start.setDate(x)).toLocaleDateString());
       }
-
-      this.data = {
-        labels: labels,
-        datasets: [
-          {
-            label: 'Sales',
-            data: result,
-            fill: false,
-            backgroundColor: "blue",
-            borderColor: '#42A5F5',
-            tension: 0,
-          }
-        ]
+      this.pieChart = {
+        ...this.pieChart,
+        dataTable: [
+          ['Date', 'Issues'],
+          ...result.map((item,index)=>{return [labels[index],item]})
+        ],
       };
+      this.google.draw(this.pieChart);
     }
   }
 

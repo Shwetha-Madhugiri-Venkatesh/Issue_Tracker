@@ -14,30 +14,30 @@
                     [(h)]="item.h"
                 >
                 <div style="width: 100%;height: 100%;box-shadow: 0 0 10px 0.2px rgba(0, 0, 0, 0.2);border-radius: 5px;">
-                    <div style="height: 15%;padding: 5px;">
-                         <p style="font-weight: bold;">{{item.title}}</p>
+                    <div style="height: 15%;padding: 5px 5px 0px 5px;">
+                         <p style="font-weight: bold; font-size: 15px;">{{item.title}}</p>
                     </div>
                     <div style="display: flex;align-items: center;justify-content: center;height: 85%;width: 100%;">
                         <div id="line-graph" *ngIf="item.input=='graph'">
-                            <app-graph [graph_header]="graph_header" [graph_header_right]="graph_header_right"></app-graph>
+                            <app-graph [graph_header]="graph_header" [graph_header_right]="graph_header_right" [font]="text"></app-graph>
                         </div>
                         <div id="line-graph" *ngIf="item.input=='browser'">
-                            <app-browser [other_header]="other_header"></app-browser>
+                            <app-browser [other_header]="other_header" [font]="text"></app-browser>
                         </div>
                         <div id="line-graph" *ngIf="item.input=='priority'">
-                            <app-priority [other_header]="other_header"></app-priority>
+                            <app-priority [other_header]="other_header" [font]="text"></app-priority>
                         </div>
                         <div id="line-graph" *ngIf="item.input=='status'">
-                            <app-status [other_header]="other_header"></app-status>
+                            <app-status [other_header]="other_header" [font]="text"></app-status>
                         </div>
                         <div id="line-graph" *ngIf="item.input=='category'">
-                            <app-category [category_header]="graph_header" [category_header_right]="graph_header_right"></app-category>
+                            <app-category [category_header]="graph_header" [category_header_right]="graph_header_right" [font]="text"></app-category>
                         </div>
                         <div id="line-graph" *ngIf="item.input=='type'">
-                            <app-type [other_header]="other_header"></app-type>
+                            <app-type [other_header]="other_header" [font]="text"></app-type>
                         </div>
                         <div id="line-graph" *ngIf="item.input=='operatingSystem'">
-                            <app-operating-system [other_header]="other_header"></app-operating-system>
+                            <app-operating-system [other_header]="other_header" [font]="text"></app-operating-system>
                         </div>
                     </div>
                 </div>

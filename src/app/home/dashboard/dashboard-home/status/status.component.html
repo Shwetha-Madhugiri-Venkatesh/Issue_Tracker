@@ -3,12 +3,12 @@
         <!-- Status header -->
         <div id="status-header" [ngStyle]="other_header">
             <div id="status-header-left">
-                <h4 id="status-heading">Status</h4>
+                <h4 id="status-heading" [ngStyle]="font">Status</h4>
             </div>
             <div id="status-header-right">
                 <div id="status-header-right-inner">
-                    <div id="refresh-div" (click)="ngOnInit()" pTooltip="Refresh" tooltipPosition="bottom">
-                        <i class="fa-solid fa-rotate-right fa-rotate-270"></i>
+                    <div id="refresh-div" [ngStyle]="font?{'width':'20px','height':'20px'}:{'width':'27px','height':'27px'}" (click)="ngOnInit()" pTooltip="Refresh" tooltipPosition="bottom">
+                        <i [ngStyle]="font" class="fa-solid fa-rotate-right fa-rotate-270"></i>
                     </div>
                 </div>
             </div>
@@ -16,7 +16,7 @@
         <!-- Status Graph -->
         <div id="status-container">
             <div id="status-container-inner">
-                <p-chart type="bar" [data]="data" class="h-[30rem]" [options]="status_options" />
+                <google-chart *ngIf="pieChart?.dataTable?.length" [data]="pieChart" #gc></google-chart>
             </div>
         </div>
     </div>

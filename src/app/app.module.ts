@@ -54,6 +54,7 @@ import { ErrorInterceptor } from './Interceptors/error_intercepters';
 import { GridsterModule, GridsterPrototypeService } from '@hyperviewhq/angular2gridster';
 import { DashboardHomeComponent } from './home/dashboard/dashboard-home/dashboard-home.component';
 import { CustomDashboardComponent } from './home/dashboard/custom-dashboard/custom-dashboard.component';
+import { Ng2GoogleChartsModule } from 'ng2-google-charts';
 
 Chart.register(ChartDataLabels);
 
@@ -109,6 +110,7 @@ Chart.register(ChartDataLabels);
     OverlayPanelModule,
     TooltipModule,
     GridsterModule,
+    Ng2GoogleChartsModule,
 ],
   providers: [
     GridsterPrototypeService,

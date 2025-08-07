@@ -1,9 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { catchError, throwError } from 'rxjs';
 import { Ticket } from 'src/app/Models/ticket';
 import { HTTPService } from 'src/app/Services/http_service';
 import { TwoWayDataBinding } from 'src/app/Services/two_way_dataBinding';
+import { GoogleChartComponent, GoogleChartInterface, GoogleChartType } from 'ng2-google-charts';
 
 @Component({
   selector: 'app-category',
@@ -19,6 +20,12 @@ export class CategoryComponent implements OnInit{
   category_options;
   @Input() category_header;
   @Input() category_header_right;
+  @Input() font;
+  public pieChart: GoogleChartInterface = {
+    chartType: GoogleChartType.ColumnChart,
+    options: { 'title': 'Tasks' },
+  };
+  @ViewChild('gc') google: GoogleChartComponent;
   constructor(private http_service: HTTPService, private two_way: TwoWayDataBinding,  private message_service:MessageService) { }
 
   //Data from TwoWayDataBinding server
@@ -49,65 +56,26 @@ export class CategoryComponent implements OnInit{
           result[x.categoryDesc] = number_of_issues;
         }
 
-        this.data = {
-          labels: Object.keys(result), //result object keys as category names
-          datasets: [
-            {
-              label: 'Sales',
-              data: Object.values(result), //result object values as number of issues respectively
-              fill: false,
-              backgroundColor: "blue",
-              borderColor: '#42A5F5',
-              tension: 0
-            }
-          ]
+        this.pieChart = {
+          ...this.pieChart,
+          dataTable: [
+            ['Dates', 'Number of Issues'],
+            ...Object.entries(result)
+          ],
+          options: {
+            vAxis: {
+              title: 'Number of Issues',
+              minValue: 0
+            },
+            hAxis: {
+              title: 'Dates',
+              minValue: 0
+            },
+          width:this.category_header?180:1200,
+          height:this.category_header?110:500,
+          },
         };
-      }
-
-      this.category_options = {
-        maintainAspectRatio: false,
-        aspectRatio: 0.6,
-        responsive: true,
-        plugins: {
-          tooltip: {
-            enabled: true
-          },
-          legend: { display: false },
-          datalabels: {
-            display: true,
-            color: 'white',
-            font: {
-              size: 14,
-              weight: 'bold'
-            }
-          }
-        },
-        scales: {
-          x: {
-            grid: {
-              drawBorder: false,
-              drawOnChartArea: false,
-              display: false
-            },
-            title: {
-              display: true,
-              text: 'Categories'
-            }
-          },
-          y: {
-            grid: {
-              drawBorder: false,
-              drawOnChartArea: false,
-              display: false
-            },
-            title: {
-              display: true,
-              text: 'Number of Issues',
-              rotation: 0,
-              padding: { top: 0, bottom: 5, left: 20, right: 20 }
-            }
-          }
-        }
+        this.google?.draw(this.pieChart);
       }
     },
     
@@ -138,19 +106,15 @@ export class CategoryComponent implements OnInit{
     }
     
     //modifying the data
-    this.data = {
-      labels: Object.keys(result), //result object keys as Subcategories name 
-      datasets: [
-        {
-          label: 'Sales',
-          data: Object.values(result), //result object values as number of issues 
-          fill: false,
-          backgroundColor: "blue",
-          borderColor: '#42A5F5',
-          tension: 0,
-        },
-      ]
-    };
+
+    this.pieChart = {
+        ...this.pieChart,
+        dataTable: [
+          ['Date', 'Issues'],
+          ...Object.entries(result)
+        ],
+      };
+      this.google.draw(this.pieChart);
   }
 
   //storing data which should be preloaded once the user navigates

@@ -3,16 +3,16 @@
         <!-- Category Header -->
         <div id="category-header" [ngStyle]="category_header">
             <div id="category-header-left">
-                <h4 id="category-heading">Category</h4>
+                <h4 id="category-heading" [ngStyle]="font">Category</h4>
             </div>
             <div id="category-header-right" [ngStyle]="category_header_right">
                 <div id="category-header-right-inner">
-                    <div id="dropdown">
-                        <p-dropdown [options]="categories" [(ngModel)]="selectedCategory" optionLabel="categoryDesc"
+                    <div id="dropdown" [ngStyle]="font?{'justify-content':'flex-start'}:{'justify-content':'center'}">
+                        <p-dropdown [styleClass]="font ? 'font' : 'nofont'" [options]="categories" [(ngModel)]="selectedCategory" optionLabel="categoryDesc"
                             placeholder="Select category" name="category" (onChange)="category_entered($event)" />
                     </div>
-                    <div id="refresh-div" (click)="ngOnInit()" pTooltip="Refresh" tooltipPosition="bottom">
-                        <i class="fa-solid fa-rotate-right fa-rotate-270"></i>
+                    <div id="refresh-div" [ngStyle]="font?{'width':'20px','height':'20px'}:{'width':'27px','height':'27px'}" (click)="ngOnInit()" pTooltip="Refresh" tooltipPosition="bottom">
+                        <i [ngStyle]="font" class="fa-solid fa-rotate-right fa-rotate-270"></i>
                     </div>
                 </div>
             </div>
@@ -20,7 +20,8 @@
         <!-- Category graph -->
         <div id="category-container">
             <div id="category-container-inner" class="category">
-                <p-chart type="bar" [data]="data" class="h-[30rem]" [options]="category_options" />
+                <google-chart *ngIf="pieChart?.dataTable?.length" [data]="pieChart" #gc></google-chart>
+                <!-- <p-chart type="bar" [data]="data" class="h-[30rem]" [options]="category_options" /> -->
             </div>
         </div>
 

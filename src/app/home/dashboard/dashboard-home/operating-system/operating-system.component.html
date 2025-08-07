@@ -2,13 +2,13 @@
     <div id="operatingSystem-content-inner">
         <!-- Operating system header -->
         <div id="operatingSystem-header" [ngStyle]="other_header">
-            <div id="operatingSystem-header-left">
-                <h4 id="operatingSystem-heading">Operating Systems</h4>
+            <div id="operatingSystem-header-left" [ngStyle]="font?{'width':'100%'}:{'width':'50%'}">
+                <h4 id="operatingSystem-heading" [ngStyle]="font">Operating Systems</h4>
             </div>
             <div id="operatingSystem-header-right">
                 <div id="operatingSystem-header-right-inner">
-                    <div id="refresh-div" (click)="ngOnInit()" pTooltip="Refresh" tooltipPosition="bottom">
-                        <i class="fa-solid fa-rotate-right fa-rotate-270"></i>
+                    <div id="refresh-div" [ngStyle]="font?{'width':'20px','height':'20px'}:{'width':'27px','height':'27px'}" (click)="ngOnInit()" pTooltip="Refresh" tooltipPosition="bottom">
+                        <i [ngStyle]="font" class="fa-solid fa-rotate-right fa-rotate-270"></i>
                     </div>
                 </div>
             </div>
@@ -16,7 +16,7 @@
         <!-- Operating System Graph -->
         <div id="operatingSystem-container">
             <div id="status-container-inner">
-                <p-chart type="pie" [data]="data" class="h-[30rem]" [options]="operating_options" />
+                <google-chart *ngIf="pieChart?.dataTable?.length" [data]="pieChart" #gc></google-chart>
             </div>
         </div>
     </div>

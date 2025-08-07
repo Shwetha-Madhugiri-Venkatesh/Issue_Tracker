@@ -1,9 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { catchError, throwError } from 'rxjs';
 import { Ticket } from 'src/app/Models/ticket';
 import { HTTPService } from 'src/app/Services/http_service';
 import { TwoWayDataBinding } from 'src/app/Services/two_way_dataBinding';
+import { GoogleChartComponent, GoogleChartInterface, GoogleChartType } from 'ng2-google-charts';
 
 @Component({
   selector: 'app-browser',
@@ -16,6 +17,13 @@ export class BrowserComponent implements OnInit {
   data;
   browser_options;
   @Input() other_header;
+  @Input() font;
+
+  pieChart: GoogleChartInterface = {
+      chartType: GoogleChartType.PieChart,
+      options: { 'title': 'Tasks' },
+    };
+  @ViewChild('gc') google: GoogleChartComponent;
   constructor(private http_service: HTTPService, private two_way: TwoWayDataBinding, private message_service:MessageService) { }
 
   //from TwoWayDataBinding server
@@ -33,32 +41,27 @@ export class BrowserComponent implements OnInit {
         }
       }
 
-      this.data = {
-        labels: Object.keys(result), //result object keys as browser names
-        datasets: [
-          {
-            label: 'Sales',
-            data: Object.values(result), //result object values as number of issues respectively
-            fill: false,
-            backgroundColor: ["orange", "magenta", 'pink', 'blue', 'green', 'gray', 'red'],
-            borderColor: 'white',
-            tension: 0,
-          }
-        ]
-      };
+      this.pieChart = {
+          ...this.pieChart,
+          dataTable: [
+            ['Dates', 'Number of Issues'],
+            ...Object.entries(result)
+          ],
+          options: {
+            vAxis: {
+              title: 'Number of Issues',
+              minValue: 0
+            },
+            hAxis: {
+              title: 'Dates',
+              minValue: 0
+            },
+          width:this.other_header?180:600,
+          height:this.other_header?120:500,
+          },
+        };
 
-      this.browser_options = {
-        plugins: {
-          datalabels: {
-            display: true,
-            color: 'white',
-            font: {
-              size: 14,
-              weight: 'bold'
-            }
-          }
-        }
-      };
+        this.google?.draw(this.pieChart);
     },
     (err)=>{
        this.message_service.add({

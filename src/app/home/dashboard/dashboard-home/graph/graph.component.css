@@ -97,10 +97,17 @@
     padding: 20px 10px;
 }
 
-::ng-deep #graph-component .p-inputtext {
-    width: 150px;
-    padding: 1px 3px 3px 3px;
-    border-radius: 5px;
+::ng-deep #graph-component .font .p-inputtext {
+font-size: 12px;
+  width: 80px;
+  padding: 1px 2px 1px 5px;
+  border-radius: 5px;
+}
+
+::ng-deep #graph-component .nofont .p-inputtext {
+ width: 150px;
+  padding: 1px 3px 3px 3px;
+  border-radius: 5px;
 }
 
 ::ng-deep #graph-component .p-button.p-button-icon-only {

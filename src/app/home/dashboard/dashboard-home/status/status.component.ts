@@ -1,9 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { catchError, throwError } from 'rxjs';
 import { Ticket } from 'src/app/Models/ticket';
 import { HTTPService } from 'src/app/Services/http_service';
 import { TwoWayDataBinding } from 'src/app/Services/two_way_dataBinding';
+import { GoogleChartComponent, GoogleChartInterface, GoogleChartType } from 'ng2-google-charts';
 
 @Component({
   selector: 'app-status',
@@ -16,8 +17,14 @@ export class StatusComponent {
   status_options;
 
   @Input() other_header;
+  @Input() font;
   constructor(private http_service: HTTPService, private two_way: TwoWayDataBinding, private message_service:MessageService) { }
 
+  public pieChart: GoogleChartInterface = {
+      chartType: GoogleChartType.ColumnChart,
+      options: { 'title': 'Tasks' },
+    };
+    @ViewChild('gc') google: GoogleChartComponent;
   //data from TwoWayDataBinding server
   statuses: { statusId: string, status: string, tickets: Ticket[] }[] = this.two_way.statuses;
 
@@ -33,19 +40,26 @@ export class StatusComponent {
         result[x.status] = number_of_issues;
       }
 
-      this.data = {
-        labels: Object.keys(result), //result object keys as status names
-        datasets: [
-          {
-            label: 'Sales',
-            data: Object.values(result), //result object values as number of issues
-            fill: false,
-            backgroundColor: "blue",
-            borderColor: '#42A5F5',
-            tension: 0
-          }
-        ]
+      this.pieChart = {
+        ...this.pieChart,
+        dataTable: [
+          ['Dates', 'Number of Issues'],
+          ...Object.entries(result)
+        ],
+        options: {
+          vAxis: {
+            title: 'Number of Issues',
+            minValue: 0
+          },
+          hAxis: {
+            title: 'Dates',
+            minValue: 0
+          },
+           width:this.other_header?180:600,
+          height:this.other_header?130:500,
+        },
       };
+      this.google?.draw(this.pieChart);
     },
     
     (err)=>{
@@ -56,54 +70,5 @@ export class StatusComponent {
                     });
     }
   )
-
-    this.status_options = {
-      maintainAspectRatio: false,
-      aspectRatio: 0.6,
-      responsive: true,
-      plugins: {
-        tooltip: {
-          enabled: true
-        },
-        legend: { display: false },
-        datalabels: {
-          display: true,
-          color: 'white',
-          font: {
-            size: 14,
-            weight: 'bold'
-          }
-        }
-      },
-      scales: {
-        x: {
-          grid: {
-
-            drawBorder: false,
-            drawOnChartArea: false,
-            display: false
-          },
-          title: {
-            display: true,
-            text: 'Status',
-          }
-        },
-        y: {
-
-          grid: {
-
-            drawBorder: false,
-            drawOnChartArea: false,
-            display: false
-          },
-          title: {
-            display: true,
-            text: 'Number of Issues',
-            rotation: 0,
-            padding: { top: 0, bottom: 5, left: 20, right: 20 },
-          }
-        }
-      }
-    }
   }
 }

@@ -14,6 +14,8 @@
     flex-direction: column;
 }
 
+
+
 ::ng-deep #category-container canvas {
     width: 100% !important;
     height: 400px !important;
@@ -45,8 +47,20 @@
     flex-direction: row;
     gap: 5px;
 }
+::ng-deep #dropdown .font .p-inputtext {
+font-size: 12px;
+  width: 80px;
+  padding: 1px 2px 1px 5px;
+  border-radius: 5px;
+}
 
-::ng-deep #dropdown .p-dropdown {
+::ng-deep #dropdown .nofont .p-dropdown  {
+    width: 150px !important;
+    height: 27px;
+    border-radius: 5px;
+}
+
+::ng-deep #dropdown .font .p-dropdown  {
     width: 150px !important;
     height: 27px;
     border-radius: 5px;
