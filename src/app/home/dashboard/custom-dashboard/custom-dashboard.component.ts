@@ -22,6 +22,9 @@ export class CustomDashboardComponent {
   previus_items=[];
   sorted_items;
 
+  graph_header={'flex-direction': 'column','gap': '5px','height':'55%'};
+  graph_header_right={'justify-content': 'flex-start','width': '100%'};
+  other_header={'height':'55%'};
   comp_types=[
     {label:'number_of_Issues',component:'graph'},
     {label:'browsers',component:'browser'},

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { catchError, throwError } from 'rxjs';
 import { Ticket } from 'src/app/Models/ticket';
@@ -15,7 +15,7 @@ export class BrowserComponent implements OnInit {
 
   data;
   browser_options;
-
+  @Input() other_header;
   constructor(private http_service: HTTPService, private two_way: TwoWayDataBinding, private message_service:MessageService) { }
 
   //from TwoWayDataBinding server

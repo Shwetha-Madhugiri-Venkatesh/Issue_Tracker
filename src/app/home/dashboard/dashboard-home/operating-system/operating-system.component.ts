@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { catchError, throwError } from 'rxjs';
 import { Ticket } from 'src/app/Models/ticket';
@@ -14,7 +14,7 @@ import { TwoWayDataBinding } from 'src/app/Services/two_way_dataBinding';
 export class OperatingSystemComponent {
   data;
   operating_options: any;
-
+  @Input() other_header;
   constructor(private http_service: HTTPService, private two_way: TwoWayDataBinding, private message_service:MessageService) { }
 
   //data from TwoWayDataBinding server

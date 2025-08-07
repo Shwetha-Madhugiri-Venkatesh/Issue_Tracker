@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { catchError, throwError } from 'rxjs';
 import { Ticket } from 'src/app/Models/ticket';
@@ -17,7 +17,8 @@ export class CategoryComponent implements OnInit{
   selectedCategory;
   all_tickets;
   category_options;
-
+  @Input() category_header;
+  @Input() category_header_right;
   constructor(private http_service: HTTPService, private two_way: TwoWayDataBinding,  private message_service:MessageService) { }
 
   //Data from TwoWayDataBinding server

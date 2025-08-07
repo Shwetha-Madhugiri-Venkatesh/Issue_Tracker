@@ -29,6 +29,7 @@
     height: 100%;
     width: 100%;
     object-fit: cover;
+    box-shadow: none;
 }
 
 #custom-gridster{
@@ -113,4 +114,9 @@ form{
 
 ::ng-deep ngx-gridster{
     padding: 5px 0px;
+}
+
+#graph-header{
+        flex-direction: column;
+        gap: 5px;
 }

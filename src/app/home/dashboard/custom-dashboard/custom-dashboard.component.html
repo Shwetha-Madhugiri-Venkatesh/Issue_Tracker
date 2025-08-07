@@ -19,25 +19,25 @@
                     </div>
                     <div style="display: flex;align-items: center;justify-content: center;height: 85%;width: 100%;">
                         <div id="line-graph" *ngIf="item.input=='graph'">
-                            <app-graph></app-graph>
+                            <app-graph [graph_header]="graph_header" [graph_header_right]="graph_header_right"></app-graph>
                         </div>
                         <div id="line-graph" *ngIf="item.input=='browser'">
-                            <app-browser></app-browser>
+                            <app-browser [other_header]="other_header"></app-browser>
                         </div>
                         <div id="line-graph" *ngIf="item.input=='priority'">
-                            <app-priority></app-priority>
+                            <app-priority [other_header]="other_header"></app-priority>
                         </div>
                         <div id="line-graph" *ngIf="item.input=='status'">
-                            <app-status></app-status>
+                            <app-status [other_header]="other_header"></app-status>
                         </div>
                         <div id="line-graph" *ngIf="item.input=='category'">
-                            <app-category></app-category>
+                            <app-category [category_header]="graph_header" [category_header_right]="graph_header_right"></app-category>
                         </div>
                         <div id="line-graph" *ngIf="item.input=='type'">
-                            <app-type></app-type>
+                            <app-type [other_header]="other_header"></app-type>
                         </div>
                         <div id="line-graph" *ngIf="item.input=='operatingSystem'">
-                            <app-operating-system></app-operating-system>
+                            <app-operating-system [other_header]="other_header"></app-operating-system>
                         </div>
                     </div>
                 </div>

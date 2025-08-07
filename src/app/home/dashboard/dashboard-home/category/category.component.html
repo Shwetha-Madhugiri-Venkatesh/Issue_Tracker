@@ -1,11 +1,11 @@
 <div id="category-component">
     <div id="category-content-inner">
         <!-- Category Header -->
-        <div id="category-header">
+        <div id="category-header" [ngStyle]="category_header">
             <div id="category-header-left">
                 <h4 id="category-heading">Category</h4>
             </div>
-            <div id="category-header-right">
+            <div id="category-header-right" [ngStyle]="category_header_right">
                 <div id="category-header-right-inner">
                     <div id="dropdown">
                         <p-dropdown [options]="categories" [(ngModel)]="selectedCategory" optionLabel="categoryDesc"

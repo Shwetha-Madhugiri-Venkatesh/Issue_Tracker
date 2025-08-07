@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { catchError, throwError } from 'rxjs';
 import { Ticket } from 'src/app/Models/ticket';
@@ -13,7 +13,7 @@ import { HTTPService } from 'src/app/Services/http_service';
 export class TypeComponent {
   data;
   type_options: { plugins: { datalabels: { display: boolean; color: string; font: { size: number; weight: string; }; }; }; };
-
+  @Input() other_header;
   constructor(private http_service: HTTPService, private message_service:MessageService) { }
 
   types: { type: string, value: string }[] = [

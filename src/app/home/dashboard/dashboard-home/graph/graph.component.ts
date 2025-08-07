@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { catchError, throwError } from 'rxjs';
 import { Ticket } from 'src/app/Models/ticket';
@@ -18,6 +18,8 @@ export class GraphComponent implements OnInit {
   data: { labels: string[]; datasets: { label: string; data: number[]; fill: boolean; backgroundColor: string, borderColor: string; tension: number; }[]; };
   graph_options;
 
+  @Input() graph_header;
+  @Input() graph_header_right;
   constructor(private http_service: HTTPService, private message_service:MessageService) { }
 
   ngOnInit() {

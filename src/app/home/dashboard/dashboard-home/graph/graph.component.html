@@ -1,13 +1,13 @@
 <div id="graph-component">
     <div id="graph-content-inner">
         <!-- Graph Header -->
-        <div id="graph-header">
+        <div id="graph-header" [ngStyle]="graph_header">
             <div id="graph-header-left">
                 <h4 id="graph-heading">Number of Issues</h4>
             </div>
-            <div id="graph-header-right">
+            <div id="graph-header-right" [ngStyle]="graph_header_right">
                 <div id="graph-header-right-inner">
-                    <div id="calender">
+                    <div id="calender" [ngStyle]="graph_header">
                         <p-calendar placeholder="Start Date" [(ngModel)]="start_date" dateFormat="yy-mm-dd"
                             (onSelect)="graph_data(start_date, end_date)"></p-calendar>
                         <p-calendar placeholder="End Date" [(ngModel)]="end_date" dateFormat="yy-mm-dd"
